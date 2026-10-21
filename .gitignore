@@ -6,3 +6,4 @@ Thumbs.db
 parts/test-*.html
 base-test.html
 *.zip
+out/
