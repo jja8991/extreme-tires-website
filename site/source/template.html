@@ -79,6 +79,11 @@ header.nav{background:var(--ink);color:#fff;position:sticky;top:env(safe-area-in
 .play.snd .i-mute{display:block}
 .play.snd.on .i-mute{display:none}
 .play.snd.on .i-vol{display:block}
+.play.tap .i-mute,.play.tap .i-vol{display:none}
+.play.tap .i-play{display:block}
+.play.tap{background:var(--red)}
+.play.tap b{background:#fff}
+.play.tap b svg path{fill:var(--red)}
 .play.snd{cursor:pointer;border:0;font-family:inherit;text-align:left}
 .play small{display:block;font-weight:400;opacity:.75;font-size:12px}
 .hero-copy{color:#fff;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:56px max(16px,env(safe-area-inset-right,0px)) 56px 56px}
@@ -1582,7 +1587,7 @@ header.nav.scrolled .logo img{height:42px}
     var ID='iV1QXEGjeLg', media=document.querySelector('.hero-media'), frame=document.getElementById('hv-frame'), home=document.getElementById('view-home');
     if(!media||!frame||!home)return;
     var conn=navigator.connection||{}, lite=conn.saveData||/(^|-)2g$/.test(conn.effectiveType||'');
-    if(reduce||lite)return;                       // reduced motion / data saver: keep the photo
+    var autoOK=!(reduce||lite);                   // reduced motion / data saver: no autoplay, offer a tap-to-play button instead
     var started=false, origin=/^https?:$/.test(location.protocol)?'&origin='+encodeURIComponent(location.origin):'';
     function post(o){try{frame.contentWindow.postMessage(JSON.stringify(o),'*')}catch(_){}}
     var vid=document.getElementById('hv-video'), localOK=true;
@@ -1590,9 +1595,12 @@ header.nav.scrolled .logo img{height:42px}
       frame.src='https://www.youtube-nocookie.com/embed/'+ID+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+ID+'&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1'+origin; }
     // Our own file first (media/hero.mp4: reliable muted autoplay on iPhone); YouTube is the fallback if it is missing or blocked
     function localFail(){ localOK=false; sndMode(false); vid.removeAttribute('src'); vid.load(); yt(); }
+    // Phone blocked autoplay (Low Power Mode, Reduce Motion, Data Saver): keep the photo and show a Play button. A tap always counts as permission.
+    function tapMode(){ if(!btn||!vid)return; btn.classList.add('snd','tap'); btn.classList.remove('on'); btn.removeAttribute('href'); btn.removeAttribute('target'); btn.setAttribute('role','button'); btn.setAttribute('tabindex','0'); btn.setAttribute('aria-label','Play the shop video'); bt.textContent='Tap to play video'; bs.textContent='Autoplay is off on this phone'; }
     function start(){ if(started||home.hidden)return; started=true;
+      if(!autoOK&&vid&&localOK){ tapMode(); return }
       if(vid&&localOK){ vid.muted=true; vid.src='media/hero.mp4';
-        var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){ if(vid.paused&&localOK)localFail() });
+        var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(err){ if(!(vid.paused&&localOK))return; if(err&&err.name==='NotAllowedError')tapMode(); else localFail() });
       } else yt(); }
     // Sound button: starts muted (browsers require it); one tap turns the music on/off. Falls back to a YouTube link when our file isn't playing.
     var btn=document.getElementById('hv-play'), bt=btn&&btn.querySelector('.pl-t'), bs=btn&&btn.querySelector('.pl-s'), ytHref=btn&&btn.getAttribute('href');
@@ -1602,10 +1610,12 @@ header.nav.scrolled .logo img{height:42px}
       bt.textContent=on?'Sound on':'Tap for sound'; bs.textContent=on?'Tap to mute':'Hear the music · tap to unmute'; }
     function sndMode(on){ if(!btn)return;
       if(on){ btn.classList.add('snd'); btn.removeAttribute('href'); btn.removeAttribute('target'); btn.setAttribute('role','button'); btn.setAttribute('tabindex','0'); sndUI(); }
-      else { btn.classList.remove('snd','on'); btn.setAttribute('href',ytHref); btn.setAttribute('target','_blank'); btn.removeAttribute('role'); btn.removeAttribute('aria-pressed'); btn.removeAttribute('aria-label'); btn.removeAttribute('tabindex'); bt.textContent='Watch with sound'; bs.textContent='Opens the full video on YouTube'; } }
-    function toggleSnd(e){ if(!btn.classList.contains('snd'))return; e.preventDefault(); vid.muted=!vid.muted; if(!vid.muted&&vid.paused)vid.play().catch(function(){}); sndUI(); }
+      else { btn.classList.remove('snd','on','tap'); btn.setAttribute('href',ytHref); btn.setAttribute('target','_blank'); btn.removeAttribute('role'); btn.removeAttribute('aria-pressed'); btn.removeAttribute('aria-label'); btn.removeAttribute('tabindex'); bt.textContent='Watch with sound'; bs.textContent='Opens the full video on YouTube'; } }
+    function tapPlay(e){ e.preventDefault(); if(!vid.getAttribute('src'))vid.src='media/hero.mp4'; vid.muted=false;
+      var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){ vid.muted=true; var p2=vid.play(); if(p2&&p2.catch)p2.catch(function(){ if(localOK)localFail() }) }) }
+    function toggleSnd(e){ if(!btn.classList.contains('snd'))return; if(btn.classList.contains('tap')){ tapPlay(e); return } e.preventDefault(); vid.muted=!vid.muted; if(!vid.muted&&vid.paused)vid.play().catch(function(){}); sndUI(); }
     if(btn){ btn.addEventListener('click',toggleSnd); btn.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter')toggleSnd(e) }); }
-    if(vid){ vid.addEventListener('playing',function(){ if(started){media.classList.add('live');sndMode(true)} });
+    if(vid){ vid.addEventListener('playing',function(){ if(started){media.classList.add('live');btn&&btn.classList.remove('tap');sndMode(true)} });
              vid.addEventListener('error',function(){ if(started&&localOK)localFail() }); }
     function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); if(vid){vid.pause();vid.muted=true;vid.removeAttribute('src');vid.load();sndMode(false)} }
     frame.addEventListener('load',function(){ if(started)post({event:'listening',id:1,channel:'widget'}) });
