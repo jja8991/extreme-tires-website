@@ -79,6 +79,11 @@ header.nav{background:var(--ink);color:#fff;position:sticky;top:env(safe-area-in
 .play.snd .i-mute{display:block}
 .play.snd.on .i-mute{display:none}
 .play.snd.on .i-vol{display:block}
+.hv-pause{position:absolute;top:14px;right:14px;z-index:4;width:44px;height:44px;border-radius:50%;border:0;background:rgba(13,13,14,.82);display:none;place-items:center;cursor:pointer;padding:0}
+.hero-media.live .hv-pause:not([hidden]){display:grid}
+.hv-pause .i-pl{display:none}
+.hv-pause.paused .i-pa{display:none}
+.hv-pause.paused .i-pl{display:block}
 .play.tap .i-mute,.play.tap .i-vol{display:none}
 .play.tap .i-play{display:block}
 .play.tap{background:var(--red)}
@@ -767,11 +772,12 @@ header.nav.scrolled .logo img{height:42px}
   <div class="hero">
     <div class="hero-media">
       <img src="{{STORE}}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
-      <div class="hv" aria-hidden="true"><video id="hv-video" muted loop playsinline preload="auto" tabindex="-1" disablepictureinpicture></video><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <div class="hv" aria-hidden="true"><video id="hv-video" muted loop playsinline webkit-playsinline preload="auto" tabindex="-1" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny"></video><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
       <a class="play" id="hv-play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
         <b><svg class="i-play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg><svg class="i-mute" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 9v6h4l5 4V5L7 9H3z"/><path stroke="#fff" stroke-width="2" stroke-linecap="round" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="i-vol" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 9v6h4l5 4V5L7 9H3z"/><path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" d="M16 8.5a5 5 0 010 7M18.8 5.7a9 9 0 010 12.6"/></svg></b>
         <span><em class="pl-t">Watch with sound</em><small class="pl-s">Opens the full video on YouTube</small></span>
       </a>
+      <button type="button" class="hv-pause" id="hv-pause" aria-label="Pause background video" hidden><svg class="i-pa" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg><svg class="i-pl" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M4 2l10 6-10 6z"/></svg></button>
     </div>
     <div class="hero-copy">
       <div class="eyebrow">Sunrise, FL · Tires · Wheels · Auto Service</div>
@@ -1586,8 +1592,7 @@ header.nav.scrolled .logo img{height:42px}
   (function(){
     var ID='iV1QXEGjeLg', media=document.querySelector('.hero-media'), frame=document.getElementById('hv-frame'), home=document.getElementById('view-home');
     if(!media||!frame||!home)return;
-    var conn=navigator.connection||{}, lite=conn.saveData||/(^|-)2g$/.test(conn.effectiveType||'');
-    var autoOK=!(reduce||lite);                   // reduced motion / data saver: no autoplay, offer a tap-to-play button instead
+    var autoOK=true;                              // always try muted autoplay; the pause button below is the accessibility control
     var started=false, origin=/^https?:$/.test(location.protocol)?'&origin='+encodeURIComponent(location.origin):'';
     function post(o){try{frame.contentWindow.postMessage(JSON.stringify(o),'*')}catch(_){}}
     var vid=document.getElementById('hv-video'), localOK=true;
@@ -1617,6 +1622,15 @@ header.nav.scrolled .logo img{height:42px}
     if(btn){ btn.addEventListener('click',toggleSnd); btn.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter')toggleSnd(e) }); }
     if(vid){ vid.addEventListener('playing',function(){ if(started){media.classList.add('live');btn&&btn.classList.remove('tap');sndMode(true)} });
              vid.addEventListener('error',function(){ if(started&&localOK)localFail() }); }
+    // Pause / play control (WCAG: moving content that runs >5s must be pausable)
+    var pz=document.getElementById('hv-pause'), userPaused=false;
+    function pzUI(){ if(!pz)return; pz.hidden=!(vid&&vid.getAttribute('src')&&!tapOnly()); pz.classList.toggle('paused',userPaused); pz.setAttribute('aria-label',userPaused?'Play background video':'Pause background video'); }
+    function tapOnly(){ return btn&&btn.classList.contains('tap') }
+    if(pz)pz.addEventListener('click',function(){ userPaused=!userPaused; if(userPaused)vid.pause(); else vid.play().catch(function(){}); pzUI(); });
+    if(vid){ vid.addEventListener('playing',pzUI); }
+    // iOS Low Power Mode / strict autoplay: the first touch, click or scroll anywhere counts as permission, so start the muted video then
+    function unlock(){ if(started&&!userPaused&&vid&&vid.getAttribute('src')&&vid.paused)vid.play().catch(function(){}); }
+    ['touchstart','pointerdown','click','keydown','scroll'].forEach(function(ev){ window.addEventListener(ev,unlock,{passive:true,capture:true}) });
     function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); if(vid){vid.pause();vid.muted=true;vid.removeAttribute('src');vid.load();sndMode(false)} }
     frame.addEventListener('load',function(){ if(started)post({event:'listening',id:1,channel:'widget'}) });
     window.addEventListener('message',function(e){
@@ -1628,8 +1642,8 @@ header.nav.scrolled .logo img{height:42px}
       else if(st===2)media.classList.remove('live'); // paused (e.g. iPhone Low Power Mode): fall back to the photo
     });
     new MutationObserver(function(){ home.hidden?stop():start() }).observe(home,{attributes:true,attributeFilter:['hidden']});
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){ if(!started)return; if(vid&&vid.getAttribute('src')){ es[0].isIntersecting?vid.play().catch(function(){}):vid.pause(); return } post({event:'command',func:es[0].isIntersecting?'playVideo':'pauseVideo',args:''}) },{threshold:.05}).observe(media);
-    var go=function(){setTimeout(start,300)}; document.readyState==='complete'?go():window.addEventListener('load',go);
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){ if(!started)return; if(vid&&vid.getAttribute('src')){ es[0].isIntersecting?(userPaused||vid.play().catch(function(){})):vid.pause(); return } post({event:'command',func:es[0].isIntersecting?'playVideo':'pauseVideo',args:''}) },{threshold:.05}).observe(media);
+    var go=function(){setTimeout(start,50)}; document.readyState!=='loading'?go():document.addEventListener('DOMContentLoaded',go);
   })();
 
   // Nav shrink + mobile action bar after the hero
