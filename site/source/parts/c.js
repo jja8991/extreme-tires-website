@@ -46,12 +46,8 @@ $('cp-grid').addEventListener('click',function(e){
 cpRender();
 $('cp-club').addEventListener('submit',function(e){
   e.preventDefault();
-  var p=$('cp-club-phone').value.trim(), m=$('cp-club-email').value.trim(), msg=$('cp-club-msg');
-  var pd=p.replace(/\D/g,''), pOk=pd.length===10||(pd.length===11&&pd.charAt(0)==='1'), mOk=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m);
-  if(!p&&!m){msg.textContent='Enter a mobile number or an email to join.';return}
-  if(p&&!pOk){msg.textContent='Enter a 10-digit mobile number, like (954) 555-0123.';$('cp-club-phone').focus();return}
-  if(m&&!mOk){msg.textContent='Enter an email like name@example.com';$('cp-club-email').focus();return}
-  msg.textContent='Prototype only, nothing was sent. On the live site this subscribes you in Omnisend. Msg & data rates may apply. Reply STOP to opt out.';
+  ET.subscribe({phone:$('cp-club-phone').value.trim(),email:$('cp-club-email').value.trim(),smsOk:$('cp-club-sms').checked,emailOk:$('cp-club-em').checked,hp:$('cp-club-hp').value,
+    source:'coupons-club',msg:$('cp-club-msg'),btn:this.querySelector('button'),focus:{phone:$('cp-club-phone'),email:$('cp-club-email'),sms:$('cp-club-sms'),em:$('cp-club-em')}});
 });
 
 /* ---------- FINANCING ---------- */

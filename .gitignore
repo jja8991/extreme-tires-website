@@ -7,3 +7,8 @@ parts/test-*.html
 base-test.html
 *.zip
 out/
+
+# secrets
+.env
+.env.*
+!.env.example

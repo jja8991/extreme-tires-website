@@ -336,13 +336,21 @@ $('sc-form').addEventListener('submit',function(e){
   if(bad){done.hidden=true;bad.focus();return}
   var how={text:'text',call:'phone call',email:'email'}[cp]||'text';
   var where=sc.where==='mobile'?'Mobile at '+g('sc-zip'):'Sunrise shop ('+(radio('sc-drop')==='leave'?'leaving the vehicle':'waiting')+')';
-  done.innerHTML='<h3>Request ready, '+h(g('sc-name').split(' ')[0])+'.</h3>'+
-   '<p style="margin:0 0 10px"><b>Prototype only, nothing was sent.</b> '+h(svcs.map(function(x){return SV[x].label}).join(', '))+' &middot; '+h(g('sc-year')+' '+g('sc-make')+' '+g('sc-model'))+' &middot; '+h(where)+' &middot; '+h(curDay().k+', '+sc.wins.join(' or '))+'</p>'+
+  done.innerHTML='<h3>Request received, '+h(g('sc-name').split(' ')[0])+'.</h3>'+
+   '<p style="margin:0 0 10px"><b id="sc-status" role="status">Prototype only, nothing was sent.</b> '+h(svcs.map(function(x){return SV[x].label}).join(', '))+' &middot; '+h(g('sc-year')+' '+g('sc-make')+' '+g('sc-model'))+' &middot; '+h(where)+' &middot; '+h(curDay().k+', '+sc.wins.join(' or '))+'</p>'+
    '<ol class="timeline"><li class="now"><b>Request received</b><small>On the live site this goes to the shop</small></li>'+
    '<li><b>We will confirm by '+how+'</b><small>With the day and arrival window that works</small></li>'+
    '<li><b>Reminder before your visit</b><small>'+(sc.where==='mobile'?'Plus the parking checklist':'Plus shop address and hours')+'</small></li>'+
    '<li><b>Service day</b><small>'+(sc.where==='mobile'?'Our tech arrives in your window':'7712 W Oakland Park Blvd, Sunrise')+'</small></li></ol>';
   done.hidden=false; done.focus();
+  if(ET.CONFIG.live){
+    var st=$('sc-status'), dd=curDay(), smsOn=$('sc-sms').checked; st.textContent='Sending your request…';
+    ET.post('/booking',{source:'schedule',name:g('sc-name'),phone:g('sc-phone'),email:g('sc-email'),smsConsent:smsOn,consentText:smsOn?ET.CONSENT.smsBooking:'',
+      service:svcs.map(function(x){return SV[x].label}).join(', '),where:sc.where,vehicle:(g('sc-year')+' '+g('sc-make')+' '+g('sc-model')).trim(),zip:sc.where==='mobile'?g('sc-zip'):'',
+      day:dd.k,startISO:ET.apptISO(dd.m,sc.wins[0]),windowLabel:sc.wins.join(' or '),summary:(svcs.join(', ')+' | '+g('sc-notes')).slice(0,400),website:$('sc-hp').value}).then(function(r){
+      st.textContent=r.json&&r.json.ok?('We have your request.'+(r.json.confirmationSms?' A confirmation text is on its way.':' We will contact you to confirm.')):'We could not send this online. Please call (954) 773-1896 and we will book you right away.';
+    });
+  }
 });
 ET.onShow.schedule=function(){
   if(pendingSvc){

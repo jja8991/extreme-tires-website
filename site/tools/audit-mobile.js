@@ -23,7 +23,7 @@ for(const pg of pages){const [v,q]=pg.split('/');
         const fs=parseFloat(getComputedStyle(e).fontSize);if(fs<14)small.push([key(e),fs,t.slice(0,28)]);
         if(e.tagName==='P'&&t.length>40)ps.push(fs)}
       sc.querySelectorAll('a,button,select,summary,input:not([type=checkbox]):not([type=radio]):not([type=hidden]),textarea,label.chk,.opt,.pick label').forEach(e=>{
-        if(!vis(e)||e.closest('.proto'))return;const r=e.getBoundingClientRect();
+        if(!vis(e)||e.closest('.proto')||e.classList.contains('hp'))return;const r=e.getBoundingClientRect();
         const inline=e.tagName==='A'&&getComputedStyle(e).display==='inline'&&e.closest('p,li,.hf-note,.crumbs,.legal');
         if(!inline&&(r.height<44||r.width<44))taps.push([key(e),Math.round(r.width)+'x'+Math.round(r.height),(e.textContent||e.getAttribute('aria-label')||'').trim().slice(0,22)])})});
     return {small,taps,ps}});

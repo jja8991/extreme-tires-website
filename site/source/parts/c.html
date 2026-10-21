@@ -40,7 +40,10 @@
         <label class="f" for="cp-club-phone" style="color:#fff">Mobile number<input id="cp-club-phone" type="tel" placeholder="(954) 555-0123" autocomplete="tel" inputmode="tel"></label>
         <label class="f" for="cp-club-email" style="color:#fff">Email<input id="cp-club-email" type="email" placeholder="you@email.com" autocomplete="email"></label>
         <button class="btn btn-dark" type="submit" style="align-self:end">Join</button>
-        <p class="fine" id="cp-club-msg" role="status">Msg &amp; data rates may apply. Reply STOP to opt out. Connects to Omnisend on the live site.</p>
+        <label class="consent" for="cp-club-sms"><input type="checkbox" id="cp-club-sms"><span data-consent="sms"></span></label>
+        <label class="consent" for="cp-club-em"><input type="checkbox" id="cp-club-em"><span data-consent="email"></span></label>
+        <input type="text" class="hp" id="cp-club-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="fine" id="cp-club-msg" role="status">Prototype: connects to Omnisend once switched on.</p>
       </form>
     </div>
   </section>

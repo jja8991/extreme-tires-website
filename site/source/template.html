@@ -681,6 +681,14 @@ header.nav.scrolled .logo img{height:42px}
   .hero-media::after{background:linear-gradient(180deg,rgba(13,13,14,.05) 0%,rgba(13,13,14,0) 55%,rgba(13,13,14,.45) 100%)}
   .play{top:auto;bottom:76px;left:14px;z-index:4}
 }
+
+/* ===== v12: Omnisend + Twilio consent UI ===== */
+.consent{display:flex;gap:10px;align-items:flex-start;grid-column:1/-1;font-size:14px;line-height:1.45;cursor:pointer;color:inherit}
+.consent input{width:22px;height:22px;flex:none;margin-top:1px;accent-color:var(--red);padding:0}
+.club .consent input{background:transparent}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0;overflow:hidden}
+.toggle.consent{align-items:flex-start;font-weight:400}
+.sc-consent{margin-top:14px;color:var(--ink)}
 </style>
 
 <!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
@@ -1002,7 +1010,10 @@ header.nav.scrolled .logo img{height:42px}
         <label class="f" for="c-phone" style="color:#fff">Mobile number<input id="c-phone" type="tel" placeholder="(954) 555-0123" autocomplete="tel"></label>
         <label class="f" for="c-email" style="color:#fff">Email<input id="c-email" type="email" placeholder="you@email.com" autocomplete="email"></label>
         <button class="btn btn-dark" type="submit" style="align-self:end">Join</button>
-        <p class="fine" id="club-msg">Connects to Omnisend on the live site. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+        <label class="consent" for="c-sms"><input type="checkbox" id="c-sms"><span data-consent="sms"></span></label>
+        <label class="consent" for="c-em"><input type="checkbox" id="c-em"><span data-consent="email"></span></label>
+        <input type="text" class="hp" id="c-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="fine" id="club-msg" role="status">Prototype: connects to Omnisend once switched on.</p>
       </form>
     </div>
   </section>
@@ -1303,6 +1314,49 @@ header.nav.scrolled .logo img{height:42px}
   window.addEventListener('hashchange',function(){var h=(location.hash||'').slice(1).split('/');if(h[0]!==ET.cur.view||(h[1]||'')!==ET.cur.param)show(h[0]||'home',null,h[1]||'')});
   // Helpers shared with the page modules (loaded after this script)
   ET.show=show; ET.setHash=setHash; ET.hasView=hasView; ET.esc=esc; ET.money=money; ET.county=county; ET.icon=icon; ET.SERVICES=SERVICES; ET.reduce=reduce;
+
+  // ===== v12: Omnisend + Twilio hooks =====
+  // NOTHING is sent until ET.CONFIG.live is true. Flip it only after the keys are in Vercel and /api/health shows them (see docs/INTEGRATIONS-Omnisend-Twilio.md).
+  ET.CONFIG={live:false,api:'/api'};
+  ET.CONSENT={
+    sms:'By checking this box you agree to receive texts from Extreme Tires about your request and offers. Msg & data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
+    smsBooking:'By checking this box you agree to receive texts from Extreme Tires about your appointment request. Msg & data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
+    email:'I agree to receive marketing emails from Extreme Tires. Unsubscribe anytime.'};
+  ET.post=function(path,body){
+    return fetch(ET.CONFIG.api+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().catch(function(){return{ok:false,error:'bad_response'}}).then(function(j){return{status:r.status,json:j}})})
+      .catch(function(){return{status:0,json:{ok:false,error:'network'}}});
+  };
+  // "Oct 23" + "10-12 PM" -> "2026-10-23T10:00:00-04:00" (America/New_York, DST-correct). '' when it cannot be parsed.
+  ET.apptISO=function(md,win){
+    var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], m=/^([A-Za-z]{3})\s+(\d{1,2})$/.exec(md||''), w=/^(\d{1,2})/.exec(win||'');
+    if(!m||!w||M.indexOf(m[1])<0)return '';
+    var mi=M.indexOf(m[1]), d=+m[2], h=+w[1]; if(h<8)h+=12;
+    var now=new Date(), y=now.getFullYear(); if(new Date(y,mi,d+1)<now)y++;
+    var off=-5;
+    try{var p=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',timeZoneName:'shortOffset'}).formatToParts(new Date(Date.UTC(y,mi,d,h+5))).filter(function(x){return x.type==='timeZoneName'})[0];
+        var o=/GMT([+-]\d+)/.exec(p&&p.value||''); if(o)off=+o[1]}catch(_){}
+    var pad=function(n){return(n<10?'0':'')+n}, sg=off<0?'-':'+';
+    return y+'-'+pad(mi+1)+'-'+pad(d)+'T'+pad(h)+':00:00'+sg+pad(Math.abs(off))+':00';
+  };
+  // Shared sign-up for the two "get deals" forms. o: {phone,email,smsOk,emailOk,hp,source,msg(el),btn(el),focus:{phone,email,sms,em}}
+  ET.subscribe=function(o){
+    var digits=o.phone.replace(/\D/g,''), pOk=digits.length===10||(digits.length===11&&digits.charAt(0)==='1'), mOk=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(o.email), say=function(t){o.msg.textContent=t};
+    if(!o.phone&&!o.email){say('Enter a mobile number or an email to join.');return}
+    if(o.phone&&!pOk){say('Enter a 10-digit mobile number, like (954) 555-0123.');o.focus.phone.focus();return}
+    if(o.email&&!mOk){say('Enter an email like name@example.com');o.focus.email.focus();return}
+    if(o.phone&&!o.smsOk){say('Check the text box to get texts, or clear the mobile number.');o.focus.sms.focus();return}
+    if(o.email&&!o.emailOk){say('Check the email box to get emails, or clear the email.');o.focus.em.focus();return}
+    if(!ET.CONFIG.live){say('Prototype only, nothing was sent. On the live site this subscribes you in Omnisend.');return}
+    if(o.btn)o.btn.disabled=true; say('Signing you up…');
+    ET.post('/subscribe',{email:o.email,phone:o.phone,consentEmail:!!(o.email&&o.emailOk),consentSms:!!(o.phone&&o.smsOk),
+      consentText:(o.phone?ET.CONSENT.sms:'')+(o.phone&&o.email?' | ':'')+(o.email?ET.CONSENT.email:''),source:o.source,website:o.hp||''}).then(function(r){
+      if(o.btn)o.btn.disabled=false;
+      if(r.json&&r.json.ok)say('You are on the list. Reply STOP to any text to opt out.');
+      else say(r.json&&r.json.error==='not_configured'?'Sign-up is not available right now. Call (954) 773-1896.':'We could not sign you up just now. Please try again, or call (954) 773-1896.');
+    });
+  };
+  document.querySelectorAll('[data-consent]').forEach(function(el){el.textContent=ET.CONSENT[el.getAttribute('data-consent')]||''});
   Object.defineProperty(ET,'STORE',{get:function(){return document.querySelector('.hero-media img').src}});
   ET.start=function(){var h=(location.hash||'').slice(1).split('/');show(h[0]||'home',null,h[1]||'')};
 
@@ -1504,15 +1558,14 @@ header.nav.scrolled .logo img{height:42px}
       h='<h3>Where do we send updates?</h3>'+
         '<label class="f" for="w-name">Name<input id="w-name" autocomplete="name" value="'+esc(W.name)+'" placeholder="First and last name"></label>'+
         '<label class="f" for="w-phone">Mobile number<input id="w-phone" type="tel" autocomplete="tel" value="'+esc(W.phone)+'" placeholder="(954) 555-0123"></label>'+
-        '<label class="toggle" for="w-texts"><input type="checkbox" id="w-texts"'+(W.texts?' checked':'')+'> Text me the confirmation and "tech on the way" updates</label>'+
-        '<p style="margin:0;color:var(--steel);font-size:12px">Msg &amp; data rates may apply. Reply STOP to opt out.</p>';
+        '<label class="toggle consent" for="w-texts"><input type="checkbox" id="w-texts"'+(W.texts?' checked':'')+'><span>'+esc(ET.CONSENT.smsBooking)+'</span></label>';
     } else {
       var need=NEEDS.filter(function(n){return n[0]===W.need})[0];
-      h='<div class="done-step step"><h3>You\'re booked, '+esc(W.name.split(' ')[0]||'friend')+'.</h3>'+
+      h='<div class="done-step step"><h3>Request received, '+esc(W.name.split(' ')[0]||'friend')+'.</h3>'+
         '<p style="margin:0;color:var(--steel)">'+esc(need?need[2]:'Service')+(W.byo?' (your tires)':'')+' · '+esc(W.veh)+' · '+(W.where==='mobile'?'Mobile at '+esc(W.zip):'Sunrise shop')+' · '+esc(W.day)+', '+esc(W.win)+'</p>'+
-        '<ol class="timeline"><li class="now"><b>Request received</b><small>Prototype only, nothing was sent</small></li>'+
-        '<li><b>Confirmation text</b><small>With your out-the-door price</small></li><li><b>Reminder the evening before</b><small>Plus the parking checklist</small></li>'+
-        '<li><b>"Tech on the way"</b><small>Your tech\'s name and arrival time</small></li><li><b>Job done</b><small>Receipt by text · Kafene financing available</small></li></ol>'+
+        '<ol class="timeline"><li class="now"><b>Request received</b><small id="wiz-status" role="status">Prototype only, nothing was sent</small></li>'+
+        '<li><b>We confirm your window</b><small>By text, if you opted in, or by phone</small></li><li><b>Reminder before your window</b><small>Plus the parking checklist for mobile jobs</small></li>'+
+        '<li><b>Service day</b><small>'+(W.where==='mobile'?'Our tech arrives in your window':'7712 W Oakland Park Blvd, Sunrise')+'</small></li></ol>'+
         '<button type="button" class="linkbtn" id="wiz-restart" style="justify-self:start">Start another booking</button></div>';
       wbody.innerHTML=h; return;
     }
@@ -1535,13 +1588,24 @@ header.nav.scrolled .logo img{height:42px}
     if(b.dataset.where){W.where=b.dataset.where;W.dir=1;renderWiz();var z=document.getElementById('w-zip');if(z)z.focus();return}
     if(b.dataset.day){W.day=b.dataset.day;renderWiz();return}
     if(b.dataset.win){W.win=b.dataset.win;renderWiz();return}
-    if(b.id==='wiz-restart'){W.step=0;W.need=null;W.where=null;W.win=null;W.dir=-1;renderWiz()}
+    if(b.id==='wiz-restart'){W.step=0;W.need=null;W.where=null;W.win=null;W.texts=false;W.dir=-1;renderWiz()}
   });
   wbody.addEventListener('input',function(e){
     if(e.target.id==='w-zip'){W.zip=e.target.value.trim();var c=county(W.zip),r=document.getElementById('w-zipres');
       r.className='zipres '+(c?'ok':(W.zip.length===5?'no':''));r.textContent=c?'We cover '+W.zip+' in '+c+' County.':(W.zip.length===5?'Outside our regular route. Call and we will try.':'')}
   });
-  wnext.addEventListener('click',function(){if(!saveStep())return;W.step++;W.dir=1;renderWiz();
+  function bookWizard(){
+    if(!ET.CONFIG.live)return;
+    var d=WDAYS.filter(function(x){return x.k===W.day})[0]||{}, need=NEEDS.filter(function(n){return n[0]===W.need})[0], st=document.getElementById('wiz-status');
+    if(st)st.textContent='Sending your request…';
+    ET.post('/booking',{source:'wizard',name:W.name,phone:W.phone,smsConsent:!!W.texts,consentText:W.texts?ET.CONSENT.smsBooking:'',
+      service:need?need[2]:'Service',where:W.where,vehicle:W.veh+(W.size?' ('+W.size+')':'')+(W.byo?' [customer brings tires]':''),zip:W.zip||'',day:W.day,
+      startISO:ET.apptISO(d.m,W.win),windowLabel:W.win,summary:(need?need[2]:'Service')+' | '+W.veh+' | '+W.where+' | '+W.day+' '+W.win,website:''}).then(function(r){
+      var s=document.getElementById('wiz-status'); if(!s)return;
+      s.textContent=r.json&&r.json.ok?('We have your request.'+(r.json.confirmationSms?' A confirmation text is on its way.':' We will contact you to confirm.')):'We could not send this online. Please call (954) 773-1896 and we will book you right away.';
+    });
+  }
+  wnext.addEventListener('click',function(){if(!saveStep())return;W.step++;W.dir=1;renderWiz();if(W.step===5)bookWizard();
     var f=wbody.querySelector('input,button.opt');if(f&&W.step<5)f.focus({preventScroll:true})});
   wback.addEventListener('click',function(){if(W.step>0){W.step--;W.dir=-1;renderWiz()}});
   renderWiz();
@@ -1667,9 +1731,9 @@ header.nav.scrolled .logo img{height:42px}
   // Deals sign-up (prototype)
   document.getElementById('club-form').addEventListener('submit',function(e){
     e.preventDefault();
-    var p=document.getElementById('c-phone').value.trim(), m=document.getElementById('c-email').value.trim();
-    var msg=document.getElementById('club-msg');
-    msg.textContent=(p||m)?'Prototype only, nothing was sent. On the live site this subscribes you in Omnisend.':'Enter a mobile number or an email to join.';
+    var g=function(id){return document.getElementById(id)};
+    ET.subscribe({phone:g('c-phone').value.trim(),email:g('c-email').value.trim(),smsOk:g('c-sms').checked,emailOk:g('c-em').checked,hp:g('c-hp').value,
+      source:'home-club',msg:g('club-msg'),btn:this.querySelector('button'),focus:{phone:g('c-phone'),email:g('c-email'),sms:g('c-sms'),em:g('c-em')}});
   });
 
   // Quote form validation (messages match the mockup)
