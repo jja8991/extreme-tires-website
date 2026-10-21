@@ -614,6 +614,7 @@ header.nav.scrolled .logo img{height:42px}
 /* ===== v9: hero background video ===== */
 .hv{position:absolute;inset:0;z-index:1;overflow:hidden;opacity:0;transition:opacity .9s ease;container-type:size;pointer-events:none;background:#0d0d0e}
 .hero-media.live .hv{opacity:1}
+.hv video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
 .hv iframe{position:absolute;top:50%;left:50%;width:max(100cqw,177.78cqh);height:max(56.25cqw,100cqh);transform:translate(-50%,-50%);border:0;pointer-events:none}
 .hero-media::after{z-index:2}
 .play{z-index:3}
@@ -745,7 +746,7 @@ header.nav.scrolled .logo img{height:42px}
   <div class="hero">
     <div class="hero-media">
       <img src="{{STORE}}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
-      <div class="hv" aria-hidden="true"><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <div class="hv" aria-hidden="true"><video id="hv-video" muted loop playsinline preload="auto" tabindex="-1" disablepictureinpicture></video><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
       <a class="play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
         <b><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></b>
         <span>Watch with sound<small>Opens the full video on YouTube</small></span>
@@ -1568,9 +1569,18 @@ header.nav.scrolled .logo img{height:42px}
     if(reduce||lite)return;                       // reduced motion / data saver: keep the photo
     var started=false, origin=/^https?:$/.test(location.protocol)?'&origin='+encodeURIComponent(location.origin):'';
     function post(o){try{frame.contentWindow.postMessage(JSON.stringify(o),'*')}catch(_){}}
-    function start(){ if(started||home.hidden)return; started=true;
+    var vid=document.getElementById('hv-video'), localOK=true;
+    function yt(){ if(!started||frame.getAttribute('src'))return;
       frame.src='https://www.youtube-nocookie.com/embed/'+ID+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+ID+'&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1'+origin; }
-    function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); }
+    // Our own file first (media/hero.mp4: reliable muted autoplay on iPhone); YouTube is the fallback if it is missing or blocked
+    function localFail(){ localOK=false; vid.removeAttribute('src'); vid.load(); yt(); }
+    function start(){ if(started||home.hidden)return; started=true;
+      if(vid&&localOK){ vid.muted=true; vid.src='media/hero.mp4';
+        var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){ if(vid.paused&&localOK)localFail() });
+      } else yt(); }
+    if(vid){ vid.addEventListener('playing',function(){ if(started)media.classList.add('live') });
+             vid.addEventListener('error',function(){ if(started&&localOK)localFail() }); }
+    function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); if(vid){vid.pause();vid.removeAttribute('src');vid.load()} }
     frame.addEventListener('load',function(){ if(started)post({event:'listening',id:1,channel:'widget'}) });
     window.addEventListener('message',function(e){
       if(e.source!==frame.contentWindow)return;   // only messages from our own player
@@ -1581,7 +1591,7 @@ header.nav.scrolled .logo img{height:42px}
       else if(st===2)media.classList.remove('live'); // paused (e.g. iPhone Low Power Mode): fall back to the photo
     });
     new MutationObserver(function(){ home.hidden?stop():start() }).observe(home,{attributes:true,attributeFilter:['hidden']});
-    if('IntersectionObserver' in window)new IntersectionObserver(function(es){ if(!started)return; post({event:'command',func:es[0].isIntersecting?'playVideo':'pauseVideo',args:''}) },{threshold:.05}).observe(media);
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){ if(!started)return; if(vid&&vid.getAttribute('src')){ es[0].isIntersecting?vid.play().catch(function(){}):vid.pause(); return } post({event:'command',func:es[0].isIntersecting?'playVideo':'pauseVideo',args:''}) },{threshold:.05}).observe(media);
     var go=function(){setTimeout(start,300)}; document.readyState==='complete'?go():window.addEventListener('load',go);
   })();
 

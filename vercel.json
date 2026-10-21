@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "echo no-install",
-  "buildCommand": "mkdir -p out && cp site/index.html out/index.html && printf 'User-agent: *\\nDisallow: /\\n' > out/robots.txt",
+  "buildCommand": "mkdir -p out && cp site/index.html out/index.html && cp -r site/media out/media && printf 'User-agent: *\\nDisallow: /\\n' > out/robots.txt",
   "outputDirectory": "out",
   "headers": [
     {
