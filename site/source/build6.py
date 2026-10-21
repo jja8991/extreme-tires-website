@@ -5,6 +5,7 @@ Missing parts are skipped. Each part's JS is wrapped so one failing module canno
 import base64, io, os, sys, argparse
 from PIL import Image
 ap=argparse.ArgumentParser(); ap.add_argument('--out',default='extreme-tires-prototype.html'); ap.add_argument('--parts',default='a,b,c,d')
+ap.add_argument('--document',action='store_true',help='wrap in a full HTML document (doctype, charset, mobile viewport). REQUIRED for anything served as a website; omit only for Claude artifacts, which add their own skeleton')
 args=ap.parse_args()
 args.out=os.path.abspath(args.out)  # resolve before chdir below
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -46,4 +47,10 @@ tail='''
 t=t.replace('/*PARTS_CSS*/',css).replace('<!--PARTS_HTML-->',html).replace('<!--PARTS_JS-->',js+tail)
 t=t.replace('{{LOGO}}',uri('assets/logo.png','PNG')).replace('{{STORE}}',uri('assets/store.jpg','JPEG',1400,78)).replace('{{BRANDS}}',uri('assets/brands.png','JPEG',1600,85))
 assert '{{' not in t
-open(args.out,'w',encoding='utf-8').write(t); print(args.out, len(t)//1024,'KB')
+if args.document:
+    i=t.index('</style>')+len('</style>')
+    head=('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+          '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+          '<meta name="theme-color" content="#0d0d0e">\n')
+    t=head+t[:i]+'\n</head>\n<body>\n'+t[i:]+'\n</body>\n</html>\n'
+open(args.out,'w',encoding='utf-8').write(t); print(args.out, len(t)//1024,'KB', '(full document)' if args.document else '(fragment)')

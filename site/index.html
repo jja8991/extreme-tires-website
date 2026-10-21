@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0d0e">
 <title>Extreme Mobile Tires Redesign</title>
 <meta name="description" content="Mobile tire service and tire shop in Sunrise, FL. New tires with out-the-door pricing, installed at the shop or at your location across Broward, Miami-Dade and Palm Beach.">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -1588,7 +1594,37 @@ header.nav.scrolled .logo img{height:42px}
 .cy-zipres.ok{color:var(--yellow)}.cy-zipres.no{color:#ffb4b6}
 .cy-proof{margin:0;font-size:14px;color:#cfcfcf}
 
+
+/* ===== v10 MOBILE READABILITY: min 14px text, 44px tap targets, 16px form fields (no iOS zoom) ===== */
+@media(max-width:860px){
+  html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  body{font-size:16px;line-height:1.55}
+  small,.eyebrow,label.f,legend,.sample,.sample-note,.badge,.sv-badge,.sv-more,.bs-go,.go,.cap,p.fine,.fine,
+  .crumbs,.crumbs a,.util,.util *,footer,footer a,footer small,footer div,footer span,
+  h2.mini,.hf-note,.hf-note *,.brand,td,th,figcaption,.meta,.tag{font-size:14px!important;line-height:1.5}
+  footer a,.legal a,.crumbs a,.util a{display:inline-flex;align-items:center;min-height:44px;padding:0 6px}
+  header.nav a,.drawer a,.burger,.social a,footer .social a,.hf-tabs button,.tabs button,button,.btn,summary,select{min-height:44px}
+  .burger{min-width:48px;padding:0 14px;font-size:15px!important}
+  .social a,footer .social a{min-width:44px;min-height:44px;width:44px;height:44px}
+  input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px!important;min-height:48px}
+  label.chk,.opt,.pick label{min-height:44px}
+  a[href^="tel:"],a[href^="sms:"]{min-height:44px;display:inline-flex;align-items:center}
+  main span,main b,main em,main dt,main dd,main button,main h2,main p,main div,[data-view] span,[data-view] b,[data-view] em,[data-view] dt,[data-view] button,[data-view] p,[data-view] div{font-size:max(1em,14px)}
+  [data-view] [class*="hint"],[data-view] [class*="fine"],[data-view] [class*="badge"],[data-view] [class*="lbl"],[data-view] [class*="exp"],[data-view] [class*="kind"],[data-view] [class*="conf"],[data-view] [class*="role"],[data-view] .k,[data-view] .msg,[data-view] .otd,[data-view] .wh-cur{font-size:14px!important}
+  [data-view] a:not(.btn):not(.btn-red):not(.btn-dark):not(.btn-ghost){min-height:44px;display:inline-flex;align-items:center}
+  [data-view] p a,[data-view] li a,[data-view] .hf-note a{display:inline;min-height:0}
+  .social a,footer .social a{min-width:48px!important;width:48px!important;height:48px!important}
+  [data-view] h2[class],[data-view] aside h2,[data-view] b,[data-view] .ta-note,[data-view] p.ta-note{font-size:14px!important}
+  [data-view] a{min-width:44px}
+  .lg-toc h2{font-size:14px!important}
+  [data-view] a{max-width:100%;flex-wrap:wrap}
+  [data-view] a>span,[data-view] .sv-more{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}
+  footer [aria-label="Facebook"],footer a[aria-label]{min-width:48px!important;width:48px!important;height:48px!important;display:inline-flex;align-items:center;justify-content:center}
+}
 </style>
+</head>
+<body>
+
 
 <!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -5127,3 +5163,6 @@ $('cy-root').addEventListener('submit',function(e){
   ET.start();
 })();
 </script>
+
+</body>
+</html>

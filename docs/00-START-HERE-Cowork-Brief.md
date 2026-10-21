@@ -105,7 +105,7 @@ Review gap: Tire Hut has about 500 reviews.
 ## 6. New prototype: v6 (built): 83 pages, all reachable, 0 errors
 v6 adds every page in Melissa's sitemap. **Fonts: Montserrat (headlines) + Inter (body).** Live link (private): https://claude.ai/artifact/3uVEUPjCFt8dpnjEMCKXq8
 New in v6: Wheels (visualizer mock-up) · Auto Service hub + 11 service pages · Schedule a Repair · Diagnostic Center & Maintenance Advisor · Commercial/Fleet · Tire Brands + 19 brand pages · Tips (14 articles, tire-size decoder, DOT date checker) · Coupons · Financing (Kafene, no payment math) · Reviews (aggregator figures only) · About · Locations (live open/closed) · Contact · News & Gallery · Service Areas + 14 city pages · Terms / Privacy / Accessibility (drafts for attorney review) · HTML Sitemap · 404. A "Jump to page" menu in the yellow bar lists every page.
-Rebuild: `python3 site/source/build6.py --out site/index.html` (needs Pillow). Check every link: `node site/tools/crawl.js <path-to-html>` (needs Playwright).
+Rebuild: `python3 site/source/build6.py --parts a,b,c,d --document --out site/index.html` (needs Pillow). Check every link: `node site/tools/crawl.js <path-to-html>` (needs Playwright).
 **Everything below this line in section 6 describes the v5 pages, which still exist inside v6.**
 **Live link (private, share via the page's Share menu):** https://claude.ai/artifact/3uVEUPjCFt8dpnjEMCKXq8
 Local copy: `site/index.html` (open in any browser) · launcher: `Start-ExtremeSite.ps1` → http://localhost:8080
