@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Assemble the Extreme Tires prototype from template.html + parts/<id>.{html,css,js}.
+Usage: python3 build6.py [--out FILE] [--parts a,b,c,d]
+Missing parts are skipped. Each part's JS is wrapped so one failing module cannot break the rest."""
+import base64, io, os, sys, argparse
+from PIL import Image
+ap=argparse.ArgumentParser(); ap.add_argument('--out',default='extreme-tires-prototype.html'); ap.add_argument('--parts',default='a,b,c,d')
+args=ap.parse_args()
+args.out=os.path.abspath(args.out)  # resolve before chdir below
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+def uri(path,fmt,maxw=None,q=80):
+    im=Image.open(path).convert('RGB')
+    if maxw and im.width>maxw: im=im.resize((maxw,round(im.height*maxw/im.width)),Image.LANCZOS)
+    b=io.BytesIO(); im.save(b,fmt,quality=q) if fmt=='JPEG' else im.save(b,fmt,optimize=True)
+    return f"data:image/{'jpeg' if fmt=='JPEG' else 'png'};base64,"+base64.b64encode(b.getvalue()).decode()
+def rd(p): return open(p,encoding='utf-8').read() if os.path.exists(p) else ''
+t=rd('template.html')
+css=html=js=''
+for p in [x for x in args.parts.split(',') if x]:
+    css+=f'\n/* ===== part {p} ===== */\n'+rd(f'parts/{p}.css')
+    html+=f'\n<!-- ===== part {p} ===== -->\n'+rd(f'parts/{p}.html')
+    j=rd(f'parts/{p}.js')
+    if j.strip(): js+=f"\n<script>try{{(function(){{\n{j}\n}})();}}catch(e){{console.error('part {p} failed',e)}}</script>"
+tail='''
+<script>
+(function(){
+  var ET=window.ET; if(!ET)return;
+  // Core pages + every page a module registered (ET.pages.push({id,label,group,param}))
+  var core=[{id:'home',label:'Home',group:0},{id:'tires',label:'Tires',group:0},{id:'mobile',label:'Mobile Service',group:0},{id:'quote',label:'Request a Quote',group:0}];
+  var all=core.concat(ET.pages).filter(function(p){return ET.hasView(p.id)});
+  var sel=document.getElementById('jump'); if(sel){
+    sel.innerHTML='<option value="">Jump to page…</option>'+all.map(function(p){var v=p.id+(p.param?'/'+p.param:'');return '<option value="'+v+'">'+p.label+'</option>'}).join('');
+    sel.addEventListener('change',function(){if(!sel.value)return;var s=sel.value.split('/');ET.show(s[0],null,s[1]||'');ET.setHash(s[0],s[1]||'')});
+  }
+  ET.start();
+})();
+</script>'''
+t=t.replace('/*PARTS_CSS*/',css).replace('<!--PARTS_HTML-->',html).replace('<!--PARTS_JS-->',js+tail)
+t=t.replace('{{LOGO}}',uri('assets/logo.png','PNG')).replace('{{STORE}}',uri('assets/store.jpg','JPEG',1400,78)).replace('{{BRANDS}}',uri('assets/brands.png','JPEG',1600,85))
+assert '{{' not in t
+open(args.out,'w',encoding='utf-8').write(t); print(args.out, len(t)//1024,'KB')

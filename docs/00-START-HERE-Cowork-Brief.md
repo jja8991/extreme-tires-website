@@ -64,7 +64,7 @@ Recurring complaints: waits longer than quoted, occasional specialty-work issues
 - Header: **white background**. Forms over a **gray background with shadow**.
 - Needs: social links, Kafene lease form, wheel configurator, Omnisend on every page, email forwarding for the Contact page.
 - Nav (her sitemap): **Home · Tires · Wheels · Mobile Service · [logo] · Auto Service · Coupons · More▾** (More = About, Locations, Contact, Reviews, Financing, News & Gallery). Tagline: **"EXPERIENCE CONVENIENCE."** E-commerce lives inside Tires and Wheels.
-- Mockups: see `02-Melissa-Mockups/`.
+- Mockups: see `design/melissa-mockups/`.
 
 ---
 
@@ -102,9 +102,13 @@ Review gap: Tire Hut has about 500 reviews.
 
 ---
 
-## 6. New prototype: v5 (built)
+## 6. New prototype: v6 (built): 83 pages, all reachable, 0 errors
+v6 adds every page in Melissa's sitemap. **Fonts: Montserrat (headlines) + Inter (body).** Live link (private): https://claude.ai/artifact/3uVEUPjCFt8dpnjEMCKXq8
+New in v6: Wheels (visualizer mock-up) · Auto Service hub + 11 service pages · Schedule a Repair · Diagnostic Center & Maintenance Advisor · Commercial/Fleet · Tire Brands + 19 brand pages · Tips (14 articles, tire-size decoder, DOT date checker) · Coupons · Financing (Kafene, no payment math) · Reviews (aggregator figures only) · About · Locations (live open/closed) · Contact · News & Gallery · Service Areas + 14 city pages · Terms / Privacy / Accessibility (drafts for attorney review) · HTML Sitemap · 404. A "Jump to page" menu in the yellow bar lists every page.
+Rebuild: `python3 site/source/build6.py --out site/index.html` (needs Pillow). Check every link: `node site/tools/crawl.js <path-to-html>` (needs Playwright).
+**Everything below this line in section 6 describes the v5 pages, which still exist inside v6.**
 **Live link (private, share via the page's Share menu):** https://claude.ai/artifact/3uVEUPjCFt8dpnjEMCKXq8
-Local copy: `04-Prototype/index.html` (open in any browser) · launcher: `Start-ExtremeSite.ps1` → http://localhost:8080
+Local copy: `site/index.html` (open in any browser) · launcher: `Start-ExtremeSite.ps1` → http://localhost:8080
 Look: black / signal red / white, with yellow accents. Fonts: Saira Condensed (display) + Barlow (body). Smooth motion, all of which turns off for visitors with reduce-motion set.
 
 | Page | Features |
@@ -119,7 +123,7 @@ Look: black / signal red / white, with yellow accents. Fonts: Saira Condensed (d
 ---
 
 ## 7. Instagram → gallery automation (built, tested on a mock feed)
-`05-Instagram-Sync/`: `sync-instagram.mjs` + GitHub Action (every 6 hrs) + README.
+`instagram-sync/`: `sync-instagram.mjs` + GitHub Action (every 6 hrs) + README.
 Pulls @extremetires posts, downloads the photos, tags them by hashtag (#jeep #truck #lifted #wheels #mobiletires), `#nogallery` hides a post, deleted posts get removed, the token refreshes itself.
 **Status:** Setup email **sent to Melissa Oct 20** (Business account → Meta developer app → token → add Justin as app Administrator; told not to email the token).
 If the site moves to Shopify, use an Instagram feed app (e.g. Instafeed) instead.
@@ -138,7 +142,7 @@ If the site moves to Shopify, use an Instagram feed app (e.g. Instafeed) instead
 - [ ] Claim or merge the old Davie listings
 
 ## 9. Assets still needed
-See `03-Image-Upload-List.md`: 11 must-have photos (storefront, van, Hunter rack, crew…), 12–20 gallery builds, staff headshots, hero video loop, and the **original logo file** (the current one is cropped from a mockup).
+See `docs/image-upload-list.md`: 11 must-have photos (storefront, van, Hunter rack, crew…), 12–20 gallery builds, staff headshots, hero video loop, and the **original logo file** (the current one is cropped from a mockup).
 
 ## 10. Next steps (in order)
 1. Share the prototype link with Melissa and Simon; collect feedback.

@@ -1,0 +1,1524 @@
+<title>Extreme Mobile Tires Redesign</title>
+<meta name="description" content="Mobile tire service and tire shop in Sunrise, FL. New tires with out-the-door pricing, installed at the shop or at your location across Broward, Miami-Dade and Palm Beach.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap">
+<style>
+/* Layout: Melissa's split header (red utility bar, black nav with centered logo), split hero,
+   black "Shop for tires" band with a tire finder, then service grid, mobile service, offers, footer.
+   Single committed look: black / signal red / white, matching the Extreme Tires badge. */
+:root{
+  --ink:#0d0d0e;        /* nav + footer black */
+  --char:#1d1e20;       /* charcoal bands */
+  --red:#e3161b;        /* badge red */
+  --red-deep:#b80f13;
+  --yellow:#ffd21f;     /* nav active, used sparingly */
+  --paper:#ffffff;
+  --mist:#efefee;       /* light section ground */
+  --steel:#5d6570;      /* body grey from her landing header */
+  --line:#d6d6d4;
+  --display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --body:"Inter","Helvetica Neue",Arial,sans-serif;
+  --gut-l:max(16px, env(safe-area-inset-left, 0px));
+  --gut-r:max(16px, env(safe-area-inset-right, 0px));
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--ink)}
+a{color:inherit}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;line-height:1.06;margin:0;text-wrap:balance;letter-spacing:-.012em}
+.wrap{max-width:1240px;margin:0 auto;padding-left:var(--gut-l);padding-right:var(--gut-r)}
+.eyebrow{font:700 13px/1 var(--body);text-transform:uppercase;letter-spacing:.14em;color:var(--red)}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+
+/* prototype ribbon */
+.proto{background:var(--yellow);color:var(--ink);font:600 13px/1.3 var(--body)}
+.proto .wrap{display:flex;gap:12px;justify-content:space-between;align-items:center;padding-block:7px;flex-wrap:wrap}
+.proto nav{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.proto select{font:700 12px var(--body);text-transform:uppercase;letter-spacing:.06em;border:1.5px solid var(--ink);background:#fff;color:var(--ink);padding:4px 8px;width:auto;max-width:200px}
+.proto a{text-decoration:none;padding:4px 10px;border:1.5px solid var(--ink);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:12px}
+.proto a[aria-current="page"]{background:var(--ink);color:var(--yellow)}
+
+/* utility bar */
+.util{background:var(--red);color:#fff;font:700 15px/1.2 var(--body)}
+.util .wrap{display:flex;justify-content:center;gap:10px 40px;flex-wrap:wrap;padding-block:9px;text-align:center}
+.util span{opacity:.92;font-weight:500}
+
+/* nav */
+header.nav{background:var(--ink);color:#fff;position:sticky;top:env(safe-area-inset-top,0px);z-index:50}
+.nav .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding-block:14px}
+.nav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;align-items:center}
+.nav ul.right{justify-content:flex-end}
+.nav li{position:relative}
+.nav a.top{display:block;text-decoration:none;font:700 15px/1 var(--display);letter-spacing:.05em;text-transform:uppercase;padding:10px 12px;transition:background .15s,color .15s}
+.nav a.top:hover,.nav a.top:focus-visible,.nav li.open>a.top{background:var(--red);color:var(--yellow)}
+.logo img{height:56px;width:auto}
+.drop{position:absolute;right:0;top:100%;background:var(--ink);border-top:3px solid var(--red);min-width:230px;padding:10px 0;display:none}
+.nav li:hover .drop,.nav li:focus-within .drop{display:block}
+.drop a{display:block;padding:8px 18px;text-decoration:none;font-weight:600}
+.drop a:hover{background:var(--char);color:var(--yellow)}
+.burger{display:none;background:none;border:2px solid #fff;color:#fff;font:700 14px var(--body);padding:8px 12px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer}
+.mnav{display:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.08fr 1fr;background:var(--red);min-height:520px}
+.hero-media{position:relative;overflow:hidden;background:#222}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:62% 60%}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0) 55%,rgba(227,22,27,.35))}
+.play{position:absolute;left:20px;bottom:20px;z-index:2;display:flex;align-items:center;gap:12px;background:rgba(13,13,14,.82);color:#fff;text-decoration:none;padding:10px 16px 10px 10px;font-weight:600;font-size:14px;max-width:calc(100% - 40px)}
+.play b{display:grid;place-items:center;width:38px;height:38px;flex:none;background:var(--red);border-radius:50%}
+.play small{display:block;font-weight:400;opacity:.75;font-size:12px}
+.hero-copy{color:#fff;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:56px max(16px,env(safe-area-inset-right,0px)) 56px 56px}
+.hero-copy .eyebrow{color:#fff;opacity:.9}
+.hero-copy h1{font-size:clamp(34px,4.6vw,65px);font-weight:900}
+.hero-copy h1 em{font-style:normal;color:var(--ink)}
+.hero-copy p{margin:0;font-size:18px;max-width:30em}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:800 14px/1 var(--display);letter-spacing:.07em;text-transform:uppercase;padding:16px 24px;border:2px solid transparent;cursor:pointer;transition:transform .12s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#000;color:var(--yellow)}
+.btn-ghost{border-color:#fff;color:#fff;background:transparent}
+.btn-ghost:hover{background:#fff;color:var(--red)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.hero-facts{display:flex;gap:28px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.35);padding-top:18px;font-size:14px}
+.hero-facts b{display:block;font:800 20px/1 var(--display)}
+
+/* tire finder band */
+.finder{background:var(--ink);color:#fff;padding-block:56px}
+.finder h2{font-size:clamp(28px,3.7vw,47px);font-weight:800;text-transform:none;font-family:var(--display)}
+.finder-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center}
+.finder p.lead{color:#bdbdbd;margin:14px 0 0;max-width:34em}
+.tabs{display:flex;gap:0;margin-bottom:-1px}
+.tabs button{flex:1;background:var(--char);color:#bbb;border:0;font:700 13px var(--display);letter-spacing:.08em;text-transform:uppercase;padding:14px;cursor:pointer;border-top:3px solid transparent}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--ink);border-top-color:var(--red)}
+.panel{background:#fff;color:var(--ink);padding:22px;display:grid;gap:14px}
+.fields{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.fields.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+label.f{display:grid;gap:5px;font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel);min-width:0}
+select,input,textarea{font:500 16px var(--body);color:var(--ink);background:#fff;border:0;border-bottom:2px solid var(--line);padding:10px 4px;width:100%;min-width:0;border-radius:0}
+select:focus,input:focus,textarea:focus{outline:none;border-bottom-color:var(--red)}
+.size-demo{display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;font:800 23px/1 var(--display);letter-spacing:.02em}
+.size-demo span{color:var(--red)}
+.size-demo small{font:500 13px var(--body);color:var(--steel);letter-spacing:0;margin-left:8px}
+.result{font-size:14px;color:var(--steel);min-height:1.4em}
+.widget-note{font-size:12px;color:#8a8a8a;margin-top:10px}
+
+/* services */
+.services{background:var(--mist);padding-block:72px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
+.sec-head h2{font-size:clamp(27px,3.3vw,41px);font-weight:800}
+.sec-head p{margin:8px 0 0;color:var(--steel);max-width:36em}
+.svc-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.svc{background:#fff;display:grid;justify-items:center;align-content:center;gap:12px;padding:22px 10px;text-decoration:none;text-align:center;font:700 15px/1.2 var(--body);border-bottom:3px solid transparent;transition:border-color .15s,transform .15s}
+.svc:hover{border-bottom-color:var(--red);transform:translateY(-2px)}
+.svc svg{width:46px;height:46px;color:var(--red)}
+.svc.pay{background:var(--ink);color:#fff}
+.svc.pay svg{color:var(--yellow)}
+
+/* mobile service */
+.mobile{display:grid;grid-template-columns:1fr 1fr;background:var(--char);color:#fff}
+.mobile-copy{padding:64px 56px 64px max(16px,env(safe-area-inset-left,0px));display:grid;gap:18px;align-content:center;max-width:640px;justify-self:end;width:100%}
+.mobile-copy h2{font-size:clamp(30px,3.6vw,47px);font-weight:900}
+.mobile-copy h2 span{color:var(--red)}
+.mobile-copy p{margin:0;color:#cfcfcf;font-size:17px}
+.steps{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:12px}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.steps b{font:900 23px/1 var(--display);color:var(--red)}
+.steps strong{display:block;font-size:17px}
+.steps small{color:#aaa;font-size:14px}
+.mobile-media{position:relative;min-height:420px;background:#111 center/cover no-repeat}
+.mobile-media .tag{position:absolute;right:16px;bottom:16px;background:var(--red);color:#fff;font:800 13px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;padding:10px 14px}
+
+/* offers */
+.offers{padding-block:72px}
+.offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.offer{border:2px dashed var(--ink);padding:26px;display:grid;gap:10px;align-content:start;position:relative}
+.offer .amt{font:900 42px/.9 var(--display);color:var(--red)}
+.offer h3{font-size:24px;font-weight:800}
+.offer p{margin:0;color:var(--steel);font-size:15px}
+.offer .sample{position:absolute;top:-11px;left:18px;background:var(--yellow);font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;padding:5px 8px}
+.finance{margin-top:16px;background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding:26px 28px}
+.finance h3{font-size:30px;font-weight:800}
+.finance p{margin:4px 0 0;color:#bbb}
+
+/* reviews + gallery placeholders */
+.proof{background:var(--mist);padding-block:64px}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.slot{background:#fff;border:2px dashed #b9b9b6;padding:28px;display:grid;gap:8px;align-content:start;min-height:200px}
+.slot h3{font-size:28px;font-weight:800}
+.slot p{margin:0;color:var(--steel)}
+.slot .who{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;color:var(--red)}
+
+/* brands + footer */
+.brands{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:22px}
+.brands img{width:100%;max-width:980px;margin:0 auto;height:auto}
+footer{background:var(--ink);color:#fff}
+.foot{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 1.4fr;gap:32px;padding-block:56px}
+.foot h4{font:800 17px/1 var(--display);text-transform:uppercase;letter-spacing:.04em;margin:0 0 18px}
+.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.foot a{text-decoration:none;font-weight:600;color:#e8e8e8}
+.foot a:hover{color:var(--yellow)}
+.visit{display:grid;gap:16px;align-content:start}
+.visit small{display:block;text-transform:uppercase;letter-spacing:.1em;color:#9a9a9a;font-size:12px;margin-bottom:2px}
+.visit b{font-size:17px}
+.socials{display:flex;gap:10px}
+.socials a{width:40px;height:40px;display:grid;place-items:center;border:1.5px solid #555;border-radius:50%}
+.socials svg{width:18px;height:18px}
+.legal{border-top:1px solid #333}
+.legal .wrap{display:flex;gap:6px 18px;flex-wrap:wrap;justify-content:center;padding-block:18px;font-size:14px;color:#aaa}
+.legal a{text-decoration:none}
+
+/* quote page */
+.q-head{background:var(--char);color:#fff}
+.q-head .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:40px}
+.q-head h1{font-size:clamp(36px,5.2vw,62px);font-weight:900}
+.q-head p{margin:10px 0 16px;color:#cfcfcf;max-width:34em}
+.q-head .hours{text-align:right;font-size:15px;line-height:1.6}
+.q-head .hours b{display:block;letter-spacing:.1em;font-size:13px;margin-bottom:6px}
+.q-photo{height:clamp(220px,32vw,420px);overflow:hidden;border-bottom:8px solid var(--red)}
+.q-photo img{width:100%;height:100%;object-fit:cover}
+.q-intro{background:#fff;border-left:10px solid var(--red)}
+.q-intro .wrap{padding-block:36px;display:grid;gap:14px}
+.q-intro h2{font-size:clamp(25px,3.4vw,43px);font-weight:900;max-width:16ch}
+.q-intro p{margin:0;color:var(--steel);max-width:44em}
+.checks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:6px}
+.checks div{background:var(--mist);padding:14px;font-weight:600;font-size:14px;display:flex;gap:8px;align-items:flex-start}
+.checks div::before{content:"✓";color:var(--red);font-weight:800}
+.q-body{background:var(--mist);padding-block:44px}
+.q-body h3{font-size:30px;font-weight:800;margin-bottom:4px}
+.pick{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:20px 0 30px}
+.pick label{position:relative;background:#fff;display:grid;justify-items:center;gap:8px;padding:16px 6px;text-align:center;font:700 14px/1.2 var(--body);cursor:pointer;border:2px solid transparent;transition:border-color .12s}
+.pick input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}
+.pick svg{width:38px;height:38px;color:var(--red)}
+.pick label:has(input:checked){border-color:var(--red);background:#fff4f4}
+.pick label:has(input:focus-visible){outline:3px solid var(--yellow)}
+.form-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 24px}
+.form-grid label.f{color:var(--red-deep)}
+.err{color:var(--red-deep);font-size:13px;min-height:1.2em;font-weight:500}
+.chk{display:flex;gap:10px;align-items:center;font-weight:500;margin-top:20px}
+.chk input{width:20px;height:20px;accent-color:var(--red)}
+.q-what{background:var(--char);color:#fff;padding-block:36px}
+.q-what h3{font-size:30px;font-weight:800;text-align:center;display:block;margin:0 auto 22px;width:fit-content;border-bottom:3px solid var(--red);padding-bottom:8px}
+.sym{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px}
+.sym label{display:flex;gap:10px;align-items:center}
+.sym input{width:20px;height:20px;accent-color:var(--red)}
+.q-what textarea{background:transparent;color:#fff;border-bottom-color:#666;margin-top:6px;resize:vertical;min-height:80px}
+.q-submit{background:var(--ink);color:#fff;padding-block:30px}
+.q-submit .btn{width:100%}
+.q-submit p{font-size:13px;color:#aaa;margin:12px 0 0}
+.done{background:#fff;color:var(--ink);border-left:6px solid var(--red);padding:16px 18px;margin-top:16px;font-weight:500}
+
+/* ===== v2: motion ===== */
+:root{--ease:cubic-bezier(.2,.7,.2,1)}
+header.nav .wrap{transition:padding .35s var(--ease)}
+header.nav .logo img{transition:height .35s var(--ease)}
+header.nav.scrolled{box-shadow:0 8px 24px rgba(0,0,0,.35)}
+header.nav.scrolled .wrap{padding-block:6px}
+header.nav.scrolled .logo img{height:42px}
+.nav a.top{position:relative}
+.nav a.top::after{content:"";position:absolute;left:12px;right:12px;bottom:4px;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav a.top:hover::after{transform:scaleX(1)}
+.drop{display:block;visibility:hidden;opacity:0;transform:translateY(8px);transition:opacity .2s var(--ease),transform .2s var(--ease),visibility 0s .2s}
+.nav li:hover .drop,.nav li:focus-within .drop{visibility:visible;opacity:1;transform:none;transition-delay:0s}
+.hero-media img{animation:kenburns 22s ease-in-out infinite alternate;transform-origin:62% 60%}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.12)}}
+.hero-copy > *{animation:rise .8s var(--ease) both}
+.hero-copy > *:nth-child(2){animation-delay:.08s}
+.hero-copy > *:nth-child(3){animation-delay:.16s}
+.hero-copy > *:nth-child(4){animation-delay:.24s}
+.hero-copy > *:nth-child(5){animation-delay:.32s}
+@keyframes rise{from{transform:translateY(22px)}to{transform:none}}
+.reveal{transform:translateY(26px);transition:transform .7s var(--ease)}
+.reveal.in{transform:none}
+.svc,.offer,.slot,.pick label{transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .15s}
+.svc:hover,.offer:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(13,13,14,.12)}
+.btn{transition:transform .15s var(--ease),background .2s,color .2s,box-shadow .2s}
+.btn:hover{box-shadow:0 8px 20px rgba(0,0,0,.25)}
+[data-view]{animation:viewin .45s var(--ease)}
+@keyframes viewin{from{transform:translateY(14px)}to{transform:none}}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.35s}
+
+/* ===== v2: conversion blocks ===== */
+.trust{background:var(--paper);border-bottom:1px solid var(--line)}
+.trust .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding-block:18px}
+.trust div{display:flex;gap:12px;align-items:center;font-size:14px;color:var(--steel);min-width:0}
+.trust b{font:800 20px/1 var(--display);color:var(--ink);white-space:nowrap}
+.trust .stars{color:#f5a400;letter-spacing:2px;font-size:15px}
+.quick{display:flex;gap:10px;flex-wrap:wrap}
+.quick a{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;text-decoration:none;color:#fff;padding:9px 14px;border:1.5px solid rgba(255,255,255,.55);border-radius:999px;transition:background .2s,border-color .2s}
+.quick a:hover{background:rgba(0,0,0,.25);border-color:#fff}
+.quick svg{width:16px;height:16px}
+.photo-quote{background:var(--yellow);color:var(--ink)}
+.photo-quote .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;padding-block:26px}
+.photo-quote h3{font-size:32px;font-weight:900}
+.photo-quote p{margin:4px 0 0;font-weight:500}
+.photo-quote .cam{width:64px;height:64px;border-radius:50%;background:var(--ink);display:grid;place-items:center}
+.photo-quote .cam svg{width:30px;height:30px}
+.photo-quote .num{font:800 17px var(--display);letter-spacing:.03em}
+.expires{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--ink);background:var(--mist);padding:6px 8px;justify-self:start}
+.club{background:var(--red);color:#fff}
+.club .wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:center;padding-block:44px}
+.club h2{font-size:clamp(25px,3.0vw,37px);font-weight:900}
+.club p{margin:8px 0 0;opacity:.92}
+.club form{display:grid;grid-template-columns:1fr 1fr auto;gap:10px}
+.club input{background:#fff;border:0;padding:14px}
+.club .fine{grid-column:1/-1;font-size:12px;opacity:.85;margin:0}
+.faq{padding-block:64px}
+.faq details{border-bottom:1px solid var(--line);padding-block:4px}
+.faq summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:16px;font:700 20px/1.3 var(--body);padding:16px 0}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:800 22px/1 var(--display);color:var(--red);transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 18px;color:var(--steel);max-width:60em}
+.actionbar{display:none}
+@media (max-width:860px){
+  .trust .wrap{grid-template-columns:1fr 1fr}
+  .photo-quote .wrap{grid-template-columns:1fr;text-align:left}
+  .club .wrap,.club form{grid-template-columns:1fr}
+  .actionbar{display:grid;grid-template-columns:1fr 1fr 1.3fr;position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--ink);border-top:3px solid var(--red);padding:8px max(10px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));gap:8px;transform:translateY(110%);transition:transform .35s var(--ease)}
+  .actionbar.show{transform:none}
+  .actionbar a{display:grid;place-items:center;text-decoration:none;color:#fff;font:800 13px/1 var(--display);letter-spacing:.06em;text-transform:uppercase;padding:12px 6px;border:1.5px solid #444}
+  .actionbar a.q{background:var(--red);border-color:var(--red)}
+  footer{padding-bottom:70px}
+}
+@media (prefers-reduced-motion:reduce){.hero-media img,.hero-copy > *,[data-view]{animation:none}.reveal{transform:none}}
+
+/* ===== v3: page heads ===== */
+.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--yellow);color:var(--ink);padding:10px 14px;font-weight:700}
+.skip:focus{left:max(16px,env(safe-area-inset-left,0px))}
+.crumbs{font-size:13px;color:#aaa;display:flex;gap:8px;flex-wrap:wrap}
+.crumbs a{text-decoration:none;color:#ddd}
+.phead{background:var(--ink);color:#fff;border-bottom:6px solid var(--red)}
+.phead .wrap{display:grid;gap:12px;padding-block:40px}
+.phead h1{font-size:clamp(33px,4.4vw,56px);font-weight:900}
+.phead p{margin:0;color:#c9c9c9;max-width:44em;font-size:17px}
+.sample-note{display:inline-block;background:var(--yellow);color:var(--ink);font:700 12px/1.3 var(--body);text-transform:uppercase;letter-spacing:.08em;padding:6px 10px}
+
+/* ===== v3: tire shop ===== */
+.shopbar{background:var(--mist);border-bottom:1px solid var(--line)}
+.shopbar .wrap{display:flex;gap:12px 24px;align-items:center;flex-wrap:wrap;padding-block:14px}
+.vehicle-chip{display:flex;gap:10px;align-items:center;background:#fff;padding:8px 14px;font-weight:600;border-left:4px solid var(--red)}
+.vehicle-chip small{display:block;font-weight:500;color:var(--steel);font-size:12px}
+.seg{display:inline-flex;border:2px solid var(--ink)}
+.seg button{background:#fff;border:0;font:700 14px var(--body);padding:9px 14px;cursor:pointer;text-transform:uppercase;letter-spacing:.05em}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.shop{display:grid;grid-template-columns:250px 1fr;gap:28px;padding-block:28px 64px}
+.filters{display:grid;gap:22px;align-content:start;position:sticky;top:96px}
+.filters fieldset{border:0;padding:0;margin:0;display:grid;gap:8px}
+.filters legend{font:800 14px var(--display);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.filters label{display:flex;gap:9px;align-items:center;font-weight:500}
+.filters input[type=checkbox]{width:18px;height:18px;accent-color:var(--red)}
+.filters input[type=range]{accent-color:var(--red);border:0;padding:0}
+.results-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.results-head b{font-size:18px}
+.results-head select{width:auto}
+.tire-list{display:grid;gap:12px}
+.tire{display:grid;grid-template-columns:120px 1fr auto;gap:20px;background:#fff;border:1px solid var(--line);padding:18px;align-items:center;transition:box-shadow .25s var(--ease),transform .25s var(--ease)}
+.tire:hover{box-shadow:0 14px 30px rgba(13,13,14,.1);transform:translateY(-2px)}
+.tread{width:120px;height:120px;max-width:100%;border-radius:50%;background:radial-gradient(circle,#2a2a2c 0 34%,#d8d8d8 34% 41%,#1a1a1b 41%);position:relative;overflow:hidden}
+.tread::after{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,transparent 0 6deg,rgba(255,255,255,.07) 6deg 10deg);-webkit-mask:radial-gradient(circle,transparent 0 41%,#000 41%);mask:radial-gradient(circle,transparent 0 41%,#000 41%)}
+.tire .brand{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
+.tire h3{font-size:26px;font-weight:800;margin:4px 0 6px}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tags span{font-size:12px;font-weight:600;background:var(--mist);padding:4px 8px}
+.tags span.go{background:#e9f6ec;color:#17652b}
+.price{text-align:right;display:grid;gap:4px;justify-items:end;min-width:170px}
+.price .each{font:900 27px/1 var(--display)}
+.price .each small{font:500 13px var(--body);color:var(--steel)}
+.price .otd{font-size:13px;color:var(--steel)}
+.price .otd b{color:var(--ink)}
+.price .btn{padding:12px 16px;font-size:16px}
+.empty{background:#fff;border:2px dashed var(--line);padding:30px;text-align:center;color:var(--steel)}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(420px,100%);background:#fff;z-index:90;transform:translateX(105%);transition:transform .4s var(--ease);display:grid;grid-template-rows:auto 1fr auto;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.drawer.open{transform:none;box-shadow:-20px 0 40px rgba(0,0,0,.25)}
+.drawer header{background:var(--ink);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:18px 20px}
+.drawer header h2{font-size:28px;font-weight:800}
+.drawer header button{background:none;border:1.5px solid #fff;color:#fff;font:700 14px var(--body);padding:6px 10px;cursor:pointer}
+.drawer .body{padding:20px;overflow:auto;display:grid;gap:16px;align-content:start}
+.lines{display:grid;gap:8px;font-size:15px}
+.lines div{display:flex;justify-content:space-between;gap:12px}
+.lines .tot{border-top:2px solid var(--ink);padding-top:10px;font:800 17px var(--display)}
+.drawer footer{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:8px}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:85;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.open{opacity:1;pointer-events:auto}
+.packages{background:var(--char);color:#fff;padding-block:48px}
+.pk-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.pk{border:1px solid #3a3a3d;padding:22px;display:grid;gap:8px}
+.pk h3{font-size:26px;font-weight:800}
+.pk p{margin:0;color:#bdbdbd}
+
+/* ===== v3: mobile service ===== */
+.zipbox{background:#fff;color:var(--ink);padding:24px;display:grid;gap:14px;max-width:560px;border-top:6px solid var(--red)}
+.zipbox form{display:grid;grid-template-columns:1fr auto;gap:10px}
+.zipbox input{font:800 20px var(--display);letter-spacing:.1em;border-bottom-width:3px}
+.zipres{font-weight:600;min-height:1.5em}
+.zipres.ok{color:#17652b}
+.zipres.no{color:var(--red-deep)}
+.mhero{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
+.onsite{padding-block:56px}
+.onsite-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
+.onsite-grid div{background:var(--mist);padding:20px;display:grid;gap:10px;align-content:start}
+.onsite-grid svg{width:40px;height:40px;color:var(--red)}
+.onsite-grid b{font:800 17px var(--display);text-transform:uppercase}
+.onsite-grid p{margin:0;color:var(--steel);font-size:14px}
+.slots{background:var(--mist);padding-block:56px}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-top:18px}
+.days button,.times button{border:2px solid var(--ink);background:#fff;font:700 15px var(--body);padding:10px 14px;cursor:pointer;flex:none;transition:background .15s,color .15s}
+.days button small{display:block;font-weight:500;font-size:12px}
+.days button[aria-pressed="true"],.times button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.times{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 20px}
+.areas{padding-block:56px}
+.cities{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.cities a{text-decoration:none;border:1.5px solid var(--ink);padding:8px 14px;font-weight:600;transition:background .15s,color .15s}
+.cities a:hover{background:var(--ink);color:#fff}
+
+@media (max-width:1060px){.onsite-grid,.pk-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){
+  .shop{grid-template-columns:1fr}
+  .filters{position:static;grid-template-columns:1fr 1fr}
+  .tire{grid-template-columns:80px 1fr}
+  .tread{width:80px;height:80px}
+  .price{grid-column:1/-1;text-align:left;justify-items:start;min-width:0;grid-template-columns:1fr auto;align-items:end}
+  .price .btn{grid-row:span 2}
+  .mhero{grid-template-columns:1fr}
+}
+@media (max-width:520px){.onsite-grid,.pk-grid,.filters{grid-template-columns:1fr}.zipbox form{grid-template-columns:1fr}}
+
+/* ===== v4: guided quote flow ===== */
+.flow{background:var(--ink);color:#fff;padding-block:56px;position:relative;overflow:hidden;overflow:clip}
+.flow::before{content:"";position:absolute;right:-180px;top:-180px;width:520px;height:520px;border-radius:50%;border:60px solid rgba(227,22,27,.12)}
+.flow-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start;position:relative}
+.flow h2{font-size:clamp(30px,3.7vw,49px);font-weight:900}
+.flow h2 span{color:var(--red)}
+.flow .lead{color:#bdbdbd;margin:14px 0 0;max-width:30em}
+.promise{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px}
+.promise li{display:flex;gap:10px;align-items:flex-start;color:#ddd}
+.promise li::before{content:"";flex:none;width:18px;height:18px;margin-top:3px;background:var(--red);clip-path:polygon(14% 44%,0 59%,40% 100%,100% 18%,86% 4%,40% 72%)}
+.card{background:#fff;color:var(--ink);box-shadow:0 30px 60px rgba(0,0,0,.4);min-width:0}
+.prog{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:16px 22px 0}
+.prog i{height:5px;background:var(--line);transition:background .35s var(--ease)}
+.prog i.on{background:var(--red)}
+.stepmeta{display:flex;justify-content:space-between;padding:10px 22px 0;font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;color:var(--steel)}
+.steps-wrap{overflow:hidden;overflow:clip}
+.step{padding:18px 22px 6px;display:grid;gap:14px;animation:stepin .4s var(--ease)}
+@keyframes stepin{from{transform:translateX(26px)}to{transform:none}}
+.step.back{animation-name:stepback}
+@keyframes stepback{from{transform:translateX(-26px)}to{transform:none}}
+.step h3{font-size:30px;font-weight:900}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;text-align:left;background:var(--mist);border:2px solid transparent;padding:14px;cursor:pointer;font:600 16px/1.25 var(--body);color:var(--ink);transition:border-color .15s,background .15s,transform .15s}
+.opt:hover{transform:translateY(-2px)}
+.opt small{display:block;font-weight:500;color:var(--steel);font-size:13px}
+.opt svg{width:40px;height:40px;color:var(--red)}
+.opt[aria-pressed="true"]{border-color:var(--red);background:#fff4f4}
+.opt.urgent{background:var(--red);color:#fff}
+.opt.urgent small{color:#ffe1e1}
+.opt.urgent svg{color:#fff}
+.alert{background:#fff4f4;border-left:4px solid var(--red);padding:12px 14px;font-weight:500;font-size:15px}
+.checklist{background:var(--mist);padding:14px 16px;font-size:14px}
+.checklist b{display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+.checklist ul{margin:0;padding-left:18px;display:grid;gap:3px;color:var(--steel)}
+.windows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.windows button{border:2px solid var(--ink);background:#fff;font:700 14px var(--body);padding:10px 6px;cursor:pointer}
+.windows button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.flow-days{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.flow-days button{flex:none;border:2px solid var(--ink);background:#fff;font:700 14px var(--body);padding:8px 12px;cursor:pointer}
+.flow-days button small{display:block;font-weight:500;font-size:11px}
+.flow-days button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.navrow{display:flex;justify-content:space-between;gap:10px;padding:14px 22px 22px}
+.navrow .btn{padding:14px 20px;font-size:16px}
+.linkbtn{background:none;border:0;font:700 14px var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--steel);cursor:pointer;padding:10px 4px}
+.linkbtn[disabled]{visibility:hidden}
+.toggle{display:flex;gap:10px;align-items:center;font-weight:500}
+.toggle input{width:20px;height:20px;accent-color:var(--red)}
+.done-step{text-align:left}
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:0;border-left:3px solid var(--red);margin-left:8px}
+.timeline li{padding:0 0 14px 18px;position:relative}
+.timeline li::before{content:"";position:absolute;left:-9px;top:3px;width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid var(--red)}
+.timeline li.now::before{background:var(--red)}
+.timeline b{display:block}
+.timeline small{color:var(--steel)}
+
+/* ===== v4: how it works, combo, reviews, lifts, fleet ===== */
+.how{padding-block:64px;background:var(--paper)}
+.how-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:26px;counter-reset:s}
+.how-grid div{padding:22px 20px 22px 0;border-top:4px solid var(--ink);display:grid;gap:8px;align-content:start;position:relative}
+.how-grid div::before{counter-increment:s;content:counter(s);font:900 42px/1 var(--display);color:var(--red)}
+.how-grid b{font:800 17px var(--display);text-transform:uppercase}
+.how-grid p{margin:0;color:var(--steel);font-size:15px;max-width:22em}
+.how-grid .msg{font-size:13px;background:var(--mist);padding:8px 10px;border-radius:12px 12px 12px 2px;color:var(--ink);justify-self:start;max-width:95%}
+.combo{background:var(--red);color:#fff}
+.combo .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding-block:44px}
+.combo h2{font-size:clamp(25px,3.3vw,41px);font-weight:900}
+.combo p{margin:10px 0 0;font-size:17px;opacity:.95;max-width:34em}
+.combo .vs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.combo .vs div{background:rgba(0,0,0,.22);padding:16px}
+.combo .vs b{display:block;font:800 14px var(--display);text-transform:uppercase;margin-bottom:6px}
+.combo .vs ul{margin:0;padding-left:18px;font-size:14px;display:grid;gap:4px}
+.combo .vs .us{background:var(--ink)}
+.rev{padding-block:64px;background:var(--mist)}
+.rev-top{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center}
+.big{font:900 86px/.85 var(--display);color:var(--ink)}
+.big small{display:block;font:700 14px var(--body);color:var(--steel);letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+.stars-l{color:#f5a400;font-size:26px;letter-spacing:4px}
+.platforms{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.platforms span{background:#fff;padding:8px 12px;font-weight:600;font-size:14px;border:1px solid var(--line)}
+.platforms b{font-variant-numeric:tabular-nums}
+.rev-slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:26px}
+.rev-slots div{background:#fff;padding:20px;border-top:3px solid #f5a400;display:grid;gap:8px;color:var(--steel);font-size:14px}
+.rev-slots b{color:var(--ink);font-size:16px}
+.lifts{padding-block:64px}
+.lift-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
+.lift{border:2px solid var(--ink);padding:20px;display:grid;gap:8px;align-content:start;transition:transform .25s var(--ease),box-shadow .25s var(--ease)}
+.lift:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(13,13,14,.12)}
+.lift b{font:800 19px var(--display);text-transform:uppercase}
+.lift .hrs{font:800 23px/1 var(--display);color:var(--red)}
+.lift .hrs small{font:600 13px var(--body);color:var(--steel)}
+.lift p{margin:0;color:var(--steel);font-size:14px}
+.fleet{background:var(--char);color:#fff}
+.fleet .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-block:34px}
+.fleet h3{font-size:34px;font-weight:900}
+.fleet p{margin:4px 0 0;color:#bbb}
+
+@media (max-width:1060px){.how-grid,.lift-grid{grid-template-columns:1fr 1fr}.rev-top{grid-template-columns:auto 1fr}.rev-top .btn{grid-column:1/-1;justify-self:start}}
+@media (max-width:860px){.flow-grid,.combo .wrap{grid-template-columns:1fr}.rev-slots{grid-template-columns:1fr}}
+@media (max-width:520px){.opts,.how-grid,.lift-grid,.combo .vs{grid-template-columns:1fr}.windows{grid-template-columns:1fr 1fr}.big{font-size:84px}.rev-top{grid-template-columns:1fr}}
+
+/* ===== v5: Instagram gallery ===== */
+.ig{padding-block:64px;background:var(--ink);color:#fff}
+.ig .sec-head p{color:#bbb}
+.ig-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.ig-chips button{background:transparent;color:#fff;border:1.5px solid #555;font:700 14px var(--body);padding:8px 14px;cursor:pointer;transition:background .15s,border-color .15s}
+.ig-chips button[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
+.ig-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.ig-tile{position:relative;aspect-ratio:1;overflow:hidden;background:#222;border:0;padding:0;cursor:pointer;max-width:100%}
+.ig-tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.ig-tile:hover img{transform:scale(1.06)}
+.ig-tile .cap{position:absolute;inset:auto 0 0 0;padding:28px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.85));color:#fff;font:600 13px/1.3 var(--body);text-align:left;transform:translateY(100%);transition:transform .3s var(--ease)}
+.ig-tile:hover .cap,.ig-tile:focus-visible .cap{transform:none}
+.ig-tile .badge{position:absolute;top:8px;left:8px;background:var(--red);color:#fff;font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.08em;padding:5px 7px}
+.ig-tile .vid{position:absolute;top:8px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,.6);display:grid;place-items:center}
+.ig-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px;color:#999;font-size:13px}
+.lb{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.9);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));opacity:0;pointer-events:none;transition:opacity .3s}
+.lb.open{opacity:1;pointer-events:auto}
+.lb figure{margin:0;max-width:min(900px,100%);display:grid;gap:12px;color:#fff}
+.lb img{max-height:70vh;width:auto;margin:0 auto;object-fit:contain}
+.lb figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.lb .x{position:absolute;top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));background:none;border:1.5px solid #fff;color:#fff;font:700 14px var(--body);padding:8px 12px;cursor:pointer}
+@media (max-width:860px){.ig-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:520px){.ig-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* responsive */
+@media (max-width:1060px){
+  .nav .wrap{grid-template-columns:auto 1fr;}
+  .nav ul{display:none}
+  .burger{display:block;justify-self:end}
+  .logo{order:-1}
+  .mnav[data-open="true"]{display:grid;background:var(--ink);border-top:3px solid var(--red)}
+  .mnav a{color:#fff;text-decoration:none;font:700 16px var(--display);text-transform:uppercase;letter-spacing:.05em;padding:14px var(--gut-r) 14px var(--gut-l);border-bottom:1px solid #222}
+  .svc-grid,.pick{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:860px){
+  .hero,.mobile,.finder-grid,.proof-grid{grid-template-columns:1fr}
+  .hero-media{height:300px}
+  .hero-copy{padding:40px var(--gut-r) 44px var(--gut-l)}
+  .mobile-copy{padding:48px var(--gut-r) 48px var(--gut-l);justify-self:stretch;max-width:none}
+  .mobile-media{min-height:260px}
+  .offer-grid{grid-template-columns:1fr}
+  .fields{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr 1fr}
+  .checks{grid-template-columns:1fr 1fr}
+  .q-head .hours{text-align:left}
+}
+@media (max-width:520px){
+  .svc-grid,.pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fields,.fields.three,.form-grid,.sym,.checks,.foot{grid-template-columns:1fr}
+  .logo img{height:44px}
+  .util .wrap{font-size:13px;gap:4px 18px}
+  .util .hide-sm{display:none}
+}
+/*PARTS_CSS*/
+</style>
+
+<!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-brake" viewBox="0 0 48 48"><circle cx="22" cy="26" r="16" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="22" cy="26" r="5" fill="currentColor"/><path d="M30 6a20 20 0 0 1 14 14l-8 2a12 12 0 0 0-8-8z" fill="currentColor"/></symbol>
+    <symbol id="i-wheel" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="24" r="4" fill="currentColor"/><path d="M24 8v12M24 28v12M8 24h12M28 24h12M13 13l8 8M27 27l8 8M35 13l-8 8M21 27l-8 8" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-lift" viewBox="0 0 48 48"><path d="M8 22h8l4-8h12l4 8h4v8H8z" fill="currentColor"/><path d="M14 30v4M34 30v4" stroke="currentColor" stroke-width="3"/><circle cx="14" cy="39" r="6" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="34" cy="39" r="6" fill="none" stroke="currentColor" stroke-width="4"/></symbol>
+    <symbol id="i-oil" viewBox="0 0 48 48"><path d="M14 10h12l8 8v24H14z" fill="currentColor"/><path d="M18 4h6v6h-6z" fill="currentColor"/><path d="M24 24c-3 5-4 7-4 9a4 4 0 0 0 8 0c0-2-1-4-4-9z" fill="#fff"/></symbol>
+    <symbol id="i-susp" viewBox="0 0 48 48"><path d="M24 4v6M24 38v6" stroke="currentColor" stroke-width="4"/><path d="M16 10h16M16 38h16" stroke="currentColor" stroke-width="4"/><path d="M18 14l12 4-12 4 12 4-12 4 12 4" fill="none" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-align" viewBox="0 0 48 48"><rect x="4" y="12" width="8" height="24" fill="currentColor"/><rect x="36" y="12" width="8" height="24" fill="currentColor"/><path d="M12 24h24" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="24" r="5" fill="currentColor"/></symbol>
+    <symbol id="i-balance" viewBox="0 0 48 48"><ellipse cx="24" cy="10" rx="16" ry="6" fill="currentColor"/><ellipse cx="24" cy="24" rx="16" ry="6" fill="currentColor"/><ellipse cx="24" cy="38" rx="16" ry="6" fill="currentColor"/><path d="M8 10v28M40 10v28" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-install" viewBox="0 0 48 48"><path d="M8 6l6 6-3 3 14 14-4 4-14-14-3 3-6-6z" fill="currentColor"/><rect x="28" y="6" width="14" height="36" rx="3" fill="none" stroke="currentColor" stroke-width="4"/><path d="M28 14h14M28 22h14M28 30h14" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-repair" viewBox="0 0 48 48"><circle cx="20" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="20" cy="28" r="6" fill="currentColor"/><path d="M36 6l6 6-8 8-6-6z" fill="currentColor"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 48 48"><circle cx="24" cy="24" r="12" fill="currentColor"/><circle cx="24" cy="24" r="4" fill="#fff"/><path d="M6 24a18 18 0 0 1 30-13" fill="none" stroke="currentColor" stroke-width="4"/><path d="M38 4v10H28" fill="none" stroke="currentColor" stroke-width="4"/><path d="M42 24a18 18 0 0 1-30 13" fill="none" stroke="currentColor" stroke-width="4"/></symbol>
+    <symbol id="i-tpms" viewBox="0 0 48 48"><path d="M24 6a18 18 0 1 1-18 18" fill="none" stroke="currentColor" stroke-width="4"/><path d="M24 14v12" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="33" r="3" fill="currentColor"/><path d="M4 14h10M4 8h6" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-pay" viewBox="0 0 48 48"><rect x="4" y="12" width="40" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="24" r="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 18h6M38 30h6" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-van" viewBox="0 0 48 48"><path d="M2 14h28v20H2zM30 20h9l7 7v7H30z" fill="currentColor"/><circle cx="11" cy="37" r="5" fill="#fff" stroke="currentColor" stroke-width="3"/><circle cx="37" cy="37" r="5" fill="#fff" stroke="currentColor" stroke-width="3"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="proto">
+  <div class="wrap">
+    <span>Prototype v6 · Extreme Tires redesign · not the live site</span>
+    <nav aria-label="Prototype pages">
+      <a href="#home" data-view-link="home">Home</a>
+      <a href="#tires" data-view-link="tires">Tires</a>
+      <a href="#mobile" data-view-link="mobile">Mobile</a>
+      <a href="#quote" data-view-link="quote">Quote</a>
+      <select id="jump" aria-label="Jump to any page"></select>
+    </nav>
+  </div>
+</div>
+
+<div class="util">
+  <div class="wrap">
+    <div>(954) 773-1896</div>
+    <div>7712 West Oakland Park Blvd | Sunrise, FL 33351</div>
+    <div class="hide-sm"><span>Mon–Fri 8–6:30 · Sat 8–4 · Sun Closed</span></div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <ul>
+      <li><a class="top" href="#tires" data-view-link="tires">Tires</a></li>
+      <li><a class="top" href="#wheels" data-view-link="wheels">Wheels</a></li>
+      <li><a class="top" href="#mobile" data-view-link="mobile">Mobile Service</a></li>
+    </ul>
+    <a class="logo" href="#home" data-view-link="home" aria-label="Extreme Tires home"><img src="{{LOGO}}" alt="Extreme Tires, Mobile Tire Service" width="492" height="140"></a>
+    <ul class="right">
+      <li><a class="top" href="#services" data-view-link="services">Auto Service</a></li>
+      <li><a class="top" href="#coupons" data-view-link="coupons">Coupons</a></li>
+      <li><a class="top" href="#about" data-view-link="about" aria-haspopup="true">More ▾</a>
+        <div class="drop">
+          <a href="#about" data-view-link="about">About Us</a>
+          <a href="#locations" data-view-link="locations">Locations</a>
+          <a href="#reviews" data-view-link="reviews">Reviews</a>
+          <a href="#financing" data-view-link="financing">Financing</a>
+          <a href="#gallery" data-view-link="gallery">News &amp; Gallery</a>
+          <a href="#contact" data-view-link="contact">Contact Us</a>
+        </div>
+      </li>
+    </ul>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Menu</button>
+  </div>
+  <nav class="mnav" id="mnav" data-open="false" aria-label="Main">
+    <a href="#tires" data-view-link="tires">Tires</a>
+    <a href="#wheels" data-view-link="wheels">Wheels</a>
+    <a href="#mobile" data-view-link="mobile">Mobile Service</a>
+    <a href="#services" data-view-link="services">Auto Service</a>
+    <a href="#coupons" data-view-link="coupons">Coupons</a>
+    <a href="#about" data-view-link="about">About</a>
+    <a href="#reviews" data-view-link="reviews">Reviews</a>
+    <a href="#gallery" data-view-link="gallery">News &amp; Gallery</a>
+    <a href="#financing" data-view-link="financing">Financing</a>
+    <a href="#locations" data-view-link="locations">Locations</a>
+    <a href="#contact" data-view-link="contact">Contact</a>
+    <a href="#quote" data-view-link="quote">Request a Quote</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+<!-- ================= HOME ================= -->
+<section id="view-home" data-view="home">
+
+  <div class="hero">
+    <div class="hero-media">
+      <img src="{{STORE}}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
+      <a class="play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
+        <b><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></b>
+        <span>Watch the shop in action<small>On the live site this video plays muted behind the hero</small></span>
+      </a>
+    </div>
+    <div class="hero-copy">
+      <div class="eyebrow">Sunrise, FL · Tires · Wheels · Auto Service</div>
+      <h1>Tires and service. <em>At the shop or at your door.</em></h1>
+      <p>Shop new tires and wheels online, book a repair, or have our mobile team come to your home or job site anywhere in Broward.</p>
+      <div class="btns">
+        <a class="btn btn-dark" href="#start" data-go="home">Book in 60 seconds</a>
+        <a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop Tires</a>
+      </div>
+      <div class="quick">
+        <a href="tel:+19547731896"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call (954) 773-1896</a>
+        <a href="sms:+19547731896"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2z"/></svg>Text us</a>
+        <a href="https://wa.me/19547731896" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1.1z"/></svg>WhatsApp</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>Since 2007</b>Serving South Florida</div>
+        <div><b>Mobile</b>Service at your location</div>
+        <div><b>Pay later</b>Lease-to-own financing</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="trust" aria-label="Why Extreme Tires">
+    <div class="wrap">
+      <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,300+ reviews across Google, Yelp &amp; more</span></div>
+      <div><b>Hunter</b><span>Engineering alignment equipment</span></div>
+      <div><b>19+</b><span>Tire brands, from Continental to Nitto</span></div>
+      <div><b>3</b><span>Counties served: Broward, Miami-Dade, Palm Beach</span></div>
+    </div>
+  </div>
+
+  <section class="flow" id="start" aria-labelledby="flow-h">
+    <div class="wrap flow-grid">
+      <div>
+        <div class="eyebrow">Quote &amp; book</div>
+        <h2 id="flow-h">Booked in <span>60 seconds.</span></h2>
+        <p class="lead">Five quick taps. You get a 2-hour arrival window, a text when your tech is on the way, and the out-the-door price before we start.</p>
+        <ul class="promise">
+          <li>Out-the-door price before we start, no surprise fees</li>
+          <li>Text updates from booking to "tech on the way"</li>
+          <li>Bring your own tires? We install those too</li>
+          <li>Shop now, pay later with Kafene financing</li>
+        </ul>
+      </div>
+      <div class="card" id="wiz">
+        <div class="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="stepmeta"><span id="wiz-count">Step 1 of 5</span><span id="wiz-name">What you need</span></div>
+        <div class="steps-wrap" aria-live="polite"><div id="wiz-body"></div></div>
+        <div class="navrow"><button class="linkbtn" type="button" id="wiz-back">← Back</button><button class="btn btn-red" type="button" id="wiz-next">Next</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="eyebrow">How mobile service works</div>
+      <h2 id="how-h" style="font-size:clamp(27px,3.3vw,41px);font-weight:800">You never wonder where we are</h2>
+      <div class="how-grid">
+        <div><b>Book</b><p>Pick a 2-hour window online, by text or by phone.</p><span class="msg">Booked: Thu 10–12 · 4 tires, mobile install</span></div>
+        <div><b>Reminder</b><p>A text the evening before, with what your parking spot needs.</p><span class="msg">See you tomorrow 10–12. Need ~5 ft around the car.</span></div>
+        <div><b>On the way</b><p>A text with your tech's name when the van heads your way.</p><span class="msg">Adam is 20 min away 🚐</span></div>
+        <div><b>Done</b><p>Receipt and a quick review link by text when the job is done.</p><span class="msg">All set! Receipt + how did we do?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="finder" id="finder" aria-labelledby="finder-h">
+    <div class="wrap finder-grid">
+      <div>
+        <div class="eyebrow">Online tire shop</div>
+        <h2 id="finder-h">Shop For Brand New Tires</h2>
+        <p class="lead">Search by vehicle or by the size printed on your sidewall. Order online and pick installation at the shop or with our mobile team.</p>
+      </div>
+      <div>
+        <div class="tabs" role="tablist">
+          <button role="tab" aria-selected="true" aria-controls="p-veh" id="t-veh">By vehicle</button>
+          <button role="tab" aria-selected="false" aria-controls="p-size" id="t-size">By tire size</button>
+        </div>
+        <form class="panel" id="p-veh" role="tabpanel" aria-labelledby="t-veh">
+          <div class="fields">
+            <label class="f" for="v-year">Year<select id="v-year"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></label>
+            <label class="f" for="v-make">Make<select id="v-make"><option>Jeep</option><option>Ford</option><option>Toyota</option><option>Chevrolet</option></select></label>
+            <label class="f" for="v-model">Model<select id="v-model"><option>Gladiator</option><option>Wrangler</option><option>Grand Cherokee</option></select></label>
+            <label class="f" for="v-trim">Trim<select id="v-trim"><option>Rubicon</option><option>Sport</option><option>Mojave</option></select></label>
+          </div>
+          <button class="btn btn-red" type="submit">Find tires that fit</button>
+          <div class="result" aria-live="polite"></div>
+        </form>
+        <form class="panel" id="p-size" role="tabpanel" aria-labelledby="t-size" hidden>
+          <div class="fields three">
+            <label class="f" for="s-w">Width<select id="s-w"><option>225</option><option>245</option><option>265</option><option>285</option></select></label>
+            <label class="f" for="s-a">Aspect ratio<select id="s-a"><option>65</option><option>60</option><option>70</option><option>75</option></select></label>
+            <label class="f" for="s-r">Rim (in)<select id="s-r"><option>17</option><option>18</option><option>20</option><option>22</option></select></label>
+          </div>
+          <div class="size-demo" aria-live="polite"><span id="sz">225/65R17</span><small>Find it on your sidewall, e.g. 225/65R17 102H</small></div>
+          <button class="btn btn-red" type="submit">Search this size</button>
+          <div class="result" aria-live="polite"></div>
+        </form>
+        <p class="widget-note">Placeholder. The Tire Guru Tire Match / Service Match widget drops in here.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="photo-quote">
+    <div class="wrap">
+      <div class="cam"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffd21f" d="M9 3h6l2 3h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3zm3 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></div>
+      <div><h3>Text a photo of your tire, get a quote</h3><p>Snap the sidewall size or the damage and send it. We reply with options and a price.</p></div>
+      <div class="num">Text (954) 773-1896</div>
+    </div>
+  </div>
+
+  <section class="services" id="services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Auto service</div><h2 id="svc-h">What do you need help with?</h2>
+        <p>Pick a service to book it or get a quote. Not sure what's wrong? Describe the symptoms and our team will tell you the next step.</p></div>
+        <a class="btn btn-dark" href="#schedule" data-view-link="schedule">Book a Repair</a>
+      </div>
+      <div class="svc-grid" id="svc-grid"></div>
+    </div>
+  </section>
+
+  <section class="mobile" id="mobile" aria-labelledby="mob-h">
+    <div class="mobile-copy">
+      <div class="eyebrow">Mobile tire service</div>
+      <h2 id="mob-h">Experience <span>convenience.</span></h2>
+      <p>Skip the waiting room. Our service van brings the tires, the balancer and the tech to your driveway, office or job site.</p>
+      <ol class="steps">
+        <li><b>1</b><div><strong>Tell us the vehicle and the problem</strong><small>Online quote or a call to (954) 773-1896</small></div></li>
+        <li><b>2</b><div><strong>Pick a time and a place</strong><small>Home, work or the side of the road</small></div></li>
+        <li><b>3</b><div><strong>We install, balance and go</strong><small>Installation, balancing, repairs and oil changes on site</small></div></li>
+      </ol>
+      <div class="btns"><a class="btn btn-red" href="#mobile" data-view-link="mobile">Check my ZIP &amp; book</a></div>
+    </div>
+    <div class="mobile-media" style="background-image:url('{{STORE}}');background-position:85% 70%">
+      <span class="tag">Photo slot · Melissa's mobile van shot</span>
+    </div>
+  </section>
+
+  <section class="combo" aria-labelledby="combo-h">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow" style="color:#fff;opacity:.85">Only at Extreme</div>
+        <h2 id="combo-h">Mobile install today. Alignment at the shop when it suits you.</h2>
+        <p>Mobile-only vans can't align your wheels, and the chains don't come to you. We do both, so new tires wear evenly from day one.</p>
+        <div class="btns" style="margin-top:18px"><a class="btn btn-dark" href="#start" data-go="home">Book the combo</a></div>
+      </div>
+      <div class="vs">
+        <div><b>Mobile-only services</b><ul><li>Install at your door</li><li>No alignment</li><li>No lifts or wheels</li></ul></div>
+        <div class="us"><b>Extreme Tires</b><ul><li>Install at your door</li><li>Hunter alignment in Sunrise</li><li>Lifts, wheels &amp; full service</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lifts" aria-labelledby="lift-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Lifts &amp; leveling</div><h2 id="lift-h">Build it here</h2>
+      <p>Every kit lists its install time up front, so you know how long the truck will be with us.</p></div>
+      <a class="btn btn-dark" href="#quote" data-view-link="quote">Quote my build</a></div>
+      <div class="lift-grid">
+        <div class="lift"><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
+        <div class="lift"><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
+        <div class="lift"><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
+        <div class="lift"><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="offers" id="offers" aria-labelledby="off-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Coupons</div><h2 id="off-h">Current offers</h2>
+      <p>Tire specials, service specials and manufacturer rebates. The offers below are sample layouts, not real pricing.</p></div></div>
+      <div class="offer-grid">
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">$XX off</div><h3>Set of 4 tires</h3><p>Tire special. Swap in the current Nitto or Pirelli promo.</p><span class="expires">Expires MM/DD · show every deadline</span></div>
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Free</div><h3>Tire rotation</h3><p>Service special. Example: with any oil change.</p><span class="expires">Expires MM/DD</span></div>
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Rebate</div><h3>Manufacturer rebates</h3><p>Link out to the current Continental or Nexen rebate form.</p><span class="expires">Ends with the brand's promo</span></div>
+      </div>
+      <div class="finance">
+        <div><h3>Shop now, pay later</h3><p>Lease-to-own financing on tires, wheels and service through Kafene.</p></div>
+        <a class="btn btn-red" href="https://application.kafene.com/applications/new" target="_blank" rel="noopener">Apply for financing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" id="proof" aria-labelledby="proof-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">About &amp; support</div><h2 id="proof-h">Real customers, real builds</h2></div></div>
+      <div class="proof-grid">
+        <div class="slot"><span class="who">About us</span><h3>Meet the crew</h3><p>Photos and short bios for the team customers name in reviews: Simon, Jason, Adam, Alvaro and the techs. Needs real photos from the shop.</p><a class="btn btn-dark" href="#about" data-view-link="about" style="justify-self:start;margin-top:8px">About Extreme</a></div>
+        <div class="slot"><span class="who">News &amp; Gallery</span><h3>Customer gallery</h3><p>A grid of Extreme customer trucks, Jeeps and wheel builds, laid out like Melissa's gallery example. It needs Extreme's own photos, since the example shows another shop.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ig" id="gallery" aria-labelledby="ig-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Gallery · @extremetires</div><h2 id="ig-h">Fresh off the lift</h2>
+      <p>Every build we post on Instagram lands here automatically, sorted by vehicle.</p></div>
+      <div class="btns"><a class="btn btn-ghost" href="#gallery" data-view-link="gallery">See full gallery</a><a class="btn btn-red" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Follow on Instagram</a></div></div>
+      <div class="ig-chips" id="ig-chips" role="group" aria-label="Filter gallery"></div>
+      <div class="ig-grid" id="ig-grid"></div>
+      <div class="ig-foot"><span id="ig-updated"></span><span>Tag your build <b style="color:#fff">#extremetires</b> to get featured</span></div>
+    </div>
+  </section>
+
+  <section class="rev" id="reviews" aria-labelledby="rev-h">
+    <div class="wrap">
+      <div class="rev-top">
+        <div class="big">4.7<small>out of 5</small></div>
+        <div>
+          <div class="stars-l" aria-hidden="true">★★★★★</div>
+          <h2 id="rev-h" style="font-size:clamp(22px,2.7vw,34px);font-weight:900">1,300+ South Florida drivers</h2>
+          <div class="platforms"><span>Birdeye <b>4.7 · 1,319</b></span><span>Google feed</span><span>Yelp <b>4.2 · 106</b></span><span>MapQuest <b>4.4 · 109</b></span></div>
+        </div>
+        <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Review us on Google</a>
+      </div>
+      <div class="rev-slots">
+        <div><b>Live Google review</b>Latest reviews stream in here from the Google Business Profile, newest first, with owner replies.</div>
+        <div><b>Live Google review</b>Customers mention pricing, speed, mobile service, and lift and wheel work most often.</div>
+        <div><b>Live Google review</b>Every reply to a low rating shows here too, which builds more trust than hiding it.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fleet">
+    <div class="wrap">
+      <div><h3>Fleet &amp; commercial</h3><p>Vans, box trucks, trailers and RVs. On-site service on your schedule. Ask about fleet accounts.</p></div>
+      <a class="btn btn-red" href="#commercial" data-view-link="commercial">Get a fleet quote</a>
+    </div>
+  </div>
+
+  <section class="faq" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Questions</div><h2 id="faq-h">Mobile tire service FAQ</h2></div></div>
+      <details open><summary>Do you really come to me?</summary><p>Yes. Our mobile team installs, balances and repairs tires at your home, office or job site across Broward, Miami-Dade and Palm Beach counties. Request a quote and pick "mobile service at my location."</p></details>
+      <details><summary>What can you do on site?</summary><p>Tire installation, balancing, tire repair and oil changes. Alignments, brakes and suspension work happen at the Sunrise shop on Hunter Engineering equipment.</p></details>
+      <details><summary>Can I pay over time?</summary><p>Yes. Lease-to-own financing through Kafene covers tires, wheels and service. Apply online in a few minutes.</p></details>
+      <details><summary>What are your shop hours?</summary><p>Monday to Friday 8:00 AM to 6:30 PM, Saturday 8:00 AM to 4:00 PM, closed Sunday. 7712 West Oakland Park Blvd, Sunrise, FL 33351.</p></details>
+    </div>
+  </section>
+
+  <section class="club" aria-labelledby="club-h">
+    <div class="wrap">
+      <div><h2 id="club-h">Get tire deals first</h2><p>Coupons, rebates and new wheel drops by text or email. About two a month.</p></div>
+      <form id="club-form" novalidate>
+        <label class="f" for="c-phone" style="color:#fff">Mobile number<input id="c-phone" type="tel" placeholder="(954) 555-0123" autocomplete="tel"></label>
+        <label class="f" for="c-email" style="color:#fff">Email<input id="c-email" type="email" placeholder="you@email.com" autocomplete="email"></label>
+        <button class="btn btn-dark" type="submit" style="align-self:end">Join</button>
+        <p class="fine" id="club-msg">Connects to Omnisend on the live site. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+      </form>
+    </div>
+  </section>
+</section>
+
+<!-- ================= TIRES ================= -->
+<section id="view-tires" data-view="tires" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Tires</span><span>/</span><span>2024 Jeep Gladiator Rubicon</span></nav>
+      <h1>Tires for your Gladiator</h1>
+      <p>Every price is out the door for a set of four: tire, mount, balance, valve stem, TPMS reset, disposal and Florida's $1 tire fee. Installed at the shop or in your driveway.</p>
+      <span class="sample-note">Sample catalog and pricing · live prices come from the Tire Guru feed</span>
+    </div>
+  </div>
+  <div class="shopbar">
+    <div class="wrap">
+      <div class="vehicle-chip"><div>2024 Jeep Gladiator Rubicon<small>Fits 285/70R17 · Change vehicle</small></div></div>
+      <div class="seg" role="group" aria-label="Install type">
+        <button type="button" aria-pressed="true" data-install="mobile">Mobile install</button>
+        <button type="button" aria-pressed="false" data-install="shop">At the shop</button>
+      </div>
+      <span style="color:var(--steel);font-size:14px">Choose where we install. The total updates instantly.</span>
+    </div>
+  </div>
+  <div class="wrap shop">
+    <aside class="filters" aria-label="Filter tires">
+      <fieldset id="f-type"><legend>Tire type</legend></fieldset>
+      <fieldset id="f-brand"><legend>Brand</legend></fieldset>
+      <fieldset><legend>Max price per tire</legend>
+        <label for="f-max" style="display:grid;gap:4px"><span id="f-max-out">Up to $350</span><input type="range" id="f-max" min="200" max="350" step="10" value="350"></label>
+      </fieldset>
+    </aside>
+    <div>
+      <div class="results-head">
+        <b id="count">8 tires fit</b>
+        <label class="f" for="sort" style="grid-auto-flow:column;align-items:center;gap:10px">Sort
+          <select id="sort"><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="brand">Brand A–Z</option></select></label>
+      </div>
+      <div class="tire-list" id="tire-list" aria-live="polite"></div>
+    </div>
+  </div>
+  <section class="packages" aria-labelledby="pk-h">
+    <div class="wrap">
+      <div class="eyebrow">Wheels</div>
+      <h2 id="pk-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Tire + wheel packages</h2>
+      <p style="color:#bdbdbd;max-width:40em;margin:8px 0 0">Mounted, balanced and fitment-checked for your vehicle, with lift and leveling kits installed in the same visit.</p>
+      <div class="pk-grid">
+        <div class="pk"><h3>See it on your truck</h3><p>The wheel visualizer shows any wheel on your exact vehicle and color before you buy.</p></div>
+        <div class="pk"><h3>Guaranteed fitment</h3><p>Offset, bolt pattern and clearance checked against your build, lifted or stock.</p></div>
+        <div class="pk"><h3>27 wheel brands</h3><p>Mickey Thompson, Advanti, Worx and more. Ask for anything we don't list.</p></div>
+      </div>
+      <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#quote" data-view-link="quote">Quote a package</a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ================= MOBILE SERVICE ================= -->
+<section id="view-mobile" data-view="mobile" hidden>
+  <div class="phead">
+    <div class="wrap mhero">
+      <div style="display:grid;gap:14px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Mobile Tire Service</span></nav>
+        <h1>Mobile tire service in Broward, Miami-Dade &amp; Palm Beach</h1>
+        <p>Our van brings the tires, the high-speed balancer and an Extreme tech to your driveway, office or job site. You keep your day.</p>
+      </div>
+      <div class="zipbox">
+        <b style="font:800 19px var(--display);text-transform:uppercase">Do we come to you?</b>
+        <form id="zip-form" novalidate>
+          <label for="zip" class="f">Your ZIP code<input id="zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+          <button class="btn btn-red" type="submit" style="align-self:end">Check</button>
+        </form>
+        <div class="zipres" id="zipres" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <section class="onsite" aria-labelledby="on-h">
+    <div class="wrap">
+      <div class="eyebrow">What we do on site</div>
+      <h2 id="on-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">The shop, on wheels</h2>
+      <div class="onsite-grid">
+        <div><svg aria-hidden="true"><use href="#i-install"/></svg><b>Tire installation</b><p>New tires mounted on your vehicle, old ones hauled away.</p></div>
+        <div><svg aria-hidden="true"><use href="#i-balance"/></svg><b>High-speed balancing</b><p>The same balancing equipment as the shop, built into the van.</p></div>
+        <div><svg aria-hidden="true"><use href="#i-repair"/></svg><b>Repairs &amp; roadside</b><p>Flats and leaks patched where you are, including roadside.</p></div>
+        <div><svg aria-hidden="true"><use href="#i-oil"/></svg><b>Oil changes</b><p>Mobile oil change while you work. Fleets welcome.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="slots" aria-labelledby="sl-h">
+    <div class="wrap">
+      <div class="eyebrow">Book it</div>
+      <h2 id="sl-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Pick a day and time</h2>
+      <div class="days" id="days" role="group" aria-label="Day"></div>
+      <div class="times" id="times" role="group" aria-label="Time"></div>
+      <button class="btn btn-red" type="button" id="book-slot">Book this slot</button>
+      <p style="color:var(--steel);font-size:14px;margin:10px 0 0" id="slot-note">Sample availability. On the live site this reads the shop's real calendar.</p>
+    </div>
+  </section>
+  <section class="areas" aria-labelledby="ar-h">
+    <div class="wrap">
+      <div class="eyebrow">Service area</div>
+      <h2 id="ar-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Cities we cover</h2>
+      <p style="color:var(--steel);max-width:44em">Each city gets its own page on the live site, for local search. Davie belongs here as a service city, not in the shop's address.</p>
+      <div class="cities" id="cities"></div>
+    </div>
+  </section>
+</section>
+
+<!--PARTS_HTML-->
+<!-- ================= REQUEST A QUOTE ================= -->
+<section id="view-quote" data-view="quote" hidden>
+  <div class="q-head">
+    <div class="wrap">
+      <div>
+        <h1>Request a Quote</h1>
+        <p>Answer a few questions so our team can understand your needs and contact you.</p>
+        <div style="font-weight:700;font-size:18px">(954) 773-1896</div>
+        <div>7712 West Oakland Park Blvd, Sunrise, FL 33351</div>
+      </div>
+      <div class="hours"><b>STORE HOURS</b>Mon–Fri: 8:00 AM–6:30 PM<br>Sat: 8:00 AM–4:00 PM<br>Sun: Closed</div>
+    </div>
+  </div>
+  <div class="q-photo"><img src="{{STORE}}" alt="Extreme Tires storefront" width="1400" height="523"></div>
+
+  <div class="q-intro">
+    <div class="wrap">
+      <div class="eyebrow">Extreme Tires · Sunrise, FL</div>
+      <h2>A better quote starts with the right details.</h2>
+      <p>Share a few details about your vehicle and service needs so our team can provide a more accurate quote with less back-and-forth.</p>
+      <div class="checks"><div>Tires, wheels and auto service</div><div>Mobile service at your location</div><div>Pricing confirmed by our team</div><div>Shop now, pay later available</div></div>
+    </div>
+  </div>
+
+  <form id="quote-form" novalidate>
+    <div class="q-body">
+      <div class="wrap">
+        <h3>What do you need help with?</h3>
+        <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip it and describe the symptoms below.</p>
+        <div class="pick" id="pick"></div>
+        <div class="form-grid">
+          <label class="f" for="q-first">First name<input id="q-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="q-first"></span></label>
+          <label class="f" for="q-last">Last name<input id="q-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="q-last"></span></label>
+          <label class="f" for="q-phone">Phone number<input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="q-phone"></span></label>
+          <label class="f" for="q-email">Email<input id="q-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="q-email"></span></label>
+          <label class="f" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
+          <label class="f" for="q-when">When do you need service?<select id="q-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="q-when"></span></label>
+        </div>
+        <label class="chk" for="q-mobile"><input type="checkbox" id="q-mobile" name="mobile"> I'd prefer mobile service at my location</label>
+      </div>
+    </div>
+    <div class="q-what">
+      <div class="wrap">
+        <h3>What is happening with the vehicle?</h3>
+        <div class="sym">
+          <label for="sy1"><input type="checkbox" id="sy1"> Flat, leak, or tire damage</label>
+          <label for="sy2"><input type="checkbox" id="sy2"> Need new tires or pricing</label>
+          <label for="sy3"><input type="checkbox" id="sy3"> Vibration, balancing, or rotation</label>
+          <label for="sy4"><input type="checkbox" id="sy4"> Brakes, alignment, suspension, or other service</label>
+        </div>
+        <label class="f" for="q-details" style="margin-top:22px;color:#bbb">Vehicle and service details
+          <textarea id="q-details" placeholder="Vehicle year/make/model, tire size, symptoms, or service needed"></textarea></label>
+      </div>
+    </div>
+    <div class="q-submit">
+      <div class="wrap">
+        <button class="btn btn-red" type="submit">Request My Quote</button>
+        <p>Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
+        <div class="done" id="done" hidden role="status"></div>
+      </div>
+    </div>
+  </form>
+</section>
+</main>
+
+<div class="brands" aria-label="Tire brands we carry"><div class="wrap"><img src="{{BRANDS}}" alt="Continental, Pirelli, Nexen and Nitto" width="2720" height="178"></div></div>
+
+<footer id="visit">
+  <div class="wrap foot">
+    <div><h4>Tires &amp; Wheels</h4><ul><li><a href="#tires" data-view-link="tires">Shop Tires</a></li><li><a href="#wheels" data-view-link="wheels">Shop Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial Tires</a></li><li><a href="#brands" data-view-link="brands">Tire Brands</a></li><li><a href="#tires" data-view-link="tires">Tire Size</a></li><li><a href="#tips" data-view-link="tips">Tire Care Tips</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile Tire Service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire Installation</a></li><li><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair">Tire Repair</a></li><li><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation">Tire Rotation</a></li><li><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing">Tire Balancing</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel Alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake Repair</a></li><li><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair">Suspension Repair</a></li><li><a href="#services" data-view-link="services">View All Services</a></li></ul></div>
+    <div><h4>About &amp; Support</h4><ul><li><a href="#about" data-view-link="about">About Us</a></li><li><a href="#locations" data-view-link="locations">Locations</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#gallery" data-view-link="gallery">News &amp; Gallery</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact Us</a></li></ul></div>
+    <div class="visit"><h4>Visit &amp; Contact</h4>
+      <div><small>Phone number</small><b>(954) 773-1896</b></div>
+      <div><small>Our location</small><b>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</b></div>
+      <div><small>Store hours</small><b>Mon–Fri: 8:00 AM–6:30 PM<br>Sat: 8:00 AM–4:00 PM<br>Sun: Closed</b></div>
+      <div><small>Socials</small>
+        <div class="socials">
+          <a href="#visit" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M14 8V6c0-.8.2-1.3 1.4-1.3H17V1.2C16.7 1.1 15.6 1 14.4 1 11.8 1 10 2.6 10 5.5V8H7v3.6h3V23h4V11.6h3l.5-3.6z"/></svg></a>
+          <a href="#visit" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/></svg></a>
+          <a href="#visit" aria-label="Threads"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="2" d="M17 8.5C16 5.5 14 4 12 4 7.6 4 5 7.3 5 12s2.6 8 7 8c3.4 0 6-2 6-5 0-2.3-1.8-3.9-5-3.9-2.2 0-3.5 1-3.5 2.4 0 1.3 1.1 2.1 2.6 2.1 2.6 0 3.9-2.3 3.4-6"/></svg></a>
+          <a href="#visit" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M16 2h-3.3v13.2a2.9 2.9 0 1 1-2.1-2.8V9a6.3 6.3 0 1 0 5.4 6.2V8.6a7.9 7.9 0 0 0 4.4 1.4V6.7A4.6 4.6 0 0 1 16 2z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap">
+    <span>Copyright © 2007–2026 Extreme Tires</span><a href="#terms" data-view-link="terms">Terms of Use</a><a href="#privacy" data-view-link="privacy">Privacy</a><a href="#privacy/choices" data-view-link="privacy" data-param="choices">Your Privacy Choices</a><a href="#accessibility" data-view-link="accessibility">Accessibility</a><a href="#sitemap" data-view-link="sitemap">Sitemap</a>
+  </div></div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Gallery photo" aria-hidden="true">
+  <button class="x" type="button" id="lb-x">Close</button>
+  <figure><img id="lb-img" alt=""><figcaption><span id="lb-cap"></span><a class="btn btn-red" id="lb-link" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">View on Instagram</a></figcaption></figure>
+</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Your tire quote" aria-hidden="true">
+  <header><h2>Your set of 4</h2><button type="button" id="drawer-close">Close</button></header>
+  <div class="body" id="drawer-body"></div>
+  <footer>
+    <a class="btn btn-red" href="#quote" data-view-link="quote" id="drawer-book">Book install</a>
+    <small style="color:var(--steel)">Sample pricing. Tax at Broward's 7% rate. Final price confirmed by our team.</small>
+  </footer>
+</aside>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":["TireShop","AutoRepair"],"name":"Extreme Tires","url":"https://www.extrememobiletires.com/","telephone":"+1-954-773-1896","priceRange":"$$",
+ "address":{"@type":"PostalAddress","streetAddress":"7712 West Oakland Park Blvd","addressLocality":"Sunrise","addressRegion":"FL","postalCode":"33351","addressCountry":"US"},
+ "geo":{"@type":"GeoCoordinates","latitude":26.0928,"longitude":-80.238},
+ "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"08:00","closes":"16:00"}],
+ "areaServed":["Broward County, FL","Miami-Dade County, FL","Palm Beach County, FL"],
+ "sameAs":["https://www.facebook.com/Extremetires/","https://www.instagram.com/extremetires","https://youtube.com/@extremetires2010"]}
+</script>
+
+<nav class="actionbar" id="actionbar" aria-label="Quick actions">
+  <a href="tel:+19547731896">Call</a>
+  <a href="sms:+19547731896">Text</a>
+  <a class="q" href="#quote" data-view-link="quote">Get a Quote</a>
+</nav>
+
+<script>
+(function(){
+  // Services from Melissa's quote mockup, same order and wording
+  var SERVICES=[
+    ["brake","Brake Repair"],["wheel","Custom Wheels Service"],["lift","Lift Kits"],["oil","Oil Changes"],
+    ["susp","Suspension Repair"],["align","Wheel Alignments"],["balance","Tire Balancing"],["install","Tire Installation"],
+    ["repair","Tire Repair"],["rotate","Tire Rotation"],["tpms","TPMS Service"],["pay","Shop Now, Pay Later"]
+  ];
+  var icon=function(id){return '<svg aria-hidden="true"><use href="#i-'+id+'"/></svg>'};
+
+  var grid=document.getElementById('svc-grid');
+  grid.innerHTML=SERVICES.map(function(s){
+    var pay=s[0]==='pay';
+    var SL={brake:'brake-repair',wheel:'custom-wheels',lift:'lift-kits',oil:'oil-changes',susp:'suspension-repair',align:'wheel-alignment',balance:'tire-balancing',install:'tire-installation',repair:'tire-repair',rotate:'tire-rotation',tpms:'tpms-service'};
+    return pay?'<a class="svc pay" href="#financing" data-view-link="financing">'+icon(s[0])+s[1]+'</a>'
+      :'<a class="svc" href="#service/'+SL[s[0]]+'" data-view-link="service" data-param="'+SL[s[0]]+'">'+icon(s[0])+s[1]+'</a>';
+  }).join('');
+
+  var pick=document.getElementById('pick');
+  pick.innerHTML=SERVICES.map(function(s,i){
+    return '<label for="pk'+i+'"><input type="checkbox" id="pk'+i+'" name="svc" value="'+s[1]+'">'+icon(s[0])+s[1]+'</label>';
+  }).join('');
+
+  var burger=document.getElementById('burger'), mnav=document.getElementById('mnav');
+  // Router: #view or #view/param (e.g. #service/brake-repair). Pages register hooks on window.ET.
+  var views=document.querySelectorAll('[data-view]');
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ET=window.ET={onShow:{},pages:[],cur:{view:'home',param:''}};
+  function hasView(v){return [].some.call(views,function(el){return el.dataset.view===v})}
+  function show(v, anchor, param){
+    param=param||'';
+    var swap=function(){ apply(v, anchor, param) };
+    var cur=[].filter.call(views,function(el){return !el.hidden})[0];
+    var changed=!cur||cur.dataset.view!==v||ET.cur.param!==param;
+    if(cur && changed && document.startViewTransition && !reduce){document.startViewTransition(swap)} else swap();
+  }
+  function apply(v, anchor, param){
+    if(!hasView(v)){ // a section id on the home page, or an unknown page
+      if(document.getElementById(v)&&hasView('home')){anchor=v;v='home'}
+      else v=hasView('notfound')?'notfound':'home';
+    }
+    ET.cur={view:v,param:param};
+    views.forEach(function(el){el.hidden=el.dataset.view!==v});
+    var fn=ET.onShow[v]; if(fn){try{fn(param)}catch(err){console.error('page hook failed:',v,err)}}
+    var jump=document.getElementById('jump'); if(jump){var jv=ET.cur.view+(param?'/'+param:'');jump.value=[].some.call(jump.options,function(o){return o.value===jv})?jv:''}
+    document.querySelectorAll('.proto a').forEach(function(a){
+      if(a.dataset.viewLink===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
+    closeMenu();
+    if(anchor){var t=document.getElementById(anchor); if(t){t.scrollIntoView(); return;}}
+    window.scrollTo(0,0);
+  }
+  function setHash(v,param){try{history.replaceState(null,'','#'+v+(param?'/'+param:''))}catch(_){}}
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a'); if(!a)return;
+    if(a.dataset.viewLink){
+      e.preventDefault();
+      if(a.dataset.svc){ // preselect the clicked service on the quote form
+        pick.querySelectorAll('input').forEach(function(i){i.checked=(i.value===a.dataset.svc)});
+      }
+      show(a.dataset.viewLink, a.dataset.anchor, a.dataset.param);
+      setHash(a.dataset.viewLink, a.dataset.param);
+    } else if(a.dataset.go){
+      e.preventDefault();
+      show(a.dataset.go, a.getAttribute('href').slice(1));
+    }
+  });
+  window.addEventListener('hashchange',function(){var h=(location.hash||'').slice(1).split('/');if(h[0]!==ET.cur.view||(h[1]||'')!==ET.cur.param)show(h[0]||'home',null,h[1]||'')});
+  // Helpers shared with the page modules (loaded after this script)
+  ET.show=show; ET.setHash=setHash; ET.hasView=hasView; ET.esc=esc; ET.money=money; ET.county=county; ET.icon=icon; ET.SERVICES=SERVICES; ET.reduce=reduce;
+  Object.defineProperty(ET,'STORE',{get:function(){return document.querySelector('.hero-media img').src}});
+  ET.start=function(){var h=(location.hash||'').slice(1).split('/');show(h[0]||'home',null,h[1]||'')};
+
+  // Mobile menu
+  function closeMenu(){mnav.dataset.open='false';burger.setAttribute('aria-expanded','false')}
+  burger.addEventListener('click',function(){
+    var open=mnav.dataset.open!=='true';
+    mnav.dataset.open=String(open);burger.setAttribute('aria-expanded',String(open));
+  });
+
+  // Tire finder tabs + demo results
+  var tabs=[['t-veh','p-veh'],['t-size','p-size']];
+  tabs.forEach(function(t){
+    document.getElementById(t[0]).addEventListener('click',function(){
+      tabs.forEach(function(o){
+        var on=o[0]===t[0];
+        document.getElementById(o[0]).setAttribute('aria-selected',String(on));
+        document.getElementById(o[1]).hidden=!on;
+      });
+    });
+  });
+  function size(){return document.getElementById('s-w').value+'/'+document.getElementById('s-a').value+'R'+document.getElementById('s-r').value}
+  ['s-w','s-a','s-r'].forEach(function(id){document.getElementById(id).addEventListener('change',function(){document.getElementById('sz').textContent=size()})});
+  document.getElementById('p-veh').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=['v-year','v-make','v-model','v-trim'].map(function(id){return document.getElementById(id).value}).join(' ');
+    show('tires'); try{history.replaceState(null,'','#tires')}catch(_){}
+  });
+  document.getElementById('p-size').addEventListener('submit',function(e){
+    e.preventDefault();
+    show('tires'); try{history.replaceState(null,'','#tires')}catch(_){}
+  });
+
+  // ===== Tire shop (sample catalog; prices are placeholders until the Tire Guru feed is wired) =====
+  var TIRES=[
+    {b:"BFGoodrich",m:"All-Terrain T/A KO2",t:"All-terrain",p:289},
+    {b:"Nitto",m:"Ridge Grappler",t:"Hybrid terrain",p:315},
+    {b:"Toyo",m:"Open Country A/T III",t:"All-terrain",p:262},
+    {b:"Falken",m:"Wildpeak A/T4W",t:"All-terrain",p:239},
+    {b:"Michelin",m:"Defender LTX M/S2",t:"Highway",p:298},
+    {b:"Nitto",m:"Trail Grappler M/T",t:"Mud-terrain",p:339},
+    {b:"Cooper",m:"Discoverer AT3 4S",t:"All-terrain",p:219},
+    {b:"Continental",m:"TerrainContact A/T",t:"All-terrain",p:231}
+  ];
+  var INSTALL=25, TIRE_FEE=1, TAX=0.07, installType='mobile';
+  function otd(p){return Math.round(((p+INSTALL+TIRE_FEE)*4)*(1+TAX))}
+  function money(n){return '$'+n.toLocaleString('en-US')}
+  function uniq(k){return TIRES.map(function(x){return x[k]}).filter(function(v,i,a){return a.indexOf(v)===i}).sort()}
+  function boxes(id,vals,key){
+    document.getElementById(id).insertAdjacentHTML('beforeend',vals.map(function(v,i){
+      return '<label for="'+key+i+'"><input type="checkbox" id="'+key+i+'" value="'+v+'" data-k="'+key+'">'+v+'</label>'}).join(''));
+  }
+  boxes('f-type',uniq('t'),'t'); boxes('f-brand',uniq('b'),'b');
+  var list=document.getElementById('tire-list');
+  function checked(k){return [].slice.call(document.querySelectorAll('input[data-k="'+k+'"]:checked')).map(function(i){return i.value})}
+  function renderTires(){
+    var ts=checked('t'), bs=checked('b'), max=+document.getElementById('f-max').value, s=document.getElementById('sort').value;
+    var rows=TIRES.filter(function(x){return (!ts.length||ts.indexOf(x.t)>-1)&&(!bs.length||bs.indexOf(x.b)>-1)&&x.p<=max});
+    rows.sort(function(a,b){return s==='low'?a.p-b.p:s==='high'?b.p-a.p:a.b.localeCompare(b.b)});
+    document.getElementById('count').textContent=rows.length+(rows.length===1?' tire fits':' tires fit');
+    list.innerHTML=rows.length?rows.map(function(x){
+      var i=TIRES.indexOf(x);
+      return '<article class="tire"><div class="tread" aria-hidden="true"></div><div style="min-width:0"><div class="brand">'+x.b+'</div><h3>'+x.m+'</h3>'+
+        '<div class="tags"><span>'+x.t+'</span><span>285/70R17</span><span class="go">'+(installType==='mobile'?'Mobile install eligible':'Install at Sunrise shop')+'</span></div></div>'+
+        '<div class="price"><div class="each">'+money(x.p)+' <small>/ tire</small></div><div class="otd">Set of 4 out the door <b>'+money(otd(x.p))+'</b></div>'+
+        '<button class="btn btn-red" type="button" data-add="'+i+'">Add set of 4</button></div></article>'}).join('')
+      :'<div class="empty">No tires match those filters. Clear a filter, or <a href="#quote" data-view-link="quote">ask us to source one</a>.</div>';
+  }
+  document.querySelector('.filters').addEventListener('change',renderTires);
+  document.getElementById('f-max').addEventListener('input',function(){document.getElementById('f-max-out').textContent='Up to $'+this.value;renderTires()});
+  document.getElementById('sort').addEventListener('change',renderTires);
+  document.querySelectorAll('[data-install]').forEach(function(b){
+    b.addEventListener('click',function(){
+      installType=b.dataset.install;
+      document.querySelectorAll('[data-install]').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});
+      renderTires();
+    });
+  });
+  renderTires();
+
+  var drawer=document.getElementById('drawer'), scrim=document.getElementById('scrim'), chosen=null;
+  function openDrawer(x){
+    chosen=x;
+    var sub=(x.p+INSTALL+TIRE_FEE)*4, tax=Math.round(sub*TAX);
+    document.getElementById('drawer-body').innerHTML='<div><div class="brand" style="font:700 12px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--red)">'+x.b+'</div>'+
+      '<h3 style="font-size:30px;font-weight:800">'+x.m+'</h3><p style="margin:4px 0 0;color:var(--steel)">285/70R17 · '+(installType==='mobile'?'Mobile install at your location':'Install at the Sunrise shop')+'</p></div>'+
+      '<div class="lines"><div><span>4 × tire</span><b>'+money(x.p*4)+'</b></div><div><span>Mount, balance, stem, TPMS reset, disposal</span><b>'+money(INSTALL*4)+'</b></div>'+
+      '<div><span>Florida new tire fee</span><b>'+money(TIRE_FEE*4)+'</b></div><div><span>Sales tax (7%)</span><b>'+money(tax)+'</b></div>'+
+      '<div class="tot"><span>Out the door</span><span>'+money(sub+tax)+'</span></div></div>'+
+      '<p style="margin:0;color:var(--steel);font-size:14px">Lease-to-own financing is available through Kafene. Ask us for a monthly estimate when you book.</p>';
+    drawer.classList.add('open');scrim.classList.add('open');drawer.setAttribute('aria-hidden','false');
+    document.getElementById('drawer-close').focus();
+  }
+  function closeDrawer(){drawer.classList.remove('open');scrim.classList.remove('open');drawer.setAttribute('aria-hidden','true')}
+  list.addEventListener('click',function(e){var b=e.target.closest('[data-add]');if(b)openDrawer(TIRES[+b.dataset.add])});
+  document.getElementById('drawer-close').addEventListener('click',closeDrawer);
+  scrim.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeDrawer()});
+  document.getElementById('drawer-book').addEventListener('click',function(){
+    closeDrawer();
+    if(chosen){
+      document.getElementById('q-details').value='2024 Jeep Gladiator Rubicon · 285/70R17 · '+chosen.b+' '+chosen.m+' (set of 4)';
+      document.getElementById('q-mobile').checked=(installType==='mobile');
+      pick.querySelectorAll('input').forEach(function(i){i.checked=(i.value==='Tire Installation')});
+    }
+  });
+
+  // ===== Mobile service: ZIP check, slots, cities =====
+  function county(z){
+    var n=+z; if(!/^\d{5}$/.test(z))return null;
+    if((n>=33004&&n<=33009)||(n>=33019&&n<=33029)||(n>=33060&&n<=33099)||(n>=33301&&n<=33394)||n===33441||n===33442)return 'Broward';
+    if(n>=33010&&n<=33199)return 'Miami-Dade';
+    if(n>=33401&&n<=33499)return 'Palm Beach';
+    return '';
+  }
+  document.getElementById('zip-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var z=document.getElementById('zip').value.trim(), c=county(z), out=document.getElementById('zipres');
+    out.className='zipres';
+    if(c===null){out.textContent='Enter a 5-digit ZIP code.';out.classList.add('no');return}
+    if(c){out.textContent='Yes, we cover '+z+' in '+c+' County. Pick a time below.';out.classList.add('ok');document.getElementById('slots-anchor');document.querySelector('.slots').scrollIntoView({behavior:reduce?'auto':'smooth'})}
+    else{out.textContent='That ZIP is outside our regular route. Call (954) 773-1896 and we will see what we can do.';out.classList.add('no')}
+  });
+  var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var daysEl=document.getElementById('days'), timesEl=document.getElementById('times'), pickDay=null, pickTime=null;
+  var d=new Date(), made=0, html='';
+  while(made<6){d.setDate(d.getDate()+1); if(d.getDay()===0)continue;
+    html+='<button type="button" aria-pressed="'+(made===0)+'" data-day="'+DAYS[d.getDay()]+' '+MON[d.getMonth()]+' '+d.getDate()+'" data-sat="'+(d.getDay()===6)+'">'+DAYS[d.getDay()]+'<small>'+MON[d.getMonth()]+' '+d.getDate()+'</small></button>';made++}
+  daysEl.innerHTML=html;
+  function renderTimes(sat){
+    var t=sat?['8:00 AM','10:00 AM','12:00 PM','2:00 PM']:['8:00 AM','10:00 AM','12:00 PM','2:00 PM','4:00 PM'];
+    timesEl.innerHTML=t.map(function(x,i){return '<button type="button" aria-pressed="'+(i===1)+'" data-time="'+x+'">'+x+'</button>'}).join('');
+    pickTime=t[1];
+  }
+  pickDay=daysEl.querySelector('button').dataset.day; renderTimes(daysEl.querySelector('button').dataset.sat==='true');
+  daysEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    daysEl.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickDay=b.dataset.day;renderTimes(b.dataset.sat==='true')});
+  timesEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    timesEl.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickTime=b.dataset.time});
+  document.getElementById('book-slot').addEventListener('click',function(){
+    document.getElementById('q-mobile').checked=true;
+    var w=document.getElementById('q-when'); w.value='This week';
+    var z=document.getElementById('zip').value.trim(); if(z)document.getElementById('q-loc').value=z;
+    var det=document.getElementById('q-details'); det.value=('Requested mobile slot: '+pickDay+' at '+pickTime+'. '+det.value).trim();
+    show('quote'); try{history.replaceState(null,'','#quote')}catch(_){}
+  });
+  document.getElementById('cities').innerHTML=['Sunrise','Plantation','Tamarac','Lauderhill','Weston','Davie','Coral Springs','Pembroke Pines','Fort Lauderdale','Hollywood','Miramar','Boca Raton','Miami Gardens','Hialeah']
+    .map(function(c){var sl=c.toLowerCase().replace(/ /g,'-');return '<a href="#city/'+sl+'" data-view-link="city" data-param="'+sl+'">'+c+'</a>'}).join('');
+
+  // ===== v4: 60-second guided flow =====
+  var W={need:null,veh:'2024 Jeep Gladiator Rubicon',size:'',byo:false,where:null,zip:'',day:null,win:null,name:'',phone:'',texts:true,step:0,dir:1};
+  var NEEDS=[
+    ['tires','install','New tires','Shop, price and install'],
+    ['service','brake','Repair or service','Brakes, alignment, oil and more'],
+    ['wheels','lift','Wheels or lift','Packages, lifts, leveling'],
+    ['flat','repair','Flat right now','We come to you today']
+  ];
+  var STEPNAMES=['What you need','Your vehicle','Where','When','Your details'];
+  var wbody=document.getElementById('wiz-body'), wnext=document.getElementById('wiz-next'), wback=document.getElementById('wiz-back');
+  function dayList(){var out=[],d=new Date();while(out.length<6){d.setDate(d.getDate()+1);if(d.getDay()===0)continue;out.push({k:DAYS[d.getDay()]+' '+MON[d.getMonth()]+' '+d.getDate(),d:DAYS[d.getDay()],m:MON[d.getMonth()]+' '+d.getDate(),sat:d.getDay()===6})}return out}
+  var WDAYS=dayList();
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function renderWiz(){
+    var s=W.step, h='';
+    document.querySelectorAll('#wiz .prog i').forEach(function(i,n){i.classList.toggle('on',n<=s)});
+    document.getElementById('wiz-count').textContent=s<5?'Step '+(s+1)+' of 5':'Booked';
+    document.getElementById('wiz-name').textContent=s<5?STEPNAMES[s]:'Request received';
+    wback.disabled=(s===0||s===5);
+    wnext.hidden=(s===5);
+    wnext.textContent=s===4?'Book it':'Next';
+    if(s===0){
+      h='<h3>What do you need today?</h3><div class="opts">'+NEEDS.map(function(n){
+        return '<button type="button" class="opt'+(n[0]==='flat'?' urgent':'')+'" data-need="'+n[0]+'" aria-pressed="'+(W.need===n[0])+'"><svg aria-hidden="true"><use href="#i-'+n[1]+'"/></svg><span>'+n[2]+'<small>'+n[3]+'</small></span></button>'}).join('')+'</div>';
+      if(W.need==='flat')h+='<div class="alert">Stuck right now? Call or text <b>(954) 773-1896</b> for the fastest dispatch, or keep going to book.</div>';
+    } else if(s===1){
+      h='<h3>Tell us about the vehicle</h3>'+
+        '<label class="f" for="w-veh">Year, make and model<input id="w-veh" value="'+esc(W.veh)+'" placeholder="e.g. 2021 Toyota Tacoma TRD"></label>'+
+        '<label class="f" for="w-size">Tire size (optional)<input id="w-size" value="'+esc(W.size)+'" placeholder="e.g. 265/70R17, printed on the sidewall"></label>'+
+        (W.need==='tires'?'<label class="toggle" for="w-byo"><input type="checkbox" id="w-byo"'+(W.byo?' checked':'')+'> I already have my tires, I just need them installed</label>':'');
+    } else if(s===2){
+      h='<h3>Where should we do it?</h3><div class="opts">'+
+        '<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Home, work or roadside</small></span></button>'+
+        '<button type="button" class="opt" data-where="shop" aria-pressed="'+(W.where==='shop')+'"><svg aria-hidden="true"><use href="#i-align"/></svg><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button></div>';
+      if(W.where==='mobile'){
+        var c=W.zip?county(W.zip):null;
+        h+='<label class="f" for="w-zip">ZIP code<input id="w-zip" inputmode="numeric" maxlength="5" value="'+esc(W.zip)+'" placeholder="33351"></label>'+
+          '<div class="zipres '+(c?'ok':(W.zip.length===5?'no':''))+'" id="w-zipres">'+(c?'We cover '+W.zip+' in '+c+' County.':(W.zip.length===5?'Outside our regular route. Call and we will try.':''))+'</div>'+
+          '<div class="checklist"><b>What your spot needs</b><ul><li>About 5 ft clear around the vehicle</li><li>Flat, firm ground (driveway, lot or garage)</li><li>Keys available and wheel locks in the car</li></ul></div>';
+      }
+    } else if(s===3){
+      var day=WDAYS.filter(function(x){return x.k===W.day})[0]||WDAYS[0]; if(!W.day)W.day=day.k;
+      var wins=day.sat?['8–10 AM','10–12 PM','12–2 PM','2–4 PM']:['8–10 AM','10–12 PM','12–2 PM','2–4 PM','4–6 PM'];
+      if(wins.indexOf(W.win)<0)W.win=null;
+      h='<h3>Pick a 2-hour window</h3><div class="flow-days" role="group" aria-label="Day">'+WDAYS.map(function(x){
+        return '<button type="button" data-day="'+x.k+'" aria-pressed="'+(x.k===W.day)+'">'+x.d+'<small>'+x.m+'</small></button>'}).join('')+'</div>'+
+        '<div class="windows" role="group" aria-label="Arrival window">'+wins.map(function(w){return '<button type="button" data-win="'+w+'" aria-pressed="'+(w===W.win)+'">'+w+'</button>'}).join('')+'</div>'+
+        '<p style="margin:0;color:var(--steel);font-size:13px">Sample availability. The live site reads the shop calendar.</p>';
+    } else if(s===4){
+      h='<h3>Where do we send updates?</h3>'+
+        '<label class="f" for="w-name">Name<input id="w-name" autocomplete="name" value="'+esc(W.name)+'" placeholder="First and last name"></label>'+
+        '<label class="f" for="w-phone">Mobile number<input id="w-phone" type="tel" autocomplete="tel" value="'+esc(W.phone)+'" placeholder="(954) 555-0123"></label>'+
+        '<label class="toggle" for="w-texts"><input type="checkbox" id="w-texts"'+(W.texts?' checked':'')+'> Text me the confirmation and "tech on the way" updates</label>'+
+        '<p style="margin:0;color:var(--steel);font-size:12px">Msg &amp; data rates may apply. Reply STOP to opt out.</p>';
+    } else {
+      var need=NEEDS.filter(function(n){return n[0]===W.need})[0];
+      h='<div class="done-step step"><h3>You\'re booked, '+esc(W.name.split(' ')[0]||'friend')+'.</h3>'+
+        '<p style="margin:0;color:var(--steel)">'+esc(need?need[2]:'Service')+(W.byo?' (your tires)':'')+' · '+esc(W.veh)+' · '+(W.where==='mobile'?'Mobile at '+esc(W.zip):'Sunrise shop')+' · '+esc(W.day)+', '+esc(W.win)+'</p>'+
+        '<ol class="timeline"><li class="now"><b>Request received</b><small>Prototype only, nothing was sent</small></li>'+
+        '<li><b>Confirmation text</b><small>With your out-the-door price</small></li><li><b>Reminder the evening before</b><small>Plus the parking checklist</small></li>'+
+        '<li><b>"Tech on the way"</b><small>Your tech\'s name and arrival time</small></li><li><b>Job done</b><small>Receipt by text · Kafene financing available</small></li></ol>'+
+        '<button type="button" class="linkbtn" id="wiz-restart" style="justify-self:start">Start another booking</button></div>';
+      wbody.innerHTML=h; return;
+    }
+    wbody.innerHTML='<div class="step'+(W.dir<0?' back':'')+'">'+h+'<div class="err" id="wiz-err"></div></div>';
+  }
+  function wizErr(m){var e=document.getElementById('wiz-err');if(e)e.textContent=m;return false}
+  function saveStep(){
+    var s=W.step, g=function(id){var el=document.getElementById(id);return el?el.value.trim():''};
+    if(s===0&&!W.need)return wizErr('Pick what you need to keep going.');
+    if(s===1){W.veh=g('w-veh');W.size=g('w-size');var b=document.getElementById('w-byo');W.byo=!!(b&&b.checked);if(!W.veh)return wizErr('Add your vehicle so we bring the right tools.')}
+    if(s===2){if(!W.where)return wizErr('Choose mobile or the shop.');if(W.where==='mobile'){W.zip=g('w-zip');if(!county(W.zip))return wizErr('Enter a ZIP we cover, or pick the shop.')}}
+    if(s===3&&!W.win)return wizErr('Pick an arrival window.');
+    if(s===4){W.name=g('w-name');W.phone=g('w-phone');W.texts=document.getElementById('w-texts').checked;
+      if(!W.name)return wizErr('Add your name.'); if(W.phone.replace(/\D/g,'').length<10)return wizErr('Add a 10-digit mobile number.')}
+    return true;
+  }
+  wbody.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    if(b.dataset.need){W.need=b.dataset.need;renderWiz();return}
+    if(b.dataset.where){W.where=b.dataset.where;W.dir=1;renderWiz();var z=document.getElementById('w-zip');if(z)z.focus();return}
+    if(b.dataset.day){W.day=b.dataset.day;renderWiz();return}
+    if(b.dataset.win){W.win=b.dataset.win;renderWiz();return}
+    if(b.id==='wiz-restart'){W.step=0;W.need=null;W.where=null;W.win=null;W.dir=-1;renderWiz()}
+  });
+  wbody.addEventListener('input',function(e){
+    if(e.target.id==='w-zip'){W.zip=e.target.value.trim();var c=county(W.zip),r=document.getElementById('w-zipres');
+      r.className='zipres '+(c?'ok':(W.zip.length===5?'no':''));r.textContent=c?'We cover '+W.zip+' in '+c+' County.':(W.zip.length===5?'Outside our regular route. Call and we will try.':'')}
+  });
+  wnext.addEventListener('click',function(){if(!saveStep())return;W.step++;W.dir=1;renderWiz();
+    var f=wbody.querySelector('input,button.opt');if(f&&W.step<5)f.focus({preventScroll:true})});
+  wback.addEventListener('click',function(){if(W.step>0){W.step--;W.dir=-1;renderWiz()}});
+  renderWiz();
+
+  // ===== v5: Instagram gallery =====
+  // Live site: fetch('/gallery/gallery.json') written by sync-instagram.mjs every 6 hours.
+  // Prototype: same shape, sample items using the storefront photo until the feed is connected.
+  var STORE=document.querySelector('.hero-media img').src;
+  var GALLERY={updated:null,items:[
+    {id:'s1',file:STORE,category:'jeep',tags:['jeep','lift'],isVideo:false,caption:'Sample: lifted Gladiator on new all-terrains',pos:'78% 70%'},
+    {id:'s2',file:STORE,category:'jeep',tags:['jeep','wheels'],isVideo:false,caption:'Sample: Gladiator Rubicon, custom wheels',pos:'15% 75%'},
+    {id:'s3',file:STORE,category:'shop',tags:[],isVideo:false,caption:'Sample: the Sunrise shop',pos:'50% 40%'},
+    {id:'s4',file:STORE,category:'mobile',tags:['mobile'],isVideo:true,caption:'Sample: mobile install video',pos:'90% 60%'},
+    {id:'s5',file:STORE,category:'truck',tags:['truck','lift'],isVideo:false,caption:'Sample: leveled pickup',pos:'30% 55%'},
+    {id:'s6',file:STORE,category:'wheels',tags:['wheels'],isVideo:false,caption:'Sample: wheel package mounted and balanced',pos:'65% 80%'},
+    {id:'s7',file:STORE,category:'shop',tags:[],isVideo:false,caption:'Sample: bay doors open, 8 AM',pos:'5% 50%'},
+    {id:'s8',file:STORE,category:'truck',tags:['truck'],isVideo:false,caption:'Sample: fleet truck on site',pos:'45% 85%'}
+  ]};
+  var IGCATS=[['all','All'],['jeep','Jeep'],['truck','Trucks'],['lift','Lifts'],['wheels','Wheels'],['mobile','Mobile']];
+  ET.GALLERY=GALLERY; ET.IGCATS=IGCATS;
+  var igFilter='all', igGrid=document.getElementById('ig-grid');
+  function igRender(){
+    var rows=GALLERY.items.filter(function(i){return igFilter==='all'||i.category===igFilter||i.tags.indexOf(igFilter)>-1});
+    igGrid.innerHTML=rows.map(function(i){
+      return '<button type="button" class="ig-tile" data-ig="'+i.id+'" aria-label="'+esc(i.caption)+'"><img src="'+i.file+'" alt="" loading="lazy" style="object-position:'+(i.pos||'50% 50%')+'">'+
+        (i.id.charAt(0)==='s'?'<span class="badge">Sample</span>':'')+
+        (i.isVideo?'<span class="vid"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></span>':'')+
+        '<span class="cap">'+esc(i.caption)+'</span></button>'}).join('')||'<p style="color:#999">No posts in this category yet.</p>';
+  }
+  document.getElementById('ig-chips').innerHTML=IGCATS.map(function(c){return '<button type="button" data-igf="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+c[1]+'</button>'}).join('');
+  document.getElementById('ig-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;igFilter=b.dataset.igf;
+    this.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});igRender()});
+  document.getElementById('ig-updated').textContent='Auto-syncs from Instagram every 6 hours · sample tiles shown in this prototype';
+  var lb=document.getElementById('lb');
+  igGrid.addEventListener('click',function(e){var t=e.target.closest('[data-ig]');if(!t)return;
+    var it=GALLERY.items.filter(function(i){return i.id===t.dataset.ig})[0];
+    var im=document.getElementById('lb-img');im.src=it.file;im.alt=it.caption;
+    document.getElementById('lb-cap').textContent=it.caption;
+    document.getElementById('lb-link').href=it.permalink||'https://www.instagram.com/extremetires';
+    lb.classList.add('open');lb.setAttribute('aria-hidden','false');document.getElementById('lb-x').focus()});
+  function lbClose(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true')}
+  document.getElementById('lb-x').addEventListener('click',lbClose);
+  lb.addEventListener('click',function(e){if(e.target===lb)lbClose()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')lbClose()});
+  igRender();
+
+  // Nav shrink + mobile action bar after the hero
+  var navEl=document.querySelector('header.nav'), bar=document.getElementById('actionbar');
+  function onScroll(){
+    var y=window.scrollY||0;
+    navEl.classList.toggle('scrolled', y>60);
+    bar.classList.toggle('show', y>380);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  // Scroll reveal: content is visible at rest; only blocks below the fold get a short slide-up
+  if(!reduce && 'IntersectionObserver' in window){
+    var targets=document.querySelectorAll('.sec-head,.svc,.offer,.slot,.mobile-copy,.finder-grid,.faq details,.finance,.how-grid > div,.lift,.rev-slots > div');
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+    targets.forEach(function(t,i){
+      if(t.getBoundingClientRect().top>window.innerHeight){t.classList.add('reveal');t.style.transitionDelay=(i%6)*60+'ms';io.observe(t)}
+    });
+  }
+
+  // Deals sign-up (prototype)
+  document.getElementById('club-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var p=document.getElementById('c-phone').value.trim(), m=document.getElementById('c-email').value.trim();
+    var msg=document.getElementById('club-msg');
+    msg.textContent=(p||m)?'Prototype only, nothing was sent. On the live site this subscribes you in Omnisend.':'Enter a mobile number or an email to join.';
+  });
+
+  // Quote form validation (messages match the mockup)
+  var form=document.getElementById('quote-form');
+  var MSG={'q-first':'Please enter your name.','q-last':'Please enter your name.','q-phone':'This field is required','q-email':'This field is required','q-when':'Please select when you need service.'};
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var bad=null;
+    Object.keys(MSG).forEach(function(id){
+      var el=document.getElementById(id), err=form.querySelector('.err[data-for="'+id+'"]');
+      var ok=el.value.trim()!=='' && (id!=='q-email' || /.+@.+\..+/.test(el.value));
+      if(id==='q-email' && el.value.trim()!=='' && !ok) err.textContent='Enter an email like name@example.com';
+      else err.textContent=ok?'':MSG[id];
+      if(!ok && !bad) bad=el;
+    });
+    var done=document.getElementById('done');
+    if(bad){done.hidden=true;bad.focus();return;}
+    var picked=[].slice.call(pick.querySelectorAll('input:checked')).map(function(i){return i.value});
+    done.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(picked.length?' for: '+picked.join(', '):'')+'.';
+    done.hidden=false;
+  });
+})();
+</script>
+<!--PARTS_JS-->

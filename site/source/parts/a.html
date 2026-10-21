@@ -1,0 +1,391 @@
+<!-- ================= A: WHEELS ================= -->
+<section id="view-wheels" data-view="wheels" hidden>
+  <div class="phead wh-phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Wheels</span></nav>
+      <h1>Custom wheels, fitted right</h1>
+      <p>Pick a finish, size and style, see how it looks, then let our team confirm the fit for your exact vehicle. Tire and wheel packages are mounted and balanced in one visit.</p>
+      <div class="btns">
+        <a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Custom Wheels Service">Quote a wheel package</a>
+        <a class="btn btn-ghost" href="#wh-viz" data-go="wheels">Try the visualizer</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="wh-viz" id="wh-viz" aria-labelledby="wh-viz-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Wheel visualizer</div>
+          <h2 id="wh-viz-h">See it before you buy it</h2>
+          <p>Choose a vehicle type, then try finishes, sizes and styles.</p>
+        </div>
+        <span class="sample-note">Mock-up only · the live visualizer uses your exact vehicle</span>
+      </div>
+      <div class="wh-grid">
+        <div class="wh-stage" aria-live="polite">
+          <div class="wh-canvas" id="wh-canvas" role="img" aria-label="Illustration of the selected wheel"></div>
+          <div class="wh-readout">
+            <b id="wh-title">Gloss black · 20&quot; · Split-spoke</b>
+            <span id="wh-sub">Illustration only. Real wheels vary by brand and model.</span>
+          </div>
+        </div>
+        <div class="wh-controls">
+          <fieldset class="wh-fs">
+            <legend>Vehicle</legend>
+            <div class="wh-chips" id="wh-veh" role="group" aria-label="Vehicle type">
+              <button type="button" aria-pressed="false" data-veh="jeep"><svg aria-hidden="true"><use href="#i-lift"/></svg>Jeep</button>
+              <button type="button" aria-pressed="true" data-veh="truck"><svg aria-hidden="true"><use href="#i-van"/></svg>Truck</button>
+              <button type="button" aria-pressed="false" data-veh="suv"><svg aria-hidden="true"><use href="#i-wheel"/></svg>SUV</button>
+              <button type="button" aria-pressed="false" data-veh="car"><svg aria-hidden="true"><use href="#i-align"/></svg>Car</button>
+            </div>
+            <p class="wh-vnote" id="wh-vnote"></p>
+          </fieldset>
+          <fieldset class="wh-fs">
+            <legend>Finish <span id="wh-fin-name" class="wh-cur"></span></legend>
+            <div class="wh-swatches" id="wh-fin" role="group" aria-label="Wheel finish"></div>
+          </fieldset>
+          <fieldset class="wh-fs">
+            <legend>Diameter <span id="wh-dia-name" class="wh-cur"></span></legend>
+            <div class="wh-seg" id="wh-dia" role="group" aria-label="Wheel diameter in inches"></div>
+          </fieldset>
+          <fieldset class="wh-fs">
+            <legend>Style <span id="wh-sty-name" class="wh-cur"></span></legend>
+            <div class="wh-styles" id="wh-sty" role="group" aria-label="Wheel style"></div>
+          </fieldset>
+          <div class="btns wh-cta">
+            <a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Custom Wheels Service" id="wh-quote">Quote this look</a>
+            <a class="btn btn-dark" href="#financing" data-view-link="financing">Financing options</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-brands" aria-labelledby="wh-br-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Wheel brands</div><h2 id="wh-br-h">27 wheel brands to choose from</h2>
+        <p>Ask our team about any wheel you do not see listed.</p></div>
+      </div>
+      <div class="wh-brand-grid">
+        <div class="wh-brand"><span class="wh-bmark">Mickey Thompson</span><p>Ask us for available sizes and finishes.</p></div>
+        <div class="wh-brand"><span class="wh-bmark">Advanti</span><p>Ask us for available sizes and finishes.</p></div>
+        <div class="wh-brand"><span class="wh-bmark">Worx</span><p>Ask us for available sizes and finishes.</p></div>
+        <div class="wh-brand wh-more"><span class="wh-bmark">+24 more brands</span><p>Full brand list to confirm.</p><span class="sample-note">List to confirm · Simon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-pkg" aria-labelledby="wh-pkg-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Tire + wheel packages</div><h2 id="wh-pkg-h">One visit, rolling out ready</h2>
+        <p>A package pairs your wheels with matching tires so everything is mounted, balanced and checked together.</p></div>
+      </div>
+      <div class="how-grid wh-steps">
+        <div><b>Pick the wheel</b><p>Choose a style, finish and diameter. Our team confirms it suits your vehicle.</p></div>
+        <div><b>Match the tires</b><p>Larger wheels usually mean a lower-profile tire, sized to keep the overall diameter close to stock.</p></div>
+        <div><b>Mount and balance</b><p>Tires go on the wheels and are balanced as an assembly, with the TPMS sensors handled.</p></div>
+        <div><b>Install and check</b><p>Wheels go on the vehicle, lug nuts are torqued to spec and fitment is checked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-fit" aria-labelledby="wh-fit-h">
+    <div class="wrap">
+      <div class="eyebrow">Fitment check</div>
+      <h2 id="wh-fit-h">What we check before a wheel goes on</h2>
+      <p class="wh-lead">A wheel that looks right can still rub, miss the brakes or sit crooked. Here is what our team looks at. This is a general guide, not a guarantee for any specific wheel.</p>
+      <div class="wh-fit-grid">
+        <div><b>1 · Bolt pattern</b><p>The number of lugs and the circle they sit on, written like 5x114.3. It has to match the vehicle exactly.</p></div>
+        <div><b>2 · Offset</b><p>How far the wheel face sits from the centerline, in millimeters. It sets how far the wheel and tire stick out or tuck in.</p></div>
+        <div><b>3 · Clearance</b><p>Room for brake calipers, suspension parts and fenders at full turn and full suspension travel, especially with wider tires or a lift.</p></div>
+        <div><b>4 · Center bore and load</b><p>The center hole should fit the hub, and the wheel and tire should be rated for the vehicle's weight.</p></div>
+      </div>
+      <div class="wh-guar"><span class="sample-note">Fitment guarantee terms: Simon to confirm</span><span>No promise is made here until the shop writes the terms.</span></div>
+    </div>
+  </section>
+
+  <section class="wh-lift" data-wh-store aria-labelledby="wh-lift-h">
+    <div class="wrap">
+      <div class="wh-lift-box">
+        <div class="eyebrow" style="color:#fff;opacity:.9">Building it bigger?</div>
+        <h2 id="wh-lift-h">Lift or level, then fit the wheels</h2>
+        <p>Larger wheels and tires often go hand in hand with a lift or leveling kit. We can plan both together.</p>
+        <div class="btns">
+          <a class="btn btn-red" href="#service/lift-kits" data-view-link="service" data-param="lift-kits">Lift kits and leveling</a>
+          <a class="btn btn-ghost" href="#service/custom-wheels" data-view-link="service" data-param="custom-wheels">Custom wheel service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="wh-faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Questions</div><h2 id="wh-faq-h">Wheel FAQ</h2></div></div>
+      <details open><summary>Can I put any wheel on my vehicle?</summary><p>No. The bolt pattern, offset, center bore and clearance all have to work with your vehicle. That is why our team checks fitment before ordering.</p></details>
+      <details><summary>Do bigger wheels change my tires?</summary><p>Yes. A larger wheel usually takes a tire with a shorter sidewall. The goal is to keep the overall tire diameter close to stock so the speedometer and gearing stay accurate.</p></details>
+      <details><summary>Will my TPMS sensors work with new wheels?</summary><p>The sensors can often be moved to the new wheels or replaced. Our team will go over the options when you ask for a quote.</p></details>
+      <details><summary>Can I pay over time?</summary><p>Lease-to-own financing is available through Kafene. Terms are set by the provider, so see the <a href="#financing" data-view-link="financing">financing page</a> for how to apply.</p></details>
+    </div>
+  </section>
+</section>
+
+<!-- ================= A: SERVICES HUB ================= -->
+<section id="view-services" data-view="services" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Auto Service</span></nav>
+      <h1>Auto service, shop or driveway</h1>
+      <p>From new tires to Hunter alignments, lifts and brakes. Some jobs we can do where you are, and the rest are handled at our Sunrise shop.</p>
+      <div class="btns">
+        <a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule a repair</a>
+        <a class="btn btn-ghost" href="#advisor" data-view-link="advisor">Not sure what you need?</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="sv-sec" aria-labelledby="sv-m-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Mobile</div><h2 id="sv-m-h">At your location</h2>
+      <p>Our van comes to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p></div>
+      <a class="btn btn-dark" href="#mobile" data-view-link="mobile">Check my ZIP</a></div>
+      <div class="sv-grid" id="sv-grid-mobile"></div>
+    </div>
+  </section>
+
+  <section class="sv-sec sv-shopsec" aria-labelledby="sv-s-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Shop</div><h2 id="sv-s-h">At the Sunrise shop</h2>
+      <p>7712 West Oakland Park Blvd. Alignments run on Hunter Engineering equipment. The shop also does every service above.</p></div>
+      <a class="btn btn-dark" href="#locations" data-view-link="locations">Hours and directions</a></div>
+      <div class="sv-grid" id="sv-grid-shop"></div>
+    </div>
+  </section>
+
+  <section class="combo" aria-labelledby="sv-combo-h">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow" style="color:#fff;opacity:.85">Mobile plus shop</div>
+        <h2 id="sv-combo-h">Tires at your door. Alignment at the shop.</h2>
+        <p>Have new tires installed where you are, then bring the vehicle in for an alignment so they wear evenly. Tell us in one request and we will line it up.</p>
+        <div class="btns" style="margin-top:18px"><a class="btn btn-dark" href="#schedule" data-view-link="schedule" data-sched="tire-installation,wheel-alignment">Schedule the combo</a></div>
+      </div>
+      <div class="vs">
+        <div><b>At your location</b><ul><li>Tire installation</li><li>Balancing</li><li>Repairs and roadside</li><li>Oil changes</li></ul></div>
+        <div class="us"><b>At the shop</b><ul><li>Hunter alignment</li><li>Brakes and suspension</li><li>TPMS, lifts, wheels</li><li>All of the mobile list</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sv-help" aria-labelledby="sv-help-h">
+    <div class="wrap">
+      <div class="sv-help-grid">
+        <a class="sv-help-card" href="#advisor" data-view-link="advisor" data-adv-tab="maintenance">
+          <svg aria-hidden="true"><use href="#i-rotate"/></svg>
+          <span><b>Maintenance Advisor</b>Enter your mileage for a generic checklist of what to ask about.</span>
+        </a>
+        <a class="sv-help-card" href="#advisor" data-view-link="advisor" data-adv-tab="diagnostic">
+          <svg aria-hidden="true"><use href="#i-tpms"/></svg>
+          <span><b>Dashboard light guide</b>What common warning lights usually mean, in plain language.</span>
+        </a>
+        <a class="sv-help-card" href="#schedule" data-view-link="schedule">
+          <svg aria-hidden="true"><use href="#i-install"/></svg>
+          <span><b>Schedule a repair</b>Pick your services, day and arrival window.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="sv-faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Questions</div><h2 id="sv-faq-h">Auto service FAQ</h2></div></div>
+      <details open><summary>Which services can you do at my location?</summary><p>Tire installation, high-speed balancing, tire repair and roadside flat repair, and oil changes. Everything else is done at the Sunrise shop.</p></details>
+      <details><summary>Do I need an appointment?</summary><p>You can request a time online or call (954) 773-1896. Tell us what is going on and our team will confirm what works.</p></details>
+      <details><summary>Where is the shop and when is it open?</summary><p>7712 West Oakland Park Blvd, Sunrise, FL 33351. Monday to Friday 8:00 AM to 6:30 PM, Saturday 8:00 AM to 4:00 PM, closed Sunday.</p></details>
+      <details><summary>How do I find out what a repair will cost?</summary><p>Request a quote with your vehicle and symptoms. Our team confirms pricing before work starts.</p></details>
+    </div>
+  </section>
+
+  <div class="fleet">
+    <div class="wrap">
+      <div><h3>Not sure what you need?</h3><p>Describe the symptoms and our team will point you in the right direction.</p></div>
+      <a class="btn btn-red" href="#quote" data-view-link="quote">Request a quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= A: SERVICE (param) ================= -->
+<section id="view-service" data-view="service" hidden>
+  <div id="sp-root" aria-live="polite"></div>
+</section>
+
+<!-- ================= A: SCHEDULE ================= -->
+<section id="view-schedule" data-view="schedule" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>Schedule a repair</span></nav>
+      <h1>Schedule a repair</h1>
+      <p>Tell us what the vehicle needs and when works for you. Our team will confirm the appointment. For a price first, <a href="#quote" data-view-link="quote" style="color:#fff">request a quote</a> instead.</p>
+    </div>
+  </div>
+  <form id="sc-form" class="sc-form" novalidate>
+    <div class="wrap sc-wrap">
+      <div class="sc-main">
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">1</span> What does it need?</legend>
+          <p class="sc-hint">Pick one or more. Not sure? Pick the closest and describe it in the notes.</p>
+          <div class="sc-pick" id="sc-pick"></div>
+          <div class="err" id="sc-err-svc" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">2</span> Your vehicle</legend>
+          <div class="sc-row3">
+            <label class="f" for="sc-year">Year<input id="sc-year" inputmode="numeric" maxlength="4" placeholder="2021" autocomplete="off"><span class="err" id="sc-err-year"></span></label>
+            <label class="f" for="sc-make">Make<input id="sc-make" placeholder="Toyota" autocomplete="off"><span class="err" id="sc-err-make"></span></label>
+            <label class="f" for="sc-model">Model<input id="sc-model" placeholder="Tacoma" autocomplete="off"><span class="err" id="sc-err-model"></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">3</span> Where should we do it?</legend>
+          <div class="opts sc-where" id="sc-where" role="group" aria-label="Location">
+            <button type="button" class="opt" data-where="shop" aria-pressed="true"><svg aria-hidden="true"><use href="#i-align"/></svg><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button>
+            <button type="button" class="opt" data-where="mobile" aria-pressed="false"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Mobile jobs only</small></span></button>
+          </div>
+          <div class="sc-note" id="sc-mobnote" hidden>Mobile covers tire installation, balancing, tire repair and oil changes. The other services are done at the shop.</div>
+
+          <div id="sc-mobile" hidden class="sc-sub">
+            <label class="f" for="sc-zip" style="max-width:260px">Your ZIP code<input id="sc-zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+            <div class="zipres" id="sc-zipres" aria-live="polite"></div>
+            <div class="checklist"><b>What your spot needs</b><ul><li>About 5 ft clear around the vehicle</li><li>Flat, firm ground (driveway, lot or garage)</li><li>Keys available and wheel locks in the car</li></ul></div>
+          </div>
+
+          <div id="sc-drop" class="sc-sub">
+            <div class="sc-lbl">At the shop, you can</div>
+            <div class="sc-radios" role="radiogroup" aria-label="Drop-off style">
+              <label><input type="radio" name="sc-drop" value="wait" checked> I'll wait</label>
+              <label><input type="radio" name="sc-drop" value="leave"> I'll leave my vehicle</label>
+            </div>
+            <div class="sc-hint">Whether a job is a wait-or-leave job depends on the work. The shop will confirm.</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">4</span> When works for you?</legend>
+          <div class="flow-days sc-days" id="sc-days" role="group" aria-label="Preferred day"></div>
+          <div class="sc-lbl" style="margin-top:14px">Pick up to two arrival windows <span id="sc-wincount" class="sc-cur"></span></div>
+          <div class="windows sc-wins" id="sc-wins" role="group" aria-label="Preferred 2-hour windows"></div>
+          <div class="sc-hint">Sample availability. The live site reads the shop calendar.</div>
+          <div class="err" id="sc-err-when" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">5</span> How should we reach you?</legend>
+          <div class="sc-radios" role="radiogroup" aria-label="Contact preference">
+            <label><input type="radio" name="sc-contact" value="text" checked> Text</label>
+            <label><input type="radio" name="sc-contact" value="call"> Call</label>
+            <label><input type="radio" name="sc-contact" value="email"> Email</label>
+          </div>
+          <div class="sc-row3" style="margin-top:14px">
+            <label class="f" for="sc-name">Name<input id="sc-name" autocomplete="name" placeholder="First and last name"><span class="err" id="sc-err-name"></span></label>
+            <label class="f" for="sc-phone">Phone<input id="sc-phone" type="tel" autocomplete="tel" placeholder="(954) 555-0123"><span class="err" id="sc-err-phone"></span></label>
+            <label class="f" for="sc-email">Email <span id="sc-email-opt" style="text-transform:none;letter-spacing:0;font-weight:500">(optional)</span><input id="sc-email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" id="sc-err-email"></span></label>
+          </div>
+          <label class="f" for="sc-notes" style="margin-top:14px">Anything we should know?<textarea id="sc-notes" rows="3" placeholder="Symptoms, noises, tire size, lifted or leveled, etc."></textarea></label>
+        </fieldset>
+
+        <button class="btn btn-red sc-submit" type="submit">Request this appointment</button>
+        <p class="sc-fine">This is a request, not a confirmed booking. Our team will confirm the time with you.</p>
+        <div class="done" id="sc-done" hidden role="status" tabindex="-1"></div>
+      </div>
+
+      <aside class="sc-side" aria-label="Your request">
+        <div class="sc-sum">
+          <b>Your request</b>
+          <dl id="sc-sum">
+            <dt>Services</dt><dd id="sc-s-svc">None yet</dd>
+            <dt>Where</dt><dd id="sc-s-where">Sunrise shop</dd>
+            <dt>When</dt><dd id="sc-s-when">Pick a day and window</dd>
+          </dl>
+        </div>
+        <div class="sc-sum sc-call">
+          <b>Need it sooner?</b>
+          <p>Call <a href="tel:+19547731896"><strong>(954) 773-1896</strong></a><br>Mon–Fri 8:00 AM–6:30 PM<br>Sat 8:00 AM–4:00 PM</p>
+        </div>
+        <a class="sc-side-link" href="#advisor" data-view-link="advisor" data-adv-tab="maintenance">Not sure what you need? Try the Maintenance Advisor</a>
+      </aside>
+    </div>
+  </form>
+</section>
+
+<!-- ================= A: ADVISOR ================= -->
+<section id="view-advisor" data-view="advisor" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>Diagnostic Center &amp; Maintenance Advisor</span></nav>
+      <h1>Diagnostic Center &amp; Maintenance Advisor</h1>
+      <p>Learn what common warning lights usually mean, or get a general checklist for your mileage. These are guides, not diagnoses. Only a technician with the vehicle in front of them can tell you what is wrong.</p>
+    </div>
+  </div>
+
+  <div class="ad-tabs-bar">
+    <div class="wrap">
+      <div class="ad-tabs" role="tablist" aria-label="Advisor sections">
+        <button type="button" role="tab" id="ad-tab-diagnostic" aria-controls="ad-panel-diagnostic" aria-selected="true" data-tab="diagnostic">Diagnostic Center</button>
+        <button type="button" role="tab" id="ad-tab-maintenance" aria-controls="ad-panel-maintenance" aria-selected="false" tabindex="-1" data-tab="maintenance">Maintenance Advisor</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="ad-panel-diagnostic" role="tabpanel" aria-labelledby="ad-tab-diagnostic" class="ad-panel">
+    <div class="wrap">
+      <div class="ad-safe" role="note"><b>Safety first.</b> If a light comes on together with smoke, a burning smell, a loud noise, a soft brake pedal or the vehicle driving differently, pull over where it is safe and call for help. This guide cannot tell you it is safe to keep driving.</div>
+      <div class="sec-head" style="margin-top:34px"><div><div class="eyebrow">Dashboard lights</div><h2 style="font-size:clamp(26px,3.2vw,40px);font-weight:800">What the light usually means</h2>
+      <p>Colors vary by vehicle, so check the owner's manual. As a rule, red means stop safely and get help, and amber or yellow means have it checked soon.</p></div></div>
+      <div class="ad-lights" id="ad-lights"></div>
+      <div class="ad-cta">
+        <div><h3>Light on and not sure?</h3><p>Have a technician inspect it. A warning light is a starting point, and the cause can only be found with testing on the vehicle.</p></div>
+        <div class="btns"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule an inspection</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ad-panel-maintenance" role="tabpanel" aria-labelledby="ad-tab-maintenance" class="ad-panel" hidden>
+    <div class="wrap">
+      <div class="ad-m-grid">
+        <form class="ad-form" id="ad-form" novalidate>
+          <h2>Your vehicle</h2>
+          <label class="f" for="ad-miles">Current mileage
+            <input id="ad-miles" inputmode="numeric" placeholder="e.g. 47000" autocomplete="off" aria-describedby="ad-miles-err">
+            <span class="err" id="ad-miles-err" role="alert"></span>
+          </label>
+          <fieldset class="ad-fs">
+            <legend>How is it mostly driven?</legend>
+            <div class="ad-conds" id="ad-conds">
+              <label><input type="radio" name="ad-cond" value="highway" checked><span><b>Mostly highway</b><small>Steady speeds, longer trips</small></span></label>
+              <label><input type="radio" name="ad-cond" value="city"><span><b>Stop-and-go</b><small>Traffic, short trips, heat</small></span></label>
+              <label><input type="radio" name="ad-cond" value="severe"><span><b>Towing or off-road</b><small>Loads, dirt, rough roads</small></span></label>
+            </div>
+          </fieldset>
+          <button class="btn btn-red" type="submit">Build my checklist</button>
+          <p class="ad-fine">Generic intervals only. Always follow your owner's manual first.</p>
+        </form>
+        <div class="ad-result" id="ad-result" aria-live="polite">
+          <div class="ad-empty"><svg aria-hidden="true"><use href="#i-rotate"/></svg><p>Enter your mileage and pick how you drive to see a checklist of what to ask about.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="faq" aria-labelledby="ad-faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Good to know</div><h2 id="ad-faq-h">Before you rely on a guide</h2></div></div>
+      <details open><summary>Is this a diagnosis?</summary><p>No. These pages explain what lights and intervals generally mean. A technician has to inspect and test the vehicle to find the real cause.</p></details>
+      <details><summary>Which schedule should I follow?</summary><p>Your owner's manual. It lists intervals set by the manufacturer for your exact vehicle. The checklist here is only a conversation starter.</p></details>
+      <details><summary>Can I get this checked at my location?</summary><p>Tire installation, balancing, repairs and oil changes can be done by our mobile team. Inspections that need a lift or alignment equipment happen at the Sunrise shop.</p></details>
+    </div>
+  </section>
+</section>
