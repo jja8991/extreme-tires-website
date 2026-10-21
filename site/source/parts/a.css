@@ -276,3 +276,19 @@
 
 /* FAQ summary: wrapped questions made the "+" push the page wider by a few px on phones */
 #view-wheels .faq summary,#view-services .faq summary,#view-advisor .faq summary{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
+
+/* trust line + ordering pass */
+.a-trust{margin:0;font-size:14px!important;color:#d8d8d8!important;display:flex;gap:6px 8px;flex-wrap:wrap;align-items:center}
+.a-trust b{color:#fff}
+.a-trust a{color:#fff;font-weight:700}
+.a-stars{color:#f5a400;letter-spacing:2px}
+.sp-trust,.sc-trust p{margin:0;font-size:14px;color:#ddd;text-align:center}
+.sp-trust b,.sc-trust b{color:#fff}
+.sc-trust{border-top-color:#f5a400}
+.sp-faqsec{padding-block:40px 52px}
+.wh-ghost{border-color:var(--ink);color:var(--ink)}
+.wh-ghost:hover{background:var(--ink);color:#fff}
+.ad-light .btn-ghost,.sp-ghostlt{border-color:var(--ink);color:var(--ink)}
+.ad-light .btn-ghost:hover{background:var(--ink);color:#fff}
+.ad-form .btn-ghost{border-color:#fff}
+.ad-form .btn-ghost:hover{background:#fff;color:var(--ink)}

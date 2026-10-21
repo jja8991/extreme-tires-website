@@ -229,3 +229,17 @@
 @media (max-width:420px){
   .rv-src,.ab-grid4,.ab-stats .wrap{grid-template-columns:1fr}
 }
+
+/* ---- ordering pass ---- */
+.fn-ink{border-color:var(--ink);color:var(--ink);background:transparent}
+.fn-ink:hover{background:var(--ink);color:#fff}
+.lc-gh{border-color:var(--ink);color:var(--ink)}
+.lc-gh:hover{background:var(--ink);color:#fff}
+.lc-side{display:grid;gap:18px;align-content:start}
+.lc-side .lc-zipbox{margin:0}
+.lc-side h2{font-size:clamp(24px,2.8vw,34px);font-weight:900;margin:10px 0}
+.lc-mapsec{padding-block:0 60px}
+.lc-mapsec .lc-map{min-height:320px}
+.lc-main{padding-bottom:40px}
+.ct-trust{font-weight:700;color:var(--yellow)!important;font-size:15px!important}
+@media (max-width:860px){.lc-mapsec{padding-block:0 44px}}

@@ -140,8 +140,6 @@ function renderService(param){
          '<p style="margin:14px 0 0"><span class="sample-note">Exact scope for your vehicle: shop to confirm</span></p></section>'+
        '<section aria-labelledby="sp-sig-h"><h2 id="sp-sig-h">'+(isGear?'Reasons to consider it':'Signs you may need it')+'</h2>'+listHtml(s.signs,'sp-signs')+
          '<p style="margin:14px 0 0;color:var(--steel);font-size:14px">These are general signs, not a diagnosis. Have a technician inspect the vehicle to know for sure.</p></section>'+
-       '<section aria-labelledby="sp-faq-h" class="sp-faq"><h2 id="sp-faq-h">Common questions</h2>'+
-         s.faq.map(function(q,n){return '<details'+(n===0?' open':'')+'><summary>'+h(q[0])+'</summary><p>'+h(q[1])+'</p></details>'}).join('')+'</section>'+
      '</div>'+
      '<aside class="sp-aside" aria-label="Service details"><div class="sp-card">'+
        '<div class="sp-fact"><small>Where</small><b>'+(s.mode==='both'?'Mobile or at the shop':'At the Sunrise shop')+'</b></div>'+
@@ -149,12 +147,15 @@ function renderService(param){
        '<div class="sp-fact"><small>Starting at</small><b>$XX</b><span class="sample-note">Sample · pricing set by the shop</span></div>'+
        '<a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="'+h(s.label)+'">Request a quote</a>'+
        '<a class="btn btn-ghost" href="#schedule" data-view-link="schedule" data-sched="'+param+'">Schedule a repair</a>'+
+       '<p class="sp-trust"><b>4.7★ from 1,319 Birdeye reviews</b><br>Hunter alignment · Mobile + shop</p>'+
        '<p class="sp-call">Questions? Call <a href="tel:+19547731896">(954) 773-1896</a></p>'+
      '</div></aside>'+
    '</div>'+
+   '<div class="wrap"><nav class="sp-pn" aria-label="More services"><a '+link(ps)+'><small>&larr; Previous</small><b>'+h(prev.name)+'</b></a><a class="nx" '+link(ns)+'><small>Next &rarr;</small><b>'+h(next.name)+'</b></a></nav></div>'+
    '<section class="sp-related" aria-labelledby="sp-rel-h"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Related</div><h2 id="sp-rel-h" style="font-size:clamp(24px,2.8vw,34px);font-weight:800">Often done together</h2></div><a class="btn btn-dark" href="#services" data-view-link="services">All services</a></div>'+
      '<div class="sp-rel-grid">'+s.rel.slice(0,3).map(function(r){return card(r,SV[r].mode==='both')}).join('')+'</div></div></section>'+
-   '<div class="wrap"><nav class="sp-pn" aria-label="More services"><a '+link(ps)+'><small>&larr; Previous</small><b>'+h(prev.name)+'</b></a><a class="nx" '+link(ns)+'><small>Next &rarr;</small><b>'+h(next.name)+'</b></a></nav></div>';
+   '<section class="sp-faqsec" aria-labelledby="sp-faq-h"><div class="wrap sp-faq" style="max-width:900px"><h2 id="sp-faq-h" style="font-size:clamp(24px,2.8vw,34px);font-weight:800;margin-bottom:14px">Common questions</h2>'+
+         s.faq.map(function(q,n){return '<details'+(n===0?' open':'')+'><summary>'+h(q[0])+'</summary><p>'+h(q[1])+'</p></details>'}).join('')+'</div></section>';
 }
 ET.onShow.service=function(param){renderService(param)};
 
@@ -351,10 +352,10 @@ ET.onShow.schedule=function(){
 };
 
 /* ======================= ADVISOR: tabs ======================= */
-var advTab='diagnostic';
+var advTab='maintenance';
 function setTab(t,focus){
   advTab=t;
-  ['diagnostic','maintenance'].forEach(function(k){
+  ['maintenance','diagnostic'].forEach(function(k){
     var on=k===t, b=$('ad-tab-'+k);
     b.setAttribute('aria-selected',String(on)); b.tabIndex=on?0:-1; $('ad-panel-'+k).hidden=!on;
     if(on&&focus)b.focus();
@@ -363,7 +364,7 @@ function setTab(t,focus){
 document.querySelector('.ad-tabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setTab(b.dataset.tab)});
 document.querySelector('.ad-tabs').addEventListener('keydown',function(e){
   var k=e.key; if(k!=='ArrowLeft'&&k!=='ArrowRight'&&k!=='Home'&&k!=='End')return;
-  e.preventDefault(); setTab(k==='ArrowLeft'||k==='Home'?'diagnostic':'maintenance',true);
+  e.preventDefault(); setTab(k==='ArrowLeft'||k==='Home'?'maintenance':'diagnostic',true);
 });
 ET.onShow.advisor=function(){setTab(pendingTab||advTab);pendingTab=null};
 
@@ -416,8 +417,8 @@ $('ad-lights').innerHTML=LIGHTS.map(function(l,n){
    '<div class="ad-det"><div><h4>What it usually means</h4><p>'+h(l.mean)+'</p></div>'+(l.steady?'<p>'+h(l.steady)+'</p>':'')+
    '<div><h4>What to do</h4><ul>'+l.now.map(function(x){return '<li>'+h(x)+'</li>'}).join('')+'</ul></div>'+
    '<p><b>Always have a technician inspect it.</b> A light shows that something needs a look, not what the repair is.</p>'+
-   '<div class="btns"><a class="btn btn-red" href="#schedule" data-view-link="schedule"'+(l.svc&&SV[l.svc]&&l.svcLabel?' data-sched="'+l.svc+'"':'')+'>Schedule an inspection</a>'+
-   (l.svc&&l.svcLabel?'<a class="btn btn-dark" '+link(l.svc)+'>'+h(l.svcLabel)+'</a>':'')+'</div></div></details>';
+   '<div class="btns"><a class="btn btn-dark" href="#schedule" data-view-link="schedule"'+(l.svc&&SV[l.svc]&&l.svcLabel?' data-sched="'+l.svc+'"':'')+'>Schedule an inspection</a>'+
+   (l.svc&&l.svcLabel?'<a class="btn btn-ghost sp-ghostlt" '+link(l.svc)+'>'+h(l.svcLabel)+'</a>':'')+'</div></div></details>';
 }).join('');
 
 /* ======================= ADVISOR: Maintenance ======================= */

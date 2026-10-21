@@ -144,24 +144,26 @@ function cityPage(c){
   var mob=[['install','Tire installation','New tires mounted at your location.','tire-installation'],['balance','High-speed balancing','Balanced on site with the van&rsquo;s equipment.','tire-balancing'],['repair','Flat &amp; roadside repair','Flat repairs without a trip to the shop.','tire-repair'],['oil','Oil changes','A routine oil change while you stay put.','oil-changes']];
   var q=c.i;
   var steps=[['Tell us what you need','Request a quote or call '+PHONE+' with your vehicle, tire size if you know it, and your ZIP.'],['Pick a time','We confirm the details and an arrival window that works for you.'],['We come to you','Our tech brings the tires and equipment to your location in '+esc(c.name)+' and does the work there.']];
-  return '<div class="phead"><div class="wrap">'+cityCrumbs(c.name)+'<h1>Mobile tire service in '+esc(c.name)+', FL</h1><p>'+intro+'</p>'+
-    '<span class="sample-note" style="justify-self:start">Local details to add per city: neighborhoods, landmarks, ZIPs served</span>'+
-    '<div class="btns" style="margin-top:6px"><a class="btn btn-red" href="#quote" data-view-link="quote">Get a quote</a><a class="btn btn-ghost" href="#mobile" data-view-link="mobile">Mobile service details</a></div></div></div>'+
-  '<section class="d-sec alt" aria-labelledby="cy-h-svc"><div class="wrap"><div class="eyebrow">At your location</div><h2 class="d-h2" id="cy-h-svc">What we do at your location</h2><p class="d-lead">The van brings the tools to you in '+esc(c.name)+'.</p><div class="cy-svcs">'+
-    mob.map(function(m){return '<a class="cy-svc" href="#service/'+m[3]+'" data-view-link="service" data-param="'+m[3]+'">'+ET.icon(m[0])+'<b>'+m[1]+'</b><span>'+m[2]+'</span></a>'}).join('')+'</div></div></section>'+
-  '<section class="d-sec" aria-labelledby="cy-h-how"><div class="wrap"><div class="eyebrow">Simple</div><h2 class="d-h2" id="cy-h-how">How it works</h2><ol class="cy-steps">'+
-    steps.map(function(s){return '<li><b>'+s[0]+'</b><p>'+s[1]+'</p></li>'}).join('')+'</ol></div></section>'+
-  '<section class="d-sec" style="padding-top:0"><div class="wrap"><div class="cy-shop"><div><div class="eyebrow">Shop services</div><h2 style="margin-top:8px">Bigger jobs at our Sunrise shop</h2>'+
+  var svcs='<section class="d-sec alt" aria-labelledby="cy-h-svc"><div class="wrap"><div class="eyebrow">At your location</div><h2 class="d-h2" id="cy-h-svc">What we do at your location</h2><p class="d-lead">The van brings the tools to you in '+esc(c.name)+'.</p><div class="cy-svcs">'+
+    mob.map(function(m){return '<a class="cy-svc" href="#service/'+m[3]+'" data-view-link="service" data-param="'+m[3]+'">'+ET.icon(m[0])+'<b>'+m[1]+'</b><span>'+m[2]+'</span></a>'}).join('')+'</div></div></section>';
+  var how='<section class="d-sec" aria-labelledby="cy-h-how"><div class="wrap"><div class="eyebrow">Simple</div><h2 class="d-h2" id="cy-h-how">How it works</h2><ol class="cy-steps">'+
+    steps.map(function(s){return '<li><b>'+s[0]+'</b><p>'+s[1]+'</p></li>'}).join('')+'</ol></div></section>';
+  var shop='<section class="d-sec" style="padding-top:0"><div class="wrap"><div class="cy-shop"><div><div class="eyebrow">Shop services</div><h2 style="margin-top:8px">Bigger jobs at our Sunrise shop</h2>'+
     '<p>Some work needs a lift or an alignment rack. For '+esc(c.name)+' customers that is a visit to our shop.</p><div class="tags"><span>Hunter alignment</span><span>Brakes</span><span>Suspension</span><span>TPMS</span><span>Lift &amp; leveling kits</span><span>Custom wheel sourcing</span></div>'+
     '<div class="btns" style="margin-top:20px"><a class="btn btn-ghost" href="#services" data-view-link="services">See all services</a></div></div>'+
-    '<div class="vis"><div><small>Address</small><b>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</b></div><div><small>Hours</small><b>Mon&ndash;Fri 8:00 AM&ndash;6:30 PM<br>Sat 8:00 AM&ndash;4:00 PM<br>Sun closed</b></div><div><small>Phone</small><b>'+PHONE+'</b></div></div></div></div></section>'+
-  '<section class="d-sec faq alt" aria-labelledby="cy-h-faq" style="padding-block:56px"><div class="wrap"><div class="eyebrow">Questions</div><h2 class="d-h2" id="cy-h-faq" style="margin-bottom:20px">'+esc(c.name)+' FAQ</h2>'+
+    '<div class="vis"><div><small>Address</small><b>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</b></div><div><small>Hours</small><b>Mon&ndash;Fri 8:00 AM&ndash;6:30 PM<br>Sat 8:00 AM&ndash;4:00 PM<br>Sun closed</b></div><div><small>Phone</small><b>'+PHONE+'</b></div></div></div></div></section>';
+  var faq='<section class="d-sec faq alt" aria-labelledby="cy-h-faq" style="padding-block:56px"><div class="wrap"><div class="eyebrow">Questions</div><h2 class="d-h2" id="cy-h-faq" style="margin-bottom:20px">'+esc(c.name)+' FAQ</h2>'+
     '<details><summary>'+sub(FAQQ1[q%3],c)+'</summary><p>'+sub(FAQA1[(q+1)%3],c)+'</p></details>'+
     '<details><summary>'+FAQQ2[(q+1)%3]+'</summary><p>'+FAQA2+'</p></details>'+
-    '<details><summary>'+FAQQ3[(q+2)%3]+'</summary><p>'+FAQA3[q%3]+'</p></details></div></section>'+
-  '<section class="d-sec" aria-labelledby="cy-h-near"><div class="wrap"><div class="eyebrow">Nearby</div><h2 class="d-h2" id="cy-h-near">Nearby areas</h2><p class="d-lead">We also serve these cities.</p><div class="cy-near">'+
-    c.near.map(function(s){var n=CBY[s];return '<a href="#city/'+s+'" data-view-link="city" data-param="'+s+'">'+esc(n.name)+'</a>'}).join('')+'<a href="#cities" data-view-link="cities">All service areas</a></div></div></section>'+
-  '<section class="cy-final" aria-label="Book"><div class="wrap"><div><h2>Ready when you are in '+esc(c.name)+'</h2><p>Get a quote online or look at mobile service details first. Prefer to talk? Call '+PHONE+'.</p></div><div class="btns"><a class="btn btn-dark" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="#mobile" data-view-link="mobile">Book mobile service</a></div></div></section>';
+    '<details><summary>'+FAQQ3[(q+2)%3]+'</summary><p>'+FAQA3[q%3]+'</p></details></div></section>';
+  var near='<section class="d-sec" aria-labelledby="cy-h-near"><div class="wrap"><div class="eyebrow">Nearby</div><h2 class="d-h2" id="cy-h-near">Nearby areas</h2><p class="d-lead">We also serve these cities.</p><div class="cy-near">'+
+    c.near.map(function(s){var n=CBY[s];return '<a href="#city/'+s+'" data-view-link="city" data-param="'+s+'">'+esc(n.name)+'</a>'}).join('')+'<a href="#cities" data-view-link="cities">All service areas</a></div></div></section>';
+  var hero='<div class="phead"><div class="wrap">'+cityCrumbs(c.name)+'<h1>Mobile tire service in '+esc(c.name)+', FL</h1><p>'+intro+'</p>'+
+    '<div class="btns"><a class="btn btn-red" href="#mobile" data-view-link="mobile">Book mobile service</a><a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call '+PHONE+'</a></div>'+
+    '<form class="cy-zip" id="cy-zipf" novalidate><label class="f" for="cy-zipi">Confirm your ZIP<input id="cy-zipi" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label><button class="btn btn-ghost" type="submit">Check</button></form><p class="cy-zipres" id="cy-zipres" aria-live="polite"></p>'+
+    '<p class="cy-proof">4.7&#9733; from 1,319 reviews on Birdeye &middot; Mobile van + Sunrise shop</p>'+
+    '<span class="sample-note" style="justify-self:start">Local details to add per city: neighborhoods, landmarks, ZIPs served</span></div></div>';
+  return hero+svcs+how+shop+faq+near;
 }
 ET.onShow.city=function(p){
   var c=CBY[p],root=$('cy-root');
@@ -203,4 +205,12 @@ $('nf-form').addEventListener('submit',function(e){
   if(!u){er.textContent='Tell us which page or link did not work.';$('nf-url').focus();return}
   er.textContent='';ok.textContent='Thanks. Prototype only, nothing was sent. The live site will pass this to the team.';
   this.reset();
+});
+
+$('cy-root').addEventListener('submit',function(e){
+  if(e.target.id!=='cy-zipf')return;e.preventDefault();
+  var z=$('cy-zipi').value.trim(),c=ET.county(z),r=$('cy-zipres');r.className='cy-zipres';
+  if(c===null){r.textContent='Enter a 5-digit ZIP code.';r.classList.add('no')}
+  else if(c){r.textContent='Yes, we cover '+z+' in '+c+' County. Book mobile service above.';r.classList.add('ok')}
+  else{r.textContent='Outside our regular route. Call '+PHONE+' and we will see what we can do.';r.classList.add('no')}
 });

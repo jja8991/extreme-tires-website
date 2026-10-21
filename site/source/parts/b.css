@@ -205,3 +205,16 @@
   .bs-tile{min-height:112px;padding:16px}
   .bs-tile::before{font-size:72px}
 }
+
+/* ordering pass */
+.cm-trust{margin:0;font-size:14px;font-weight:600;color:#e8e8e8}
+.cm-trust span{color:var(--yellow);margin-right:4px}
+.phead .btns{margin-top:4px}
+.cm-next{background:var(--mist);border-top:1px solid var(--line)}
+.cm-next .wrap{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;padding-block:18px}
+.cm-next a{font-weight:700;text-decoration:none;border-bottom:2px solid var(--red);padding:10px 0;min-height:44px;display:inline-flex;align-items:center}
+.bs-order{margin-top:22px;background:var(--mist);border-left:6px solid var(--red);padding:16px 18px}
+.bs-order a{font-weight:700;color:var(--red-deep)}
+.br-story-sec{padding-block:36px;background:#fff}
+.br-grid .br-line-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:520px){.br-grid .br-line-grid{grid-template-columns:1fr}}

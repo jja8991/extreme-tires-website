@@ -32,6 +32,14 @@ tail='''
     sel.innerHTML='<option value="">Jump to page…</option>'+all.map(function(p){var v=p.id+(p.param?'/'+p.param:'');return '<option value="'+v+'">'+p.label+'</option>'}).join('');
     sel.addEventListener('change',function(){if(!sel.value)return;var s=sel.value.split('/');ET.show(s[0],null,s[1]||'');ET.setHash(s[0],s[1]||'')});
   }
+  // Closing call-to-action band on every informational page (forms and legal pages excluded)
+  var skip={home:1,quote:1,schedule:1,contact:1,notfound:1,terms:1,privacy:1,accessibility:1,sitemap:1};
+  document.querySelectorAll('[data-view]').forEach(function(el){
+    if(skip[el.dataset.view]||el.querySelector(':scope > .cta-band'))return;
+    var s=document.createElement('section');s.className='cta-band';s.setAttribute('aria-label','Book or contact us');
+    s.innerHTML='<div class="wrap"><div><h2>Ready when you are</h2><p>Book in 60 seconds, or call and talk to a real person. Mon\u2013Fri 8\u20136:30 \u00b7 Sat 8\u20134.</p></div><div class="cta-actions"><a class="btn btn-red" href="#start" data-go="home">Book in 60 seconds</a><a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div></div>';
+    el.appendChild(s);
+  });
   ET.start();
 })();
 </script>'''

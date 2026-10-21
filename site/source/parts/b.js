@@ -1,4 +1,5 @@
 var esc=ET.esc;
+var TRUST='<p class="cm-trust"><span aria-hidden="true">★</span> 4.7 from 1,319 reviews on Birdeye · Mobile + shop · Hunter alignment</p>';
 function $(id){return document.getElementById(id)}
 function ic(id){return ET.icon(id)}
 
@@ -142,22 +143,19 @@ ET.onShow.brand=function(param){
   root.innerHTML=
   '<div class="phead"><div class="wrap">'+
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#brands" data-view-link="brands">Tire Brands</a><span>/</span><span>'+n+'</span></nav>'+
-    '<h1>'+n+' tires</h1><p>Shop '+n+' at Extreme Tires. Installed at the Sunrise shop or by our mobile van.</p>'+
-    '<div class="btns"><a class="btn btn-red" href="#tires" data-view-link="tires">Shop tires</a><a class="btn btn-ghost" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a></div>'+
+    '<h1>'+n+' tires</h1><p>Shop '+n+' at Extreme Tires, installed at the shop or by our mobile van.</p>'+TRUST+
+    '<div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop tires</a></div>'+
   '</div></div>'+
-  '<section class="br-intro" aria-labelledby="br-h"><div class="wrap br-grid"><div>'+
-    '<div class="eyebrow">Brand overview</div><h2 id="br-h">Shop '+n+' at Extreme Tires</h2>'+
-    '<p>Browse '+n+' tires for your vehicle, get a price from our team and have them installed where it suits you.</p>'+
-    '<div class="br-story"><span class="sample-note">Placeholder</span><p style="margin-top:8px">Brand story to be written or approved by Extreme.</p></div>'+
-  '</div><div class="br-rebate"><span class="sample">Sample</span><div class="eyebrow">Current rebate</div><div class="amt">$XX</div>'+
-    '<p>Confirm with the manufacturer\'s promotion before publishing. Rebate terms and dates come from the manufacturer.</p>'+
+  '<section class="br-lines" aria-labelledby="br-l"><div class="wrap br-grid"><div><div class="eyebrow">Popular lines</div><h2 id="br-l" style="font-size:clamp(26px,3.2vw,40px);font-weight:900">Popular '+n+' lines</h2>'+linesHtml+'</div>'+
+    '<div class="br-rebate"><span class="sample">Sample</span><div class="eyebrow">Current rebate</div><div class="amt">$XX</div>'+
+    '<p>Confirm with the manufacturer\'s promotion before publishing. Terms and dates come from the manufacturer.</p>'+
     '<a class="btn btn-dark" href="#coupons" data-view-link="coupons">See coupons and offers</a></div></div></section>'+
-  '<section class="br-lines" aria-labelledby="br-l"><div class="wrap"><div class="eyebrow">Popular lines</div><h2 id="br-l">Popular '+n+' lines</h2>'+linesHtml+'</div></section>'+
   '<section class="br-install" aria-labelledby="br-i"><div class="wrap"><div class="eyebrow">Install it where you are</div><h2 id="br-i">Mobile or at the shop</h2>'+
     '<div class="br-strip"><div>'+ic('van')+'<b>Mobile install</b><p>Our van brings the tires and balancer to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p><a href="#mobile" data-view-link="mobile">Check your ZIP</a></div>'+
     '<div>'+ic('install')+'<b>At the Sunrise shop</b><p>7712 West Oakland Park Blvd. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</p><a href="#locations" data-view-link="locations">Hours and directions</a></div></div>'+
-    '<div class="btns" style="margin-top:24px"><a class="btn btn-red" href="#tires" data-view-link="tires">Shop tires</a><a class="btn btn-dark" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a></div>'+
   '</div></section>'+
+  '<section class="br-story-sec" aria-labelledby="br-h"><div class="wrap"><div class="eyebrow">About the brand</div><h2 id="br-h" style="font-size:clamp(22px,2.6vw,30px);font-weight:900">Shop '+n+' at Extreme Tires</h2>'+
+    '<div class="br-story"><span class="sample-note">Placeholder</span><p style="margin-top:8px">Brand story to be written or approved by Extreme.</p></div></div></section>'+
   '<nav class="br-nav" aria-label="More brands"><div class="wrap">'+
     '<a class="prev" href="#brand/'+prev[0]+'" data-view-link="brand" data-param="'+prev[0]+'"><small>Previous brand</small><b>'+esc(prev[1])+'</b></a>'+
     '<a class="next" href="#brand/'+next[0]+'" data-view-link="brand" data-param="'+next[0]+'"><small>Next brand</small><b>'+esc(next[1])+'</b></a>'+
@@ -387,14 +385,14 @@ ET.onShow.tip=function(param){
   '<div class="phead"><div class="wrap">'+
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#tips" data-view-link="tips">Tips</a><span>/</span><span>'+esc(t.t)+'</span></nav>'+
     '<h1>'+esc(t.t)+'</h1><p>'+esc(t.lede)+'</p>'+
+    '<div class="btns"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule service</a><a class="btn btn-ghost" href="#advisor" data-view-link="advisor">Ask a tech</a></div>'+TRUST+
     '<div class="ta-meta"><span>'+hub+'</span><span>'+mins(t)+' min read</span><span>Draft · technician review pending</span></div>'+
   '</div></div>'+
   '<div class="ta-body"><div class="wrap ta-grid"><article class="ta-main">'+
     '<aside class="ta-take" aria-labelledby="ta-tk"><h2 id="ta-tk">Key takeaways</h2><ul>'+t.take.map(function(k){return '<li>'+esc(k)+'</li>'}).join('')+'</ul></aside>'+
-    secs+(t.w==='size'?sizeWidget():t.w==='dot'?dotWidget():'')+
+    (t.w==='size'?sizeWidget():t.w==='dot'?dotWidget():'')+secs+
     '<p class="ta-draft">General information, not a substitute for your owner\'s manual or a technician\'s inspection. Draft copy for Extreme to review before publishing.</p>'+
   '</article><aside class="ta-side" aria-label="Related">'+rel+
-    '<div class="ta-cta"><h2>Need it looked at?</h2><p>Schedule a visit at the shop, or ask us to come to you.</p><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule service</a><a class="btn btn-ghost" href="#advisor" data-view-link="advisor">Ask a tech</a></div>'+
   '</aside></div></div>'+
   '<nav class="br-nav" aria-label="More articles"><div class="wrap">'+
     '<a class="prev" href="#tip/'+prev.s+'" data-view-link="tip" data-param="'+prev.s+'"><small>Previous article</small><b>'+esc(prev.t)+'</b></a>'+

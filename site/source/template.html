@@ -546,6 +546,28 @@ header.nav.scrolled .logo img{height:42px}
   .util .wrap{font-size:13px;gap:4px 18px}
   .util .hide-sm{display:none}
 }
+/* ===== v7: sitewide conversion ===== */
+.nav-cta{background:var(--red);margin-left:8px;border-radius:2px}
+.nav a.top.nav-cta:hover,.nav a.top.nav-cta:focus-visible{background:var(--red-deep);color:#fff}
+.nav a.top.nav-cta::after{display:none}
+.mnav .mnav-cta{background:var(--red);color:#fff}
+.cta-band{background:var(--red);color:#fff}
+.cta-band .wrap{display:flex;gap:20px 40px;justify-content:space-between;align-items:center;flex-wrap:wrap;padding-block:36px}
+.cta-band h2{font-size:clamp(24px,3vw,36px);font-weight:900}
+.cta-band p{margin:6px 0 0;opacity:.95;max-width:34em}
+.cta-actions{display:flex;gap:10px;flex-wrap:wrap}
+.cta-band .btn-red{background:var(--ink);color:#fff}
+.cta-band .btn-red:hover{background:#000;color:var(--yellow)}
+.q-photo{height:clamp(120px,15vw,200px)}
+.nav a.top{white-space:nowrap;padding:10px 10px;font-size:14px}
+.nav .wrap{gap:12px}
+@media (max-width:1240px){.nav a.top{padding:10px 8px;font-size:13px}.nav-cta{margin-left:4px}}
+.q-intro .wrap{padding-block:18px;gap:8px}
+.q-intro h2{font-size:clamp(22px,2.4vw,30px);max-width:none}
+.q-intro .eyebrow{display:none}
+.q-intro p{font-size:15px}
+.checks{margin-top:2px}
+.q-body{padding-block:32px}
 /*PARTS_CSS*/
 </style>
 
@@ -611,10 +633,12 @@ header.nav.scrolled .logo img{height:42px}
           <a href="#contact" data-view-link="contact">Contact Us</a>
         </div>
       </li>
+      <li><a class="top nav-cta" href="#start" data-go="home">Book Now</a></li>
     </ul>
     <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Menu</button>
   </div>
   <nav class="mnav" id="mnav" data-open="false" aria-label="Main">
+    <a class="mnav-cta" href="#start" data-go="home">Book in 60 seconds</a>
     <a href="#tires" data-view-link="tires">Tires</a>
     <a href="#wheels" data-view-link="wheels">Wheels</a>
     <a href="#mobile" data-view-link="mobile">Mobile Service</a>
@@ -633,7 +657,6 @@ header.nav.scrolled .logo img{height:42px}
 <main id="main" tabindex="-1">
 <!-- ================= HOME ================= -->
 <section id="view-home" data-view="home">
-
   <div class="hero">
     <div class="hero-media">
       <img src="{{STORE}}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
@@ -665,7 +688,7 @@ header.nav.scrolled .logo img{height:42px}
 
   <div class="trust" aria-label="Why Extreme Tires">
     <div class="wrap">
-      <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,300+ reviews across Google, Yelp &amp; more</span></div>
+      <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,319 reviews on Birdeye</span></div>
       <div><b>Hunter</b><span>Engineering alignment equipment</span></div>
       <div><b>19+</b><span>Tire brands, from Continental to Nitto</span></div>
       <div><b>3</b><span>Counties served: Broward, Miami-Dade, Palm Beach</span></div>
@@ -690,19 +713,6 @@ header.nav.scrolled .logo img{height:42px}
         <div class="stepmeta"><span id="wiz-count">Step 1 of 5</span><span id="wiz-name">What you need</span></div>
         <div class="steps-wrap" aria-live="polite"><div id="wiz-body"></div></div>
         <div class="navrow"><button class="linkbtn" type="button" id="wiz-back">← Back</button><button class="btn btn-red" type="button" id="wiz-next">Next</button></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="how" aria-labelledby="how-h">
-    <div class="wrap">
-      <div class="eyebrow">How mobile service works</div>
-      <h2 id="how-h" style="font-size:clamp(27px,3.3vw,41px);font-weight:800">You never wonder where we are</h2>
-      <div class="how-grid">
-        <div><b>Book</b><p>Pick a 2-hour window online, by text or by phone.</p><span class="msg">Booked: Thu 10–12 · 4 tires, mobile install</span></div>
-        <div><b>Reminder</b><p>A text the evening before, with what your parking spot needs.</p><span class="msg">See you tomorrow 10–12. Need ~5 ft around the car.</span></div>
-        <div><b>On the way</b><p>A text with your tech's name when the van heads your way.</p><span class="msg">Adam is 20 min away 🚐</span></div>
-        <div><b>Done</b><p>Receipt and a quick review link by text when the job is done.</p><span class="msg">All set! Receipt + how did we do?</span></div>
       </div>
     </div>
   </section>
@@ -763,6 +773,22 @@ header.nav.scrolled .logo img{height:42px}
     </div>
   </section>
 
+  <section class="offers" id="offers" aria-labelledby="off-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Coupons</div><h2 id="off-h">Current offers</h2>
+      <p>Tire specials, service specials and manufacturer rebates. The offers below are sample layouts, not real pricing.</p></div></div>
+      <div class="offer-grid">
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">$XX off</div><h3>Set of 4 tires</h3><p>Tire special. Swap in the current Nitto or Pirelli promo.</p><span class="expires">Expires MM/DD · show every deadline</span></div>
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Free</div><h3>Tire rotation</h3><p>Service special. Example: with any oil change.</p><span class="expires">Expires MM/DD</span></div>
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Rebate</div><h3>Manufacturer rebates</h3><p>Link out to the current Continental or Nexen rebate form.</p><span class="expires">Ends with the brand's promo</span></div>
+      </div>
+      <div class="finance">
+        <div><h3>Shop now, pay later</h3><p>Lease-to-own financing on tires, wheels and service through Kafene.</p></div>
+        <a class="btn btn-red" href="https://application.kafene.com/applications/new" target="_blank" rel="noopener">Apply for financing</a>
+      </div>
+    </div>
+  </section>
+
   <section class="mobile" id="mobile" aria-labelledby="mob-h">
     <div class="mobile-copy">
       <div class="eyebrow">Mobile tire service</div>
@@ -780,6 +806,19 @@ header.nav.scrolled .logo img{height:42px}
     </div>
   </section>
 
+  <section class="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="eyebrow">How mobile service works</div>
+      <h2 id="how-h" style="font-size:clamp(27px,3.3vw,41px);font-weight:800">You never wonder where we are</h2>
+      <div class="how-grid">
+        <div><b>Book</b><p>Pick a 2-hour window online, by text or by phone.</p><span class="msg">Booked: Thu 10–12 · 4 tires, mobile install</span></div>
+        <div><b>Reminder</b><p>A text the evening before, with what your parking spot needs.</p><span class="msg">See you tomorrow 10–12. Need ~5 ft around the car.</span></div>
+        <div><b>On the way</b><p>A text with your tech's name when the van heads your way.</p><span class="msg">Adam is 20 min away 🚐</span></div>
+        <div><b>Done</b><p>Receipt and a quick review link by text when the job is done.</p><span class="msg">All set! Receipt + how did we do?</span></div>
+      </div>
+    </div>
+  </section>
+
   <section class="combo" aria-labelledby="combo-h">
     <div class="wrap">
       <div>
@@ -792,57 +831,6 @@ header.nav.scrolled .logo img{height:42px}
         <div><b>Mobile-only services</b><ul><li>Install at your door</li><li>No alignment</li><li>No lifts or wheels</li></ul></div>
         <div class="us"><b>Extreme Tires</b><ul><li>Install at your door</li><li>Hunter alignment in Sunrise</li><li>Lifts, wheels &amp; full service</li></ul></div>
       </div>
-    </div>
-  </section>
-
-  <section class="lifts" aria-labelledby="lift-h">
-    <div class="wrap">
-      <div class="sec-head"><div><div class="eyebrow">Lifts &amp; leveling</div><h2 id="lift-h">Build it here</h2>
-      <p>Every kit lists its install time up front, so you know how long the truck will be with us.</p></div>
-      <a class="btn btn-dark" href="#quote" data-view-link="quote">Quote my build</a></div>
-      <div class="lift-grid">
-        <div class="lift"><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
-        <div class="lift"><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
-        <div class="lift"><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
-        <div class="lift"><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="offers" id="offers" aria-labelledby="off-h">
-    <div class="wrap">
-      <div class="sec-head"><div><div class="eyebrow">Coupons</div><h2 id="off-h">Current offers</h2>
-      <p>Tire specials, service specials and manufacturer rebates. The offers below are sample layouts, not real pricing.</p></div></div>
-      <div class="offer-grid">
-        <div class="offer"><span class="sample">Sample offer</span><div class="amt">$XX off</div><h3>Set of 4 tires</h3><p>Tire special. Swap in the current Nitto or Pirelli promo.</p><span class="expires">Expires MM/DD · show every deadline</span></div>
-        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Free</div><h3>Tire rotation</h3><p>Service special. Example: with any oil change.</p><span class="expires">Expires MM/DD</span></div>
-        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Rebate</div><h3>Manufacturer rebates</h3><p>Link out to the current Continental or Nexen rebate form.</p><span class="expires">Ends with the brand's promo</span></div>
-      </div>
-      <div class="finance">
-        <div><h3>Shop now, pay later</h3><p>Lease-to-own financing on tires, wheels and service through Kafene.</p></div>
-        <a class="btn btn-red" href="https://application.kafene.com/applications/new" target="_blank" rel="noopener">Apply for financing</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="proof" id="proof" aria-labelledby="proof-h">
-    <div class="wrap">
-      <div class="sec-head"><div><div class="eyebrow">About &amp; support</div><h2 id="proof-h">Real customers, real builds</h2></div></div>
-      <div class="proof-grid">
-        <div class="slot"><span class="who">About us</span><h3>Meet the crew</h3><p>Photos and short bios for the team customers name in reviews: Simon, Jason, Adam, Alvaro and the techs. Needs real photos from the shop.</p><a class="btn btn-dark" href="#about" data-view-link="about" style="justify-self:start;margin-top:8px">About Extreme</a></div>
-        <div class="slot"><span class="who">News &amp; Gallery</span><h3>Customer gallery</h3><p>A grid of Extreme customer trucks, Jeeps and wheel builds, laid out like Melissa's gallery example. It needs Extreme's own photos, since the example shows another shop.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="ig" id="gallery" aria-labelledby="ig-h">
-    <div class="wrap">
-      <div class="sec-head"><div><div class="eyebrow">Gallery · @extremetires</div><h2 id="ig-h">Fresh off the lift</h2>
-      <p>Every build we post on Instagram lands here automatically, sorted by vehicle.</p></div>
-      <div class="btns"><a class="btn btn-ghost" href="#gallery" data-view-link="gallery">See full gallery</a><a class="btn btn-red" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Follow on Instagram</a></div></div>
-      <div class="ig-chips" id="ig-chips" role="group" aria-label="Filter gallery"></div>
-      <div class="ig-grid" id="ig-grid"></div>
-      <div class="ig-foot"><span id="ig-updated"></span><span>Tag your build <b style="color:#fff">#extremetires</b> to get featured</span></div>
     </div>
   </section>
 
@@ -862,6 +850,31 @@ header.nav.scrolled .logo img{height:42px}
         <div><b>Live Google review</b>Customers mention pricing, speed, mobile service, and lift and wheel work most often.</div>
         <div><b>Live Google review</b>Every reply to a low rating shows here too, which builds more trust than hiding it.</div>
       </div>
+    </div>
+  </section>
+
+  <section class="lifts" aria-labelledby="lift-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Lifts &amp; leveling</div><h2 id="lift-h">Build it here</h2>
+      <p>Every kit lists its install time up front, so you know how long the truck will be with us.</p></div>
+      <a class="btn btn-dark" href="#quote" data-view-link="quote">Quote my build</a></div>
+      <div class="lift-grid">
+        <div class="lift"><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
+        <div class="lift"><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
+        <div class="lift"><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
+        <div class="lift"><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ig" id="gallery" aria-labelledby="ig-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Gallery · @extremetires</div><h2 id="ig-h">Fresh off the lift</h2>
+      <p>Every build we post on Instagram lands here automatically, sorted by vehicle.</p></div>
+      <div class="btns"><a class="btn btn-ghost" href="#gallery" data-view-link="gallery">See full gallery</a><a class="btn btn-red" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Follow on Instagram</a></div></div>
+      <div class="ig-chips" id="ig-chips" role="group" aria-label="Filter gallery"></div>
+      <div class="ig-grid" id="ig-grid"></div>
+      <div class="ig-foot"><span id="ig-updated"></span><span>Tag your build <b style="color:#fff">#extremetires</b> to get featured</span></div>
     </div>
   </section>
 
@@ -893,6 +906,7 @@ header.nav.scrolled .logo img{height:42px}
       </form>
     </div>
   </section>
+
 </section>
 
 <!-- ================= TIRES ================= -->
