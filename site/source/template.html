@@ -568,6 +568,49 @@ header.nav.scrolled .logo img{height:42px}
 .q-intro p{font-size:15px}
 .checks{margin-top:2px}
 .q-body{padding-block:32px}
+/* ===== v8: hero finder card ===== */
+.hero{padding-bottom:0}
+.hero-copy{padding-bottom:118px}
+.hero .btn{border-radius:10px}
+.play{top:20px;bottom:auto}
+.hero{min-height:0}
+.hero-copy{gap:14px;padding:30px max(16px,env(safe-area-inset-right,0px)) 118px 52px}
+.hero-copy h1{font-size:clamp(32px,3.7vw,50px);line-height:1.04}
+.hero-copy p{font-size:17px}
+.hero-facts{display:none}
+.hero-media{min-height:440px}
+@media (max-width:860px){.hero-media{height:180px;min-height:0}.hero-copy{padding:24px var(--gut-r) 84px var(--gut-l);gap:14px}.hero-copy h1{font-size:clamp(30px,8.4vw,40px)}.hero-copy p{font-size:15px}.quick{display:none}.play{padding:6px 12px 6px 6px;font-size:12px}.play small{display:none}.play b{width:30px;height:30px}}
+.hero-finder-wrap{position:relative;z-index:6;margin-top:-96px;padding:0 var(--gut-r) 28px var(--gut-l)}
+.hf{max-width:1120px;margin:0 auto;background:#fff;border-radius:20px;padding:18px 24px 14px;box-shadow:0 28px 70px rgba(10,10,12,.30),0 2px 0 rgba(255,255,255,.7) inset;border:1px solid rgba(0,0,0,.06)}
+.hf-top{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;margin-bottom:12px}
+.hf-title{display:flex;align-items:center;gap:14px;min-width:0}
+.hf-ico{flex:none;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#f0262b,#bd1018);color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px rgba(227,22,27,.35)}
+.hf h2{font:800 clamp(18px,2vw,23px)/1.15 var(--display);text-transform:none;letter-spacing:-.01em;color:var(--ink)}
+.hf-title p{margin:3px 0 0;font-size:14px;color:var(--steel)}
+.hf-tabs{display:inline-flex;background:#eeeeec;border-radius:999px;padding:4px;gap:2px}
+.hf-tabs button{border:0;background:transparent;border-radius:999px;padding:10px 20px;font:700 14px var(--body);color:var(--steel);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s;white-space:nowrap}
+.hf-tabs button[aria-selected="true"]{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.14)}
+.hf-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:12px;align-items:stretch}
+.hf-form.three{grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,.8fr) auto}
+.hf-f{position:relative;display:block;min-width:0;background:#f6f6f4;border:1.5px solid #e4e4e1;border-radius:14px;padding:9px 14px 4px;transition:border-color .15s,box-shadow .15s,background .15s}
+.hf-f:hover{border-color:#cfcfcb}
+.hf-f:focus-within{border-color:var(--red);background:#fff;box-shadow:0 0 0 4px rgba(227,22,27,.12)}
+.hf-f span{display:block;font:700 11px/1 var(--body);letter-spacing:.09em;text-transform:uppercase;color:#7a7f87}
+.hf-f select{border:0;background:transparent;padding:6px 18px 6px 0;font:600 17px var(--body);color:var(--ink);cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24'><path d='M6 9l6 6 6-6' fill='none' stroke='%23e3161b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:right 2px center}
+.hf-f select:focus{outline:none}
+.hf-size{display:flex;flex-direction:column;justify-content:center;background:#fff4f4;border:1.5px dashed #f0b3b5;border-radius:14px;padding:9px 14px}
+.hf-size small{font:700 11px/1 var(--body);letter-spacing:.09em;text-transform:uppercase;color:#a33}
+.hf-size b{font:800 22px/1.2 var(--display);color:var(--red)}
+.hf-go{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:14px;padding:0 28px;min-height:60px;font:800 16px var(--display);letter-spacing:.02em;color:#fff;cursor:pointer;background:linear-gradient(135deg,#f0262b,#bd1018);box-shadow:0 10px 22px rgba(227,22,27,.38);transition:transform .15s,box-shadow .2s,filter .2s;white-space:nowrap}
+.hf-go:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(227,22,27,.45);filter:brightness(1.05)}
+.hf-go:active{transform:translateY(0)}
+.hf-go svg{transition:transform .2s}
+.hf-go:hover svg{transform:translateX(4px)}
+.hf-note{margin:12px 2px 0;font-size:13px;color:#7a7f87}
+.hf-note span{color:#a3a7ad}
+@media (max-width:1060px){.hf-form{grid-template-columns:repeat(2,minmax(0,1fr))}.hf-form.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hf-form .hf-size{grid-column:1/-1}.hf-go{grid-column:1/-1}}
+@media (max-width:860px){.hero-finder-wrap{margin-top:-56px}.hf{padding:14px 14px 12px;border-radius:18px}.hf-tabs{width:100%}.hf-tabs button{flex:1;padding:9px 12px}.hf-ico,.hf-title p{display:none}.hf-top{margin-bottom:10px}.hf h2{font-size:17px}.hf-f{padding:7px 12px 2px;border-radius:12px}.hf-f select{font-size:16px;padding:4px 18px 4px 0}.hf-go{min-height:52px;border-radius:12px}.hf-form{gap:9px}.hf-note{display:none}.hero-media{height:104px}.hero-copy{padding:18px var(--gut-r) 74px var(--gut-l);gap:12px}.hero-copy .eyebrow,.hero-copy p,.hero-copy .btn-ghost{display:none}.hero-copy h1{font-size:clamp(26px,7.6vw,34px)}}
+@media (max-width:520px){.hf-form.three{grid-template-columns:repeat(2,minmax(0,1fr))}.hf-form.three .hf-f:nth-child(3){grid-column:1/-1}.hf-note span{display:block}.hf-ico{width:42px;height:42px}}
 /*PARTS_CSS*/
 </style>
 
@@ -671,7 +714,7 @@ header.nav.scrolled .logo img{height:42px}
       <p>Shop new tires and wheels online, book a repair, or have our mobile team come to your home or job site anywhere in Broward.</p>
       <div class="btns">
         <a class="btn btn-dark" href="#start" data-go="home">Book in 60 seconds</a>
-        <a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop Tires</a>
+        <a class="btn btn-ghost" href="#tires" data-view-link="tires">Browse all tires</a>
       </div>
       <div class="quick">
         <a href="tel:+19547731896"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call (954) 773-1896</a>
@@ -683,6 +726,29 @@ header.nav.scrolled .logo img{height:42px}
         <div><b>Mobile</b>Service at your location</div>
         <div><b>Pay later</b>Lease-to-own financing</div>
       </div>
+    </div>
+  </div>
+
+  <div class="hero-finder-wrap">
+    <div class="hf" id="finder" role="region" aria-labelledby="hf-h">
+      <div class="hf-top">
+        <div class="hf-title"><span class="hf-ico" aria-hidden="true"><svg viewBox="0 0 48 48" width="26" height="26"><use href="#i-wheel"/></svg></span>
+          <div><h2 id="hf-h">Find tires that fit your vehicle</h2><p>Out-the-door prices, installed at the shop or at your door.</p></div></div>
+        <div class="hf-tabs" role="tablist" aria-label="Search by">
+          <button type="button" role="tab" aria-selected="true" aria-controls="p-veh" id="t-veh">By vehicle</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="p-size" id="t-size">By tire size</button>
+        </div>
+      </div>
+      <form class="hf-form" id="p-veh" role="tabpanel" aria-labelledby="t-veh">
+        <label class="hf-f" for="v-year"><span>Year</span><select id="v-year"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></label><label class="hf-f" for="v-make"><span>Make</span><select id="v-make"><option>Jeep</option><option>Ford</option><option>Toyota</option><option>Chevrolet</option></select></label><label class="hf-f" for="v-model"><span>Model</span><select id="v-model"><option>Gladiator</option><option>Wrangler</option><option>Grand Cherokee</option></select></label><label class="hf-f" for="v-trim"><span>Trim</span><select id="v-trim"><option>Rubicon</option><option>Sport</option><option>Mojave</option></select></label>
+        <button class="hf-go" type="submit">Find tires <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <form class="hf-form three" id="p-size" role="tabpanel" aria-labelledby="t-size" hidden>
+        <label class="hf-f" for="s-w"><span>Width</span><select id="s-w"><option>225</option><option>245</option><option>265</option><option>285</option></select></label><label class="hf-f" for="s-a"><span>Aspect ratio</span><select id="s-a"><option>65</option><option>60</option><option>70</option><option>75</option></select></label><label class="hf-f" for="s-r"><span>Rim (in)</span><select id="s-r"><option>17</option><option>18</option><option>20</option><option>22</option></select></label>
+        <div class="hf-size" aria-live="polite"><small>Your size</small><b><span id="sz">225/65R17</span></b></div>
+        <button class="hf-go" type="submit">Search this size <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p class="hf-note">Not sure of your size? It's printed on the tire sidewall, like 225/65R17. <span>Prototype: the Tire Guru Tire Match widget drops in here.</span></p>
     </div>
   </div>
 
@@ -713,43 +779,6 @@ header.nav.scrolled .logo img{height:42px}
         <div class="stepmeta"><span id="wiz-count">Step 1 of 5</span><span id="wiz-name">What you need</span></div>
         <div class="steps-wrap" aria-live="polite"><div id="wiz-body"></div></div>
         <div class="navrow"><button class="linkbtn" type="button" id="wiz-back">← Back</button><button class="btn btn-red" type="button" id="wiz-next">Next</button></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="finder" id="finder" aria-labelledby="finder-h">
-    <div class="wrap finder-grid">
-      <div>
-        <div class="eyebrow">Online tire shop</div>
-        <h2 id="finder-h">Shop For Brand New Tires</h2>
-        <p class="lead">Search by vehicle or by the size printed on your sidewall. Order online and pick installation at the shop or with our mobile team.</p>
-      </div>
-      <div>
-        <div class="tabs" role="tablist">
-          <button role="tab" aria-selected="true" aria-controls="p-veh" id="t-veh">By vehicle</button>
-          <button role="tab" aria-selected="false" aria-controls="p-size" id="t-size">By tire size</button>
-        </div>
-        <form class="panel" id="p-veh" role="tabpanel" aria-labelledby="t-veh">
-          <div class="fields">
-            <label class="f" for="v-year">Year<select id="v-year"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></label>
-            <label class="f" for="v-make">Make<select id="v-make"><option>Jeep</option><option>Ford</option><option>Toyota</option><option>Chevrolet</option></select></label>
-            <label class="f" for="v-model">Model<select id="v-model"><option>Gladiator</option><option>Wrangler</option><option>Grand Cherokee</option></select></label>
-            <label class="f" for="v-trim">Trim<select id="v-trim"><option>Rubicon</option><option>Sport</option><option>Mojave</option></select></label>
-          </div>
-          <button class="btn btn-red" type="submit">Find tires that fit</button>
-          <div class="result" aria-live="polite"></div>
-        </form>
-        <form class="panel" id="p-size" role="tabpanel" aria-labelledby="t-size" hidden>
-          <div class="fields three">
-            <label class="f" for="s-w">Width<select id="s-w"><option>225</option><option>245</option><option>265</option><option>285</option></select></label>
-            <label class="f" for="s-a">Aspect ratio<select id="s-a"><option>65</option><option>60</option><option>70</option><option>75</option></select></label>
-            <label class="f" for="s-r">Rim (in)<select id="s-r"><option>17</option><option>18</option><option>20</option><option>22</option></select></label>
-          </div>
-          <div class="size-demo" aria-live="polite"><span id="sz">225/65R17</span><small>Find it on your sidewall, e.g. 225/65R17 102H</small></div>
-          <button class="btn btn-red" type="submit">Search this size</button>
-          <div class="result" aria-live="polite"></div>
-        </form>
-        <p class="widget-note">Placeholder. The Tire Guru Tire Match / Service Match widget drops in here.</p>
       </div>
     </div>
   </section>
