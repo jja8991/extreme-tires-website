@@ -1,0 +1,61 @@
+# Runs the Instagram → gallery sync every 6 hours and commits new photos to the site repo.
+# Secrets needed (repo Settings → Secrets and variables → Actions):
+#   IG_TOKEN     long-lived Instagram token
+#   GH_PAT       fine-grained token with "Secrets: write" on this repo (only used to save the refreshed IG_TOKEN)
+name: Instagram gallery sync
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"   # every 6 hours, off the top of the hour
+  workflow_dispatch: {}       # "Run workflow" button for an instant sync
+
+permissions:
+  contents: write
+
+concurrency:
+  group: instagram-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Pull new Instagram posts
+        id: sync
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          OUT_DIR: public/gallery
+          LOG_DIR: logs
+        run: node scripts/sync-instagram.mjs
+
+      - name: Save refreshed token
+        if: steps.sync.outputs.new_token != ''
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: gh secret set IG_TOKEN --body "${{ steps.sync.outputs.new_token }}" --repo "${{ github.repository }}"
+
+      - name: Commit gallery changes
+        run: |
+          git config user.name "gallery-bot"
+          git config user.email "gallery-bot@users.noreply.github.com"
+          git add public/gallery
+          if git diff --cached --quiet; then
+            echo "No new posts."
+          else
+            git commit -m "Gallery: sync from Instagram ($(date -u +%Y-%m-%d))"
+            git push
+          fi
+
+      - name: Keep the sync log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: instagram-sync-log
+          path: logs/
+          retention-days: 14
