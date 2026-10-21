@@ -611,6 +611,21 @@ header.nav.scrolled .logo img{height:42px}
 @media (max-width:1060px){.hf-form{grid-template-columns:repeat(2,minmax(0,1fr))}.hf-form.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hf-form .hf-size{grid-column:1/-1}.hf-go{grid-column:1/-1}}
 @media (max-width:860px){.hero-finder-wrap{margin-top:-56px}.hf{padding:14px 14px 12px;border-radius:18px}.hf-tabs{width:100%}.hf-tabs button{flex:1;padding:9px 12px}.hf-ico,.hf-title p{display:none}.hf-top{margin-bottom:10px}.hf h2{font-size:17px}.hf-f{padding:7px 12px 2px;border-radius:12px}.hf-f select{font-size:16px;padding:4px 18px 4px 0}.hf-go{min-height:52px;border-radius:12px}.hf-form{gap:9px}.hf-note{display:none}.hero-media{height:104px}.hero-copy{padding:18px var(--gut-r) 74px var(--gut-l);gap:12px}.hero-copy .eyebrow,.hero-copy p,.hero-copy .btn-ghost{display:none}.hero-copy h1{font-size:clamp(26px,7.6vw,34px)}}
 @media (max-width:520px){.hf-form.three{grid-template-columns:repeat(2,minmax(0,1fr))}.hf-form.three .hf-f:nth-child(3){grid-column:1/-1}.hf-note span{display:block}.hf-ico{width:42px;height:42px}}
+/* ===== v9: hero background video ===== */
+.hv{position:absolute;inset:0;z-index:1;overflow:hidden;opacity:0;transition:opacity .9s ease;container-type:size;pointer-events:none;background:#0d0d0e}
+.hero-media.live .hv{opacity:1}
+.hv iframe{position:absolute;top:50%;left:50%;width:max(100cqw,177.78cqh);height:max(56.25cqw,100cqh);transform:translate(-50%,-50%);border:0;pointer-events:none}
+.hero-media::after{z-index:2}
+.play{z-index:3}
+@media (max-width:860px){
+  .hero{position:relative;display:block;background:var(--ink)}
+  .hero-media{position:absolute;inset:0;height:auto;min-height:0;z-index:0}
+  .hero-media::after{background:linear-gradient(180deg,rgba(13,13,14,.10) 0%,rgba(13,13,14,.30) 34%,rgba(13,13,14,.90) 100%)}
+  .hero-copy{position:relative;z-index:3;padding:128px var(--gut-r) 78px var(--gut-l);background:none}
+  .hero-copy h1{text-shadow:0 2px 16px rgba(0,0,0,.5)}
+  .hero-copy h1 em{color:var(--yellow)}
+  .play{top:14px;left:14px;max-width:calc(100% - 28px)}
+}
 /*PARTS_CSS*/
 </style>
 
@@ -703,9 +718,10 @@ header.nav.scrolled .logo img{height:42px}
   <div class="hero">
     <div class="hero-media">
       <img src="{{STORE}}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
+      <div class="hv" aria-hidden="true"><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
       <a class="play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
         <b><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></b>
-        <span>Watch the shop in action<small>On the live site this video plays muted behind the hero</small></span>
+        <span>Watch with sound<small>Opens the full video on YouTube</small></span>
       </a>
     </div>
     <div class="hero-copy">
@@ -1516,6 +1532,31 @@ header.nav.scrolled .logo img{height:42px}
   lb.addEventListener('click',function(e){if(e.target===lb)lbClose()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')lbClose()});
   igRender();
+
+  // ===== v9: hero background video (YouTube, muted, looping). Poster photo stays until playback really starts =====
+  (function(){
+    var ID='iV1QXEGjeLg', media=document.querySelector('.hero-media'), frame=document.getElementById('hv-frame'), home=document.getElementById('view-home');
+    if(!media||!frame||!home)return;
+    var conn=navigator.connection||{}, lite=conn.saveData||/(^|-)2g$/.test(conn.effectiveType||'');
+    if(reduce||lite)return;                       // reduced motion / data saver: keep the photo
+    var started=false, origin=/^https?:$/.test(location.protocol)?'&origin='+encodeURIComponent(location.origin):'';
+    function post(o){try{frame.contentWindow.postMessage(JSON.stringify(o),'*')}catch(_){}}
+    function start(){ if(started||home.hidden)return; started=true;
+      frame.src='https://www.youtube-nocookie.com/embed/'+ID+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+ID+'&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1'+origin; }
+    function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); }
+    frame.addEventListener('load',function(){ if(started)post({event:'listening',id:1,channel:'widget'}) });
+    window.addEventListener('message',function(e){
+      if(e.source!==frame.contentWindow)return;   // only messages from our own player
+      var d=e.data; if(typeof d==='string'){try{d=JSON.parse(d)}catch(_){return}}
+      if(!d)return;
+      var st; if(d.event==='onStateChange')st=d.info; else if(d.event==='infoDelivery'&&d.info&&typeof d.info.playerState==='number')st=d.info.playerState;
+      if(st===1)media.classList.add('live');      // 1 = playing: fade the video in over the photo
+      else if(st===2)media.classList.remove('live'); // paused (e.g. iPhone Low Power Mode): fall back to the photo
+    });
+    new MutationObserver(function(){ home.hidden?stop():start() }).observe(home,{attributes:true,attributeFilter:['hidden']});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){ if(!started)return; post({event:'command',func:es[0].isIntersecting?'playVideo':'pauseVideo',args:''}) },{threshold:.05}).observe(media);
+    var go=function(){setTimeout(start,300)}; document.readyState==='complete'?go():window.addEventListener('load',go);
+  })();
 
   // Nav shrink + mobile action bar after the hero
   var navEl=document.querySelector('header.nav'), bar=document.getElementById('actionbar');
