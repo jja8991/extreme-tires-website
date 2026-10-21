@@ -73,6 +73,13 @@ header.nav{background:var(--ink);color:#fff;position:sticky;top:env(safe-area-in
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,0) 55%,rgba(227,22,27,.35))}
 .play{position:absolute;left:20px;bottom:20px;z-index:2;display:flex;align-items:center;gap:12px;background:rgba(13,13,14,.82);color:#fff;text-decoration:none;padding:10px 16px 10px 10px;font-weight:600;font-size:14px;max-width:calc(100% - 40px)}
 .play b{display:grid;place-items:center;width:38px;height:38px;flex:none;background:var(--red);border-radius:50%}
+.play em{font-style:normal;display:block}
+.play .i-mute,.play .i-vol{display:none}
+.play.snd .i-play{display:none}
+.play.snd .i-mute{display:block}
+.play.snd.on .i-mute{display:none}
+.play.snd.on .i-vol{display:block}
+.play.snd{cursor:pointer;border:0;font-family:inherit;text-align:left}
 .play small{display:block;font-weight:400;opacity:.75;font-size:12px}
 .hero-copy{color:#fff;display:flex;flex-direction:column;justify-content:center;gap:22px;padding:56px max(16px,env(safe-area-inset-right,0px)) 56px 56px}
 .hero-copy .eyebrow{color:#fff;opacity:.9}
@@ -655,6 +662,15 @@ header.nav.scrolled .logo img{height:42px}
   [data-view] a>span,[data-view] .sv-more{min-width:0;max-width:100%;overflow-wrap:anywhere;white-space:normal}
   footer [aria-label="Facebook"],footer a[aria-label]{min-width:48px!important;width:48px!important;height:48px!important;display:inline-flex;align-items:center;justify-content:center}
 }
+
+/* ===== v11 MOBILE HERO = VIDEO ONLY (headline stays in the page for screen readers/SEO; Book/Call/Text live in the sticky bar + finder card) ===== */
+@media(max-width:860px){
+  .hero{min-height:min(66vh,560px)}
+  .hero-copy{position:absolute;left:0;top:0;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;background:none}
+  .hero-copy>*:not(h1){display:none!important}
+  .hero-media::after{background:linear-gradient(180deg,rgba(13,13,14,.05) 0%,rgba(13,13,14,0) 55%,rgba(13,13,14,.45) 100%)}
+  .play{top:auto;bottom:76px;left:14px;z-index:4}
+}
 </style>
 
 <!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
@@ -747,9 +763,9 @@ header.nav.scrolled .logo img{height:42px}
     <div class="hero-media">
       <img src="{{STORE}}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
       <div class="hv" aria-hidden="true"><video id="hv-video" muted loop playsinline preload="auto" tabindex="-1" disablepictureinpicture></video><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
-      <a class="play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
-        <b><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></b>
-        <span>Watch with sound<small>Opens the full video on YouTube</small></span>
+      <a class="play" id="hv-play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
+        <b><svg class="i-play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg><svg class="i-mute" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 9v6h4l5 4V5L7 9H3z"/><path stroke="#fff" stroke-width="2" stroke-linecap="round" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="i-vol" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 9v6h4l5 4V5L7 9H3z"/><path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" d="M16 8.5a5 5 0 010 7M18.8 5.7a9 9 0 010 12.6"/></svg></b>
+        <span><em class="pl-t">Watch with sound</em><small class="pl-s">Opens the full video on YouTube</small></span>
       </a>
     </div>
     <div class="hero-copy">
@@ -1573,14 +1589,25 @@ header.nav.scrolled .logo img{height:42px}
     function yt(){ if(!started||frame.getAttribute('src'))return;
       frame.src='https://www.youtube-nocookie.com/embed/'+ID+'?autoplay=1&mute=1&controls=0&loop=1&playlist='+ID+'&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&cc_load_policy=0&enablejsapi=1'+origin; }
     // Our own file first (media/hero.mp4: reliable muted autoplay on iPhone); YouTube is the fallback if it is missing or blocked
-    function localFail(){ localOK=false; vid.removeAttribute('src'); vid.load(); yt(); }
+    function localFail(){ localOK=false; sndMode(false); vid.removeAttribute('src'); vid.load(); yt(); }
     function start(){ if(started||home.hidden)return; started=true;
       if(vid&&localOK){ vid.muted=true; vid.src='media/hero.mp4';
         var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){ if(vid.paused&&localOK)localFail() });
       } else yt(); }
-    if(vid){ vid.addEventListener('playing',function(){ if(started)media.classList.add('live') });
+    // Sound button: starts muted (browsers require it); one tap turns the music on/off. Falls back to a YouTube link when our file isn't playing.
+    var btn=document.getElementById('hv-play'), bt=btn&&btn.querySelector('.pl-t'), bs=btn&&btn.querySelector('.pl-s'), ytHref=btn&&btn.getAttribute('href');
+    function sndUI(){ if(!btn)return; var on=!vid.muted;
+      btn.classList.toggle('on',on); btn.setAttribute('aria-pressed',on?'true':'false');
+      btn.setAttribute('aria-label',on?'Turn video sound off':'Turn video sound on');
+      bt.textContent=on?'Sound on':'Tap for sound'; bs.textContent=on?'Tap to mute':'Hear the music · tap to unmute'; }
+    function sndMode(on){ if(!btn)return;
+      if(on){ btn.classList.add('snd'); btn.removeAttribute('href'); btn.removeAttribute('target'); btn.setAttribute('role','button'); btn.setAttribute('tabindex','0'); sndUI(); }
+      else { btn.classList.remove('snd','on'); btn.setAttribute('href',ytHref); btn.setAttribute('target','_blank'); btn.removeAttribute('role'); btn.removeAttribute('aria-pressed'); btn.removeAttribute('aria-label'); btn.removeAttribute('tabindex'); bt.textContent='Watch with sound'; bs.textContent='Opens the full video on YouTube'; } }
+    function toggleSnd(e){ if(!btn.classList.contains('snd'))return; e.preventDefault(); vid.muted=!vid.muted; if(!vid.muted&&vid.paused)vid.play().catch(function(){}); sndUI(); }
+    if(btn){ btn.addEventListener('click',toggleSnd); btn.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter')toggleSnd(e) }); }
+    if(vid){ vid.addEventListener('playing',function(){ if(started){media.classList.add('live');sndMode(true)} });
              vid.addEventListener('error',function(){ if(started&&localOK)localFail() }); }
-    function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); if(vid){vid.pause();vid.removeAttribute('src');vid.load()} }
+    function stop(){ if(!started)return; started=false; media.classList.remove('live'); frame.removeAttribute('src'); if(vid){vid.pause();vid.muted=true;vid.removeAttribute('src');vid.load();sndMode(false)} }
     frame.addEventListener('load',function(){ if(started)post({event:'listening',id:1,channel:'widget'}) });
     window.addEventListener('message',function(e){
       if(e.source!==frame.contentWindow)return;   // only messages from our own player
