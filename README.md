@@ -10,4 +10,6 @@ Prototype, research and tooling for the Extreme Tires (Sunrise, FL) mobile tire 
 | `audit/` | Old-site super audit (4.1/10), competitor gap research, summary of Melissa's emails |
 | `instagram-sync/` | Instagram → gallery auto-sync script and setup guide. The workflow file is saved as `.disabled`: move it to `.github/workflows/` only after the Instagram token secrets are set |
 
+**Run it on your PC (Windows):** `git clone https://github.com/jja8991/extreme-tires-website` or run `Setup-ExtremeCowork.ps1` (clones/updates `Documents\Extreme-Tires-Cowork` and opens the prototype).
+
 **Rules:** never invent prices, policies, reviews or coupon values (placeholders stay labeled). Never commit passwords, tokens or 2FA keys.
