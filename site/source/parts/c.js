@@ -14,21 +14,31 @@ var OFFERS=[
 ];
 var CP_TABS=[['all','All offers'],['tire','Tire specials'],['service','Service specials'],['rebate','Manufacturer rebates']];
 var cpFilter='all';
+function cpCode(o,btnCls){
+  return '<button type="button" class="btn '+btnCls+' cp-claim" aria-expanded="false" aria-controls="cp-code-'+o.id+'">Claim</button>';
+}
+function cpCodeBox(o){
+  return '<div class="cp-code" id="cp-code-'+o.id+'" hidden><small>Sample code, not valid</small><code>SAMPLE-0000</code>'+
+    '<a href="#quote" data-view-link="quote" data-svc="'+esc(o.svc)+'">Use at booking</a></div>';
+}
 function cpRender(){
   var rows=OFFERS.filter(function(o){return cpFilter==='all'||o.kind===cpFilter});
-  $('cp-grid').innerHTML=rows.map(function(o){
-    var redeem=o.how==='house'
-      ?'Mention this offer when you book, or show it on your phone at the counter.'
-      :'Rebate rules come from the manufacturer. Tell us when you book and we will point you to the current form.';
+  var house=rows.filter(function(o){return o.how==='house'}), reb=rows.filter(function(o){return o.how!=='house'});
+  var out='';
+  out+=house.map(function(o){
     return '<article class="cp-card" data-id="'+o.id+'"><span class="sample">Sample</span>'+
-      '<div class="cp-kind">'+esc(o.label)+'</div><h3>'+esc(o.title)+'</h3><div class="cp-amt">'+esc(o.amt)+'</div>'+
-      '<div class="cp-exp">Expires MM/DD</div>'+
-      '<p class="cp-fine">Fine print placeholder: eligible vehicles, sizes and exclusions. Simon to confirm.</p>'+
-      '<p class="cp-redeem"><b>How to redeem</b>'+esc(redeem)+'</p>'+
-      '<button type="button" class="btn btn-red cp-claim" aria-expanded="false" aria-controls="cp-code-'+o.id+'">Claim</button>'+
-      '<div class="cp-code" id="cp-code-'+o.id+'" hidden><small>Sample code, not valid</small><code>SAMPLE-0000</code>'+
-      '<a href="#quote" data-view-link="quote" data-svc="'+esc(o.svc)+'">Use at booking</a></div></article>';
+      '<div class="cp-top"><div><div class="cp-kind">'+esc(o.label)+'</div><h3>'+esc(o.title)+'</h3></div><div class="cp-amt">'+esc(o.amt)+'</div></div>'+
+      '<div class="cp-meta"><span class="cp-exp">Expires MM/DD</span><span class="cp-fine note-int">Fine print: Simon to confirm</span></div>'+
+      cpCode(o,'cp-outline')+cpCodeBox(o)+'</article>';
   }).join('');
+  if(reb.length){
+    out+='<section class="cp-reb" aria-label="Manufacturer rebates"><div class="cp-reb-h"><span class="sample">Sample</span><h3>Manufacturer rebates</h3><span class="cp-exp">Expires MM/DD</span></div><ul class="cp-reb-list">'+
+      reb.map(function(o){
+        return '<li class="cp-row" data-id="'+o.id+'"><div class="cp-row-main"><b>'+esc(o.title)+'</b><span class="cp-row-amt">'+esc(o.amt)+'</span>'+cpCode(o,'cp-outline cp-sm')+'</div>'+cpCodeBox(o)+'</li>';
+      }).join('')+'</ul><p class="cp-fine">Rebate rules come from the manufacturer. Tell us when you book and we will point you to the current form. <span class="note-int">Fine print: Simon to confirm.</span></p></section>';
+  }
+  if(house.length) out+='<p class="cp-redeem-all">To redeem: mention the offer when you book, or show it on your phone at the counter.</p>';
+  $('cp-grid').innerHTML=out;
   $('cp-count').textContent='Showing '+rows.length+' of '+OFFERS.length+' sample offers.';
 }
 $('cp-tabs').innerHTML=CP_TABS.map(function(t){return '<button type="button" data-f="'+t[0]+'" aria-pressed="'+(t[0]==='all')+'">'+t[1]+'</button>'}).join('');
@@ -63,16 +73,13 @@ function fnUpdate(){
 $('fn-range').addEventListener('input',fnUpdate); fnUpdate();
 
 /* ---------- REVIEWS ---------- */
-$('rv-slots').innerHTML=[1,2,3,4,5,6].map(function(n){
-  return '<article class="rv-slot" aria-label="Review slot '+n+'"><div class="rv-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><b>Live Google review feed goes here</b><i></i><i style="width:80%"></i><i style="width:50%"></i><span>Reviewer name and date appear here. Slot '+n+' of 6.</span></article>';
-}).join('');
+$('rv-slots').innerHTML='<article class="rv-slot note-int" aria-label="Google review feed placeholder"><b>Future Google review feed</b><span>Live Google reviews (names, dates, text) will appear here once the feed is connected. Nothing here is a real review.</span></article>';
 
 /* ---------- ABOUT ---------- */
-var TEAM=[['Simon','Owner'],['Jason','Counter'],['Adam'],['Alvaro'],['Pete'],['Carlos'],['Jeremy'],['Kenneth'],['Shawn'],['Ryan']];
+var TEAM=[['Simon','Owner'],['Jason','Counter']];
 $('ab-people').innerHTML=TEAM.map(function(t){
-  return '<li class="ab-person"><div class="ab-av" role="img" aria-label="Photo placeholder for '+t[0]+'">'+t[0].charAt(0)+'</div><b>'+t[0]+'</b>'+
-    (t[1]?'<span class="ab-role-set">'+t[1]+'</span>':'<span>Role to confirm</span>')+'<small>Photo to add</small></li>';
-}).join('');
+  return '<li class="ab-person"><div class="ab-av" role="img" aria-label="Photo placeholder for '+t[0]+'">'+t[0].charAt(0)+'</div><b>'+t[0]+'</b><span class="ab-role-set">'+t[1]+'</span><small class="note-int">Photo to add</small></li>';
+}).join('')+'<li class="ab-teamnote note-int"><span class="sample-note">Note for the team</span><p>Team section: names, roles and photos to confirm. Other first names customers mention are held back until Simon confirms roles.</p></li>';
 
 /* ---------- LOCATIONS / CONTACT: hours in Eastern Time ---------- */
 var HOURS={0:null,1:[480,1110],2:[480,1110],3:[480,1110],4:[480,1110],5:[480,1110],6:[480,960]};

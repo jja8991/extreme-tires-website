@@ -243,3 +243,87 @@
 .lc-main{padding-bottom:40px}
 .ct-trust{font-weight:700;color:var(--yellow)!important;font-size:15px!important}
 @media (max-width:860px){.lc-mapsec{padding-block:0 44px}}
+
+/* ---- visual-audit pass (part C) ---- */
+#view-coupons .eyebrow,#view-financing .eyebrow,#view-reviews .eyebrow,#view-about .eyebrow,#view-locations .eyebrow,#view-contact .eyebrow{margin-bottom:8px}
+#view-coupons .phead .crumbs,#view-financing .phead .crumbs,#view-reviews .phead .crumbs,#view-about .phead .crumbs,#view-locations .phead .crumbs,#view-contact .phead .crumbs{align-items:center;flex-wrap:nowrap;white-space:nowrap;gap:8px}
+#view-coupons .phead .crumbs a,#view-financing .phead .crumbs a,#view-reviews .phead .crumbs a,#view-about .phead .crumbs a,#view-locations .phead .crumbs a,#view-contact .phead .crumbs a{padding:0;min-height:44px}
+/* coupons */
+.cp-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 18px}
+.cp-card{padding:24px 20px 18px;gap:12px}
+.cp-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.cp-card h3{font-size:19px;margin-top:6px}
+.cp-amt{font-size:32px;white-space:nowrap}
+.cp-meta{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.cp-outline{background:#fff;border-color:var(--ink);color:var(--ink);justify-self:stretch;min-height:44px;padding-block:12px}
+.cp-outline:hover{background:var(--ink);color:#fff}
+.cp-sm{padding:10px 18px;min-width:120px}
+.cp-redeem-all{grid-column:1/-1;margin:0;font-size:14px;color:var(--steel)}
+.cp-reb{grid-column:1/-1;background:#fff;border:2px dashed var(--ink);padding:20px;position:relative;display:grid;gap:10px}
+.cp-reb .sample{position:absolute;top:-11px;left:18px;background:var(--yellow);font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;padding:5px 8px}
+.cp-reb-h{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cp-reb-h h3{font-size:19px;font-weight:800;margin:0 auto 0 0}
+.cp-reb-h .sample{position:absolute}
+.cp-reb-list{list-style:none;margin:0;padding:0}
+.cp-row{border-top:1px solid var(--line);padding:8px 0;display:grid;gap:8px}
+.cp-row-main{display:flex;align-items:center;gap:12px}
+.cp-row-main b{font:800 15px var(--display);flex:1;min-width:0}
+.cp-row-amt{font:900 20px var(--display);color:var(--red)}
+.cp-reb .cp-fine{font-size:14px}
+.cp-card .cp-fine{font-size:14px}
+.cp-body{padding-block:44px}
+.cp-how{padding-block:44px}
+.cp-note{padding:16px 20px}
+.cp-note h3{font-size:18px}
+.cp-note p{font-size:14px}
+.cp-note-sec{padding-block:0 40px}
+/* financing */
+.fn-int{margin:22px 0 0;color:var(--char);font-size:14px}
+.fn-fine{font-size:14px;color:var(--char)}
+.fn-scale{color:var(--char)}
+.fn-steps li{padding:20px}
+/* reviews */
+.rv-stars{--r:4.5;position:relative;display:inline-block;letter-spacing:0;font-size:24px;line-height:1;color:var(--line);background:none;-webkit-text-fill-color:currentColor;white-space:nowrap}
+.rv-stars::before{content:"\2605\2605\2605\2605\2605";position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;width:calc(var(--r)/5*100%);color:#f5a400;-webkit-text-fill-color:#f5a400}
+.rv-slots{display:block}
+.rv-slot{max-width:none;padding:18px 22px}
+.rv-slot span{font-size:14px;color:var(--char)}
+.rv-feed{padding-block:44px}
+/* about */
+.ab-stats .wrap{align-items:stretch}
+.ab-stats .wrap>div{display:flex;flex-direction:column;gap:4px}
+.ab-stats b{white-space:nowrap;font-size:clamp(20px,2.2vw,30px)}
+.ab-people{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.ab-person{flex:0 0 200px}
+.ab-teamnote{flex:1 1 260px;background:#fff;border:2px dashed var(--steel);padding:20px;display:grid;gap:8px;align-content:center;justify-items:start}
+.ab-teamnote p{margin:0;color:var(--char);font-size:15px}
+.ab-ph{padding:20px}
+.ab-commit{padding-block:0 44px}
+.ab-ph-dark h2{font-size:clamp(20px,2.4vw,28px)}
+.ab-person small{color:var(--char)}
+/* locations */
+.lc-grid{align-items:start}
+.lc-side .lc-map{min-height:0;height:190px}
+.lc-side .lc-map-tag{position:static;display:block;margin:0;font:700 14px/1.3 var(--body);color:var(--char);background:none;text-align:left;padding:0;letter-spacing:.04em;text-transform:none}
+.lc-counties{grid-template-columns:2fr 1fr;grid-auto-rows:auto;align-items:stretch}
+.lc-county:first-child{grid-row:span 2}
+.lc-county{display:flex;flex-direction:column;justify-content:flex-start}
+.lc-area{padding-block:44px}
+/* contact */
+.ct-wa-btn{text-align:center}
+/* phones: stack hero CTAs, full width */
+@media (max-width:620px){
+  #view-coupons .phead .btns,#view-financing .phead .btns,#view-reviews .phead .btns,#view-about .phead .btns,#view-locations .phead .btns,#view-contact .phead .btns{flex-direction:column;align-items:stretch}
+  #view-coupons .phead .btn,#view-financing .phead .btn,#view-reviews .phead .btn,#view-about .phead .btn,#view-locations .phead .btn,#view-contact .phead .btn{width:100%}
+  .cp-grid{grid-template-columns:1fr;gap:20px}
+  .cp-card{padding:20px 16px 16px}
+  .cp-amt{font-size:28px}
+  .lc-counties{grid-template-columns:1fr}
+  .lc-county:first-child{grid-row:auto}
+  .ab-person{flex:1 1 calc(50% - 6px)}
+  .ab-stats b{font-size:clamp(18px,5.4vw,24px)}
+  .ab-stats .wrap{grid-template-columns:1fr 1fr!important}
+  .ab-stats span{font-size:14px}
+  .cp-sm{min-width:96px;padding-inline:12px}
+}
+.rv-card .rv-stars,.rv-slot .rv-stars{justify-self:start}

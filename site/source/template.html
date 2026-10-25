@@ -681,6 +681,155 @@ header.nav.scrolled .logo img{height:42px}
   .hero-media::after{background:linear-gradient(180deg,rgba(13,13,14,.05) 0%,rgba(13,13,14,0) 55%,rgba(13,13,14,.45) 100%)}
   .play{top:auto;bottom:76px;left:14px;z-index:4}
 }
+
+/* ===== v12 VISUAL AUDIT FIXES ===== */
+/* A. launch switch: internal notes hide when the build adds class "launch" to <html> */
+.note-int{}
+html.launch .note-int{display:none!important}
+
+/* E. global polish */
+.eyebrow+:is(h1,h2,h3){margin-top:6px}
+.crumbs{align-items:center;flex-wrap:nowrap;gap:6px;overflow:hidden;white-space:nowrap;min-width:0;max-width:100%}
+.crumbs>*{flex:none}
+.crumbs>:last-child{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.crumbs a{padding:0}
+.btn-line{background:transparent;border-color:var(--ink);color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:#fff}
+.util a{text-decoration:none;color:#fff}
+.brands img{max-width:760px}
+
+/* D. shared closing band: one primary (red Book), secondary outlines, centred */
+.cta-band{background:var(--char);border-top:6px solid var(--red);text-align:center}
+.cta-band .wrap{flex-direction:column;justify-content:center;align-items:center;gap:20px;padding-block:44px}
+.cta-band p{margin:8px auto 0}
+.cta-actions{justify-content:center}
+.cta-band .btn-red{background:var(--red);color:#fff}
+.cta-band .btn-red:hover{background:var(--red-deep);color:#fff}
+.cta-band .btn-ghost{border-color:rgba(255,255,255,.7);color:#fff}
+.cta-band .btn-ghost:hover{background:#fff;color:var(--ink)}
+
+/* F. home */
+.svc-grid{grid-auto-rows:1fr}
+.lift .sample{justify-self:start;background:var(--yellow);color:var(--ink);font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;padding:5px 8px}
+.rev-strip{margin-top:20px;background:#fff;border:2px dashed #b9b9b6;padding:12px 16px;display:flex;gap:6px 14px;align-items:center;flex-wrap:wrap;color:var(--steel);font-size:14px}
+.rev-strip b{color:var(--ink)}
+
+/* H. tires */
+.filters{align-self:start}
+.fil>summary{display:none;list-style:none}
+.fil>summary::-webkit-details-marker{display:none}
+.fil-body{display:grid;gap:22px}
+.tire{grid-template-columns:120px minmax(0,1fr) auto}
+.tiletire{width:120px;height:120px;max-width:100%;background:var(--mist);border:1px solid var(--line);display:grid;place-items:center}
+.tiletire svg{width:56px;height:56px;color:var(--steel)}
+.tire h3{overflow-wrap:anywhere;hyphens:auto;min-width:0}
+.price .btn{white-space:nowrap;font-size:14px;padding:12px 16px;letter-spacing:.05em}
+.tire.best{border:2px solid var(--red)}
+.tire .vp{font-style:normal;background:var(--yellow);color:var(--ink);letter-spacing:.06em;padding:3px 6px;margin-left:6px;white-space:nowrap}
+
+/* I. mobile service */
+.mhero h1{font-size:clamp(26px,3.5vw,46px)}
+.zipbox input::placeholder{color:#9a9a96;font-weight:600;letter-spacing:.02em;font-size:16px}
+.days button,.times button{min-height:60px;min-width:92px;display:grid;place-items:center;align-content:center}
+
+/* J. quote */
+.form-grid{gap:16px 24px}
+.form-grid label.f{color:var(--steel)}
+.q-body .q-what{background:var(--char);color:#fff;padding:22px 24px;margin:0 0 26px}
+.q-what h3{font-size:22px;margin:0 0 16px;width:auto;text-align:left;border-bottom:0;padding:0}
+.q-what label.f{color:#bbb}
+.q-h2{font-size:24px;font-weight:800;margin:0 0 14px}
+.q-submit{background:none;color:var(--ink);padding:22px 0 0}
+.q-submit p{color:var(--steel)}
+.q-submit .btn{width:100%;max-width:420px}
+
+/* B/C/E/F phones */
+.fcol summary{list-style:none;cursor:default}
+.fcol summary::-webkit-details-marker{display:none}
+.fcol summary h4{margin:0 0 18px}
+@media (max-width:860px){
+  /* B: compact prototype bar + one-line utility bar */
+  .proto .wrap{flex-wrap:nowrap;padding-block:3px}
+  .proto .wrap>span,.proto nav a{display:none}
+  .proto nav{flex:1;min-width:0}
+  .proto select{flex:1;width:100%;max-width:none;font-size:14px!important;text-transform:none;letter-spacing:0;min-height:44px}
+  .util .wrap{padding-block:0;gap:0}
+  .util-more{display:none}
+  .util a{font-size:15px!important;min-height:44px}
+  /* C: footer accordions */
+  .foot{gap:0;padding-block:24px 12px}
+  .visit{order:-1;padding-bottom:20px;border-bottom:1px solid #333;margin-bottom:6px}
+  .fcol{border-bottom:1px solid #333}
+  .fcol summary{cursor:pointer;min-height:52px;display:flex;align-items:center;justify-content:space-between}
+  .fcol summary h4{margin:0}
+  .fcol summary::after{content:"+";font:800 22px/1 var(--display);color:var(--yellow);transition:transform .25s}
+  .fcol[open] summary::after{transform:rotate(45deg)}
+  .fcol ul{gap:0;padding-bottom:10px}
+  /* H: filters behind a button */
+  .fil>summary{display:flex;align-items:center;justify-content:space-between;min-height:48px;padding:0 16px;border:2px solid var(--ink);background:#fff;font:800 14px var(--display)!important;text-transform:uppercase;letter-spacing:.06em;cursor:pointer}
+  .fil>summary::after{content:"+";font:800 22px/1 var(--display);color:var(--red)}
+  .fil[open]>summary::after{content:"\2212"}
+  .fil-body{padding-top:14px;grid-template-columns:1fr 1fr}
+  .fil-body fieldset:last-child{grid-column:1/-1}
+  .filters{grid-template-columns:1fr}
+  .tire{grid-template-columns:80px minmax(0,1fr)}
+  .tiletire{width:80px;height:80px}
+  .tiletire svg{width:40px;height:40px}
+  .tire h3{font-size:20px}
+  /* F: home */
+  .trust .wrap{grid-auto-rows:1fr;gap:8px;padding-block:14px}
+  .trust div{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:4px;background:var(--mist);padding:12px}
+  .trust div>span{display:block}
+  .services,.offers{padding-block:56px}
+  .proof,.how,.rev,.lifts,.ig,.faq{padding-block:50px}
+  .flow,.onsite,.slots,.areas{padding-block:44px}
+  .combo .wrap,.club .wrap{padding-block:36px}
+  .mobile-copy{padding-block:40px}
+  .fleet .wrap{padding-block:26px}
+  .sec-head{margin-bottom:22px}
+  .offer{padding:20px 18px}
+  .offer .amt{font-size:34px}
+  .lift{padding:14px;gap:6px}
+  .lift b{font-size:16px}
+  .ig-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .step{padding-bottom:0}
+  /* I: cities without an orphan */
+  .cities{display:grid;grid-template-columns:1fr 1fr}
+  .cities a{display:flex;align-items:center;justify-content:center;text-align:center}
+  /* D: closing band equal full-width buttons */
+  .cta-actions{flex-direction:column;width:100%}
+  .cta-actions .btn{width:100%}
+  /* quote */
+  .q-body .q-what{padding:18px 16px}
+}
+@media (max-width:520px){
+  .lift-grid{grid-template-columns:1fr 1fr}
+  #view-home .btns,#view-tires .btns,#view-mobile .btns,#view-quote .btns{flex-direction:column}
+  #view-home .btns .btn,#view-tires .btns .btn,#view-mobile .btns .btn,#view-quote .btns .btn,.zipbox .btn{width:100%}
+  .sym{gap:4px}
+  .price{grid-template-columns:1fr}
+  .price .btn{width:100%;grid-row:auto}
+}
+
+.br-s{display:none}
+.tire .brand{line-height:1.4}
+.tire .vp{display:block;width:fit-content;margin:4px 0 0}
+.step .err:empty{display:none}
+@media (max-width:860px){
+  .br-w{display:none}
+  .br-s{display:block;max-width:420px!important;margin:0 auto}
+  .navrow{padding-top:6px}
+  .mobile-media{min-height:180px}
+}
+@media (max-width:520px){
+  .how-grid{grid-template-columns:1fr 1fr}
+  .how-grid div{padding:14px 12px 14px 0}
+  .how-grid div::before{font-size:30px}
+}
+.q-body .q-h2{font-size:24px;font-weight:800;margin:6px 0 14px}
+.q-body .q-what h3{font-size:22px;margin:0 0 14px}
+.form-grid .err:empty{display:none}
+@media (max-width:860px){.tire .vp{font-size:14px!important}.crumbs a:first-child{min-width:44px!important}}
 </style>
 
 <!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
@@ -718,9 +867,9 @@ header.nav.scrolled .logo img{height:42px}
 
 <div class="util">
   <div class="wrap">
-    <div>(954) 773-1896</div>
-    <div>7712 West Oakland Park Blvd | Sunrise, FL 33351</div>
-    <div class="hide-sm"><span>Mon–Fri 8–6:30 · Sat 8–4 · Sun Closed</span></div>
+    <div class="util-call"><a href="tel:+19547731896">(954) 773-1896</a></div>
+    <div class="util-more">7712 West Oakland Park Blvd | Sunrise, FL 33351</div>
+    <div class="util-more hide-sm"><span>Mon–Fri 8–6:30 · Sat 8–4 · Sun Closed</span></div>
   </div>
 </div>
 
@@ -945,11 +1094,7 @@ header.nav.scrolled .logo img{height:42px}
         </div>
         <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Review us on Google</a>
       </div>
-      <div class="rev-slots">
-        <div><b>Live Google review</b>Latest reviews stream in here from the Google Business Profile, newest first, with owner replies.</div>
-        <div><b>Live Google review</b>Customers mention pricing, speed, mobile service, and lift and wheel work most often.</div>
-        <div><b>Live Google review</b>Every reply to a low rating shows here too, which builds more trust than hiding it.</div>
-      </div>
+      <div class="rev-strip note-int" role="note"><b>Live Google reviews</b><span>Placeholder: the newest reviews and owner replies stream in here from the Google Business Profile on the live site.</span></div>
     </div>
   </section>
 
@@ -959,10 +1104,10 @@ header.nav.scrolled .logo img{height:42px}
       <p>Every kit lists its install time up front, so you know how long the truck will be with us.</p></div>
       <a class="btn btn-dark" href="#quote" data-view-link="quote">Quote my build</a></div>
       <div class="lift-grid">
-        <div class="lift"><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
-        <div class="lift"><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
-        <div class="lift"><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
-        <div class="lift"><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
+        <div class="lift"><span class="sample">Sample</span><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
+        <div class="lift"><span class="sample">Sample</span><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
+        <div class="lift"><span class="sample">Sample</span><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
+        <div class="lift"><span class="sample">Sample</span><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
       </div>
     </div>
   </section>
@@ -1030,13 +1175,13 @@ header.nav.scrolled .logo img{height:42px}
     </div>
   </div>
   <div class="wrap shop">
-    <aside class="filters" aria-label="Filter tires">
+    <aside class="filters" aria-label="Filter tires"><details class="fil" data-acc open><summary>Filters</summary><div class="fil-body">
       <fieldset id="f-type"><legend>Tire type</legend></fieldset>
       <fieldset id="f-brand"><legend>Brand</legend></fieldset>
       <fieldset><legend>Max price per tire</legend>
         <label for="f-max" style="display:grid;gap:4px"><span id="f-max-out">Up to $350</span><input type="range" id="f-max" min="200" max="350" step="10" value="350"></label>
       </fieldset>
-    </aside>
+    </div></details></aside>
     <div>
       <div class="results-head">
         <b id="count">8 tires fit</b>
@@ -1049,14 +1194,14 @@ header.nav.scrolled .logo img{height:42px}
   <section class="packages" aria-labelledby="pk-h">
     <div class="wrap">
       <div class="eyebrow">Wheels</div>
-      <h2 id="pk-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Tire + wheel packages</h2>
-      <p style="color:#bdbdbd;max-width:40em;margin:8px 0 0">Mounted, balanced and fitment-checked for your vehicle, with lift and leveling kits installed in the same visit.</p>
+      <h2 id="pk-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Need wheels too?</h2>
+      <p style="color:#bdbdbd;max-width:40em;margin:8px 0 0">Tire + wheel packages, mounted, balanced and fitment-checked for your vehicle, with lift and leveling kits installed in the same visit.</p>
       <div class="pk-grid">
         <div class="pk"><h3>See it on your truck</h3><p>The wheel visualizer shows any wheel on your exact vehicle and color before you buy.</p></div>
-        <div class="pk"><h3>Guaranteed fitment</h3><p>Offset, bolt pattern and clearance checked against your build, lifted or stock.</p></div>
+        <div class="pk"><h3>Fitment checked</h3><p>Offset, bolt pattern and clearance checked against your build, lifted or stock.</p></div>
         <div class="pk"><h3>27 wheel brands</h3><p>Mickey Thompson, Advanti, Worx and more. Ask for anything we don't list.</p></div>
       </div>
-      <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#quote" data-view-link="quote">Quote a package</a></div>
+      <div class="btns" style="margin-top:22px"><a class="btn btn-ghost" href="#quote" data-view-link="quote">Quote a package</a></div>
     </div>
   </section>
 </section>
@@ -1073,7 +1218,7 @@ header.nav.scrolled .logo img{height:42px}
       <div class="zipbox">
         <b style="font:800 19px var(--display);text-transform:uppercase">Do we come to you?</b>
         <form id="zip-form" novalidate>
-          <label for="zip" class="f">Your ZIP code<input id="zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+          <label for="zip" class="f">Your ZIP code<input id="zip" inputmode="numeric" maxlength="5" placeholder="Enter ZIP, like 33351" autocomplete="postal-code"></label>
           <button class="btn btn-red" type="submit" style="align-self:end">Check</button>
         </form>
         <div class="zipres" id="zipres" aria-live="polite"></div>
@@ -1143,48 +1288,45 @@ header.nav.scrolled .logo img{height:42px}
         <h3>What do you need help with?</h3>
         <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip it and describe the symptoms below.</p>
         <div class="pick" id="pick"></div>
+        <div class="q-what">
+          <h3>What is happening with the vehicle?</h3>
+          <div class="sym">
+            <label for="sy1"><input type="checkbox" id="sy1"> Flat, leak, or tire damage</label>
+            <label for="sy2"><input type="checkbox" id="sy2"> Need new tires or pricing</label>
+            <label for="sy3"><input type="checkbox" id="sy3"> Vibration, balancing, or rotation</label>
+            <label for="sy4"><input type="checkbox" id="sy4"> Brakes, alignment, suspension, or other service</label>
+          </div>
+          <label class="f" for="q-details" style="margin-top:18px">Vehicle and service details
+            <textarea id="q-details" placeholder="Vehicle year/make/model, tire size, symptoms, or service needed"></textarea></label>
+        </div>
+        <h3 class="q-h2">Your contact details</h3>
         <div class="form-grid">
           <label class="f" for="q-first">First name<input id="q-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="q-first"></span></label>
           <label class="f" for="q-last">Last name<input id="q-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="q-last"></span></label>
           <label class="f" for="q-phone">Phone number<input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="q-phone"></span></label>
           <label class="f" for="q-email">Email<input id="q-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="q-email"></span></label>
-          <label class="f" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
+          <label class="f" for="q-loc">Location or service area<input id="q-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
           <label class="f" for="q-when">When do you need service?<select id="q-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="q-when"></span></label>
         </div>
         <label class="chk" for="q-mobile"><input type="checkbox" id="q-mobile" name="mobile"> I'd prefer mobile service at my location</label>
-      </div>
-    </div>
-    <div class="q-what">
-      <div class="wrap">
-        <h3>What is happening with the vehicle?</h3>
-        <div class="sym">
-          <label for="sy1"><input type="checkbox" id="sy1"> Flat, leak, or tire damage</label>
-          <label for="sy2"><input type="checkbox" id="sy2"> Need new tires or pricing</label>
-          <label for="sy3"><input type="checkbox" id="sy3"> Vibration, balancing, or rotation</label>
-          <label for="sy4"><input type="checkbox" id="sy4"> Brakes, alignment, suspension, or other service</label>
+        <div class="q-submit">
+          <button class="btn btn-red" type="submit">Request My Quote</button>
+          <p>Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
+          <div class="done" id="done" hidden role="status"></div>
         </div>
-        <label class="f" for="q-details" style="margin-top:22px;color:#bbb">Vehicle and service details
-          <textarea id="q-details" placeholder="Vehicle year/make/model, tire size, symptoms, or service needed"></textarea></label>
-      </div>
-    </div>
-    <div class="q-submit">
-      <div class="wrap">
-        <button class="btn btn-red" type="submit">Request My Quote</button>
-        <p>Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
-        <div class="done" id="done" hidden role="status"></div>
       </div>
     </div>
   </form>
 </section>
 </main>
 
-<div class="brands" aria-label="Tire brands we carry"><div class="wrap"><img src="{{BRANDS}}" alt="Continental, Pirelli, Nexen and Nitto" width="2720" height="178"></div></div>
+<div class="brands" aria-label="Tire brands we carry"><div class="wrap"><img class="br-w" src="{{BRANDS}}" alt="Continental, Pirelli, Nexen and Nitto" width="2720" height="178"><img class="br-s" src="{{BRANDS2}}" alt="" aria-hidden="true" width="2721" height="179"></div></div>
 
 <footer id="visit">
   <div class="wrap foot">
-    <div><h4>Tires &amp; Wheels</h4><ul><li><a href="#tires" data-view-link="tires">Shop Tires</a></li><li><a href="#wheels" data-view-link="wheels">Shop Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial Tires</a></li><li><a href="#brands" data-view-link="brands">Tire Brands</a></li><li><a href="#tires" data-view-link="tires">Tire Size</a></li><li><a href="#tips" data-view-link="tips">Tire Care Tips</a></li></ul></div>
-    <div><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile Tire Service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire Installation</a></li><li><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair">Tire Repair</a></li><li><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation">Tire Rotation</a></li><li><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing">Tire Balancing</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel Alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake Repair</a></li><li><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair">Suspension Repair</a></li><li><a href="#services" data-view-link="services">View All Services</a></li></ul></div>
-    <div><h4>About &amp; Support</h4><ul><li><a href="#about" data-view-link="about">About Us</a></li><li><a href="#locations" data-view-link="locations">Locations</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#gallery" data-view-link="gallery">News &amp; Gallery</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact Us</a></li></ul></div>
+    <details class="fcol" data-acc open><summary><h4>Tires &amp; Wheels</h4></summary><ul><li><a href="#tires" data-view-link="tires">Shop Tires</a></li><li><a href="#wheels" data-view-link="wheels">Shop Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial Tires</a></li><li><a href="#brands" data-view-link="brands">Tire Brands</a></li><li><a href="#tires" data-view-link="tires">Tire Size</a></li><li><a href="#tips" data-view-link="tips">Tire Care Tips</a></li></ul></details>
+    <details class="fcol" data-acc open><summary><h4>Services</h4></summary><ul><li><a href="#mobile" data-view-link="mobile">Mobile Tire Service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire Installation</a></li><li><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair">Tire Repair</a></li><li><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation">Tire Rotation</a></li><li><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing">Tire Balancing</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel Alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake Repair</a></li><li><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair">Suspension Repair</a></li><li><a href="#services" data-view-link="services">View All Services</a></li></ul></details>
+    <details class="fcol" data-acc open><summary><h4>About &amp; Support</h4></summary><ul><li><a href="#about" data-view-link="about">About Us</a></li><li><a href="#locations" data-view-link="locations">Locations</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#gallery" data-view-link="gallery">News &amp; Gallery</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact Us</a></li></ul></details>
     <div class="visit"><h4>Visit &amp; Contact</h4>
       <div><small>Phone number</small><b>(954) 773-1896</b></div>
       <div><small>Our location</small><b>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</b></div>
@@ -1363,12 +1505,13 @@ header.nav.scrolled .logo img{height:42px}
     var rows=TIRES.filter(function(x){return (!ts.length||ts.indexOf(x.t)>-1)&&(!bs.length||bs.indexOf(x.b)>-1)&&x.p<=max});
     rows.sort(function(a,b){return s==='low'?a.p-b.p:s==='high'?b.p-a.p:a.b.localeCompare(b.b)});
     document.getElementById('count').textContent=rows.length+(rows.length===1?' tire fits':' tires fit');
+    var minP=rows.length?Math.min.apply(null,rows.map(function(r){return r.p})):0;
     list.innerHTML=rows.length?rows.map(function(x){
       var i=TIRES.indexOf(x);
-      return '<article class="tire"><div class="tread" aria-hidden="true"></div><div style="min-width:0"><div class="brand">'+x.b+'</div><h3>'+x.m+'</h3>'+
+      return '<article class="tire'+(x.p===minP?' best':'')+'"><div class="tiletire" aria-hidden="true"><svg viewBox="0 0 48 48"><use href="#i-wheel"/></svg></div><div style="min-width:0"><div class="brand">'+x.b+(x.p===minP?' <em class="vp">Lowest in this sample list</em>':'')+'</div><h3>'+x.m+'</h3>'+
         '<div class="tags"><span>'+x.t+'</span><span>285/70R17</span><span class="go">'+(installType==='mobile'?'Mobile install eligible':'Install at Sunrise shop')+'</span></div></div>'+
         '<div class="price"><div class="each">'+money(x.p)+' <small>/ tire</small></div><div class="otd">Set of 4 out the door <b>'+money(otd(x.p))+'</b></div>'+
-        '<button class="btn btn-red" type="button" data-add="'+i+'">Add set of 4</button></div></article>'}).join('')
+        '<button class="btn '+(x.p===minP?'btn-red':'btn-line')+'" type="button" data-add="'+i+'">Add set of 4</button></div></article>'}).join('')
       :'<div class="empty">No tires match those filters. Clear a filter, or <a href="#quote" data-view-link="quote">ask us to source one</a>.</div>';
   }
   document.querySelector('.filters').addEventListener('change',renderTires);
@@ -1620,6 +1763,12 @@ header.nav.scrolled .logo img{height:42px}
       var pr=vid.play(); if(pr&&pr.catch)pr.catch(function(){ vid.muted=true; var p2=vid.play(); if(p2&&p2.catch)p2.catch(function(){ if(localOK)localFail() }) }) }
     function toggleSnd(e){ if(!btn.classList.contains('snd'))return; if(btn.classList.contains('tap')){ tapPlay(e); return } e.preventDefault(); vid.muted=!vid.muted; if(!vid.muted&&vid.paused)vid.play().catch(function(){}); sndUI(); }
     if(btn){ btn.addEventListener('click',toggleSnd); btn.addEventListener('keydown',function(e){ if(e.key===' '||e.key==='Enter')toggleSnd(e) }); }
+    // Opening seconds show a car badge, not the shop: play only the tire/tech segment START..END and loop inside it
+    var START=9, END=27;
+    function seg(){ try{ if(vid.currentTime<START-0.3||vid.currentTime>=END)vid.currentTime=START }catch(_){} }
+    if(vid){ vid.addEventListener('loadedmetadata',function(){ try{ vid.currentTime=START }catch(_){} });
+             vid.addEventListener('timeupdate',function(){ if(vid.getAttribute('src')&&!vid.seeking&&vid.readyState>0&&(vid.currentTime>=END||vid.currentTime<START-0.3))seg() });
+             vid.addEventListener('ended',function(){ try{ vid.currentTime=START; vid.play().catch(function(){}) }catch(_){} }); }
     if(vid){ vid.addEventListener('playing',function(){ if(started){media.classList.add('live');btn&&btn.classList.remove('tap');sndMode(true)} });
              vid.addEventListener('error',function(){ if(started&&localOK)localFail() }); }
     // Pause / play control (WCAG: moving content that runs >5s must be pausable)
@@ -1644,6 +1793,15 @@ header.nav.scrolled .logo img{height:42px}
     new MutationObserver(function(){ home.hidden?stop():start() }).observe(home,{attributes:true,attributeFilter:['hidden']});
     if('IntersectionObserver' in window)new IntersectionObserver(function(es){ if(!started)return; if(vid&&vid.getAttribute('src')){ es[0].isIntersecting?(userPaused||vid.play().catch(function(){})):vid.pause(); return } post({event:'command',func:es[0].isIntersecting?'playVideo':'pauseVideo',args:''}) },{threshold:.05}).observe(media);
     var go=function(){setTimeout(start,50)}; document.readyState!=='loading'?go():document.addEventListener('DOMContentLoaded',go);
+  })();
+
+  // Accordions (footer link columns, tire filters): closed on phones, always open on desktop
+  (function(){
+    var mq=window.matchMedia('(max-width:860px)'), ds=document.querySelectorAll('details[data-acc]');
+    function sync(){ ds.forEach(function(d){ d.open=!mq.matches; var s=d.querySelector('summary'); if(s){ if(mq.matches)s.removeAttribute('tabindex'); else s.setAttribute('tabindex','-1'); } }) }
+    ds.forEach(function(d){ var s=d.querySelector('summary'); if(s)s.addEventListener('click',function(e){ if(!mq.matches)e.preventDefault() }) });
+    sync();
+    if(mq.addEventListener)mq.addEventListener('change',sync); else if(mq.addListener)mq.addListener(sync);
   })();
 
   // Nav shrink + mobile action bar after the hero

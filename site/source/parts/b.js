@@ -1,5 +1,5 @@
 var esc=ET.esc;
-var TRUST='<p class="cm-trust"><span aria-hidden="true">★</span> 4.7 from 1,319 reviews on Birdeye · Mobile + shop · Hunter alignment</p>';
+var TRUST='<p class="cm-trust"><span class="cm-star" aria-hidden="true">★</span><b>4.7 from 1,319 reviews on Birdeye</b><span>Mobile + shop</span><span>Hunter alignment</span></p>';
 function $(id){return document.getElementById(id)}
 function ic(id){return ET.icon(id)}
 
@@ -25,7 +25,7 @@ var CATS=[
   ['Agricultural','lift','Farm and ranch equipment tires. Availability to confirm.']
 ];
 $('cm-cats').innerHTML=CATS.map(function(c){
-  return '<article class="cm-cat">'+ic(c[1])+'<h3>'+esc(c[0])+'</h3><p>'+esc(c[2])+'</p><span class="sample">Brands: list to confirm</span></article>';
+  return '<article class="cm-cat">'+ic(c[1])+'<h3>'+esc(c[0])+'</h3><p>'+esc(c[2])+'</p><span class="sample note-int">Brands: list to confirm</span></article>';
 }).join('');
 
 $('cm-veh').innerHTML=VEH.concat([['Other','','']]).map(function(v,i){
@@ -48,7 +48,7 @@ var FAQ=[
   ['Can we set up recurring service?','Simon to confirm: recurring schedules, reminders and service records for fleet accounts.']
 ];
 $('cm-faq').innerHTML=FAQ.map(function(q){
-  return '<details><summary>'+esc(q[0])+'</summary><p>'+esc(q[1])+'</p></details>';
+  return '<details><summary>'+esc(q[0])+'</summary><p>'+esc(q[1]).replace(/^Simon to confirm:/,'<span class="note-int">Simon to confirm:</span>')+'</p></details>';
 }).join('');
 
 function cmZip(){
@@ -139,23 +139,23 @@ ET.onShow.brand=function(param){
   var linesHtml=lines?
     '<div class="br-line-grid">'+lines.map(function(l){return '<div class="br-line"><span class="k">'+n+'</span><b>'+esc(l)+'</b><span class="sample">Sample</span></div>'}).join('')+'</div>'+
     '<p class="br-tbc"><b>Sample list.</b> Availability, sizes and the full lineup are confirmed by our team. Ask for any '+n+' tire not shown here.</p>'
-    :'<div class="br-tbc"><b>Popular lines: to confirm.</b> Tell us your tire size and we will check '+n+' options for your vehicle.</div>';
+    :'<div class="br-tbc"><b class="note-int">Popular lines: to confirm.</b> Tell us your tire size and we will check '+n+' options for your vehicle.</div>';
   root.innerHTML=
   '<div class="phead"><div class="wrap">'+
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#brands" data-view-link="brands">Tire Brands</a><span>/</span><span>'+n+'</span></nav>'+
     '<h1>'+n+' tires</h1><p>Shop '+n+' at Extreme Tires, installed at the shop or by our mobile van.</p>'+TRUST+
     '<div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop tires</a></div>'+
   '</div></div>'+
-  '<section class="br-lines" aria-labelledby="br-l"><div class="wrap br-grid"><div><div class="eyebrow">Popular lines</div><h2 id="br-l" style="font-size:clamp(26px,3.2vw,40px);font-weight:900">Popular '+n+' lines</h2>'+linesHtml+'</div>'+
+  '<section class="br-lines" aria-labelledby="br-l"><div class="wrap br-grid"><div><div class="eyebrow">Popular lines</div><h2 id="br-l">Popular '+n+' lines</h2>'+linesHtml+'</div>'+
     '<div class="br-rebate"><span class="sample">Sample</span><div class="eyebrow">Current rebate</div><div class="amt">$XX</div>'+
-    '<p>Confirm with the manufacturer\'s promotion before publishing. Terms and dates come from the manufacturer.</p>'+
+    '<p><span class="note-int">Confirm with the manufacturer\'s promotion before publishing.</span> Terms and dates come from the manufacturer.</p>'+
     '<a class="btn btn-dark" href="#coupons" data-view-link="coupons">See coupons and offers</a></div></div></section>'+
   '<section class="br-install" aria-labelledby="br-i"><div class="wrap"><div class="eyebrow">Install it where you are</div><h2 id="br-i">Mobile or at the shop</h2>'+
     '<div class="br-strip"><div>'+ic('van')+'<b>Mobile install</b><p>Our van brings the tires and balancer to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p><a href="#mobile" data-view-link="mobile">Check your ZIP</a></div>'+
     '<div>'+ic('install')+'<b>At the Sunrise shop</b><p>7712 West Oakland Park Blvd. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</p><a href="#locations" data-view-link="locations">Hours and directions</a></div></div>'+
   '</div></section>'+
-  '<section class="br-story-sec" aria-labelledby="br-h"><div class="wrap"><div class="eyebrow">About the brand</div><h2 id="br-h" style="font-size:clamp(22px,2.6vw,30px);font-weight:900">Shop '+n+' at Extreme Tires</h2>'+
-    '<div class="br-story"><span class="sample-note">Placeholder</span><p style="margin-top:8px">Brand story to be written or approved by Extreme.</p></div></div></section>'+
+  '<section class="br-story-sec note-int" aria-labelledby="br-h"><div class="wrap"><div class="eyebrow">About the brand</div><h2 id="br-h">Shop '+n+' at Extreme Tires</h2>'+
+    '<div class="br-story"><span class="sample-note note-int">Placeholder</span><p style="margin-top:8px">Brand story to be written or approved by Extreme.</p></div></div></section>'+
   '<nav class="br-nav" aria-label="More brands"><div class="wrap">'+
     '<a class="prev" href="#brand/'+prev[0]+'" data-view-link="brand" data-param="'+prev[0]+'"><small>Previous brand</small><b>'+esc(prev[1])+'</b></a>'+
     '<a class="next" href="#brand/'+next[0]+'" data-view-link="brand" data-param="'+next[0]+'"><small>Next brand</small><b>'+esc(next[1])+'</b></a>'+
@@ -386,12 +386,12 @@ ET.onShow.tip=function(param){
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#tips" data-view-link="tips">Tips</a><span>/</span><span>'+esc(t.t)+'</span></nav>'+
     '<h1>'+esc(t.t)+'</h1><p>'+esc(t.lede)+'</p>'+
     '<div class="btns"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule service</a><a class="btn btn-ghost" href="#advisor" data-view-link="advisor">Ask a tech</a></div>'+TRUST+
-    '<div class="ta-meta"><span>'+hub+'</span><span>'+mins(t)+' min read</span><span>Draft · technician review pending</span></div>'+
+    '<div class="ta-meta"><span>'+hub+'</span><span>'+mins(t)+' min read</span><span class="note-int">Draft · technician review pending</span></div>'+
   '</div></div>'+
   '<div class="ta-body"><div class="wrap ta-grid"><article class="ta-main">'+
     '<aside class="ta-take" aria-labelledby="ta-tk"><h2 id="ta-tk">Key takeaways</h2><ul>'+t.take.map(function(k){return '<li>'+esc(k)+'</li>'}).join('')+'</ul></aside>'+
     (t.w==='size'?sizeWidget():t.w==='dot'?dotWidget():'')+secs+
-    '<p class="ta-draft">General information, not a substitute for your owner\'s manual or a technician\'s inspection. Draft copy for Extreme to review before publishing.</p>'+
+    '<p class="ta-draft note-int">General information, not a substitute for your owner\'s manual or a technician\'s inspection. Draft copy for Extreme to review before publishing.</p>'+
   '</article><aside class="ta-side" aria-label="Related">'+rel+
   '</aside></div></div>'+
   '<nav class="br-nav" aria-label="More articles"><div class="wrap">'+

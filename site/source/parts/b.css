@@ -218,3 +218,35 @@
 .br-story-sec{padding-block:36px;background:#fff}
 .br-grid .br-line-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:520px){.br-grid .br-line-grid{grid-template-columns:1fr}}
+
+/* ===== visual-audit fixes (b) ===== */
+.cm-trust{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center}
+.cm-trust .cm-star{margin-right:-12px}
+.cm-trust > span:not(.cm-star){white-space:nowrap;color:#d8d8d8;font-weight:500}
+.cm-trust b{color:#fff}
+/* eyebrow to H2 gap + one heading size for section H2s */
+#view-commercial .eyebrow+h2,#view-brands .eyebrow+h2,#view-brand .eyebrow+h2,#view-tips .eyebrow+h2,#view-tip .eyebrow+h2{margin-top:6px}
+#view-commercial section h2,#view-brand section h2,.tp-sec h2{font-size:clamp(26px,3.2vw,40px);font-weight:900}
+.tp-sec h2{padding-bottom:10px}
+/* two card styles only: filled (mist) and solid (dark) */
+.cm-cats{background:#fff}
+.cm-cat{background:var(--mist);border-top:0;box-shadow:none}
+.cm-col{background:var(--ink);border:0}
+.br-lines{background:#fff}
+.br-line{background:var(--mist);border-top:0}
+.br-rebate{background:var(--mist);border:0;border-left:6px solid var(--red)}
+.br-tbc{background:var(--mist);border:0;border-left:6px solid var(--line)}
+.tp-card{background:var(--mist);border:0}
+.br-story-sec{padding-block:36px}
+/* breadcrumbs */
+#view-commercial .crumbs,#view-brands .crumbs,#view-brand .crumbs,#view-tips .crumbs,#view-tip .crumbs{align-items:center;gap:0 6px}
+#view-commercial .crumbs a,#view-brands .crumbs a,#view-brand .crumbs a,#view-tips .crumbs a,#view-tip .crumbs a{padding:0;line-height:1.3}
+#view-commercial .crumbs>span,#view-brands .crumbs>span,#view-brand .crumbs>span,#view-tips .crumbs>span,#view-tip .crumbs>span{display:inline-flex;align-items:center;min-height:44px;line-height:1.3}
+@media (min-width:861px){
+  #view-commercial .crumbs>span,#view-brands .crumbs>span,#view-brand .crumbs>span,#view-tips .crumbs>span,#view-tip .crumbs>span{min-height:0}
+}
+/* hero CTAs: stacked, full width, equal on phones */
+@media (max-width:860px){
+  #view-commercial .phead .btns,#view-brands .phead .btns,#view-brand .phead .btns,#view-tips .phead .btns,#view-tip .phead .btns{flex-direction:column;align-items:stretch}
+  #view-commercial .phead .btns .btn,#view-brands .phead .btns .btn,#view-brand .phead .btns .btn,#view-tips .phead .btns .btn,#view-tip .phead .btns .btn{width:100%;justify-content:center;text-align:center}
+}

@@ -136,15 +136,16 @@ function renderService(param){
    '</div></div>'+
    '<div class="wrap sp-body">'+
      '<div class="sp-main">'+
+       '<div class="sp-photo" role="img" aria-label="Photo placeholder for '+h(s.name)+'">'+ET.icon(s.ico)+'<span class="sample-note note-int">Photo to add: '+h(s.name)+' at the shop</span></div>'+
        '<section aria-labelledby="sp-inc-h"><h2 id="sp-inc-h">What&rsquo;s included</h2>'+listHtml(s.inc,'sp-inc')+
-         '<p style="margin:14px 0 0"><span class="sample-note">Exact scope for your vehicle: shop to confirm</span></p></section>'+
+         '<p style="margin:14px 0 0"><span class="sample-note note-int">Exact scope for your vehicle: shop to confirm</span></p></section>'+
        '<section aria-labelledby="sp-sig-h"><h2 id="sp-sig-h">'+(isGear?'Reasons to consider it':'Signs you may need it')+'</h2>'+listHtml(s.signs,'sp-signs')+
          '<p style="margin:14px 0 0;color:var(--steel);font-size:14px">These are general signs, not a diagnosis. Have a technician inspect the vehicle to know for sure.</p></section>'+
      '</div>'+
      '<aside class="sp-aside" aria-label="Service details"><div class="sp-card">'+
        '<div class="sp-fact"><small>Where</small><b>'+(s.mode==='both'?'Mobile or at the shop':'At the Sunrise shop')+'</b></div>'+
-       '<div class="sp-fact"><small>Typical time</small><b>X min</b><span class="sample-note">Shop to confirm</span></div>'+
-       '<div class="sp-fact"><small>Starting at</small><b>$XX</b><span class="sample-note">Sample · pricing set by the shop</span></div>'+
+       '<div class="sp-fact sp-ph"><small>Typical time</small><b>X min <em style="font-size:14px">sample</em></b><span class="sample-note">Sample placeholder</span><span class="sample-note note-int">Shop to confirm</span></div>'+
+       '<div class="sp-fact sp-ph"><small>Starting at</small><b>$XX <em style="font-size:14px">sample</em></b><span class="sample-note">Sample placeholder price</span><span class="sample-note note-int">Pricing set by the shop</span></div>'+
        '<a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="'+h(s.label)+'">Request a quote</a>'+
        '<a class="btn btn-ghost" href="#schedule" data-view-link="schedule" data-sched="'+param+'">Schedule a repair</a>'+
        '<p class="sp-trust"><b>4.7★ from 1,319 Birdeye reviews</b><br>Hunter alignment · Mobile + shop</p>'+

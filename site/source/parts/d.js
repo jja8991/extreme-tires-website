@@ -32,15 +32,37 @@ ET.pages.push({id:'city',param:'sunrise',label:'City: Sunrise'});
 ET.pages.push({id:'city',param:'davie',label:'City: Davie'});
 
 /* ---------- Gallery ---------- */
-var glFilter='all', glShown=8, glFocus=null, glList=[], glIdx=0;
-var glExtra=[['50% 20%','x'],['10% 30%','x'],['95% 40%','x'],['60% 10%','x'],['25% 90%','x'],['85% 90%','x'],['40% 30%','x'],['70% 50%','x']];
+var glFilter='all', glShown=12, glFocus=null, glList=[], glIdx=0;
+/* 12 deliberate crops of the one sample photo: [focus x, focus y, zoom] in source px (1400x523) */
+var GL_W=1400, GL_H=523, GL_CROPS=[
+ [1090,385,1.9],  /* Jeep front, grille and bumper */
+ [1135,425,3.2],  /* front wheel */
+ [1000,172,2.2],  /* EXTREME TIRES sign, whole words */
+ [340,330,1.5],   /* rear Jeep */
+ [1150,425,1.6],  /* right Jeep, side on */
+ [350,405,3.2],   /* rear wheel */
+ [150,270,2.2],   /* left bay doors */
+ [190,345,2.8],   /* tailgate and plate area */
+ [740,170,2.5],   /* red awning */
+ [760,290,2.6],   /* glass front and entry */
+ [715,95,2.4],    /* upper windows */
+ [860,445,2.0]    /* parking lines and bumper */
+];
+var GL_EXTRA=[
+ {category:'shop',tags:[],caption:'Sample: red awning over the front entrance'},
+ {category:'shop',tags:[],caption:'Sample: glass storefront and entry'},
+ {category:'shop',tags:[],caption:'Sample: upper windows and roofline'},
+ {category:'truck',tags:['truck'],caption:'Sample: front bumper and parking bays'}
+];
 function glItems(){
-  var base=ET.GALLERY.items.slice(), out=base.slice();
-  for(var r=0;r<2;r++){base.forEach(function(it,k){
-    var pp=glExtra[(k+r*3)%glExtra.length][0];
-    out.push({id:it.id+'-'+(r+2),file:it.file,category:it.category,tags:it.tags,isVideo:r?false:it.isVideo,caption:it.caption,pos:pp,sample:true});
-  })}
+  var base=ET.GALLERY.items.slice(0,8), out=base.map(function(it){return {id:it.id,file:it.file,category:it.category,tags:it.tags,isVideo:it.isVideo,caption:it.caption,sample:true}});
+  GL_EXTRA.forEach(function(x,k){out.push({id:'s'+(9+k),file:base[0].file,category:x.category,tags:x.tags,isVideo:false,caption:x.caption,sample:true})});
+  out.forEach(function(o,k){o.crop=GL_CROPS[k]});
   return out;
+}
+function glCropStyle(c){
+  var vw=(GL_H*4/3)/c[2],vh=vw*0.75,cx=Math.min(Math.max(c[0],vw/2),GL_W-vw/2),cy=Math.min(Math.max(c[1],vh/2),GL_H-vh/2);
+  return 'width:'+(GL_W/vw*100).toFixed(1)+'%;height:'+(GL_H/vh*100).toFixed(1)+'%;left:'+(-(cx-vw/2)/vw*100).toFixed(1)+'%;top:'+(-(cy-vh/2)/vh*100).toFixed(1)+'%';
 }
 var GL=glItems();
 var SHAPES=[''];
@@ -49,7 +71,7 @@ function glRender(){
   var rows=glVisible(), part=rows.slice(0,glShown);
   $('gl-grid').innerHTML=part.map(function(i,k){
     var sh=SHAPES[k%SHAPES.length];
-    return '<button type="button" class="gl-tile '+sh+'" data-i="'+k+'" aria-label="'+esc(i.caption)+'"><img src="'+i.file+'" alt="" loading="lazy" style="object-position:'+esc(i.pos||'50% 50%')+'">'+
+    return '<button type="button" class="gl-tile '+sh+'" data-i="'+k+'" aria-label="'+esc(i.caption)+'"><img src="'+i.file+'" alt="" loading="lazy" style="'+glCropStyle(i.crop)+'">'+
       '<span class="badge">Sample</span>'+
       (i.isVideo?'<span class="vid"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></span>':'')+
       '<span class="cap">'+esc(i.caption)+'</span></button>';
@@ -57,9 +79,9 @@ function glRender(){
   $('gl-more').parentNode.hidden=glShown>=rows.length;
 }
 $('gl-chips').innerHTML=ET.IGCATS.map(function(c){return '<button type="button" data-f="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+esc(c[1])+'</button>'}).join('');
-$('gl-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;glFilter=b.dataset.f;glShown=8;
+$('gl-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;glFilter=b.dataset.f;glShown=12;
   this.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});glRender()});
-$('gl-more').addEventListener('click',function(){var before=glShown;glShown+=8;glRender();
+$('gl-more').addEventListener('click',function(){var before=glShown;glShown+=12;glRender();
   var t=$('gl-grid').querySelectorAll('.gl-tile')[before];if(t)t.focus({preventScroll:false})});
 var lb=$('gl-lb');
 function lbShow(){var it=glList[glIdx];if(!it)return;var im=$('gl-lb-img');im.src=it.file;im.alt=it.caption;im.style.objectPosition='50% 50%';
@@ -103,7 +125,7 @@ glRender();
 /* ---------- Cities index ---------- */
 $('ci-groups').innerHTML=COUNTIES.map(function(co){
   var rows=CITIES.filter(function(c){return c[2]===co});
-  return '<section class="ci-county" id="ci-'+co.toLowerCase().replace(/[^a-z]/g,'')+'" data-county="'+co+'" aria-labelledby="ci-h-'+co.charAt(0)+'"><h2 id="ci-h-'+co.charAt(0)+'">'+esc(co)+' County <small>'+rows.length+' '+(rows.length>1?'cities':'city')+'</small></h2><div class="ci-grid">'+
+  return '<section class="ci-county" id="ci-'+co.toLowerCase().replace(/[^a-z]/g,'')+'" data-county="'+co+'" aria-labelledby="ci-h-'+co.charAt(0)+'"><h2 id="ci-h-'+co.charAt(0)+'">'+esc(co)+' County <small>'+rows.length+' '+(rows.length>1?'cities':'city')+'</small></h2><div class="ci-grid" data-n="'+rows.length+'">'+
     rows.map(function(c){return '<a class="ci-card" href="#city/'+c[0]+'" data-view-link="city" data-param="'+c[0]+'"><b>'+esc(c[1])+'</b><span>Mobile tire service in '+esc(c[1])+'</span></a>'}).join('')+'</div></section>';
 }).join('');
 $('ci-form').addEventListener('submit',function(e){
@@ -148,21 +170,21 @@ function cityPage(c){
     mob.map(function(m){return '<a class="cy-svc" href="#service/'+m[3]+'" data-view-link="service" data-param="'+m[3]+'">'+ET.icon(m[0])+'<b>'+m[1]+'</b><span>'+m[2]+'</span></a>'}).join('')+'</div></div></section>';
   var how='<section class="d-sec" aria-labelledby="cy-h-how"><div class="wrap"><div class="eyebrow">Simple</div><h2 class="d-h2" id="cy-h-how">How it works</h2><ol class="cy-steps">'+
     steps.map(function(s){return '<li><b>'+s[0]+'</b><p>'+s[1]+'</p></li>'}).join('')+'</ol></div></section>';
-  var shop='<section class="d-sec" style="padding-top:0"><div class="wrap"><div class="cy-shop"><div><div class="eyebrow">Shop services</div><h2 style="margin-top:8px">Bigger jobs at our Sunrise shop</h2>'+
-    '<p>Some work needs a lift or an alignment rack. For '+esc(c.name)+' customers that is a visit to our shop.</p><div class="tags"><span>Hunter alignment</span><span>Brakes</span><span>Suspension</span><span>TPMS</span><span>Lift &amp; leveling kits</span><span>Custom wheel sourcing</span></div>'+
+  var shop='<section class="d-sec" style="padding-top:0" aria-label="Shop services"><div class="wrap"><div class="cy-shop"><div><div class="eyebrow">At our shop</div><h2 class="d-h2">Bigger jobs at our Sunrise shop</h2>'+
+    '<p class="cy-sp">Some work needs a lift or an alignment rack. For '+esc(c.name)+' customers that is a visit to our shop.</p><div class="tags"><span>Hunter alignment</span><span>Brakes</span><span>Suspension</span><span>TPMS</span><span>Lift &amp; leveling kits</span><span>Custom wheel sourcing</span></div>'+
     '<div class="btns" style="margin-top:20px"><a class="btn btn-ghost" href="#services" data-view-link="services">See all services</a></div></div>'+
     '<div class="vis"><div><small>Address</small><b>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</b></div><div><small>Hours</small><b>Mon&ndash;Fri 8:00 AM&ndash;6:30 PM<br>Sat 8:00 AM&ndash;4:00 PM<br>Sun closed</b></div><div><small>Phone</small><b>'+PHONE+'</b></div></div></div></div></section>';
-  var faq='<section class="d-sec faq alt" aria-labelledby="cy-h-faq" style="padding-block:56px"><div class="wrap"><div class="eyebrow">Questions</div><h2 class="d-h2" id="cy-h-faq" style="margin-bottom:20px">'+esc(c.name)+' FAQ</h2>'+
+  var faq='<section class="d-sec faq alt" aria-labelledby="cy-h-faq" ><div class="wrap"><div class="eyebrow">Questions</div><h2 class="d-h2" id="cy-h-faq">'+esc(c.name)+' FAQ</h2>'+
     '<details><summary>'+sub(FAQQ1[q%3],c)+'</summary><p>'+sub(FAQA1[(q+1)%3],c)+'</p></details>'+
     '<details><summary>'+FAQQ2[(q+1)%3]+'</summary><p>'+FAQA2+'</p></details>'+
     '<details><summary>'+FAQQ3[(q+2)%3]+'</summary><p>'+FAQA3[q%3]+'</p></details></div></section>';
   var near='<section class="d-sec" aria-labelledby="cy-h-near"><div class="wrap"><div class="eyebrow">Nearby</div><h2 class="d-h2" id="cy-h-near">Nearby areas</h2><p class="d-lead">We also serve these cities.</p><div class="cy-near">'+
     c.near.map(function(s){var n=CBY[s];return '<a href="#city/'+s+'" data-view-link="city" data-param="'+s+'">'+esc(n.name)+'</a>'}).join('')+'<a href="#cities" data-view-link="cities">All service areas</a></div></div></section>';
-  var hero='<div class="phead"><div class="wrap">'+cityCrumbs(c.name)+'<h1>Mobile tire service in '+esc(c.name)+', FL</h1><p>'+intro+'</p>'+
-    '<div class="btns"><a class="btn btn-red" href="#mobile" data-view-link="mobile">Book mobile service</a><a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call '+PHONE+'</a></div>'+
-    '<form class="cy-zip" id="cy-zipf" novalidate><label class="f" for="cy-zipi">Confirm your ZIP<input id="cy-zipi" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label><button class="btn btn-ghost" type="submit">Check</button></form><p class="cy-zipres" id="cy-zipres" aria-live="polite"></p>'+
-    '<p class="cy-proof">4.7&#9733; from 1,319 reviews on Birdeye &middot; Mobile van + Sunrise shop</p>'+
-    '<span class="sample-note" style="justify-self:start">Local details to add per city: neighborhoods, landmarks, ZIPs served</span></div></div>';
+  var hero='<div class="phead d-ph"><div class="wrap">'+cityCrumbs(c.name)+'<div class="cy-hero"><div class="cy-copy"><h1>Mobile tire service in '+esc(c.name)+', FL</h1><p>'+intro+'</p>'+
+    '<div class="btns"><a class="btn btn-red" href="#mobile" data-view-link="mobile">Book mobile service</a><a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call '+PHONE+'</a></div></div>'+
+    '<div class="cy-zipbox"><b class="cy-zt">Do we come to you?</b><form class="cy-zip" id="cy-zipf" novalidate><label class="f" for="cy-zipi">Your ZIP code<input id="cy-zipi" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label><button class="btn btn-dark" type="submit">Check</button></form><div class="cy-zipres" id="cy-zipres" aria-live="polite"></div></div></div>'+
+    '<ul class="cy-trust" aria-label="At a glance"><li><b>Mobile + shop</b><span>Van to you, or our Sunrise shop</span></li><li><b>Mon&ndash;Fri 8:00&ndash;6:30</b><span>Sat 8:00&ndash;4:00 &middot; Sun closed</span></li><li><b>'+PHONE+'</b><span>Call during shop hours</span></li><li><b>4.7&#9733; on Birdeye</b><span>From 1,319 reviews</span></li></ul>'+
+    '<span class="sample-note note-int" style="justify-self:start">Local details to add per city: neighborhoods, landmarks, ZIPs served</span></div></div>';
   return hero+svcs+how+shop+faq+near;
 }
 ET.onShow.city=function(p){
