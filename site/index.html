@@ -9,7 +9,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Barlow:wght@300;400;500;600&family=Bebas+Neue&display=swap">
 <style>
 /* Layout: Melissa's split header (red utility bar, black nav with centered logo), split hero,
    black "Shop for tires" band with a tire finder, then service grid, mobile service, offers, footer.
@@ -2123,6 +2123,31 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
   .actionbar{background:rgba(13,13,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
   .actionbar a{border-radius:999px;text-transform:none;letter-spacing:.01em;font-weight:700}
 }
+
+/* ===== v15 NEW ERA HERO (home hero only): full-bleed video, giant gradient wordmark, bottom-pinned CTA row ===== */
+.hero{position:relative;display:block;grid-template-columns:none;background:#010101;height:92vh;min-height:600px;max-height:965px;padding-bottom:0;overflow:hidden}
+.hero-media{position:absolute;inset:0;height:auto;min-height:0;z-index:0}
+.hero-media::after{background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0) 260px),linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,0) 260px)}
+.ne-word{position:absolute;top:15%;left:50%;transform:translateX(-50%);width:75%;max-width:1073px;z-index:2;pointer-events:none;user-select:none;text-align:center;font-family:"Bebas Neue",var(--body);font-weight:400;line-height:.85;letter-spacing:.015em;white-space:nowrap;font-size:min(21.5vw,308px);background:linear-gradient(180deg,rgba(255,255,255,.83),rgba(255,255,255,.12));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero-copy{position:absolute;left:0;right:0;top:auto;bottom:0;width:auto;height:auto;margin:0;overflow:visible;clip:auto;clip-path:none;white-space:normal;z-index:3;display:flex;flex-direction:row;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px 48px;background:none;padding:0 max(var(--gut-r),min(80px,6vw)) 150px max(var(--gut-l),min(80px,6vw))}
+.hero .ne-l{display:flex;flex-direction:column;gap:18px;max-width:440px}
+.hero .hero-copy .eyebrow{color:#fff;opacity:.92}
+.hero .hero-copy p{display:block;font-size:20px;line-height:30px;max-width:414px;color:#fff;margin:0;text-shadow:0 1px 10px rgba(0,0,0,.35)}
+.hero .hero-copy h1{font-family:"Bebas Neue",var(--body);font-style:normal;font-weight:400;font-size:clamp(48px,4.45vw,64px);line-height:1;letter-spacing:.01em;max-width:466px;color:#fff;text-transform:uppercase;text-shadow:0 2px 18px rgba(0,0,0,.45);margin:0}
+.hero .hero-copy h1 em{font-style:normal;color:#fff}
+.hero .quick{display:none}
+@media (max-width:860px){
+  .hero{display:block;min-height:600px}
+  .hero-media{position:absolute;inset:0;height:auto;min-height:0}
+  .hero-media::after{background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,0) 200px),linear-gradient(0deg,rgba(0,0,0,.5),rgba(0,0,0,0) 300px)}
+  .hero .ne-word{width:90vw;max-width:90vw;font-size:24vw!important;top:12%}
+  .hero-copy{position:absolute;left:0;right:0;top:auto;bottom:0;width:auto;height:auto;margin:0;padding:0 var(--gut-r) 104px var(--gut-l);overflow:visible;clip:auto;clip-path:none;white-space:normal;flex-direction:column-reverse;align-items:stretch;justify-content:flex-start;gap:16px}
+  .hero .hero-copy>.ne-l{display:flex!important;gap:14px}
+  /* v10's ".go{font-size:14px!important}" catches elements the motion layer tags with class "go": counter it here */
+  .hero .hero-copy p{display:block;font-size:16px!important;line-height:24px;max-width:34em}
+  .hero .hero-copy h1{font-size:clamp(44px,12vw,60px)!important;line-height:1}
+  .play{top:14px;bottom:auto;left:14px;z-index:4}
+}
 </style>
 </head>
 <body>
@@ -2224,12 +2249,13 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
       </a>
       <button type="button" class="hv-pause" id="hv-pause" aria-label="Pause background video" hidden><svg class="i-pa" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg><svg class="i-pl" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M4 2l10 6-10 6z"/></svg></button>
     </div>
+    <div class="ne-word" aria-hidden="true">EXTREME</div>
     <div class="hero-copy">
+      <div class="ne-l">
       <div class="eyebrow">Sunrise, FL · Tires · Wheels · Auto Service</div>
-      <h1>Tires and service. <em>At the shop or at your door.</em></h1>
       <p>Shop new tires and wheels online, book a repair, or have our mobile team come to your home or job site anywhere in Broward.</p>
       <div class="btns">
-        <a class="btn btn-dark" href="#start" data-go="home">Book in 60 seconds</a>
+        <a class="btn btn-red" href="#start" data-go="home">Book in 60 seconds</a>
         <a class="btn btn-ghost" href="#tires" data-view-link="tires">Browse all tires</a>
       </div>
       <div class="quick">
@@ -2242,6 +2268,8 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
         <div><b>Mobile</b>Service at your location</div>
         <div><b>Pay later</b>Lease-to-own financing</div>
       </div>
+      </div>
+      <h1>Tires and service. <em>At the shop or at your door.</em></h1>
     </div>
   </div>
 
@@ -4399,7 +4427,7 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
     var h1=root.querySelector('h1'); blurWords(h1,100);
     [].forEach.call(root.querySelectorAll('.sec-head h2'),function(h){blurWords(h,70)});
     if(view==='home'){
-      [].forEach.call(document.querySelectorAll('.hero-copy > p, .hero-copy .btns, .hero-copy .quick'),function(el,i){
+      [].forEach.call(document.querySelectorAll('.hero-copy p, .hero-copy .btns'),function(el,i){
         if(el.dataset.bi)return; el.dataset.bi='1'; el.classList.add('blur-in'); el.style.setProperty('--bid',(800+i*300)+'ms');
         requestAnimationFrame(function(){el.classList.add('go')});
       });
