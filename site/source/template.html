@@ -261,8 +261,17 @@ header.nav.scrolled .logo img{height:42px}
 .hero-copy > *:nth-child(4){animation-delay:.24s}
 .hero-copy > *:nth-child(5){animation-delay:.32s}
 @keyframes rise{from{transform:translateY(22px)}to{transform:none}}
-.reveal{transform:translateY(26px);transition:transform .7s var(--ease)}
-.reveal.in{transform:none}
+/* ===== v14 MOTION: BlurText-style reveals (vanilla port of the landing spec) ===== */
+.bw{display:inline-block;will-change:filter,transform,opacity}
+.blur-seq .bw{opacity:0;filter:blur(10px);transform:translateY(50px)}
+.blur-seq.go .bw{animation:bw-in .7s var(--ease) both;animation-delay:var(--bwd,0ms)}
+@keyframes bw-in{0%{opacity:0;filter:blur(10px);transform:translateY(50px)}50%{opacity:.5;filter:blur(5px);transform:translateY(-5px)}100%{opacity:1;filter:blur(0);transform:translateY(0)}}
+.blur-in{opacity:0;filter:blur(10px);transform:translateY(20px)}
+.blur-in.go{animation:bi-in .6s var(--ease) both;animation-delay:var(--bid,0ms)}
+@keyframes bi-in{to{opacity:1;filter:blur(0);transform:translateY(0)}}
+.reveal{opacity:0;filter:blur(8px);transform:translateY(26px);transition:transform .7s var(--ease),opacity .7s var(--ease),filter .7s var(--ease)}
+.reveal.in{transform:none;opacity:1;filter:blur(0)}
+@media (prefers-reduced-motion:reduce){.bw,.blur-seq .bw,.blur-in{opacity:1!important;filter:none!important;transform:none!important;animation:none!important}}
 .svc,.offer,.slot,.pick label{transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .15s}
 .svc:hover,.offer:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(13,13,14,.12)}
 .btn{transition:transform .15s var(--ease),background .2s,color .2s,box-shadow .2s}
@@ -1470,6 +1479,7 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
       else v=hasView('notfound')?'notfound':'home';
     }
     ET.cur={view:v,param:param};
+    setTimeout(function(){try{motionFor(v)}catch(_){}} ,60);
     views.forEach(function(el){el.hidden=el.dataset.view!==v});
     var fn=ET.onShow[v]; if(fn){try{fn(param)}catch(err){console.error('page hook failed:',v,err)}}
     var jump=document.getElementById('jump'); if(jump){var jv=ET.cur.view+(param?'/'+param:'');jump.value=[].some.call(jump.options,function(o){return o.value===jv})?jv:''}
@@ -1857,6 +1867,44 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
     if(mq.addEventListener)mq.addEventListener('change',sync); else if(mq.addListener)mq.addListener(sync);
   })();
 
+
+  // ===== v14 MOTION: word-by-word blur reveal on headings; blur-in on heading subtext =====
+  // Vanilla port of the landing spec's BlurText: words stagger from the bottom with a blur dissolve.
+  function blurWords(h, step){
+    if(reduce||!h||h.dataset.bw)return; h.dataset.bw='1';
+    h.setAttribute('aria-label',h.textContent.trim());
+    var io2; function wrap(node){
+      [].slice.call(node.childNodes).forEach(function(n){
+        if(n.nodeType===3&&n.textContent.trim()){
+          var frag=document.createDocumentFragment();
+          n.textContent.split(/(\s+)/).forEach(function(w){
+            if(!w.trim()){frag.appendChild(document.createTextNode(w));return}
+            var s=document.createElement('span');s.className='bw';s.setAttribute('aria-hidden','true');s.textContent=w;frag.appendChild(s);
+          });
+          node.replaceChild(frag,n);
+        } else if(n.nodeType===1) wrap(n);
+      });
+    }
+    wrap(h); h.classList.add('blur-seq');
+    [].forEach.call(h.querySelectorAll('.bw'),function(s,i){s.style.setProperty('--bwd',(i*(step||100))+'ms')});
+    if('IntersectionObserver' in window){
+      io2=new IntersectionObserver(function(es){if(es[0].isIntersecting){h.classList.add('go');io2.disconnect()}},{threshold:.1});
+      io2.observe(h);
+    } else h.classList.add('go');
+  }
+  function motionFor(view){
+    if(reduce)return;
+    var root=document.querySelector('[data-view="'+view+'"]'); if(!root)return;
+    var h1=root.querySelector('h1'); blurWords(h1,100);
+    [].forEach.call(root.querySelectorAll('.sec-head h2'),function(h){blurWords(h,70)});
+    if(view==='home'){
+      [].forEach.call(document.querySelectorAll('.hero-copy > p, .hero-copy .btns, .hero-copy .quick'),function(el,i){
+        if(el.dataset.bi)return; el.dataset.bi='1'; el.classList.add('blur-in'); el.style.setProperty('--bid',(800+i*300)+'ms');
+        requestAnimationFrame(function(){el.classList.add('go')});
+      });
+    }
+  }
+  ET.pages=ET.pages||{}; ET.motionFor=motionFor;
   // Nav shrink + mobile action bar after the hero
   var navEl=document.querySelector('header.nav'), bar=document.getElementById('actionbar');
   function onScroll(){
