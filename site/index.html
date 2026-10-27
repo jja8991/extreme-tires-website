@@ -2148,6 +2148,67 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
   .hero .hero-copy h1{font-size:clamp(44px,12vw,60px)!important;line-height:1}
   .play{top:14px;bottom:auto;left:14px;z-index:4}
 }
+
+/* ===== v16 CINEMATIC HERO (home only): nav over the footage, letter reveal, Ken Burns, parallax, scroll cue, brand marquee ===== */
+:root{--et-navh:84px}
+header.nav::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);opacity:1;transition:opacity .45s var(--ease);pointer-events:none}
+.et-home header.nav{background:transparent}
+.et-home header.nav:not(.scrolled){box-shadow:none}
+.et-home header.nav:not(.scrolled)::before{opacity:0}
+.et-home header.nav:not(.scrolled) .wrap{text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.et-home header.nav:has(#burger[aria-expanded="true"])::before{opacity:1}
+/* pull the hero up under the (sticky, in-flow) nav so the footage starts at the util bar */
+.et-home #view-home .hero{margin-top:calc(-1 * var(--et-navh));height:calc(92vh + var(--et-navh));min-height:calc(600px + var(--et-navh));max-height:calc(965px + var(--et-navh))}
+.et-home #view-home .hero-media::after{background:linear-gradient(180deg,rgba(0,0,0,.66) 0,rgba(0,0,0,.34) var(--et-navh),rgba(0,0,0,0) calc(var(--et-navh) + 240px)),linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,0) 260px)}
+.et-home #view-home .ne-word{top:calc(var(--et-navh) + 11%)}
+.et-home #view-home .play{top:calc(var(--et-navh) + 20px)}
+.et-home #view-home .hv-pause{top:calc(var(--et-navh) + 14px)}
+@media (max-width:860px){
+  .et-home #view-home .hero{min-height:calc(600px + var(--et-navh))}
+  .et-home #view-home .ne-word{top:calc(var(--et-navh) + 9.5%)}
+  .et-home #view-home .play{top:calc(var(--et-navh) + 14px)}
+}
+/* a) EXTREME letters rise from below with blur; gradient repeated per letter so background-clip:text survives the transforms */
+.ne-word{transform:translate3d(-50%,var(--et-py,0px),0);opacity:var(--et-po,1)}
+.ne-ch{display:inline-block;background:linear-gradient(180deg,rgba(255,255,255,.83),rgba(255,255,255,.12));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(42%);filter:blur(14px);animation:et-ch .9s var(--ease) both;animation-delay:var(--chd,0ms)}
+@keyframes et-ch{0%{opacity:0;transform:translateY(42%);filter:blur(14px)}60%{opacity:1;filter:blur(2px)}100%{opacity:1;transform:none;filter:blur(0)}}
+/* e) tagline words start ~400ms after the letters */
+.hero .hero-copy h1.blur-seq.go .bw{animation-delay:calc(var(--bwd,0ms) + 400ms)}
+/* b) slow Ken Burns on the video wrapper (transform only; object-fit and the video JS untouched) */
+.hv{transform-origin:50% 55%;animation:et-kb 20s ease-in-out infinite alternate;will-change:transform}
+@keyframes et-kb{from{transform:scale(1)}to{transform:scale(1.08)}}
+/* c) scroll parallax hook: bottom copy fades a little */
+.hero-copy{opacity:var(--et-co,1)}
+/* d) scroll cue, desktop only, centred in the gap between the CTA row and the finder card */
+.et-cue{position:absolute;left:50%;bottom:104px;z-index:3;width:2px;height:40px;margin-left:-1px;border-radius:2px;background:rgba(255,255,255,.22);overflow:hidden;pointer-events:none;transition:opacity .4s var(--ease)}
+.et-cue::after{content:"";position:absolute;left:0;top:0;width:100%;height:45%;border-radius:2px;background:#fff;animation:et-cue 2s var(--ease) infinite}
+@keyframes et-cue{0%{transform:translateY(-100%);opacity:0}30%{opacity:1}100%{transform:translateY(230%);opacity:0}}
+.hero.et-away .et-cue{opacity:0}
+@media (max-width:860px){.et-cue{display:none}}
+/* 3) brand marquee under the finder card */
+.et-mq{background:#fff;color:var(--ink);padding:8px 0 34px}
+.et-mq-in{display:flex;align-items:center;gap:28px;padding:0 var(--gut-r) 0 var(--gut-l);max-width:calc(1120px + var(--gut-l) + var(--gut-r));margin:0 auto}
+.et-mq-lbl{flex:none;margin:0;font:500 14px/1 var(--body);letter-spacing:.04em;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:11px 18px;background:#fff;white-space:nowrap}
+.et-mq-vp{position:relative;flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
+.et-mq-track{display:flex;width:max-content;animation:et-mq 40s linear infinite;will-change:transform}
+.et-mq-vp:hover .et-mq-track,.et-mq-vp:focus-within .et-mq-track{animation-play-state:paused}
+.et-mq-list{display:flex;align-items:center;gap:64px;list-style:none;margin:0;padding:0 64px 0 0}
+.et-mq-list li{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(28px,2.4vw,34px);line-height:1.25;color:var(--ink);opacity:.7;white-space:nowrap}
+@keyframes et-mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:860px){.et-mq{padding:6px 0 24px}.et-mq-in{flex-direction:column;align-items:flex-start;gap:12px}.et-mq-vp{width:100%;flex:none}.et-mq-list{gap:44px;padding-right:44px}}
+/* 4) reduced motion: everything static and visible */
+@media (prefers-reduced-motion:reduce){
+  .ne-ch{opacity:1!important;transform:none!important;filter:none!important;animation:none!important}
+  .hv{animation:none!important;transform:none!important}
+  .et-cue::after{animation:none;transform:none;opacity:1}
+  .ne-word{transform:translateX(-50%)!important;opacity:1!important}
+  .hero-copy{opacity:1!important}
+  .et-mq-track{animation:none!important;width:auto}
+  .et-mq-list[aria-hidden="true"]{display:none}
+  .et-mq-list{flex-wrap:wrap;gap:8px 40px;padding:0}
+  .et-mq-list li{white-space:normal}
+  .et-mq-vp{-webkit-mask-image:none;mask-image:none}
+}
 </style>
 </head>
 <body>
@@ -2271,6 +2332,7 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
       </div>
       <h1>Tires and service. <em>At the shop or at your door.</em></h1>
     </div>
+    <div class="et-cue" aria-hidden="true"></div>
   </div>
 
   <div class="hero-finder-wrap">
@@ -2295,6 +2357,18 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
       <p class="hf-note">Not sure of your size? It's printed on the tire sidewall, like 225/65R17. <span>Prototype: the Tire Guru Tire Match widget drops in here.</span></p>
     </div>
   </div>
+
+  <section class="et-mq" aria-labelledby="et-mq-h">
+    <div class="et-mq-in">
+      <h2 class="et-mq-lbl" id="et-mq-h">Brands we install</h2>
+      <div class="et-mq-vp">
+        <div class="et-mq-track">
+          <ul class="et-mq-list"><li>Michelin</li><li>BFGoodrich</li><li>Uniroyal</li><li>Cooper</li><li>Firestone</li><li>Bridgestone</li><li>Hankook</li><li>Hercules</li><li>Kumho</li><li>General</li><li>Continental</li><li>Pirelli</li><li>Nexen</li><li>Nitto</li><li>Toyo</li><li>Falken</li><li>Yokohama</li><li>Ironman</li><li>OHTSU</li></ul>
+          <ul class="et-mq-list" aria-hidden="true"><li>Michelin</li><li>BFGoodrich</li><li>Uniroyal</li><li>Cooper</li><li>Firestone</li><li>Bridgestone</li><li>Hankook</li><li>Hercules</li><li>Kumho</li><li>General</li><li>Continental</li><li>Pirelli</li><li>Nexen</li><li>Nitto</li><li>Toyo</li><li>Falken</li><li>Yokohama</li><li>Ironman</li><li>OHTSU</li></ul>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <div class="trust" aria-label="Why Extreme Tires">
     <div class="wrap">
@@ -4466,6 +4540,38 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
       if(t.getBoundingClientRect().top>window.innerHeight){t.classList.add('reveal');t.style.transitionDelay=(i%6)*60+'ms';io.observe(t)}
     });
   }
+
+  // ===== v16 CINEMATIC HERO: home-only nav overlay, EXTREME letter reveal, scroll parallax (transform/opacity only) =====
+  (function(){
+    var home=document.getElementById('view-home'), hero=home&&home.querySelector('.hero'), word=hero&&hero.querySelector('.ne-word'), copy=hero&&hero.querySelector('.hero-copy');
+    if(!home||!hero)return;
+    var de=document.documentElement;
+    // nav height feeds the hero's negative top margin; measured only at rest so the scrolled (shrunk) nav can't feed back
+    function navH(){ if(navEl&&(window.scrollY||0)<=60&&!navEl.classList.contains('scrolled'))de.style.setProperty('--et-navh',navEl.offsetHeight+'px') }
+    function homeState(){ de.classList.toggle('et-home',!home.hidden); navH() }
+    homeState();
+    new MutationObserver(homeState).observe(home,{attributes:true,attributeFilter:['hidden']});
+    window.addEventListener('resize',navH,{passive:true});
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(navH);
+    window.addEventListener('load',navH);
+    if(reduce)return;
+    // a) wrap EXTREME letters (still aria-hidden), stagger 70ms
+    if(word&&!word.dataset.ch){ word.dataset.ch='1';
+      word.innerHTML=word.textContent.trim().split('').map(function(c,i){return '<span class="ne-ch" style="--chd:'+(i*70)+'ms">'+c+'</span>'}).join(''); }
+    // c) parallax: rAF-throttled, passive, idle while the hero is off-screen
+    var vis=true, ticking=false, last=-1;
+    function paint(){ ticking=false; if(!vis||home.hidden)return;
+      var y=window.scrollY||0; if(y===last)return; last=y;
+      var h=hero.offsetHeight||1, p=Math.min(Math.max(y/h,0),1);
+      if(word){ word.style.setProperty('--et-py',(-y*0.35).toFixed(1)+'px'); word.style.setProperty('--et-po',(1-p*1.4).toFixed(3)) }
+      if(copy)copy.style.setProperty('--et-co',(1-p*0.6).toFixed(3));
+      hero.classList.toggle('et-away',y>40);
+    }
+    function onSc(){ if(!ticking&&vis){ticking=true;requestAnimationFrame(paint)} }
+    window.addEventListener('scroll',onSc,{passive:true});
+    if('IntersectionObserver' in window)new IntersectionObserver(function(es){ vis=es[0].isIntersecting; if(vis){last=-1;onSc()} }).observe(hero);
+    paint();
+  })();
 
   // Deals sign-up (prototype)
   document.getElementById('club-form').addEventListener('submit',function(e){
