@@ -1,0 +1,1839 @@
+{%- comment -%} Extreme Tires v1 — converted from the static site (main 255549e). {%- endcomment -%}
+<script>window.ET_HERO_MP4 = {{ 'et-v1-hero.mp4' | asset_url | json }};</script>
+{% raw %}
+
+
+<!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-brake" viewBox="0 0 48 48"><circle cx="22" cy="26" r="16" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="22" cy="26" r="5" fill="currentColor"/><path d="M30 6a20 20 0 0 1 14 14l-8 2a12 12 0 0 0-8-8z" fill="currentColor"/></symbol>
+    <symbol id="i-wheel" viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="24" r="4" fill="currentColor"/><path d="M24 8v12M24 28v12M8 24h12M28 24h12M13 13l8 8M27 27l8 8M35 13l-8 8M21 27l-8 8" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-lift" viewBox="0 0 48 48"><path d="M8 22h8l4-8h12l4 8h4v8H8z" fill="currentColor"/><path d="M14 30v4M34 30v4" stroke="currentColor" stroke-width="3"/><circle cx="14" cy="39" r="6" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="34" cy="39" r="6" fill="none" stroke="currentColor" stroke-width="4"/></symbol>
+    <symbol id="i-oil" viewBox="0 0 48 48"><path d="M14 10h12l8 8v24H14z" fill="currentColor"/><path d="M18 4h6v6h-6z" fill="currentColor"/><path d="M24 24c-3 5-4 7-4 9a4 4 0 0 0 8 0c0-2-1-4-4-9z" fill="#fff"/></symbol>
+    <symbol id="i-susp" viewBox="0 0 48 48"><path d="M24 4v6M24 38v6" stroke="currentColor" stroke-width="4"/><path d="M16 10h16M16 38h16" stroke="currentColor" stroke-width="4"/><path d="M18 14l12 4-12 4 12 4-12 4 12 4" fill="none" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-align" viewBox="0 0 48 48"><rect x="4" y="12" width="8" height="24" fill="currentColor"/><rect x="36" y="12" width="8" height="24" fill="currentColor"/><path d="M12 24h24" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="24" r="5" fill="currentColor"/></symbol>
+    <symbol id="i-balance" viewBox="0 0 48 48"><ellipse cx="24" cy="10" rx="16" ry="6" fill="currentColor"/><ellipse cx="24" cy="24" rx="16" ry="6" fill="currentColor"/><ellipse cx="24" cy="38" rx="16" ry="6" fill="currentColor"/><path d="M8 10v28M40 10v28" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-install" viewBox="0 0 48 48"><path d="M8 6l6 6-3 3 14 14-4 4-14-14-3 3-6-6z" fill="currentColor"/><rect x="28" y="6" width="14" height="36" rx="3" fill="none" stroke="currentColor" stroke-width="4"/><path d="M28 14h14M28 22h14M28 30h14" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-repair" viewBox="0 0 48 48"><circle cx="20" cy="28" r="16" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="20" cy="28" r="6" fill="currentColor"/><path d="M36 6l6 6-8 8-6-6z" fill="currentColor"/></symbol>
+    <symbol id="i-rotate" viewBox="0 0 48 48"><circle cx="24" cy="24" r="12" fill="currentColor"/><circle cx="24" cy="24" r="4" fill="#fff"/><path d="M6 24a18 18 0 0 1 30-13" fill="none" stroke="currentColor" stroke-width="4"/><path d="M38 4v10H28" fill="none" stroke="currentColor" stroke-width="4"/><path d="M42 24a18 18 0 0 1-30 13" fill="none" stroke="currentColor" stroke-width="4"/></symbol>
+    <symbol id="i-tpms" viewBox="0 0 48 48"><path d="M24 6a18 18 0 1 1-18 18" fill="none" stroke="currentColor" stroke-width="4"/><path d="M24 14v12" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="33" r="3" fill="currentColor"/><path d="M4 14h10M4 8h6" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-pay" viewBox="0 0 48 48"><rect x="4" y="12" width="40" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="24" r="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 18h6M38 30h6" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-van" viewBox="0 0 48 48"><path d="M2 14h28v20H2zM30 20h9l7 7v7H30z" fill="currentColor"/><circle cx="11" cy="37" r="5" fill="#fff" stroke="currentColor" stroke-width="3"/><circle cx="37" cy="37" r="5" fill="#fff" stroke="currentColor" stroke-width="3"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+<div class="proto">
+  <div class="wrap">
+    <span>Prototype v6 · Extreme Tires redesign · not the live site</span>
+    <nav aria-label="Prototype pages">
+      <a href="#home" data-view-link="home">Home</a>
+      <a href="#tires" data-view-link="tires">Tires</a>
+      <a href="#mobile" data-view-link="mobile">Mobile</a>
+      <a href="#quote" data-view-link="quote">Quote</a>
+      <select id="jump" aria-label="Jump to any page"></select>
+    </nav>
+  </div>
+</div>
+
+<div class="util">
+  <div class="wrap">
+    <div>(954) 773-1896</div>
+    <div>7712 West Oakland Park Blvd | Sunrise, FL 33351</div>
+    <div class="hide-sm"><span>Mon–Fri 8–6:30 · Sat 8–4 · Sun Closed</span></div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <ul>
+      <li><a class="top" href="#tires" data-view-link="tires">Tires</a></li>
+      <li><a class="top" href="#wheels" data-view-link="wheels">Wheels</a></li>
+      <li><a class="top" href="#mobile" data-view-link="mobile">Mobile Service</a></li>
+    </ul>
+    <a class="logo" href="#home" data-view-link="home" aria-label="Extreme Tires home"><img src="{% endraw %}{{ 'et-v1-img-1.png' | asset_url }}{% raw %}" alt="Extreme Tires, Mobile Tire Service" width="492" height="140"></a>
+    <ul class="right">
+      <li><a class="top" href="#services" data-view-link="services">Auto Service</a></li>
+      <li><a class="top" href="#coupons" data-view-link="coupons">Coupons</a></li>
+      <li><a class="top" href="#about" data-view-link="about" aria-haspopup="true">More ▾</a>
+        <div class="drop">
+          <a href="#about" data-view-link="about">About Us</a>
+          <a href="#locations" data-view-link="locations">Locations</a>
+          <a href="#reviews" data-view-link="reviews">Reviews</a>
+          <a href="#financing" data-view-link="financing">Financing</a>
+          <a href="#gallery" data-view-link="gallery">News &amp; Gallery</a>
+          <a href="#contact" data-view-link="contact">Contact Us</a>
+        </div>
+      </li>
+      <li><a class="top nav-cta" href="#start" data-go="home">Book Now</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="mnav">Menu</button>
+  </div>
+  <nav class="mnav" id="mnav" data-open="false" aria-label="Main">
+    <a class="mnav-cta" href="#start" data-go="home">Book in 60 seconds</a>
+    <a href="#tires" data-view-link="tires">Tires</a>
+    <a href="#wheels" data-view-link="wheels">Wheels</a>
+    <a href="#mobile" data-view-link="mobile">Mobile Service</a>
+    <a href="#services" data-view-link="services">Auto Service</a>
+    <a href="#coupons" data-view-link="coupons">Coupons</a>
+    <a href="#about" data-view-link="about">About</a>
+    <a href="#reviews" data-view-link="reviews">Reviews</a>
+    <a href="#gallery" data-view-link="gallery">News &amp; Gallery</a>
+    <a href="#financing" data-view-link="financing">Financing</a>
+    <a href="#locations" data-view-link="locations">Locations</a>
+    <a href="#contact" data-view-link="contact">Contact</a>
+    <a href="#quote" data-view-link="quote">Request a Quote</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1">
+<!-- ================= HOME ================= -->
+<section id="view-home" data-view="home">
+  <div class="hero">
+    <div class="hero-media">
+      <img src="{% endraw %}{{ 'et-v1-img-2.jpg' | asset_url }}{% raw %}" alt="Extreme Tires storefront in Sunrise with two lifted Jeeps out front" width="1400" height="523">
+      <div class="hv" aria-hidden="true"><video id="hv-video" muted loop playsinline webkit-playsinline preload="auto" tabindex="-1" disablepictureinpicture disableremoteplayback x-webkit-airplay="deny"></video><iframe id="hv-frame" title="Extreme Tires shop video (decorative, muted)" tabindex="-1" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+      <a class="play" id="hv-play" href="https://youtu.be/iV1QXEGjeLg" target="_blank" rel="noopener">
+        <b><svg class="i-play" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg><svg class="i-mute" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 9v6h4l5 4V5L7 9H3z"/><path stroke="#fff" stroke-width="2" stroke-linecap="round" d="M16 9l5 6M21 9l-5 6"/></svg><svg class="i-vol" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M3 9v6h4l5 4V5L7 9H3z"/><path fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" d="M16 8.5a5 5 0 010 7M18.8 5.7a9 9 0 010 12.6"/></svg></b>
+        <span><em class="pl-t">Watch with sound</em><small class="pl-s">Opens the full video on YouTube</small></span>
+      </a>
+      <button type="button" class="hv-pause" id="hv-pause" aria-label="Pause background video" hidden><svg class="i-pa" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M3 2h3.5v12H3zM9.5 2H13v12H9.5z"/></svg><svg class="i-pl" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path fill="#fff" d="M4 2l10 6-10 6z"/></svg></button>
+    </div>
+    <div class="hero-copy">
+      <div class="eyebrow">Sunrise, FL · Tires · Wheels · Auto Service</div>
+      <h1>Tires and service. <em>At the shop or at your door.</em></h1>
+      <p>Shop new tires and wheels online, book a repair, or have our mobile team come to your home or job site anywhere in Broward.</p>
+      <div class="btns">
+        <a class="btn btn-dark" href="#start" data-go="home">Book in 60 seconds</a>
+        <a class="btn btn-ghost" href="#tires" data-view-link="tires">Browse all tires</a>
+      </div>
+      <div class="quick">
+        <a href="tel:+19547731896"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call (954) 773-1896</a>
+        <a href="sms:+19547731896"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M4 3h16a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 1-2z"/></svg>Text us</a>
+        <a href="https://wa.me/19547731896" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.4.6-.3.3c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.6-.1 1.1z"/></svg>WhatsApp</a>
+      </div>
+      <div class="hero-facts">
+        <div><b>Since 2007</b>Serving South Florida</div>
+        <div><b>Mobile</b>Service at your location</div>
+        <div><b>Pay later</b>Lease-to-own financing</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-finder-wrap">
+    <div class="hf" id="finder" role="region" aria-labelledby="hf-h">
+      <div class="hf-top">
+        <div class="hf-title"><span class="hf-ico" aria-hidden="true"><svg viewBox="0 0 48 48" width="26" height="26"><use href="#i-wheel"/></svg></span>
+          <div><h2 id="hf-h">Find tires that fit your vehicle</h2><p>Out-the-door prices, installed at the shop or at your door.</p></div></div>
+        <div class="hf-tabs" role="tablist" aria-label="Search by">
+          <button type="button" role="tab" aria-selected="true" aria-controls="p-veh" id="t-veh">By vehicle</button>
+          <button type="button" role="tab" aria-selected="false" aria-controls="p-size" id="t-size">By tire size</button>
+        </div>
+      </div>
+      <form class="hf-form" id="p-veh" role="tabpanel" aria-labelledby="t-veh">
+        <label class="hf-f" for="v-year"><span>Year</span><select id="v-year"><option>2024</option><option>2023</option><option>2022</option><option>2021</option></select></label><label class="hf-f" for="v-make"><span>Make</span><select id="v-make"><option>Jeep</option><option>Ford</option><option>Toyota</option><option>Chevrolet</option></select></label><label class="hf-f" for="v-model"><span>Model</span><select id="v-model"><option>Gladiator</option><option>Wrangler</option><option>Grand Cherokee</option></select></label><label class="hf-f" for="v-trim"><span>Trim</span><select id="v-trim"><option>Rubicon</option><option>Sport</option><option>Mojave</option></select></label>
+        <button class="hf-go" type="submit">Find tires <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <form class="hf-form three" id="p-size" role="tabpanel" aria-labelledby="t-size" hidden>
+        <label class="hf-f" for="s-w"><span>Width</span><select id="s-w"><option>225</option><option>245</option><option>265</option><option>285</option></select></label><label class="hf-f" for="s-a"><span>Aspect ratio</span><select id="s-a"><option>65</option><option>60</option><option>70</option><option>75</option></select></label><label class="hf-f" for="s-r"><span>Rim (in)</span><select id="s-r"><option>17</option><option>18</option><option>20</option><option>22</option></select></label>
+        <div class="hf-size" aria-live="polite"><small>Your size</small><b><span id="sz">225/65R17</span></b></div>
+        <button class="hf-go" type="submit">Search this size <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </form>
+      <p class="hf-note">Not sure of your size? It's printed on the tire sidewall, like 225/65R17. <span>Prototype: the Tire Guru Tire Match widget drops in here.</span></p>
+    </div>
+  </div>
+
+  <div class="trust" aria-label="Why Extreme Tires">
+    <div class="wrap">
+      <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,319 reviews on Birdeye</span></div>
+      <div><b>Hunter</b><span>Engineering alignment equipment</span></div>
+      <div><b>19+</b><span>Tire brands, from Continental to Nitto</span></div>
+      <div><b>3</b><span>Counties served: Broward, Miami-Dade, Palm Beach</span></div>
+    </div>
+  </div>
+
+  <section class="flow" id="start" aria-labelledby="flow-h">
+    <div class="wrap flow-grid">
+      <div>
+        <div class="eyebrow">Quote &amp; book</div>
+        <h2 id="flow-h">Booked in <span>60 seconds.</span></h2>
+        <p class="lead">Five quick taps. You get a 2-hour arrival window, a text when your tech is on the way, and the out-the-door price before we start.</p>
+        <ul class="promise">
+          <li>Out-the-door price before we start, no surprise fees</li>
+          <li>Text updates from booking to "tech on the way"</li>
+          <li>Bring your own tires? We install those too</li>
+          <li>Shop now, pay later with Kafene financing</li>
+        </ul>
+      </div>
+      <div class="card" id="wiz">
+        <div class="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="stepmeta"><span id="wiz-count">Step 1 of 5</span><span id="wiz-name">What you need</span></div>
+        <div class="steps-wrap" aria-live="polite"><div id="wiz-body"></div></div>
+        <div class="navrow"><button class="linkbtn" type="button" id="wiz-back">← Back</button><button class="btn btn-red" type="button" id="wiz-next">Next</button></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="photo-quote">
+    <div class="wrap">
+      <div class="cam"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffd21f" d="M9 3h6l2 3h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3zm3 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></div>
+      <div><h3>Text a photo of your tire, get a quote</h3><p>Snap the sidewall size or the damage and send it. We reply with options and a price.</p></div>
+      <div class="num">Text (954) 773-1896</div>
+    </div>
+  </div>
+
+  <section class="services" id="services" aria-labelledby="svc-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Auto service</div><h2 id="svc-h">What do you need help with?</h2>
+        <p>Pick a service to book it or get a quote. Not sure what's wrong? Describe the symptoms and our team will tell you the next step.</p></div>
+        <a class="btn btn-dark" href="#schedule" data-view-link="schedule">Book a Repair</a>
+      </div>
+      <div class="svc-grid" id="svc-grid"></div>
+    </div>
+  </section>
+
+  <section class="offers" id="offers" aria-labelledby="off-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Coupons</div><h2 id="off-h">Current offers</h2>
+      <p>Tire specials, service specials and manufacturer rebates. The offers below are sample layouts, not real pricing.</p></div></div>
+      <div class="offer-grid">
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">$XX off</div><h3>Set of 4 tires</h3><p>Tire special. Swap in the current Nitto or Pirelli promo.</p><span class="expires">Expires MM/DD · show every deadline</span></div>
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Free</div><h3>Tire rotation</h3><p>Service special. Example: with any oil change.</p><span class="expires">Expires MM/DD</span></div>
+        <div class="offer"><span class="sample">Sample offer</span><div class="amt">Rebate</div><h3>Manufacturer rebates</h3><p>Link out to the current Continental or Nexen rebate form.</p><span class="expires">Ends with the brand's promo</span></div>
+      </div>
+      <div class="finance">
+        <div><h3>Shop now, pay later</h3><p>Lease-to-own financing on tires, wheels and service through Kafene.</p></div>
+        <a class="btn btn-red" href="https://application.kafene.com/applications/new" target="_blank" rel="noopener">Apply for financing</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mobile" id="mobile" aria-labelledby="mob-h">
+    <div class="mobile-copy">
+      <div class="eyebrow">Mobile tire service</div>
+      <h2 id="mob-h">Experience <span>convenience.</span></h2>
+      <p>Skip the waiting room. Our service van brings the tires, the balancer and the tech to your driveway, office or job site.</p>
+      <ol class="steps">
+        <li><b>1</b><div><strong>Tell us the vehicle and the problem</strong><small>Online quote or a call to (954) 773-1896</small></div></li>
+        <li><b>2</b><div><strong>Pick a time and a place</strong><small>Home, work or the side of the road</small></div></li>
+        <li><b>3</b><div><strong>We install, balance and go</strong><small>Installation, balancing, repairs and oil changes on site</small></div></li>
+      </ol>
+      <div class="btns"><a class="btn btn-red" href="#mobile" data-view-link="mobile">Check my ZIP &amp; book</a></div>
+    </div>
+    <div class="mobile-media" style="background-image:url('{% endraw %}{{ 'et-v1-img-2.jpg' | asset_url }}{% raw %}');background-position:85% 70%">
+      <span class="tag">Photo slot · Melissa's mobile van shot</span>
+    </div>
+  </section>
+
+  <section class="how" aria-labelledby="how-h">
+    <div class="wrap">
+      <div class="eyebrow">How mobile service works</div>
+      <h2 id="how-h" style="font-size:clamp(27px,3.3vw,41px);font-weight:800">You never wonder where we are</h2>
+      <div class="how-grid">
+        <div><b>Book</b><p>Pick a 2-hour window online, by text or by phone.</p><span class="msg">Booked: Thu 10–12 · 4 tires, mobile install</span></div>
+        <div><b>Reminder</b><p>A text the evening before, with what your parking spot needs.</p><span class="msg">See you tomorrow 10–12. Need ~5 ft around the car.</span></div>
+        <div><b>On the way</b><p>A text with your tech's name when the van heads your way.</p><span class="msg">Adam is 20 min away 🚐</span></div>
+        <div><b>Done</b><p>Receipt and a quick review link by text when the job is done.</p><span class="msg">All set! Receipt + how did we do?</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="combo" aria-labelledby="combo-h">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow" style="color:#fff;opacity:.85">Only at Extreme</div>
+        <h2 id="combo-h">Mobile install today. Alignment at the shop when it suits you.</h2>
+        <p>Mobile-only vans can't align your wheels, and the chains don't come to you. We do both, so new tires wear evenly from day one.</p>
+        <div class="btns" style="margin-top:18px"><a class="btn btn-dark" href="#start" data-go="home">Book the combo</a></div>
+      </div>
+      <div class="vs">
+        <div><b>Mobile-only services</b><ul><li>Install at your door</li><li>No alignment</li><li>No lifts or wheels</li></ul></div>
+        <div class="us"><b>Extreme Tires</b><ul><li>Install at your door</li><li>Hunter alignment in Sunrise</li><li>Lifts, wheels &amp; full service</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rev" id="reviews" aria-labelledby="rev-h">
+    <div class="wrap">
+      <div class="rev-top">
+        <div class="big">4.7<small>out of 5</small></div>
+        <div>
+          <div class="stars-l" aria-hidden="true">★★★★★</div>
+          <h2 id="rev-h" style="font-size:clamp(22px,2.7vw,34px);font-weight:900">1,300+ South Florida drivers</h2>
+          <div class="platforms"><span>Birdeye <b>4.7 · 1,319</b></span><span>Google feed</span><span>Yelp <b>4.2 · 106</b></span><span>MapQuest <b>4.4 · 109</b></span></div>
+        </div>
+        <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Review us on Google</a>
+      </div>
+      <div class="rev-slots">
+        <div><b>Live Google review</b>Latest reviews stream in here from the Google Business Profile, newest first, with owner replies.</div>
+        <div><b>Live Google review</b>Customers mention pricing, speed, mobile service, and lift and wheel work most often.</div>
+        <div><b>Live Google review</b>Every reply to a low rating shows here too, which builds more trust than hiding it.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lifts" aria-labelledby="lift-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Lifts &amp; leveling</div><h2 id="lift-h">Build it here</h2>
+      <p>Every kit lists its install time up front, so you know how long the truck will be with us.</p></div>
+      <a class="btn btn-dark" href="#quote" data-view-link="quote">Quote my build</a></div>
+      <div class="lift-grid">
+        <div class="lift"><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
+        <div class="lift"><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
+        <div class="lift"><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
+        <div class="lift"><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ig" id="gallery" aria-labelledby="ig-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Gallery · @extremetires</div><h2 id="ig-h">Fresh off the lift</h2>
+      <p>Every build we post on Instagram lands here automatically, sorted by vehicle.</p></div>
+      <div class="btns"><a class="btn btn-ghost" href="#gallery" data-view-link="gallery">See full gallery</a><a class="btn btn-red" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Follow on Instagram</a></div></div>
+      <div class="ig-chips" id="ig-chips" role="group" aria-label="Filter gallery"></div>
+      <div class="ig-grid" id="ig-grid"></div>
+      <div class="ig-foot"><span id="ig-updated"></span><span>Tag your build <b style="color:#fff">#extremetires</b> to get featured</span></div>
+    </div>
+  </section>
+
+  <div class="fleet">
+    <div class="wrap">
+      <div><h3>Fleet &amp; commercial</h3><p>Vans, box trucks, trailers and RVs. On-site service on your schedule. Ask about fleet accounts.</p></div>
+      <a class="btn btn-red" href="#commercial" data-view-link="commercial">Get a fleet quote</a>
+    </div>
+  </div>
+
+  <section class="faq" id="faq" aria-labelledby="faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Questions</div><h2 id="faq-h">Mobile tire service FAQ</h2></div></div>
+      <details open><summary>Do you really come to me?</summary><p>Yes. Our mobile team installs, balances and repairs tires at your home, office or job site across Broward, Miami-Dade and Palm Beach counties. Request a quote and pick "mobile service at my location."</p></details>
+      <details><summary>What can you do on site?</summary><p>Tire installation, balancing, tire repair and oil changes. Alignments, brakes and suspension work happen at the Sunrise shop on Hunter Engineering equipment.</p></details>
+      <details><summary>Can I pay over time?</summary><p>Yes. Lease-to-own financing through Kafene covers tires, wheels and service. Apply online in a few minutes.</p></details>
+      <details><summary>What are your shop hours?</summary><p>Monday to Friday 8:00 AM to 6:30 PM, Saturday 8:00 AM to 4:00 PM, closed Sunday. 7712 West Oakland Park Blvd, Sunrise, FL 33351.</p></details>
+    </div>
+  </section>
+
+  <section class="club" aria-labelledby="club-h">
+    <div class="wrap">
+      <div><h2 id="club-h">Get tire deals first</h2><p>Coupons, rebates and new wheel drops by text or email. About two a month.</p></div>
+      <form id="club-form" novalidate>
+        <label class="f" for="c-phone" style="color:#fff">Mobile number<input id="c-phone" type="tel" placeholder="(954) 555-0123" autocomplete="tel"></label>
+        <label class="f" for="c-email" style="color:#fff">Email<input id="c-email" type="email" placeholder="you@email.com" autocomplete="email"></label>
+        <button class="btn btn-dark" type="submit" style="align-self:end">Join</button>
+        <p class="fine" id="club-msg">Connects to Omnisend on the live site. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+      </form>
+    </div>
+  </section>
+
+</section>
+
+<!-- ================= TIRES ================= -->
+<section id="view-tires" data-view="tires" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Tires</span><span>/</span><span>2024 Jeep Gladiator Rubicon</span></nav>
+      <h1>Tires for your Gladiator</h1>
+      <p>Every price is out the door for a set of four: tire, mount, balance, valve stem, TPMS reset, disposal and Florida's $1 tire fee. Installed at the shop or in your driveway.</p>
+      <span class="sample-note">Sample catalog and pricing · live prices come from the Tire Guru feed</span>
+    </div>
+  </div>
+  <div class="shopbar">
+    <div class="wrap">
+      <div class="vehicle-chip"><div>2024 Jeep Gladiator Rubicon<small>Fits 285/70R17 · Change vehicle</small></div></div>
+      <div class="seg" role="group" aria-label="Install type">
+        <button type="button" aria-pressed="true" data-install="mobile">Mobile install</button>
+        <button type="button" aria-pressed="false" data-install="shop">At the shop</button>
+      </div>
+      <span style="color:var(--steel);font-size:14px">Choose where we install. The total updates instantly.</span>
+    </div>
+  </div>
+  <div class="wrap shop">
+    <aside class="filters" aria-label="Filter tires">
+      <fieldset id="f-type"><legend>Tire type</legend></fieldset>
+      <fieldset id="f-brand"><legend>Brand</legend></fieldset>
+      <fieldset><legend>Max price per tire</legend>
+        <label for="f-max" style="display:grid;gap:4px"><span id="f-max-out">Up to $350</span><input type="range" id="f-max" min="200" max="350" step="10" value="350"></label>
+      </fieldset>
+    </aside>
+    <div>
+      <div class="results-head">
+        <b id="count">8 tires fit</b>
+        <label class="f" for="sort" style="grid-auto-flow:column;align-items:center;gap:10px">Sort
+          <select id="sort"><option value="low">Price: low to high</option><option value="high">Price: high to low</option><option value="brand">Brand A–Z</option></select></label>
+      </div>
+      <div class="tire-list" id="tire-list" aria-live="polite"></div>
+    </div>
+  </div>
+  <section class="packages" aria-labelledby="pk-h">
+    <div class="wrap">
+      <div class="eyebrow">Wheels</div>
+      <h2 id="pk-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Tire + wheel packages</h2>
+      <p style="color:#bdbdbd;max-width:40em;margin:8px 0 0">Mounted, balanced and fitment-checked for your vehicle, with lift and leveling kits installed in the same visit.</p>
+      <div class="pk-grid">
+        <div class="pk"><h3>See it on your truck</h3><p>The wheel visualizer shows any wheel on your exact vehicle and color before you buy.</p></div>
+        <div class="pk"><h3>Guaranteed fitment</h3><p>Offset, bolt pattern and clearance checked against your build, lifted or stock.</p></div>
+        <div class="pk"><h3>27 wheel brands</h3><p>Mickey Thompson, Advanti, Worx and more. Ask for anything we don't list.</p></div>
+      </div>
+      <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#quote" data-view-link="quote">Quote a package</a></div>
+    </div>
+  </section>
+</section>
+
+<!-- ================= MOBILE SERVICE ================= -->
+<section id="view-mobile" data-view="mobile" hidden>
+  <div class="phead">
+    <div class="wrap mhero">
+      <div style="display:grid;gap:14px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Mobile Tire Service</span></nav>
+        <h1>Mobile tire service in Broward, Miami-Dade &amp; Palm Beach</h1>
+        <p>Our van brings the tires, the high-speed balancer and an Extreme tech to your driveway, office or job site. You keep your day.</p>
+      </div>
+      <div class="zipbox">
+        <b style="font:800 19px var(--display);text-transform:uppercase">Do we come to you?</b>
+        <form id="zip-form" novalidate>
+          <label for="zip" class="f">Your ZIP code<input id="zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+          <button class="btn btn-red" type="submit" style="align-self:end">Check</button>
+        </form>
+        <div class="zipres" id="zipres" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <section class="onsite" aria-labelledby="on-h">
+    <div class="wrap">
+      <div class="eyebrow">What we do on site</div>
+      <h2 id="on-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">The shop, on wheels</h2>
+      <div class="onsite-grid">
+        <div><svg aria-hidden="true"><use href="#i-install"/></svg><b>Tire installation</b><p>New tires mounted on your vehicle, old ones hauled away.</p></div>
+        <div><svg aria-hidden="true"><use href="#i-balance"/></svg><b>High-speed balancing</b><p>The same balancing equipment as the shop, built into the van.</p></div>
+        <div><svg aria-hidden="true"><use href="#i-repair"/></svg><b>Repairs &amp; roadside</b><p>Flats and leaks patched where you are, including roadside.</p></div>
+        <div><svg aria-hidden="true"><use href="#i-oil"/></svg><b>Oil changes</b><p>Mobile oil change while you work. Fleets welcome.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="slots" aria-labelledby="sl-h">
+    <div class="wrap">
+      <div class="eyebrow">Book it</div>
+      <h2 id="sl-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Pick a day and time</h2>
+      <div class="days" id="days" role="group" aria-label="Day"></div>
+      <div class="times" id="times" role="group" aria-label="Time"></div>
+      <button class="btn btn-red" type="button" id="book-slot">Book this slot</button>
+      <p style="color:var(--steel);font-size:14px;margin:10px 0 0" id="slot-note">Sample availability. On the live site this reads the shop's real calendar.</p>
+    </div>
+  </section>
+  <section class="areas" aria-labelledby="ar-h">
+    <div class="wrap">
+      <div class="eyebrow">Service area</div>
+      <h2 id="ar-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Cities we cover</h2>
+      <p style="color:var(--steel);max-width:44em">Each city gets its own page on the live site, for local search. Davie belongs here as a service city, not in the shop's address.</p>
+      <div class="cities" id="cities"></div>
+    </div>
+  </section>
+</section>
+
+
+<!-- ===== part a ===== -->
+<!-- ================= A: WHEELS ================= -->
+<section id="view-wheels" data-view="wheels" hidden>
+  <div class="phead wh-phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Wheels</span></nav>
+      <h1>Custom wheels, fitted right</h1>
+      <p>Try finishes, sizes and styles, then our team confirms the fit for your vehicle.</p>
+      <div class="btns">
+        <a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Custom Wheels Service">Quote a wheel package</a>
+        <a class="btn btn-ghost" href="#wh-viz" data-go="wheels">Try the visualizer</a>
+      </div>
+      <p class="a-trust"><span class="a-stars" aria-hidden="true">★★★★★</span> <b>4.7★ from 1,319 Birdeye reviews</b> · Hunter alignment · Mobile + shop · <a href="tel:+19547731896">Call (954) 773-1896</a></p>
+    </div>
+  </div>
+
+  <section class="wh-viz" id="wh-viz" aria-labelledby="wh-viz-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Wheel visualizer</div>
+          <h2 id="wh-viz-h">See it before you buy it</h2>
+          <p>Choose a vehicle type, then try finishes, sizes and styles.</p>
+        </div>
+        <span class="sample-note">Mock-up only · the live visualizer uses your exact vehicle</span>
+      </div>
+      <div class="wh-grid">
+        <div class="wh-stage" aria-live="polite">
+          <div class="wh-canvas" id="wh-canvas" role="img" aria-label="Illustration of the selected wheel"></div>
+          <div class="wh-readout">
+            <b id="wh-title">Gloss black · 20&quot; · Split-spoke</b>
+            <span id="wh-sub">Illustration only. Real wheels vary by brand and model.</span>
+          </div>
+        </div>
+        <div class="wh-controls">
+          <fieldset class="wh-fs">
+            <legend>Vehicle</legend>
+            <div class="wh-chips" id="wh-veh" role="group" aria-label="Vehicle type">
+              <button type="button" aria-pressed="false" data-veh="jeep"><svg aria-hidden="true"><use href="#i-lift"/></svg>Jeep</button>
+              <button type="button" aria-pressed="true" data-veh="truck"><svg aria-hidden="true"><use href="#i-van"/></svg>Truck</button>
+              <button type="button" aria-pressed="false" data-veh="suv"><svg aria-hidden="true"><use href="#i-wheel"/></svg>SUV</button>
+              <button type="button" aria-pressed="false" data-veh="car"><svg aria-hidden="true"><use href="#i-align"/></svg>Car</button>
+            </div>
+            <p class="wh-vnote" id="wh-vnote"></p>
+          </fieldset>
+          <fieldset class="wh-fs">
+            <legend>Finish <span id="wh-fin-name" class="wh-cur"></span></legend>
+            <div class="wh-swatches" id="wh-fin" role="group" aria-label="Wheel finish"></div>
+          </fieldset>
+          <fieldset class="wh-fs">
+            <legend>Diameter <span id="wh-dia-name" class="wh-cur"></span></legend>
+            <div class="wh-seg" id="wh-dia" role="group" aria-label="Wheel diameter in inches"></div>
+          </fieldset>
+          <fieldset class="wh-fs">
+            <legend>Style <span id="wh-sty-name" class="wh-cur"></span></legend>
+            <div class="wh-styles" id="wh-sty" role="group" aria-label="Wheel style"></div>
+          </fieldset>
+          <div class="btns wh-cta">
+            <a class="btn btn-dark" href="#quote" data-view-link="quote" data-svc="Custom Wheels Service" id="wh-quote">Quote this look</a>
+            <a class="btn btn-ghost wh-ghost" href="#financing" data-view-link="financing">Financing options</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-brands" aria-labelledby="wh-br-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Wheel brands</div><h2 id="wh-br-h">27 wheel brands to choose from</h2>
+        <p>Ask our team about any wheel you do not see listed.</p></div>
+      </div>
+      <div class="wh-brand-grid">
+        <div class="wh-brand"><span class="wh-bmark">Mickey Thompson</span><p>Ask us for available sizes and finishes.</p></div>
+        <div class="wh-brand"><span class="wh-bmark">Advanti</span><p>Ask us for available sizes and finishes.</p></div>
+        <div class="wh-brand"><span class="wh-bmark">Worx</span><p>Ask us for available sizes and finishes.</p></div>
+        <div class="wh-brand wh-more"><span class="wh-bmark">+24 more brands</span><p>Full brand list to confirm.</p><span class="sample-note">List to confirm · Simon</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-pkg" aria-labelledby="wh-pkg-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Tire + wheel packages</div><h2 id="wh-pkg-h">One visit, rolling out ready</h2>
+        <p>A package pairs your wheels with matching tires so everything is mounted, balanced and checked together.</p></div>
+      </div>
+      <div class="how-grid wh-steps">
+        <div><b>Pick the wheel</b><p>Choose a style, finish and diameter. Our team confirms it suits your vehicle.</p></div>
+        <div><b>Match the tires</b><p>Larger wheels usually mean a lower-profile tire, sized to keep the overall diameter close to stock.</p></div>
+        <div><b>Mount and balance</b><p>Tires go on the wheels and are balanced as an assembly, with the TPMS sensors handled.</p></div>
+        <div><b>Install and check</b><p>Wheels go on the vehicle, lug nuts are torqued to spec and fitment is checked.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wh-fit" aria-labelledby="wh-fit-h">
+    <div class="wrap">
+      <div class="eyebrow">Fitment check</div>
+      <h2 id="wh-fit-h">What we check before a wheel goes on</h2>
+      <p class="wh-lead">A wheel that looks right can still rub, miss the brakes or sit crooked. Here is what our team looks at. This is a general guide, not a guarantee for any specific wheel.</p>
+      <div class="wh-fit-grid">
+        <div><b>1 · Bolt pattern</b><p>The number of lugs and the circle they sit on, written like 5x114.3. It has to match the vehicle exactly.</p></div>
+        <div><b>2 · Offset</b><p>How far the wheel face sits from the centerline, in millimeters. It sets how far the wheel and tire stick out or tuck in.</p></div>
+        <div><b>3 · Clearance</b><p>Room for brake calipers, suspension parts and fenders at full turn and full suspension travel, especially with wider tires or a lift.</p></div>
+        <div><b>4 · Center bore and load</b><p>The center hole should fit the hub, and the wheel and tire should be rated for the vehicle's weight.</p></div>
+      </div>
+      <div class="wh-guar"><span class="sample-note">Fitment guarantee terms: Simon to confirm</span><span>No promise is made here until the shop writes the terms.</span></div>
+    </div>
+  </section>
+
+  <section class="wh-lift" data-wh-store aria-labelledby="wh-lift-h">
+    <div class="wrap">
+      <div class="wh-lift-box">
+        <div class="eyebrow" style="color:#fff;opacity:.9">Building it bigger?</div>
+        <h2 id="wh-lift-h">Lift or level, then fit the wheels</h2>
+        <p>Larger wheels and tires often go hand in hand with a lift or leveling kit. We can plan both together.</p>
+        <div class="btns">
+          <a class="btn btn-dark" href="#service/lift-kits" data-view-link="service" data-param="lift-kits">Lift kits and leveling</a>
+          <a class="btn btn-ghost" href="#service/custom-wheels" data-view-link="service" data-param="custom-wheels">Custom wheel service</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="wh-faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Questions</div><h2 id="wh-faq-h">Wheel FAQ</h2></div></div>
+      <details open><summary>Can I put any wheel on my vehicle?</summary><p>No. The bolt pattern, offset, center bore and clearance all have to work with your vehicle. That is why our team checks fitment before ordering.</p></details>
+      <details><summary>Do bigger wheels change my tires?</summary><p>Yes. A larger wheel usually takes a tire with a shorter sidewall. The goal is to keep the overall tire diameter close to stock so the speedometer and gearing stay accurate.</p></details>
+      <details><summary>Will my TPMS sensors work with new wheels?</summary><p>The sensors can often be moved to the new wheels or replaced. Our team will go over the options when you ask for a quote.</p></details>
+      <details><summary>Can I pay over time?</summary><p>Lease-to-own financing is available through Kafene. Terms are set by the provider, so see the <a href="#financing" data-view-link="financing">financing page</a> for how to apply.</p></details>
+    </div>
+  </section>
+</section>
+
+<!-- ================= A: SERVICES HUB ================= -->
+<section id="view-services" data-view="services" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Auto Service</span></nav>
+      <h1>Auto service, shop or driveway</h1>
+      <p>Some jobs we do where you are. The rest happen at our Sunrise shop.</p>
+      <div class="btns">
+        <a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule a repair</a>
+        <a class="btn btn-ghost" href="#advisor" data-view-link="advisor">Not sure what you need?</a>
+      </div>
+      <p class="a-trust"><span class="a-stars" aria-hidden="true">★★★★★</span> <b>4.7★ from 1,319 Birdeye reviews</b> · Hunter alignment · Mobile + shop · <a href="tel:+19547731896">Call (954) 773-1896</a></p>
+    </div>
+  </div>
+
+  <section class="sv-sec" aria-labelledby="sv-m-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Mobile</div><h2 id="sv-m-h">At your location</h2>
+      <p>Our van comes to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p></div>
+      <a class="btn btn-dark" href="#mobile" data-view-link="mobile">Check my ZIP</a></div>
+      <div class="sv-grid" id="sv-grid-mobile"></div>
+    </div>
+  </section>
+
+  <section class="sv-sec sv-shopsec" aria-labelledby="sv-s-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Shop</div><h2 id="sv-s-h">At the Sunrise shop</h2>
+      <p>7712 West Oakland Park Blvd. Alignments run on Hunter Engineering equipment. The shop also does every service above.</p></div>
+      <a class="btn btn-dark" href="#locations" data-view-link="locations">Hours and directions</a></div>
+      <div class="sv-grid" id="sv-grid-shop"></div>
+    </div>
+  </section>
+
+  <section class="combo" aria-labelledby="sv-combo-h">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow" style="color:#fff;opacity:.85">Mobile plus shop</div>
+        <h2 id="sv-combo-h">Tires at your door. Alignment at the shop.</h2>
+        <p>Have new tires installed where you are, then bring the vehicle in for an alignment so they wear evenly. Tell us in one request and we will line it up.</p>
+        <div class="btns" style="margin-top:18px"><a class="btn btn-dark" href="#schedule" data-view-link="schedule" data-sched="tire-installation,wheel-alignment">Schedule the combo</a></div>
+      </div>
+      <div class="vs">
+        <div><b>At your location</b><ul><li>Tire installation</li><li>Balancing</li><li>Repairs and roadside</li><li>Oil changes</li></ul></div>
+        <div class="us"><b>At the shop</b><ul><li>Hunter alignment</li><li>Brakes and suspension</li><li>TPMS, lifts, wheels</li><li>All of the mobile list</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sv-help" aria-labelledby="sv-help-h">
+    <div class="wrap">
+      <div class="sv-help-grid">
+        <a class="sv-help-card" href="#advisor" data-view-link="advisor" data-adv-tab="maintenance">
+          <svg aria-hidden="true"><use href="#i-rotate"/></svg>
+          <span><b>Maintenance Advisor</b>Enter your mileage for a generic checklist of what to ask about.</span>
+        </a>
+        <a class="sv-help-card" href="#advisor" data-view-link="advisor" data-adv-tab="diagnostic">
+          <svg aria-hidden="true"><use href="#i-tpms"/></svg>
+          <span><b>Dashboard light guide</b>What common warning lights usually mean, in plain language.</span>
+        </a>
+        <a class="sv-help-card" href="#schedule" data-view-link="schedule">
+          <svg aria-hidden="true"><use href="#i-install"/></svg>
+          <span><b>Schedule a repair</b>Pick your services, day and arrival window.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="sv-faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Questions</div><h2 id="sv-faq-h">Auto service FAQ</h2></div></div>
+      <details open><summary>Which services can you do at my location?</summary><p>Tire installation, high-speed balancing, tire repair and roadside flat repair, and oil changes. Everything else is done at the Sunrise shop.</p></details>
+      <details><summary>Do I need an appointment?</summary><p>You can request a time online or call (954) 773-1896. Tell us what is going on and our team will confirm what works.</p></details>
+      <details><summary>Where is the shop and when is it open?</summary><p>7712 West Oakland Park Blvd, Sunrise, FL 33351. Monday to Friday 8:00 AM to 6:30 PM, Saturday 8:00 AM to 4:00 PM, closed Sunday.</p></details>
+      <details><summary>How do I find out what a repair will cost?</summary><p>Request a quote with your vehicle and symptoms. Our team confirms pricing before work starts.</p></details>
+    </div>
+  </section>
+
+</section>
+
+<!-- ================= A: SERVICE (param) ================= -->
+<section id="view-service" data-view="service" hidden>
+  <div id="sp-root" aria-live="polite"></div>
+</section>
+
+<!-- ================= A: SCHEDULE ================= -->
+<section id="view-schedule" data-view="schedule" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>Schedule a repair</span></nav>
+      <h1>Schedule a repair</h1>
+      <p>Pick services, a day and arrival windows. Our team confirms. Want a price first? <a href="#quote" data-view-link="quote" style="color:#fff">Request a quote</a>.</p>
+    </div>
+  </div>
+  <form id="sc-form" class="sc-form" novalidate>
+    <div class="wrap sc-wrap">
+      <div class="sc-main">
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">1</span> What does it need?</legend>
+          <p class="sc-hint">Pick one or more. Not sure? Pick the closest and describe it in the notes.</p>
+          <div class="sc-pick" id="sc-pick"></div>
+          <div class="err" id="sc-err-svc" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">2</span> Your vehicle</legend>
+          <div class="sc-row3">
+            <label class="f" for="sc-year">Year<input id="sc-year" inputmode="numeric" maxlength="4" placeholder="2021" autocomplete="off"><span class="err" id="sc-err-year"></span></label>
+            <label class="f" for="sc-make">Make<input id="sc-make" placeholder="Toyota" autocomplete="off"><span class="err" id="sc-err-make"></span></label>
+            <label class="f" for="sc-model">Model<input id="sc-model" placeholder="Tacoma" autocomplete="off"><span class="err" id="sc-err-model"></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">3</span> Where should we do it?</legend>
+          <div class="opts sc-where" id="sc-where" role="group" aria-label="Location">
+            <button type="button" class="opt" data-where="shop" aria-pressed="true"><svg aria-hidden="true"><use href="#i-align"/></svg><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button>
+            <button type="button" class="opt" data-where="mobile" aria-pressed="false"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Mobile jobs only</small></span></button>
+          </div>
+          <div class="sc-note" id="sc-mobnote" hidden>Mobile covers tire installation, balancing, tire repair and oil changes. The other services are done at the shop.</div>
+
+          <div id="sc-mobile" hidden class="sc-sub">
+            <label class="f" for="sc-zip" style="max-width:260px">Your ZIP code<input id="sc-zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+            <div class="zipres" id="sc-zipres" aria-live="polite"></div>
+            <div class="checklist"><b>What your spot needs</b><ul><li>About 5 ft clear around the vehicle</li><li>Flat, firm ground (driveway, lot or garage)</li><li>Keys available and wheel locks in the car</li></ul></div>
+          </div>
+
+          <div id="sc-drop" class="sc-sub">
+            <div class="sc-lbl">At the shop, you can</div>
+            <div class="sc-radios" role="radiogroup" aria-label="Drop-off style">
+              <label><input type="radio" name="sc-drop" value="wait" checked> I'll wait</label>
+              <label><input type="radio" name="sc-drop" value="leave"> I'll leave my vehicle</label>
+            </div>
+            <div class="sc-hint">Whether a job is a wait-or-leave job depends on the work. The shop will confirm.</div>
+          </div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">4</span> When works for you?</legend>
+          <div class="flow-days sc-days" id="sc-days" role="group" aria-label="Preferred day"></div>
+          <div class="sc-lbl" style="margin-top:14px">Pick up to two arrival windows <span id="sc-wincount" class="sc-cur"></span></div>
+          <div class="windows sc-wins" id="sc-wins" role="group" aria-label="Preferred 2-hour windows"></div>
+          <div class="sc-hint">Sample availability. The live site reads the shop calendar.</div>
+          <div class="err" id="sc-err-when" role="alert"></div>
+        </fieldset>
+
+        <fieldset class="sc-block">
+          <legend><span class="sc-n">5</span> How should we reach you?</legend>
+          <div class="sc-radios" role="radiogroup" aria-label="Contact preference">
+            <label><input type="radio" name="sc-contact" value="text" checked> Text</label>
+            <label><input type="radio" name="sc-contact" value="call"> Call</label>
+            <label><input type="radio" name="sc-contact" value="email"> Email</label>
+          </div>
+          <div class="sc-row3" style="margin-top:14px">
+            <label class="f" for="sc-name">Name<input id="sc-name" autocomplete="name" placeholder="First and last name"><span class="err" id="sc-err-name"></span></label>
+            <label class="f" for="sc-phone">Phone<input id="sc-phone" type="tel" autocomplete="tel" placeholder="(954) 555-0123"><span class="err" id="sc-err-phone"></span></label>
+            <label class="f" for="sc-email">Email <span id="sc-email-opt" style="text-transform:none;letter-spacing:0;font-weight:500">(optional)</span><input id="sc-email" type="email" autocomplete="email" placeholder="you@example.com"><span class="err" id="sc-err-email"></span></label>
+          </div>
+          <label class="f" for="sc-notes" style="margin-top:14px">Anything we should know?<textarea id="sc-notes" rows="3" placeholder="Symptoms, noises, tire size, lifted or leveled, etc."></textarea></label>
+        </fieldset>
+
+        <button class="btn btn-red sc-submit" type="submit">Request this appointment</button>
+        <p class="sc-fine">This is a request, not a confirmed booking. Our team will confirm the time with you.</p>
+        <div class="done" id="sc-done" hidden role="status" tabindex="-1"></div>
+      </div>
+
+      <aside class="sc-side" aria-label="Your request">
+        <div class="sc-sum">
+          <b>Your request</b>
+          <dl id="sc-sum">
+            <dt>Services</dt><dd id="sc-s-svc">None yet</dd>
+            <dt>Where</dt><dd id="sc-s-where">Sunrise shop</dd>
+            <dt>When</dt><dd id="sc-s-when">Pick a day and window</dd>
+          </dl>
+        </div>
+        <div class="sc-sum sc-trust"><p><b>4.7★ from 1,319 Birdeye reviews</b><br>Hunter alignment · Mobile + shop</p></div>
+        <div class="sc-sum sc-call">
+          <b>Need it sooner?</b>
+          <p>Call <a href="tel:+19547731896"><strong>(954) 773-1896</strong></a><br>Mon–Fri 8:00 AM–6:30 PM<br>Sat 8:00 AM–4:00 PM</p>
+        </div>
+        <a class="sc-side-link" href="#advisor" data-view-link="advisor" data-adv-tab="maintenance">Not sure what you need? Try the Maintenance Advisor</a>
+      </aside>
+    </div>
+  </form>
+</section>
+
+<!-- ================= A: ADVISOR ================= -->
+<section id="view-advisor" data-view="advisor" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>Diagnostic Center &amp; Maintenance Advisor</span></nav>
+      <h1>Diagnostic Center &amp; Maintenance Advisor</h1>
+      <p>A checklist for your mileage, and a plain-language guide to dashboard lights. Guides, not diagnoses.</p>
+      <p class="a-trust"><span class="a-stars" aria-hidden="true">★★★★★</span> <b>4.7★ from 1,319 Birdeye reviews</b> · Hunter alignment · Mobile + shop · <a href="tel:+19547731896">Call (954) 773-1896</a></p>
+    </div>
+  </div>
+
+  <div class="ad-tabs-bar">
+    <div class="wrap">
+      <div class="ad-tabs" role="tablist" aria-label="Advisor sections">
+        <button type="button" role="tab" id="ad-tab-maintenance" aria-controls="ad-panel-maintenance" aria-selected="true" data-tab="maintenance">Maintenance Advisor</button>
+        <button type="button" role="tab" id="ad-tab-diagnostic" aria-controls="ad-panel-diagnostic" aria-selected="false" tabindex="-1" data-tab="diagnostic">Diagnostic Center</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="ad-panel-maintenance" role="tabpanel" aria-labelledby="ad-tab-maintenance" class="ad-panel">
+    <div class="wrap">
+      <div class="ad-m-grid">
+        <form class="ad-form" id="ad-form" novalidate>
+          <h2>Your vehicle</h2>
+          <label class="f" for="ad-miles">Current mileage
+            <input id="ad-miles" inputmode="numeric" placeholder="e.g. 47000" autocomplete="off" aria-describedby="ad-miles-err">
+            <span class="err" id="ad-miles-err" role="alert"></span>
+          </label>
+          <fieldset class="ad-fs">
+            <legend>How is it mostly driven?</legend>
+            <div class="ad-conds" id="ad-conds">
+              <label><input type="radio" name="ad-cond" value="highway" checked><span><b>Mostly highway</b><small>Steady speeds, longer trips</small></span></label>
+              <label><input type="radio" name="ad-cond" value="city"><span><b>Stop-and-go</b><small>Traffic, short trips, heat</small></span></label>
+              <label><input type="radio" name="ad-cond" value="severe"><span><b>Towing or off-road</b><small>Loads, dirt, rough roads</small></span></label>
+            </div>
+          </fieldset>
+          <button class="btn btn-ghost" type="submit">Build my checklist</button>
+          <p class="ad-fine">Generic intervals only. Always follow your owner's manual first.</p>
+        </form>
+        <div class="ad-result" id="ad-result" aria-live="polite">
+          <div class="ad-empty"><svg aria-hidden="true"><use href="#i-rotate"/></svg><p>Enter your mileage and pick how you drive to see a checklist of what to ask about.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ad-panel-diagnostic" role="tabpanel" aria-labelledby="ad-tab-diagnostic" class="ad-panel" hidden>
+    <div class="wrap">
+      <div class="ad-safe" role="note"><b>Safety first.</b> If a light comes on together with smoke, a burning smell, a loud noise, a soft brake pedal or the vehicle driving differently, pull over where it is safe and call for help. This guide cannot tell you it is safe to keep driving.</div>
+      <div class="sec-head" style="margin-top:34px"><div><div class="eyebrow">Dashboard lights</div><h2 style="font-size:clamp(26px,3.2vw,40px);font-weight:800">What the light usually means</h2>
+      <p>Colors vary by vehicle, so check the owner's manual. As a rule, red means stop safely and get help, and amber or yellow means have it checked soon.</p></div></div>
+      <div class="ad-lights" id="ad-lights"></div>
+      <div class="ad-cta">
+        <div><h3>Light on and not sure?</h3><p>Have a technician inspect it. A warning light is a starting point, and the cause can only be found with testing on the vehicle.</p></div>
+        <div class="btns"><a class="btn btn-dark" href="#schedule" data-view-link="schedule">Schedule an inspection</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="faq" aria-labelledby="ad-faq-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Good to know</div><h2 id="ad-faq-h">Before you rely on a guide</h2></div></div>
+      <details open><summary>Is this a diagnosis?</summary><p>No. These pages explain what lights and intervals generally mean. A technician has to inspect and test the vehicle to find the real cause.</p></details>
+      <details><summary>Which schedule should I follow?</summary><p>Your owner's manual. It lists intervals set by the manufacturer for your exact vehicle. The checklist here is only a conversation starter.</p></details>
+      <details><summary>Can I get this checked at my location?</summary><p>Tire installation, balancing, repairs and oil changes can be done by our mobile team. Inspections that need a lift or alignment equipment happen at the Sunrise shop.</p></details>
+    </div>
+  </section>
+</section>
+
+<!-- ===== part b ===== -->
+<!-- ================= COMMERCIAL & FLEET ================= -->
+<section id="view-commercial" data-view="commercial" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Commercial &amp; Fleet</span></nav>
+      <h1>Commercial &amp; fleet tire service</h1>
+      <p>Tires and service for work vehicles, at your lot or at our Sunrise shop.</p>
+      <p class="cm-trust"><span aria-hidden="true">★</span> 4.7 from 1,319 reviews on Birdeye · Mobile + shop · Hunter alignment</p>
+      <span class="sample-note">Prototype page · fleet policies and pricing are placeholders for Simon to confirm</span>
+      <div class="btns">
+        <a class="btn btn-red" href="#commercial" data-view-link="commercial" data-anchor="cm-form-h">Get a fleet quote</a>
+        <a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="cm-form-sec" aria-labelledby="cm-form-h">
+    <div class="wrap">
+      <div class="cm-form-grid">
+        <div class="cm-form-intro">
+          <div class="eyebrow">Fleet quote</div>
+          <h2 id="cm-form-h">Tell us about your fleet</h2>
+          <p>Share a few details and our team will follow up. Pricing and service plans are confirmed by our team, not by this form.</p>
+          <ul class="cm-promise">
+            <li>Mobile or shop service, your choice</li>
+            <li>Service area: Broward, Miami-Dade and Palm Beach counties</li>
+            <li><span>Or call <b>(954) 773-1896</b>. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</span></li>
+          </ul>
+        </div>
+        <form id="cm-form" class="cm-form" novalidate>
+          <div class="cm-fields">
+            <label class="f" for="cm-company">Company name<input id="cm-company" name="company" autocomplete="organization" placeholder="Business or fleet name"><span class="err" data-for="cm-company"></span></label>
+            <label class="f" for="cm-contact">Contact name<input id="cm-contact" name="contact" autocomplete="name" placeholder="Who should we ask for?"><span class="err" data-for="cm-contact"></span></label>
+            <label class="f" for="cm-phone">Phone<input id="cm-phone" name="phone" type="tel" autocomplete="tel" placeholder="(954) 555-0123"><span class="err" data-for="cm-phone"></span></label>
+            <label class="f" for="cm-email">Email<input id="cm-email" name="email" type="email" autocomplete="email" placeholder="name@company.com"><span class="err" data-for="cm-email"></span></label>
+            <label class="f" for="cm-size">Fleet size<select id="cm-size" name="size"><option value="">Choose a range</option><option>1–5 vehicles</option><option>6–20 vehicles</option><option>21–50 vehicles</option><option>50+ vehicles</option></select><span class="err" data-for="cm-size"></span></label>
+            <label class="f" for="cm-zip">Where are vehicles based? (ZIP)<input id="cm-zip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="33351"><span class="err" data-for="cm-zip"></span><span class="zipres" id="cm-zipres" aria-live="polite"></span></label>
+          </div>
+          <fieldset class="cm-set" aria-describedby="cm-veh-err">
+            <legend>Vehicle types</legend>
+            <div class="cm-checks" id="cm-veh"></div>
+            <span class="err" id="cm-veh-err"></span>
+          </fieldset>
+          <fieldset class="cm-set">
+            <legend>Service needs</legend>
+            <div class="cm-checks" id="cm-needs"></div>
+          </fieldset>
+          <fieldset class="cm-set">
+            <legend>Preferred contact</legend>
+            <div class="cm-checks cm-radios" id="cm-pref"></div>
+          </fieldset>
+          <label class="f" for="cm-notes">Notes<textarea id="cm-notes" name="notes" rows="3" placeholder="Tire sizes, current brands, schedules, anything that helps"></textarea></label>
+          <div class="cm-submit">
+            <button class="btn btn-red" type="submit">Request fleet quote</button>
+            <p>We never display your email on the site. Prototype only, nothing is sent.</p>
+          </div>
+          <div class="done" id="cm-done" role="status" hidden></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="cm-do" aria-labelledby="cm-do-h">
+    <div class="wrap">
+      <div class="eyebrow">What we do</div>
+      <h2 id="cm-do-h">Service where it makes sense for your fleet</h2>
+      <div class="cm-do-grid">
+        <div class="cm-col">
+          <h3>On site, with the mobile van</h3>
+          <p>No trip to the shop and no vehicles sitting idle waiting in line.</p>
+          <ul class="cm-list">
+            <li><svg aria-hidden="true"><use href="#i-install"/></svg><span><b>Tire installation</b> mounted at your lot or yard</span></li>
+            <li><svg aria-hidden="true"><use href="#i-balance"/></svg><span><b>High-speed balancing</b> built into the van</span></li>
+            <li><svg aria-hidden="true"><use href="#i-repair"/></svg><span><b>Repairs and roadside</b> flat repair where the vehicle stopped</span></li>
+            <li><svg aria-hidden="true"><use href="#i-oil"/></svg><span><b>Oil changes</b> done on site</span></li>
+          </ul>
+          <a class="btn btn-ghost" href="#mobile" data-view-link="mobile">How mobile service works</a>
+        </div>
+        <div class="cm-col">
+          <h3>At the Sunrise shop</h3>
+          <p>For work that needs a lift, an alignment rack or a full bay.</p>
+          <ul class="cm-list">
+            <li><svg aria-hidden="true"><use href="#i-align"/></svg><span><b>Wheel alignment</b> on Hunter Engineering equipment</span></li>
+            <li><svg aria-hidden="true"><use href="#i-brake"/></svg><span><b>Brake service</b> inspection and repair</span></li>
+            <li><svg aria-hidden="true"><use href="#i-susp"/></svg><span><b>Suspension repair</b> for worn or damaged components</span></li>
+            <li><svg aria-hidden="true"><use href="#i-tpms"/></svg><span><b>TPMS service</b> sensors and resets</span></li>
+          </ul>
+          <a class="btn btn-ghost" href="#services" data-view-link="services">All services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cm-who" aria-labelledby="cm-who-h">
+    <div class="wrap">
+      <div class="eyebrow">Who it is for</div>
+      <h2 id="cm-who-h">Vehicles we work on</h2>
+      <p class="cm-lead">From a single work van to a mixed fleet. RVs, semis, boat trailers, golf carts and a bus all appear in our work gallery.</p>
+      <ul class="cm-tiles" id="cm-tiles"></ul>
+      <p class="cm-more"><a href="#gallery" data-view-link="gallery">See the work gallery</a></p>
+    </div>
+  </section>
+
+  <section class="cm-cats" aria-labelledby="cm-cats-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <div class="eyebrow">Tires</div>
+          <h2 id="cm-cats-h">Tire categories for work vehicles</h2>
+          <p>Tell us the size and the duty cycle and we will quote the right tire. Brand lists below are placeholders.</p>
+        </div>
+      </div>
+      <div class="cm-cat-grid" id="cm-cats"></div>
+    </div>
+  </section>
+
+  <section class="how" aria-labelledby="cm-how-h">
+    <div class="wrap">
+      <div class="eyebrow">How a fleet account works</div>
+      <h2 id="cm-how-h" style="font-size:clamp(26px,3.2vw,40px);font-weight:900">Four steps, no surprises</h2>
+      <div class="how-grid">
+        <div><b>Tell us your fleet</b><p>Send vehicle types, tire sizes, how many units and where they are based.</p></div>
+        <div><b>We build a plan</b><p>Our team recommends tires and a service schedule, on site or at the shop.</p></div>
+        <div><b>We service the vehicles</b><p>The van comes to you, or you drop units at Sunrise, on a schedule that fits your routes.</p></div>
+        <div><b>Keep records and re-order</b><p>Repeat the same sizes and service without starting over each time.</p></div>
+      </div>
+      <div class="cm-place">
+        <span class="sample-note">Simon to confirm</span>
+        <p>Invoicing terms, volume pricing, account setup requirements, scheduling windows and record-keeping format. None of these are decided in this prototype.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cm-next" aria-label="Related pages">
+    <div class="wrap">
+      <b>Keep exploring</b>
+      <a href="#mobile" data-view-link="mobile">Mobile tire service</a>
+      <a href="#services" data-view-link="services">All services</a>
+      <a href="#brands" data-view-link="brands">Tire brands</a>
+      <a href="#gallery" data-view-link="gallery">Work gallery</a>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="cm-faq-h">
+    <div class="wrap">
+      <div class="eyebrow">Fleet questions</div>
+      <h2 id="cm-faq-h" style="font-size:clamp(26px,3.2vw,40px);font-weight:900;margin-bottom:14px">Frequently asked</h2>
+      <div id="cm-faq"></div>
+    </div>
+  </section>
+
+</section>
+
+<!-- ================= TIRE BRANDS ================= -->
+<section id="view-brands" data-view="brands" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Tire Brands</span></nav>
+      <h1>Tire brands</h1>
+      <p>Nineteen brands to choose from. Pick one to see its page, or search by name.</p>
+      <p class="cm-trust"><span aria-hidden="true">★</span> 4.7 from 1,319 reviews on Birdeye · Mobile + shop · Hunter alignment</p>
+      <span class="sample-note">Sample grouping, confirm with Extreme before launch</span>
+      <div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+    </div>
+  </div>
+  <section class="bs-body" aria-label="Brand directory">
+    <div class="wrap">
+      <div class="bs-bar">
+        <label class="f bs-search" for="bs-q">Search brands<input id="bs-q" type="search" placeholder="Try &quot;Nitto&quot;" autocomplete="off"></label>
+        <div class="bs-chips" id="bs-chips" role="group" aria-label="Filter by category"></div>
+      </div>
+      <p class="bs-count" id="bs-count" aria-live="polite"></p>
+      <ul class="bs-grid" id="bs-grid"></ul>
+      <div class="empty" id="bs-empty" hidden>No brand matches that search. Clear the filter, or <a href="#quote" data-view-link="quote">ask us to order it</a>.</div>
+      <div class="bs-order"><b>Don't see your brand?</b> We can order it. <a href="#quote" data-view-link="quote" data-svc="Tire Installation">Tell us the brand and size</a> or <a href="#tires" data-view-link="tires">shop tires</a>.</div>
+      <p class="bs-fine">Categories are a generic sample grouping to show how filtering would work. Brand availability and sizes are confirmed by our team.</p>
+    </div>
+  </section>
+</section>
+
+<!-- ================= BRAND (param) ================= -->
+<section id="view-brand" data-view="brand" hidden>
+  <div id="br-root"></div>
+</section>
+
+<!-- ================= TIPS HUB ================= -->
+<section id="view-tips" data-view="tips" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Tips</span></nav>
+      <h1>Tire care &amp; car care tips</h1>
+      <p>Plain-language guides for South Florida drivers.</p>
+      <p class="cm-trust"><span aria-hidden="true">★</span> 4.7 from 1,319 reviews on Birdeye · Mobile + shop · Hunter alignment</p>
+      <span class="sample-note">Draft articles · to be reviewed by Extreme's technicians before launch</span>
+      <div class="btns"><a class="btn btn-red" href="#advisor" data-view-link="advisor">Ask a tech</a><a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote</a></div>
+    </div>
+  </div>
+  <section class="tp-body" aria-label="Articles">
+    <div class="wrap">
+      <div class="tp-bar">
+        <div class="bs-chips" id="tp-chips" role="group" aria-label="Filter by topic"></div>
+        <p class="bs-count" id="tp-count" aria-live="polite"></p>
+      </div>
+      <div id="tp-sec-tire" class="tp-sec">
+        <h2>Tire care</h2>
+        <div class="tp-grid" id="tp-grid-tire"></div>
+      </div>
+      <div id="tp-sec-car" class="tp-sec">
+        <h2>Car care</h2>
+        <div class="tp-grid" id="tp-grid-car"></div>
+      </div>
+      <aside class="tp-fix" aria-label="Note for the site team">
+        <span class="sample-note">Site note</span>
+        <p>This hub replaces three overlapping sections and 97 thin posts on the old site with 14 focused articles. Each topic lives at one address.</p>
+      </aside>
+    </div>
+  </section>
+</section>
+
+<!-- ================= TIP ARTICLE (param) ================= -->
+<section id="view-tip" data-view="tip" hidden>
+  <div id="ta-root"></div>
+</section>
+
+<!-- ===== part c ===== -->
+<!-- ================= COUPONS ================= -->
+<section id="view-coupons" data-view="coupons" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Coupons &amp; Offers</span></nav>
+      <h1>Coupons &amp; offers</h1>
+      <p>Current tire specials, service specials and manufacturer rebates, written out as text so you can read, search and claim them from any phone.</p>
+      <span class="sample-note">Sample layout. Every value and date is a placeholder until Simon confirms the real offers.</span>
+    </div>
+  </div>
+
+  <section class="cp-body" aria-labelledby="cp-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <div><div class="eyebrow">Claim an offer</div><h2 id="cp-h">What's available</h2><p>Pick a group, then claim the offer you want. Mention it when you book or show it on your phone at the counter.</p></div>
+        <div class="cp-tabs" id="cp-tabs" role="group" aria-label="Offer type"></div>
+      </div>
+      <div class="cp-grid" id="cp-grid" aria-live="polite"></div>
+      <p class="cp-count" id="cp-count"></p>
+    </div>
+  </section>
+
+  <section class="cp-how" aria-labelledby="cp-how-h">
+    <div class="wrap">
+      <div class="eyebrow">Rebate how-to</div>
+      <h2 id="cp-how-h">How manufacturer rebates work</h2>
+      <ol class="cp-steps">
+        <li><b>Ask which rebates are active</b><span>Manufacturers change their programs often. Tell us the tires you are considering and we will check what applies.</span></li>
+        <li><b>Buy and keep your invoice</b><span>Your itemized invoice is usually the proof the manufacturer asks for. Keep the paper or a photo of it.</span></li>
+        <li><b>Submit the manufacturer's form</b><span>Each brand has its own claim form and deadline. We will point you to the current one. <em class="cp-conf">Confirm exact steps with Simon.</em></span></li>
+        <li><b>Watch for your reward</b><span>The manufacturer, not the shop, issues the rebate. Timing and format are set by the brand. <em class="cp-conf">Confirm wording with Simon.</em></span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="club" aria-labelledby="cp-club-h">
+    <div class="wrap">
+      <div><h2 id="cp-club-h">Get new offers by text or email</h2><p>Be the first to hear about specials and rebates. About two messages a month.</p></div>
+      <form id="cp-club" novalidate>
+        <label class="f" for="cp-club-phone" style="color:#fff">Mobile number<input id="cp-club-phone" type="tel" placeholder="(954) 555-0123" autocomplete="tel" inputmode="tel"></label>
+        <label class="f" for="cp-club-email" style="color:#fff">Email<input id="cp-club-email" type="email" placeholder="you@email.com" autocomplete="email"></label>
+        <button class="btn btn-dark" type="submit" style="align-self:end">Join</button>
+        <p class="fine" id="cp-club-msg" role="status">Msg &amp; data rates may apply. Reply STOP to opt out. Connects to Omnisend on the live site.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="cp-note-sec">
+    <div class="wrap">
+      <div class="cp-note" role="note">
+        <span class="sample-note">Note for the team</span>
+        <h3>Offers need dates and terms in text, not images</h3>
+        <p>The old site showed 11 coupons as pictures: 2 house offers (an alignment with a tire purchase and an oil change special) and 9 manufacturer rebates. Pictures cannot be read by screen readers, searched by Google or updated without a designer. Here each offer is text with a visible expiry date, so it helps accessibility and SEO and is easy to change.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ================= FINANCING ================= -->
+<section id="view-financing" data-view="financing" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Financing</span></nav>
+      <h1>Shop now, pay later</h1>
+      <p>Extreme Tires works with Kafene on lease-to-own for tires, wheels and service. Apply online, then book your visit.</p>
+      <div class="btns">
+        <a class="btn btn-red" href="https://application.kafene.com/applications/new" target="_blank" rel="noopener">Apply with Kafene<span class="fn-ext" aria-hidden="true">&#8599;</span><span class="fn-vh"> (opens in a new tab)</span></a>
+        <a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote first</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="fn-how" aria-labelledby="fn-how-h">
+    <div class="wrap">
+      <div class="eyebrow">How to apply</div>
+      <h2 id="fn-how-h">Three steps</h2>
+      <ol class="fn-steps">
+        <li><span class="fn-n" aria-hidden="true">1</span><b>Start the application</b><p>Use the Apply button. It opens Kafene's own site in a new tab, where you enter your details.</p><span class="sample-note">Required details: confirm with Kafene</span></li>
+        <li><span class="fn-n" aria-hidden="true">2</span><b>Wait for Kafene's decision</b><p>Kafene decides whether to approve you and on what basis. The shop does not make that decision.</p><span class="sample-note">Decision process: confirm with Kafene</span></li>
+        <li><span class="fn-n" aria-hidden="true">3</span><b>Tell us when you book</b><p>Let the team know you applied. We will explain how it works with the tires, wheels or service you picked.</p><span class="sample-note">How the shop is paid: confirm with Kafene</span></li>
+      </ol>
+      <div class="btns" style="margin-top:28px">
+        <a class="btn btn-dark" href="https://application.kafene.com/applications/new" target="_blank" rel="noopener">Apply with Kafene<span class="fn-ext" aria-hidden="true">&#8599;</span><span class="fn-vh"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="fn-plan" aria-labelledby="fn-plan-h">
+    <div class="wrap fn-plan-grid">
+      <div>
+        <div class="eyebrow">Plan my purchase</div>
+        <h2 id="fn-plan-h">Roughly how big is the job?</h2>
+        <p>Slide to the size of purchase you have in mind. We do not calculate payments here: lease-to-own terms come from Kafene, so ask us and we will walk you through it.</p>
+      </div>
+      <div class="card fn-card">
+        <label class="f" for="fn-range">Purchase total you are planning</label>
+        <output class="fn-out" id="fn-out" for="fn-range">$800</output>
+        <input id="fn-range" type="range" min="100" max="4000" step="50" value="800" aria-describedby="fn-ans">
+        <div class="fn-scale" aria-hidden="true"><span>$100</span><span>$4,000+</span></div>
+        <div class="fn-ans" id="fn-ans" aria-live="polite"></div>
+        <div class="btns">
+          <a class="btn btn-dark" href="#quote" data-view-link="quote">Ask us for a monthly estimate</a>
+          <a class="btn fn-ink" href="tel:+19547731896">Call (954) 773-1896</a>
+        </div>
+        <p class="fn-fine">Your slider choice stays on this page and is not sent anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fn-honest" aria-labelledby="fn-hon-h">
+    <div class="wrap">
+      <div class="fn-hon-box">
+        <h3 id="fn-hon-h">Lease-to-own is not the same as a loan</h3>
+        <p>With a lease-to-own agreement you are typically leasing the item with an option to own it, and the total you pay can differ from the price tag. Read the full agreement from Kafene before you accept, and ask us anything that is unclear.</p>
+        <p class="fn-small">Extreme Tires does not state rates, fees, approval times or amounts on this site. All terms come from Kafene.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fn-links">
+    <div class="wrap">
+      <a href="#tires" data-view-link="tires"><svg aria-hidden="true"><use href="#i-install"/></svg><span><b>Shop tires</b>Browse sizes and brands</span></a>
+      <a href="#wheels" data-view-link="wheels"><svg aria-hidden="true"><use href="#i-wheel"/></svg><span><b>Browse wheels</b>27 wheel brands</span></a>
+      <a href="#schedule" data-view-link="schedule"><svg aria-hidden="true"><use href="#i-van"/></svg><span><b>Schedule service</b>At the shop or mobile</span></a>
+    </div>
+  </section>
+  <section class="faq" aria-labelledby="fn-faq-h">
+    <div class="wrap">
+      <div class="eyebrow">Questions</div>
+      <h2 id="fn-faq-h" style="font-size:clamp(26px,3.2vw,40px);font-weight:800;margin-bottom:12px">Financing FAQ</h2>
+      <details><summary>What can I use it for?</summary><p>The shop offers Kafene for tires, wheels and service. Confirm exactly what is covered with Kafene or the team before you apply.</p></details>
+      <details><summary>Does the shop set the terms?</summary><p>No. Kafene sets the terms and makes the decision. We cannot promise approval or quote what an agreement will cost.</p></details>
+      <details><summary>Will applying affect my credit?</summary><p>We cannot say. Kafene's application and its disclosures explain what they check, so read them before you submit.</p></details>
+      <details><summary>Can I get a quote first?</summary><p>Yes. <a href="#quote" data-view-link="quote">Request a quote</a> and we will confirm pricing for your vehicle, then you can decide whether to apply.</p></details>
+      <details><summary>Does it work for mobile service?</summary><p>Ask us. Tell the team you plan to use Kafene when you book, and we will confirm how it works for your visit.</p></details>
+      <details><summary>Who do I contact about my agreement?</summary><p>Kafene manages your agreement, so contact them for payment or account questions. For anything about your tires or service, call us.</p></details>
+    </div>
+  </section>
+
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section id="view-reviews" data-view="reviews" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Reviews</span></nav>
+      <h1>What customers say</h1>
+      <p>Ratings from public review sites, plus a place for live Google reviews on the finished site.</p>
+      <div class="btns"><a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Leave a review<span class="fn-vh"> (opens Google Maps in a new tab)</span></a></div>
+    </div>
+  </div>
+
+  <section class="rv-sum" aria-labelledby="rv-sum-h">
+    <div class="wrap">
+      <div class="rv-hero">
+        <div class="rv-big" role="img" aria-label="Rated 4.2 to 4.7 out of 5 across four public listings"><span>4.2&ndash;4.7</span><div class="rv-stars" style="--r:4.5" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div></div>
+        <div>
+          <div class="eyebrow">Rating summary</div>
+          <h2 id="rv-sum-h">Four public listings, one picture</h2>
+          <p>Each site rates on its own and reviews different customers, so we show them separately instead of blending them.</p>
+        </div>
+      </div>
+      <div class="rv-src">
+        <article class="rv-card"><h3>Birdeye</h3><div class="rv-score">4.7<small>/ 5</small></div><div class="rv-stars" style="--r:4.7" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>1,319 reviews</p></article>
+        <article class="rv-card"><h3>Chamber of Commerce</h3><div class="rv-score">4.6<small>/ 5</small></div><div class="rv-stars" style="--r:4.6" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>542 reviews</p></article>
+        <article class="rv-card"><h3>MapQuest</h3><div class="rv-score">4.4<small>/ 5</small></div><div class="rv-stars" style="--r:4.4" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>109 reviews</p></article>
+        <article class="rv-card"><h3>Yelp</h3><div class="rv-score">4.2<small>/ 5</small></div><div class="rv-stars" style="--r:4.2" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>106 reviews</p></article>
+      </div>
+      <p class="rv-src-note"><span class="sample-note">Figures from public listings, Oct 2026. Google count to be verified.</span></p>
+    </div>
+  </section>
+
+  <section class="rv-themes" aria-labelledby="rv-th-h">
+    <div class="wrap">
+      <div class="eyebrow">Themes</div>
+      <h2 id="rv-th-h">What customers mention most</h2>
+      <p class="rv-lead">Common themes across public reviews. These are topics, not quotes.</p>
+      <ul class="rv-tags">
+        <li>Pricing</li><li>Speed</li><li>Friendly staff</li><li>Mobile service</li><li>Lift &amp; wheel work</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="rv-feed" aria-labelledby="rv-feed-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Google reviews</div><h2 id="rv-feed-h">Latest reviews</h2><p>Real review text and names will appear here once the live feed is connected. Nothing below is a real review.</p></div>
+        <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Read &amp; write on Google<span class="fn-vh"> (opens in a new tab)</span></a></div>
+      <div class="rv-slots" id="rv-slots"></div>
+    </div>
+  </section>
+
+  <section class="rv-reply" aria-labelledby="rv-rep-h">
+    <div class="wrap rv-two">
+      <div class="rv-box">
+        <span class="sample-note">Policy placeholder: Simon/Melissa to confirm</span>
+        <h3 id="rv-rep-h">How we reply to every review</h3>
+        <p>Write the shop's commitment here in plain words: who answers reviews, how quickly, and what happens when something went wrong.</p>
+        <ul><li>Who replies: <i>to confirm</i></li><li>Reply time: <i>to confirm</i></li><li>How to reach a manager: <i>to confirm</i></li></ul>
+      </div>
+      <div class="rv-box rv-shout">
+        <span class="sample-note">Staff shout-out slot</span>
+        <h3>Names customers mention</h3>
+        <p class="rv-names">Simon, Jason, Adam, Alvaro&hellip;</p>
+        <p>First names only, taken from how customers talk about the shop. The team to decide whether to feature anyone and what to say.</p>
+        <a href="#about" data-view-link="about" data-anchor="ab-team">Meet the team</a>
+      </div>
+    </div>
+  </section>
+  <section class="fn-links rv-links" aria-label="Next steps">
+    <div class="wrap">
+      <a href="#mobile" data-view-link="mobile"><svg aria-hidden="true"><use href="#i-van"/></svg><span><b>Mobile service</b>We come to you</span></a>
+      <a href="#services" data-view-link="services"><svg aria-hidden="true"><use href="#i-align"/></svg><span><b>Our services</b>Alignment, brakes and more</span></a>
+      <a href="#about" data-view-link="about"><svg aria-hidden="true"><use href="#i-wheel"/></svg><span><b>About the shop</b>Meet the team</span></a>
+    </div>
+  </section>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="view-about" data-view="about" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>About Us</span></nav>
+      <h1>About Extreme Tires</h1>
+      <p>A tire shop in Sunrise and a mobile tire service that comes to you, serving Broward, Miami-Dade and Palm Beach.</p>
+      <div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+    </div>
+  </div>
+
+  <section class="ab-stats" aria-label="Extreme Tires at a glance">
+    <div class="wrap">
+      <div><b>Mobile + shop</b><span>Two ways to get service</span></div>
+      <div><b>3 counties</b><span>Broward, Miami-Dade, Palm Beach</span></div>
+      <div><b>19 tire brands</b><span>Plus wheel brands below</span></div>
+      <div><b>27 wheel brands</b><span>Including Mickey Thompson</span></div>
+    </div>
+  </section>
+
+  <section class="ab-do" aria-labelledby="ab-do-h">
+    <div class="wrap">
+      <div class="eyebrow">What we do</div>
+      <h2 id="ab-do-h">Tires, wheels and service</h2>
+      <div class="ab-grid4">
+        <a href="#tires" data-view-link="tires"><svg aria-hidden="true"><use href="#i-install"/></svg><b>Tires</b><span>19 brands from Michelin to Toyo, installed at the shop or by van.</span></a>
+        <a href="#wheels" data-view-link="wheels"><svg aria-hidden="true"><use href="#i-wheel"/></svg><b>Wheels</b><span>27 wheel brands, including custom wheel sourcing and lift kits.</span></a>
+        <a href="#services" data-view-link="services"><svg aria-hidden="true"><use href="#i-align"/></svg><b>Service</b><span>Alignment, brakes, suspension, TPMS, balancing and more at the shop.</span></a>
+        <a href="#mobile" data-view-link="mobile"><svg aria-hidden="true"><use href="#i-van"/></svg><b>Mobile</b><span>Installation, balancing, repairs and oil changes where you are.</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-why" aria-labelledby="ab-why-h">
+    <div class="wrap">
+      <div class="eyebrow">Why Extreme</div>
+      <h2 id="ab-why-h">A shop and a van, working together</h2>
+      <div class="ab-grid3">
+        <div><h3>Shop and mobile</h3><p>Come to Sunrise, or have the van bring the tires and balancer to your driveway, office or job site.</p></div>
+        <div><h3>Hunter alignment</h3><p>The shop aligns with Hunter Engineering equipment (Hawkeye) for cars, trucks and lifted vehicles.</p></div>
+        <div><h3>People you can name</h3><p>Customers mention Simon, Jason, Adam and Alvaro by first name. Meet the team below.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-team" id="ab-team" aria-labelledby="ab-team-h">
+    <div class="wrap">
+      <div class="sec-head"><div><div class="eyebrow">Meet the team</div><h2 id="ab-team-h">The people behind the counter</h2><p>First names customers mention. Roles, photos and bios are for the team to supply.</p></div><span class="sample-note">Roles marked &ldquo;to confirm&rdquo; need Simon</span></div>
+      <ul class="ab-people" id="ab-people"></ul>
+    </div>
+  </section>
+
+  <section class="ab-story" aria-labelledby="ab-story-h">
+    <div class="wrap ab-two">
+      <div>
+        <div class="eyebrow">Our story</div>
+        <h2 id="ab-story-h">Serving South Florida since 2007</h2>
+        <p class="ab-small">The site's copyright line starts in 2007. <span class="sample-note">Confirm founding year</span></p>
+      </div>
+      <div class="ab-ph" role="note">
+        <span class="sample-note">Placeholder: to be written by Extreme</span>
+        <p>Two or three short paragraphs go here. Suggested prompts for the owner: how the shop started, why the mobile van was added, and what a customer should expect when they walk in.</p>
+        <div class="ab-lines" aria-hidden="true"><i></i><i></i><i></i><i style="width:60%"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-commit" aria-labelledby="ab-commit-h">
+    <div class="wrap">
+      <div class="ab-ph ab-ph-dark" role="note">
+        <span class="sample-note">Placeholder: owner to confirm</span>
+        <h2 id="ab-commit-h">Our commitment</h2>
+        <p>One short promise to customers goes here, in the shop's own words. We have not written it for you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fn-links" aria-label="Next steps">
+    <div class="wrap">
+      <a href="#locations" data-view-link="locations"><svg aria-hidden="true"><use href="#i-lift"/></svg><span><b>Visit the shop</b>Hours and directions</span></a>
+      <a href="#reviews" data-view-link="reviews"><svg aria-hidden="true"><use href="#i-pay"/></svg><span><b>Read reviews</b>Ratings from public listings</span></a>
+      <a href="#contact" data-view-link="contact"><svg aria-hidden="true"><use href="#i-repair"/></svg><span><b>Contact us</b>Call, text or message</span></a>
+    </div>
+  </section>
+
+</section>
+
+<!-- ================= LOCATIONS ================= -->
+<section id="view-locations" data-view="locations" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Locations</span></nav>
+      <h1>Locations &amp; directions</h1>
+      <p>Visit the shop in Sunrise, or have the van come to you across Broward, Miami-Dade and Palm Beach.</p>
+      <div class="btns"><a class="btn btn-red" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Get directions<span class="fn-vh"> (opens Google Maps in a new tab)</span></a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+    </div>
+  </div>
+
+  <section class="lc-main" aria-labelledby="lc-h">
+    <div class="wrap lc-grid">
+      <article class="card lc-card">
+        <div class="eyebrow">Sunrise shop</div>
+        <h2 id="lc-h">Extreme Tires</h2>
+        <address>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</address>
+        <p class="lc-phone"><a href="tel:+19547731896">(954) 773-1896</a></p>
+        <div class="lc-open" id="lc-open" aria-live="polite"><span class="lc-dot" aria-hidden="true"></span><span id="lc-open-t">Checking hours&hellip;</span></div>
+        <table class="lc-hours" id="lc-hours">
+          <caption class="lc-vh">Shop hours, Eastern Time</caption>
+          <tbody>
+            <tr data-d="1"><th scope="row">Monday</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="2"><th scope="row">Tuesday</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="3"><th scope="row">Wednesday</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="4"><th scope="row">Thursday</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="5"><th scope="row">Friday</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="6"><th scope="row">Saturday</th><td>8:00 AM &ndash; 4:00 PM</td></tr>
+            <tr data-d="0"><th scope="row">Sunday</th><td>Closed</td></tr>
+          </tbody>
+        </table>
+        <p class="lc-fine">Open/closed is based on shop hours (ET).</p>
+        <div class="btns">
+          <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Get directions<span class="fn-vh"> (opens Google Maps in a new tab)</span></a>
+          <a class="btn btn-ghost lc-gh" href="#schedule" data-view-link="schedule">Schedule a visit</a>
+        </div>
+      </article>
+      <div class="lc-side">
+      <div>
+        <div class="eyebrow">ZIP check</div>
+        <h2 id="lc-zip-h">Does the van come to you?</h2>
+        <p>Enter your ZIP to see whether it falls in our three-county route.</p>
+      </div>
+      <div class="zipbox lc-zipbox">
+        <form id="lc-zip-form" novalidate>
+          <label for="lc-zip" class="f">Your ZIP code<input id="lc-zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+          <button class="btn btn-dark" type="submit" style="align-self:end">Check</button>
+        </form>
+        <div class="zipres" id="lc-zipres" aria-live="polite"></div>
+      </div>
+      <div class="lc-near"><b>Nearby cities</b><div class="cities" id="lc-near"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lc-mapsec" aria-label="Map">
+    <div class="wrap">
+      <div class="lc-map" role="img" aria-label="Map placeholder showing the shop pin on West Oakland Park Boulevard">
+        <svg viewBox="0 100 600 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="600" height="440" class="lc-m-bg"/>
+          <g class="lc-m-blocks"><rect x="20" y="20" width="150" height="110" rx="6"/><rect x="200" y="20" width="170" height="110" rx="6"/><rect x="410" y="20" width="170" height="110" rx="6"/><rect x="20" y="260" width="150" height="150" rx="6"/><rect x="200" y="260" width="170" height="150" rx="6"/><rect x="410" y="260" width="170" height="150" rx="6"/></g>
+          <g class="lc-m-roads"><path d="M0 195H600" class="lc-m-main"/><path d="M185 0V440M390 0V440"/><path d="M0 150H600M0 240H600" class="lc-m-thin"/></g>
+          <text x="215" y="228" class="lc-m-lbl">W Oakland Park Blvd</text>
+          <g transform="translate(290 195)"><path d="M0 0c-18-22-26-34-26-46a26 26 0 0 1 52 0c0 12-8 24-26 46z" class="lc-m-pin"/><circle cx="0" cy="-46" r="9" fill="#fff"/></g>
+        </svg>
+        <span class="lc-map-tag">Map embed goes here on the live site</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="lc-area" aria-labelledby="lc-area-h">
+    <div class="wrap">
+      <div class="eyebrow">Mobile service area</div>
+      <h2 id="lc-area-h">Counties and cities we cover</h2>
+      <div class="lc-counties" id="lc-counties"></div>
+      <p class="lc-fine"><a href="#cities" data-view-link="cities">See all service cities</a></p>
+    </div>
+  </section>
+
+  <section class="lc-arrive" aria-labelledby="lc-arr-h">
+    <div class="wrap">
+      <div class="ab-ph" role="note">
+        <span class="sample-note">Placeholder: Simon to confirm</span>
+        <h2 id="lc-arr-h" style="font-size:clamp(22px,2.6vw,30px)">Parking &amp; arrival</h2>
+        <p>Where to park, which entrance to use, and where to leave your keys after hours go here. We have not guessed at any of it.</p>
+      </div>
+    </div>
+  </section>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="view-contact" data-view="contact" hidden>
+  <div class="phead">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Contact Us</span></nav>
+      <h1>Contact us</h1>
+      <p>Call, text, or send a message. For tire prices and mobile bookings, a quote request is the fastest way.</p>
+      <p class="ct-trust">4.7&#9733; from 1,319 reviews on Birdeye &middot; Mobile + shop</p>
+      <div class="btns">
+        <a class="btn btn-red" href="tel:+19547731896">Call (954) 773-1896</a>
+        <a class="btn btn-ghost" href="sms:+19547731896">Text us</a>
+        <a class="btn btn-ghost" href="https://wa.me/19547731896" target="_blank" rel="noopener">WhatsApp<span class="fn-vh"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+  </div>
+
+  <section class="ct-main" aria-labelledby="ct-form-h">
+    <div class="wrap ct-grid">
+      <aside class="ct-side">
+        <div class="ct-info"><div class="eyebrow">Visit</div><address>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</address><a href="#locations" data-view-link="locations">Directions &amp; map</a></div>
+        <div class="ct-info"><div class="eyebrow">Hours (ET)</div><div class="lc-open" id="ct-open" aria-live="polite"><span class="lc-dot" aria-hidden="true"></span><span id="ct-open-t">Checking hours&hellip;</span></div>
+          <table class="lc-hours" id="ct-hours"><caption class="lc-vh">Shop hours, Eastern Time</caption><tbody>
+            <tr data-d="1"><th scope="row">Mon</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="2"><th scope="row">Tue</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="3"><th scope="row">Wed</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="4"><th scope="row">Thu</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="5"><th scope="row">Fri</th><td>8:00 AM &ndash; 6:30 PM</td></tr>
+            <tr data-d="6"><th scope="row">Sat</th><td>8:00 AM &ndash; 4:00 PM</td></tr>
+            <tr data-d="0"><th scope="row">Sun</th><td>Closed</td></tr></tbody></table></div>
+        <div class="ct-info"><div class="eyebrow">Follow us</div>
+          <ul class="ct-social">
+            <li><a href="https://www.facebook.com/Extremetires" target="_blank" rel="noopener">Facebook<span class="fn-vh"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Instagram<span class="fn-vh"> (opens in a new tab)</span></a></li>
+            <li><a href="https://www.youtube.com/@extremetires2010" target="_blank" rel="noopener">YouTube<span class="fn-vh"> (opens in a new tab)</span></a></li>
+            <li><span class="ct-soon">Threads <small>link to add</small></span></li>
+            <li><span class="ct-soon">TikTok <small>link to add</small></span></li>
+          </ul></div>
+      </aside>
+
+      <form class="card ct-form" id="ct-form" novalidate>
+        <h2 id="ct-form-h">Send us a message</h2>
+        <p class="ct-intro">Messages are forwarded to the shop's inbox. No email address is shown on this site.</p>
+        <div class="ct-fields">
+          <label class="f" for="ct-name">Name<input id="ct-name" autocomplete="name" placeholder="Your name" required><span class="err" data-for="ct-name"></span></label>
+          <label class="f" for="ct-phone">Phone<input id="ct-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(954) 555-0123"><span class="err" data-for="ct-phone"></span></label>
+          <label class="f" for="ct-email">Email<input id="ct-email" type="email" autocomplete="email" placeholder="you@email.com"><span class="err" data-for="ct-email"></span></label>
+          <label class="f" for="ct-topic">Topic<select id="ct-topic" required><option value="">Choose a topic</option><option>Tires or pricing</option><option>Mobile service</option><option>Wheels or lift kits</option><option>Service or repair</option><option>Financing</option><option>Coupons or rebates</option><option>Something else</option></select><span class="err" data-for="ct-topic"></span></label>
+        </div>
+        <label class="f" for="ct-msg" style="margin-top:18px">Message<textarea id="ct-msg" rows="5" placeholder="Vehicle, tire size, what is going on, or your question" required></textarea><span class="err" data-for="ct-msg"></span></label>
+        <fieldset class="ct-pref"><legend>Best way to reach you</legend>
+          <label><input type="radio" name="ct-pref" value="Phone call" checked> Phone call</label>
+          <label><input type="radio" name="ct-pref" value="Text"> Text</label>
+          <label><input type="radio" name="ct-pref" value="Email"> Email</label>
+        </fieldset>
+        <label class="chk ct-consent" for="ct-consent"><input type="checkbox" id="ct-consent"> <span>I agree to receive text messages about my request. Msg &amp; data rates may apply. Reply STOP to opt out.</span></label>
+        <span class="err" data-for="ct-consent"></span>
+        <button class="btn btn-red" type="submit" style="margin-top:14px">Send message</button>
+        <div class="done" id="ct-done" hidden role="status"></div>
+        <p class="ct-fine"><span class="sample-note">Prototype</span> On the live site, submissions are forwarded to the shop's inbox.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="faq" aria-labelledby="ct-faq-h">
+    <div class="wrap">
+      <div class="eyebrow">Quick answers</div>
+      <h2 id="ct-faq-h" style="font-size:clamp(26px,3.2vw,40px);font-weight:800;margin-bottom:12px">Before you reach out</h2>
+      <details><summary>What are your hours?</summary><p>Monday to Friday 8:00 AM to 6:30 PM, Saturday 8:00 AM to 4:00 PM, closed Sunday. Eastern Time.</p></details>
+      <details><summary>Do you come to my area?</summary><p>The van serves Broward, Miami-Dade and Palm Beach counties. <a href="#locations" data-view-link="locations" data-anchor="lc-zip-h">Check your ZIP</a> or ask us.</p></details>
+      <details><summary>Can I bring my own tires?</summary><p>Ask us. Call or text the shop before you buy so we can tell you what we can do.</p></details>
+      <details><summary>What is the fastest way to get a price?</summary><p>Send a <a href="#quote" data-view-link="quote">quote request</a> with your vehicle and tire size, or call the shop during open hours.</p></details>
+    </div>
+  </section>
+</section>
+
+<!-- ===== part d ===== -->
+<!-- ===== Agent D views ===== -->
+<section id="view-gallery" data-view="gallery" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>News &amp; Gallery</span></nav>
+    <h1>News &amp; Gallery</h1>
+    <p>Builds from the Sunrise shop and the mobile van, plus updates written by the Extreme team.</p>
+    <div class="btns"><a class="btn btn-red" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Follow @extremetires</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+    <p class="gl-proof">4.7&#9733; from 1,319 reviews on Birdeye &middot; Shop + mobile van &middot; Sunrise, FL</p>
+    <span class="sample-note" style="justify-self:start">Sample tiles shown in this prototype</span>
+  </div></div>
+  <div class="d-sec"><div class="wrap">
+    <div class="gl-tabs" role="tablist" aria-label="News and gallery">
+      <button type="button" role="tab" id="gl-tab-gallery" aria-selected="true" aria-controls="gl-panel-gallery" data-tab="gallery">Gallery</button>
+      <button type="button" role="tab" id="gl-tab-news" aria-selected="false" aria-controls="gl-panel-news" data-tab="news" tabindex="-1">News</button>
+    </div>
+
+    <div role="tabpanel" id="gl-panel-gallery" aria-labelledby="gl-tab-gallery">
+      <div class="gl-top">
+        <div class="gl-chips" id="gl-chips" role="group" aria-label="Filter gallery by category"></div>
+      </div>
+      <div class="gl-grid" id="gl-grid"></div>
+      <div class="gl-more"><button type="button" class="btn btn-dark" id="gl-more">Load more</button></div>
+      <p class="gl-sync" id="gl-sync"><span><b>Auto-synced from Instagram every 6 hours</b> &middot; <b>#nogallery</b> hides a post &middot; sample tiles shown</span></p>
+    </div>
+
+    <div role="tabpanel" id="gl-panel-news" aria-labelledby="gl-tab-news" hidden>
+      <div class="sec-head" style="margin-bottom:24px"><div><div class="eyebrow">News</div><h2 class="d-h2">From the shop</h2><p>Real posts will be written by the Extreme team. The cards below are layout placeholders only.</p></div></div>
+      <div class="gl-news">
+        <article class="gl-post"><div class="ph" role="img" aria-label="Image placeholder">Image placeholder</div><div class="b"><span class="sample-note" style="justify-self:start">Placeholder</span><h3>Post title</h3><div class="meta">Written by Extreme &middot; Date placeholder</div><p>Short summary of the post goes here.</p></div></article>
+        <article class="gl-post"><div class="ph" role="img" aria-label="Image placeholder">Image placeholder</div><div class="b"><span class="sample-note" style="justify-self:start">Placeholder</span><h3>Post title</h3><div class="meta">Written by Extreme &middot; Date placeholder</div><p>Short summary of the post goes here.</p></div></article>
+        <article class="gl-post"><div class="ph" role="img" aria-label="Image placeholder">Image placeholder</div><div class="b"><span class="sample-note" style="justify-self:start">Placeholder</span><h3>Post title</h3><div class="meta">Written by Extreme &middot; Date placeholder</div><p>Short summary of the post goes here.</p></div></article>
+      </div>
+      <div class="gl-plan">
+        <div>
+          <h3>Plan for the old blog</h3>
+          <p>The current site has 97 thin posts. For the new site we plan to cut them down to the 10&ndash;15 that are actually useful to customers.</p>
+          <ul><li>Keep and refresh posts that answer real customer questions.</li><li>Retire thin or duplicate posts, with redirects where a good match exists.</li><li>Publish new posts only when there is something real to say.</li></ul>
+          <p style="margin-top:12px"><span class="sample-note">Simon / Melissa to choose which posts stay</span></p>
+        </div>
+        <div class="stat"><b>97 &rarr; 10&ndash;15</b><span style="color:#cfcfcf">posts, planned</span></div>
+      </div>
+    </div>
+
+    <div class="gl-cta">
+      <div><h3>Submit your build</h3><p>Tag <b>#extremetires</b> on Instagram and we may feature it. We get your permission before featuring any customer photos.</p></div>
+      <a class="btn btn-dark" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Tag us on Instagram</a>
+    </div>
+  </div></div>
+</section>
+
+<div class="gl-lb" id="gl-lb" role="dialog" aria-modal="true" aria-label="Gallery photo" aria-hidden="true">
+  <button type="button" class="x" id="gl-lb-x">Close</button>
+  <button type="button" class="nav prev" id="gl-lb-prev" aria-label="Previous photo">&larr;</button>
+  <button type="button" class="nav next" id="gl-lb-next" aria-label="Next photo">&rarr;</button>
+  <figure><img id="gl-lb-img" alt=""><figcaption><span id="gl-lb-cap"></span><span class="cnt" id="gl-lb-cnt"></span><a class="btn btn-red" id="gl-lb-link" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">View on Instagram</a></figcaption></figure>
+</div>
+
+<section id="view-cities" data-view="cities" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Service Area</span></nav>
+    <h1>Where we bring the shop to you</h1>
+    <p>Mobile tire service across Broward, Miami-Dade and Palm Beach counties, backed by our Sunrise shop.</p>
+  </div></div>
+  <div class="d-sec"><div class="wrap">
+    <div class="ci-zip">
+      <div><h2>Check your ZIP</h2><p>Enter your ZIP code to see if your address is in our regular mobile service area.</p><p class="ci-proof">4.7&#9733; from 1,319 reviews on Birdeye &middot; Questions? Call (954) 773-1896</p></div>
+      <div>
+        <form id="ci-form" novalidate><label class="f" for="ci-zip" style="color:#fff">ZIP code<input id="ci-zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label><button class="btn btn-red" type="submit">Check</button></form>
+        <div class="zipres" id="ci-res" aria-live="polite"></div>
+      </div>
+    </div>
+    <div id="ci-groups"></div>
+  </div></div>
+</section>
+
+<section id="view-city" data-view="city" hidden>
+  <div id="cy-root"></div>
+</section>
+
+<section id="view-terms" data-view="terms" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Terms of Use</span></nav>
+    <h1>Terms of Use</h1>
+    <p>The rules for using the Extreme Tires website, requesting quotes and booking service.</p>
+  </div></div>
+  <div class="lg-banner" role="note"><div class="wrap"><span aria-hidden="true">&#9888;</span><span>Draft structure for attorney review. Not final legal text.</span></div></div>
+  <div class="wrap lg-layout">
+    <nav class="lg-toc" aria-label="On this page"><h2>On this page</h2><p class="lg-call">Questions? Call <b><a href="tel:+19547731896">(954) 773-1896</a></b></p><ol><li><a href="#tm-use" data-go="terms">1. Use of this website</a></li><li><a href="#tm-quotes" data-go="terms">2. Quotes and pricing</a></li><li><a href="#tm-book" data-go="terms">3. Appointments and mobile bookings</a></li><li><a href="#tm-promos" data-go="terms">4. Coupons, rebates and promotions</a></li><li><a href="#tm-fin" data-go="terms">5. Financing through a third party</a></li><li><a href="#tm-links" data-go="terms">6. Third-party links</a></li><li><a href="#tm-ip" data-go="terms">7. Content and intellectual property</a></li><li><a href="#tm-liab" data-go="terms">8. Limitation of liability</a></li><li><a href="#tm-law" data-go="terms">9. Governing law and disputes</a></li><li><a href="#tm-changes" data-go="terms">10. Changes to these terms</a></li><li><a href="#tm-contact" data-go="terms">11. Contact</a></li></ol></nav>
+    <div class="lg-doc">
+      <p class="lg-meta">Effective date: <span class="lg-ph">[Date]</span> &middot; Last updated: <span class="lg-ph">[Date]</span></p>
+<section id="tm-use"><h2>1. Use of this website</h2><p>Outline of the rules for browsing and using extremetires.com, including eligibility, acceptable use and account-free browsing. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-quotes"><h2>2. Quotes and pricing</h2><p>Online quotes and displayed prices are estimates and are subject to confirmation by Extreme Tires. Availability, taxes, fees and final out-the-door price to be confirmed before work begins. <span class="lg-ph">[Attorney to complete]</span></p><ul><li>Quote validity period: <span class="lg-ph">[X days]</span></li><li>Fees and taxes disclosure: <span class="lg-ph">[Attorney to complete]</span></li></ul></section><section id="tm-book"><h2>3. Appointments and mobile bookings</h2><p>Terms for scheduling shop appointments and mobile service windows, including arrival windows, access to the vehicle, rescheduling and cancellation. <span class="lg-ph">[Attorney to complete]</span></p><ul><li>Cancellation / no-show policy: <span class="lg-ph">[Simon to confirm]</span></li><li>Mobile service area and ZIP eligibility: <span class="lg-ph">[Attorney to complete]</span></li></ul></section><section id="tm-promos"><h2>4. Coupons, rebates and promotions</h2><p>General terms for coupons, manufacturer rebates and promotions: one-per-customer, expiration, combinability, exclusions. Specific offers will have their own terms. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-fin"><h2>5. Financing through a third party</h2><p>Financing and lease-to-own options are offered by a third party, Kafene. Extreme Tires does not set the terms, approval decisions or rates. Customers should review the provider&rsquo;s own terms before applying. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-links"><h2>6. Third-party links</h2><p>This site may link to websites we do not control (for example social networks, review sites and financing providers). We are not responsible for their content or practices. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-ip"><h2>7. Content and intellectual property</h2><p>Ownership of site text, logos, photos and trademarks; permission needed to reuse; customer-submitted photos used only with permission. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-liab"><h2>8. Limitation of liability</h2><p>Outline of disclaimers and limits of liability for site use and information provided online. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-law"><h2>9. Governing law and disputes</h2><p>Governing law (State of Florida) and venue, dispute resolution and any arbitration language. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-changes"><h2>10. Changes to these terms</h2><p>How changes are posted, and how continued use is treated. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="tm-contact"><h2>11. Contact</h2><p>Extreme Tires, 7712 West Oakland Park Blvd, Sunrise, FL 33351 &middot; (954) 773-1896.</p></section>
+    </div>
+  </div>
+</section>
+<section id="view-privacy" data-view="privacy" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Privacy</span></nav>
+    <h1>Privacy Policy</h1>
+    <p>What information the Extreme Tires website collects, how it is used, and the choices you have.</p>
+  </div></div>
+  <div class="lg-banner" role="note"><div class="wrap"><span aria-hidden="true">&#9888;</span><span>Draft structure for attorney review. Not final legal text.</span></div></div>
+  <div class="wrap lg-layout">
+    <nav class="lg-toc" aria-label="On this page"><h2>On this page</h2><p class="lg-call">Questions? Call <b><a href="tel:+19547731896">(954) 773-1896</a></b></p><ol><li><a href="#pv-collect" data-go="privacy">1. Information we collect</a></li><li><a href="#pv-use" data-go="privacy">2. How we use information</a></li><li><a href="#pv-share" data-go="privacy">3. How we share information</a></li><li><a href="#pv-sms" data-go="privacy">4. Text messaging</a></li><li><a href="#pv-cookies" data-go="privacy">5. Cookies and analytics</a></li><li><a href="#privacy-choices" data-go="privacy">6. Your Privacy Choices</a></li><li><a href="#pv-retention" data-go="privacy">7. Data retention and security</a></li><li><a href="#pv-children" data-go="privacy">8. Children&rsquo;s privacy</a></li><li><a href="#pv-changes" data-go="privacy">9. Changes to this policy</a></li><li><a href="#pv-contact" data-go="privacy">10. Contact us</a></li></ol></nav>
+    <div class="lg-doc">
+      <p class="lg-meta">Effective date: <span class="lg-ph">[Date]</span> &middot; Last updated: <span class="lg-ph">[Date]</span></p>
+<section id="pv-collect"><h2>1. Information we collect</h2><p>Outline of the categories of information collected: </p><ul><li>Forms: contact, quote requests and appointment / mobile booking details (name, phone, email, vehicle, ZIP, service requested).</li><li>SMS and email sign-ups: mobile number and email address, with the consent you give.</li><li>Analytics and cookies: device, browser and page-visit information.</li><li>Information you choose to send us, such as photos you submit for the gallery.</li></ul><p><span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-use"><h2>2. How we use information</h2><p>Outline of purposes: responding to quotes and bookings, scheduling service, sending confirmations and reminders, improving the site, and (with consent) marketing. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-share"><h2>3. How we share information</h2><p>Outline of service providers and other disclosures (scheduling, messaging, email, financing applications handled by Kafene, analytics), and legal requests. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-sms"><h2>4. Text messaging</h2><p>Text messaging outline: you opt in by providing your number and agreeing on a form; message frequency varies; <b>message &amp; data rates may apply</b>; reply <b>STOP</b> to opt out and <b>HELP</b> for help; consent is not a condition of purchase. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-cookies"><h2>5. Cookies and analytics</h2><p>Outline of cookie categories (necessary, analytics, marketing), how to manage them in your browser, and how we treat browser opt-out signals. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="privacy-choices"><h2>6. Your Privacy Choices</h2><p>Outline of rights and choices available to residents (access, deletion, correction, opt-out of sale / sharing, limit use of sensitive data) and how to submit a request. <span class="lg-ph">[Attorney to complete]</span></p><div class="lg-choice" id="pv-choice-box">
+  <div class="row"><div><b id="pv-sw-l">Do not sell or share my personal information</b><small>Sample control. The live site will connect this to the real privacy tooling.</small></div>
+  <button type="button" class="lg-sw" id="pv-sw" role="switch" aria-checked="false" aria-labelledby="pv-sw-l"></button></div>
+  <div class="status" id="pv-status" role="status" aria-live="polite"></div>
+  <span class="sample-note" style="justify-self:start">Sample toggle &middot; prototype only, nothing was saved</span>
+</div></section><section id="pv-retention"><h2>7. Data retention and security</h2><p>Outline of how long information is kept and the safeguards used. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-children"><h2>8. Children&rsquo;s privacy</h2><p>This site is not directed to children, and we do not knowingly collect personal information from children. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-changes"><h2>9. Changes to this policy</h2><p>How updates are posted and dated. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="pv-contact"><h2>10. Contact us</h2><p>Extreme Tires, 7712 West Oakland Park Blvd, Sunrise, FL 33351 &middot; (954) 773-1896. Privacy request contact: <span class="lg-ph">[Attorney / Simon to confirm]</span></p></section>
+    </div>
+  </div>
+</section>
+<section id="view-accessibility" data-view="accessibility" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Accessibility</span></nav>
+    <h1>Accessibility</h1>
+    <p>Our commitment to a website that works for everyone.</p>
+  </div></div>
+  <div class="lg-banner" role="note"><div class="wrap"><span aria-hidden="true">&#9888;</span><span>Draft structure for attorney review. Not final legal text.</span></div></div>
+  <div class="wrap lg-layout">
+    <nav class="lg-toc" aria-label="On this page"><h2>On this page</h2><p class="lg-call">Questions? Call <b><a href="tel:+19547731896">(954) 773-1896</a></b></p><ol><li><a href="#ac-commit" data-go="accessibility">1. Our commitment</a></li><li><a href="#ac-standards" data-go="accessibility">2. Standards and target</a></li><li><a href="#ac-measures" data-go="accessibility">3. What we are doing</a></li><li><a href="#ac-known" data-go="accessibility">4. Known issues</a></li><li><a href="#ac-help" data-go="accessibility">5. Need help or want to report a barrier?</a></li><li><a href="#ac-review" data-go="accessibility">6. Last reviewed</a></li></ol></nav>
+    <div class="lg-doc">
+      <p class="lg-meta">Effective date: <span class="lg-ph">[Date]</span> &middot; Last updated: <span class="lg-ph">[Date]</span></p>
+<section id="ac-commit"><h2>1. Our commitment</h2><p>Extreme Tires wants everyone to be able to find tire, wheel and service information and to request a quote or appointment. We are working to make this website usable by people with a wide range of abilities and assistive technologies.</p></section><section id="ac-standards"><h2>2. Standards and target</h2><p>Our <b>target</b> is to meet the Web Content Accessibility Guidelines (WCAG) 2.1 Level AA. This is a goal, not a certification: <span class="lg-ph">[target &mdash; verify via independent audit]</span>.</p></section><section id="ac-measures"><h2>3. What we are doing</h2><ul><li>Keyboard-operable navigation, forms and dialogs, with visible focus.</li><li>Headings, landmarks and labels intended for screen readers.</li><li>Text contrast and resizable text; motion that respects reduced-motion settings.</li><li>Alternative text for meaningful images.</li></ul><p>Items above describe design intent for the prototype and need confirmation in an audit. <span class="lg-ph">[Attorney to complete]</span></p></section><section id="ac-known"><h2>4. Known issues</h2><p>Known issues list: <span class="lg-ph">[To be completed after audit]</span></p></section><section id="ac-help"><h2>5. Need help or want to report a barrier?</h2><p>Call us at <b>(954) 773-1896</b> during store hours (Mon&ndash;Fri 8:00 AM&ndash;6:30 PM, Sat 8:00 AM&ndash;4:00 PM, Sun closed) and we will help you get the information or service you need, or use the <a href="#contact" data-view-link="contact"><b>contact page</b></a>. Please tell us the page and the problem you ran into.</p></section><section id="ac-review"><h2>6. Last reviewed</h2><p>This statement was last reviewed on <span class="lg-ph">[Date]</span>.</p></section>
+    </div>
+  </div>
+</section>
+
+<section id="view-sitemap" data-view="sitemap" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Sitemap</span></nav>
+    <h1>Sitemap</h1>
+    <p>Every page on the site, in one place.</p>
+  </div></div>
+  <div class="d-sec"><div class="wrap">
+    <div class="sm-grid" id="sm-grid"></div>
+    <p class="sm-count" id="sm-count"></p>
+  </div></div>
+</section>
+
+<section id="view-notfound" data-view="notfound" hidden>
+  <div class="phead"><div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Page not found</span></nav>
+    <h1>We can&rsquo;t find that page</h1>
+    <p>The link may be old or mistyped. Here is where most people are headed.</p>
+  </div></div>
+  <div class="d-sec"><div class="wrap">
+    <div class="nf-hero">
+      <div>
+        <a class="btn btn-red" href="tel:+19547731896">Call (954) 773-1896</a>
+        <h2 class="d-h3" style="margin-top:28px">Popular pages</h2>
+        <div class="nf-links">
+          <a href="#tires" data-view-link="tires"><svg aria-hidden="true"><use href="#i-wheel"/></svg>Shop tires</a>
+          <a href="#mobile" data-view-link="mobile"><svg aria-hidden="true"><use href="#i-van"/></svg>Mobile service</a>
+          <a href="#services" data-view-link="services"><svg aria-hidden="true"><use href="#i-repair"/></svg>Auto services</a>
+          <a href="#quote" data-view-link="quote"><svg aria-hidden="true"><use href="#i-pay"/></svg>Request a quote</a>
+          <a href="#locations" data-view-link="locations"><svg aria-hidden="true"><use href="#i-lift"/></svg>Location &amp; hours</a>
+          <a href="#contact" data-view-link="contact"><svg aria-hidden="true"><use href="#i-install"/></svg>Contact us</a>
+        </div>
+      </div>
+      <div>
+        <div class="nf-code" aria-hidden="true">4<i>0</i>4</div>
+        <div class="btns" style="margin-top:22px"><a class="btn btn-dark" href="#home" data-view-link="home">Back to home</a></div>
+        <p class="nf-note"><b>Dev note:</b> this branded page replaces the old site&rsquo;s plain &ldquo;Page not found&rdquo; text, which leaked into live pages.</p>
+      </div>
+    </div>
+    <div style="margin-top:56px">
+      <h2 class="d-h3">Report a broken link</h2>
+      <p class="d-lead">Tell us where you found the link and we will fix it.</p>
+      <form class="nf-report" id="nf-form" novalidate style="margin-top:16px">
+        <label class="f" for="nf-url">Page or link that did not work<input id="nf-url" placeholder="Where did you click?"></label>
+        <label class="f" for="nf-msg">What did you expect to see? (optional)<textarea id="nf-msg" rows="3"></textarea></label>
+        <div class="err" id="nf-err" role="alert"></div>
+        <div><button class="btn btn-dark" type="submit">Report link</button></div>
+        <div class="ok" id="nf-ok" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div></div>
+</section>
+
+<!-- ================= REQUEST A QUOTE ================= -->
+<section id="view-quote" data-view="quote" hidden>
+  <div class="q-head">
+    <div class="wrap">
+      <div>
+        <h1>Request a Quote</h1>
+        <p>Answer a few questions so our team can understand your needs and contact you.</p>
+        <div style="font-weight:700;font-size:18px">(954) 773-1896</div>
+        <div>7712 West Oakland Park Blvd, Sunrise, FL 33351</div>
+      </div>
+      <div class="hours"><b>STORE HOURS</b>Mon–Fri: 8:00 AM–6:30 PM<br>Sat: 8:00 AM–4:00 PM<br>Sun: Closed</div>
+    </div>
+  </div>
+  <div class="q-photo"><img src="{% endraw %}{{ 'et-v1-img-2.jpg' | asset_url }}{% raw %}" alt="Extreme Tires storefront" width="1400" height="523"></div>
+
+  <div class="q-intro">
+    <div class="wrap">
+      <div class="eyebrow">Extreme Tires · Sunrise, FL</div>
+      <h2>A better quote starts with the right details.</h2>
+      <p>Share a few details about your vehicle and service needs so our team can provide a more accurate quote with less back-and-forth.</p>
+      <div class="checks"><div>Tires, wheels and auto service</div><div>Mobile service at your location</div><div>Pricing confirmed by our team</div><div>Shop now, pay later available</div></div>
+    </div>
+  </div>
+
+  <form id="quote-form" novalidate>
+    <div class="q-body">
+      <div class="wrap">
+        <h3>What do you need help with?</h3>
+        <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip it and describe the symptoms below.</p>
+        <div class="pick" id="pick"></div>
+        <div class="form-grid">
+          <label class="f" for="q-first">First name<input id="q-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="q-first"></span></label>
+          <label class="f" for="q-last">Last name<input id="q-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="q-last"></span></label>
+          <label class="f" for="q-phone">Phone number<input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="q-phone"></span></label>
+          <label class="f" for="q-email">Email<input id="q-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="q-email"></span></label>
+          <label class="f" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
+          <label class="f" for="q-when">When do you need service?<select id="q-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="q-when"></span></label>
+        </div>
+        <label class="chk" for="q-mobile"><input type="checkbox" id="q-mobile" name="mobile"> I'd prefer mobile service at my location</label>
+      </div>
+    </div>
+    <div class="q-what">
+      <div class="wrap">
+        <h3>What is happening with the vehicle?</h3>
+        <div class="sym">
+          <label for="sy1"><input type="checkbox" id="sy1"> Flat, leak, or tire damage</label>
+          <label for="sy2"><input type="checkbox" id="sy2"> Need new tires or pricing</label>
+          <label for="sy3"><input type="checkbox" id="sy3"> Vibration, balancing, or rotation</label>
+          <label for="sy4"><input type="checkbox" id="sy4"> Brakes, alignment, suspension, or other service</label>
+        </div>
+        <label class="f" for="q-details" style="margin-top:22px;color:#bbb">Vehicle and service details
+          <textarea id="q-details" placeholder="Vehicle year/make/model, tire size, symptoms, or service needed"></textarea></label>
+      </div>
+    </div>
+    <div class="q-submit">
+      <div class="wrap">
+        <button class="btn btn-red" type="submit">Request My Quote</button>
+        <p>Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
+        <div class="done" id="done" hidden role="status"></div>
+      </div>
+    </div>
+  </form>
+</section>
+</main>
+
+<div class="brands" aria-label="Tire brands we carry"><div class="wrap"><img src="{% endraw %}{{ 'et-v1-img-5.jpg' | asset_url }}{% raw %}" alt="Continental, Pirelli, Nexen and Nitto" width="2720" height="178"></div></div>
+
+<footer id="visit">
+  <div class="wrap foot">
+    <div><h4>Tires &amp; Wheels</h4><ul><li><a href="#tires" data-view-link="tires">Shop Tires</a></li><li><a href="#wheels" data-view-link="wheels">Shop Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial Tires</a></li><li><a href="#brands" data-view-link="brands">Tire Brands</a></li><li><a href="#tires" data-view-link="tires">Tire Size</a></li><li><a href="#tips" data-view-link="tips">Tire Care Tips</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile Tire Service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire Installation</a></li><li><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair">Tire Repair</a></li><li><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation">Tire Rotation</a></li><li><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing">Tire Balancing</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel Alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake Repair</a></li><li><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair">Suspension Repair</a></li><li><a href="#services" data-view-link="services">View All Services</a></li></ul></div>
+    <div><h4>About &amp; Support</h4><ul><li><a href="#about" data-view-link="about">About Us</a></li><li><a href="#locations" data-view-link="locations">Locations</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#gallery" data-view-link="gallery">News &amp; Gallery</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact Us</a></li></ul></div>
+    <div class="visit"><h4>Visit &amp; Contact</h4>
+      <div><small>Phone number</small><b>(954) 773-1896</b></div>
+      <div><small>Our location</small><b>7712 West Oakland Park Blvd<br>Sunrise, FL 33351</b></div>
+      <div><small>Store hours</small><b>Mon–Fri: 8:00 AM–6:30 PM<br>Sat: 8:00 AM–4:00 PM<br>Sun: Closed</b></div>
+      <div><small>Socials</small>
+        <div class="socials">
+          <a href="#visit" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M14 8V6c0-.8.2-1.3 1.4-1.3H17V1.2C16.7 1.1 15.6 1 14.4 1 11.8 1 10 2.6 10 5.5V8H7v3.6h3V23h4V11.6h3l.5-3.6z"/></svg></a>
+          <a href="#visit" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/></svg></a>
+          <a href="#visit" aria-label="Threads"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="2" d="M17 8.5C16 5.5 14 4 12 4 7.6 4 5 7.3 5 12s2.6 8 7 8c3.4 0 6-2 6-5 0-2.3-1.8-3.9-5-3.9-2.2 0-3.5 1-3.5 2.4 0 1.3 1.1 2.1 2.6 2.1 2.6 0 3.9-2.3 3.4-6"/></svg></a>
+          <a href="#visit" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M16 2h-3.3v13.2a2.9 2.9 0 1 1-2.1-2.8V9a6.3 6.3 0 1 0 5.4 6.2V8.6a7.9 7.9 0 0 0 4.4 1.4V6.7A4.6 4.6 0 0 1 16 2z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="legal"><div class="wrap">
+    <span>Copyright © 2007–2026 Extreme Tires</span><a href="#terms" data-view-link="terms">Terms of Use</a><a href="#privacy" data-view-link="privacy">Privacy</a><a href="#privacy/choices" data-view-link="privacy" data-param="choices">Your Privacy Choices</a><a href="#accessibility" data-view-link="accessibility">Accessibility</a><a href="#sitemap" data-view-link="sitemap">Sitemap</a>
+  </div></div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Gallery photo" aria-hidden="true">
+  <button class="x" type="button" id="lb-x">Close</button>
+  <figure><img id="lb-img" alt=""><figcaption><span id="lb-cap"></span><a class="btn btn-red" id="lb-link" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">View on Instagram</a></figcaption></figure>
+</div>
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Your tire quote" aria-hidden="true">
+  <header><h2>Your set of 4</h2><button type="button" id="drawer-close">Close</button></header>
+  <div class="body" id="drawer-body"></div>
+  <footer>
+    <a class="btn btn-red" href="#quote" data-view-link="quote" id="drawer-book">Book install</a>
+    <small style="color:var(--steel)">Sample pricing. Tax at Broward's 7% rate. Final price confirmed by our team.</small>
+  </footer>
+</aside>
+
+
+
+<nav class="actionbar" id="actionbar" aria-label="Quick actions">
+  <a href="tel:+19547731896">Call</a>
+  <a href="sms:+19547731896">Text</a>
+  <a class="q" href="#quote" data-view-link="quote">Get a Quote</a>
+</nav>
+
+
+
+
+
+
+
+
+
+{% endraw %}
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":["TireShop","AutoRepair"],"name":"Extreme Tires","url":"https://www.extrememobiletires.com/","telephone":"+1-954-773-1896","priceRange":"$$",
+ "address":{"@type":"PostalAddress","streetAddress":"7712 West Oakland Park Blvd","addressLocality":"Sunrise","addressRegion":"FL","postalCode":"33351","addressCountry":"US"},
+ "geo":{"@type":"GeoCoordinates","latitude":26.0928,"longitude":-80.238},
+ "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"08:00","closes":"16:00"}],
+ "areaServed":["Broward County, FL","Miami-Dade County, FL","Palm Beach County, FL"],
+ "sameAs":["https://www.facebook.com/Extremetires/","https://www.instagram.com/extremetires","https://youtube.com/@extremetires2010"]}
+</script>
+<script src="{{ 'et-v1.js' | asset_url }}"></script>
+{% schema %}
+{"name": "Extreme Tires v1", "tag": "div", "class": "et-v1"}
+{% endschema %}

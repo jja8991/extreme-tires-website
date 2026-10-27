@@ -1,0 +1,12 @@
+{
+  "layout": "et-v1",
+  "sections": {
+    "main": {
+      "type": "et-v1",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
