@@ -153,9 +153,9 @@ function renderService(param){
      '</div></aside>'+
    '</div>'+
    '<div class="wrap"><nav class="sp-pn" aria-label="More services"><a '+link(ps)+'><small>&larr; Previous</small><b>'+h(prev.name)+'</b></a><a class="nx" '+link(ns)+'><small>Next &rarr;</small><b>'+h(next.name)+'</b></a></nav></div>'+
-   '<section class="sp-related" aria-labelledby="sp-rel-h"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Related</div><h2 id="sp-rel-h" style="font-size:clamp(24px,2.8vw,34px);font-weight:800">Often done together</h2></div><a class="btn btn-dark" href="#services" data-view-link="services">All services</a></div>'+
+   '<section class="sp-related" aria-labelledby="sp-rel-h"><div class="wrap"><div class="sec-head"><div><div class="eyebrow">Related</div><h2 id="sp-rel-h" style="font-size:clamp(24px,2.8vw,34px)">Often done together</h2></div><a class="btn btn-dark" href="#services" data-view-link="services">All services</a></div>'+
      '<div class="sp-rel-grid">'+s.rel.slice(0,3).map(function(r){return card(r,SV[r].mode==='both')}).join('')+'</div></div></section>'+
-   '<section class="sp-faqsec" aria-labelledby="sp-faq-h"><div class="wrap sp-faq" style="max-width:900px"><h2 id="sp-faq-h" style="font-size:clamp(24px,2.8vw,34px);font-weight:800;margin-bottom:14px">Common questions</h2>'+
+   '<section class="sp-faqsec" aria-labelledby="sp-faq-h"><div class="wrap sp-faq" style="max-width:900px"><h2 id="sp-faq-h" style="font-size:clamp(24px,2.8vw,34px);margin-bottom:14px">Common questions</h2>'+
          s.faq.map(function(q,n){return '<details'+(n===0?' open':'')+'><summary>'+h(q[0])+'</summary><p>'+h(q[1])+'</p></details>'}).join('')+'</div></section>';
 }
 ET.onShow.service=function(param){renderService(param)};
@@ -384,7 +384,7 @@ var IC={
  brake:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="10"/><path d="M24 19v7M24 29.5v.5"/><path d="M10 14a16 16 0 0 0 0 20M38 14a16 16 0 0 1 0 20"/></svg>',
  battery:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><rect x="6" y="17" width="36" height="22" rx="2"/><path d="M12 17v-4h6v4M30 17v-4h6v4M13 28h7M30 28h7M33.5 24.5v7"/></svg>',
  oil:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M6 20l4 2h6l4-5h10l4 4 8-5-1 12-7-1v8H14l-2-8z"/><path d="M40 33c-2 3-3 4-3 6a3 3 0 0 0 6 0c0-2-1-3-3-6z"/></svg>',
- abs:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="13"/><path d="M9 14a18 18 0 0 0 0 20M39 14a18 18 0 0 1 0 20"/><text x="24" y="28" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-weight="800" font-size="10" fill="currentColor" stroke="none">ABS</text></svg>'
+ abs:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><circle cx="24" cy="24" r="13"/><path d="M9 14a18 18 0 0 0 0 20M39 14a18 18 0 0 1 0 20"/><text x="24" y="28" text-anchor="middle" font-family="Barlow,Arial,sans-serif" font-weight="800" font-size="10" fill="currentColor" stroke="none">ABS</text></svg>'
 };
 var LIGHTS=[
  {k:'engine',n:'Check engine light',lvl:'amb',lt:'Amber · have it checked soon',
@@ -460,7 +460,7 @@ function renderAdvisor(m,c){
      var ex=i.extra?i.extra(m,c):'';
      return '<label class="ad-item" for="ad-i-'+i.k+'"><input type="checkbox" id="ad-i-'+i.k+'" '+(i.slug?'data-slug="'+i.slug+'" checked':'disabled')+'>'+ET.icon(i.ico)+
        '<span><b>'+h(i.n)+'</b><span class="ad-int">Typical: '+h(i.iv[c])+'</span><p>'+h(i.why)+'</p>'+(ex?'<p class="ad-extra">'+h(ex)+'</p>':'')+'</span></label>'}).join('')+'</div>'+
-   '<div class="ad-book"><div><b style="font:800 18px var(--display);text-transform:uppercase">Ask about these</b><p id="ad-book-n"></p></div><a class="btn btn-red" id="ad-book" href="#schedule" data-view-link="schedule" data-sched="">Book these</a></div>'+
+   '<div class="ad-book"><div><b class="ad-book-t">Ask about these</b><p id="ad-book-n"></p></div><a class="btn btn-red" id="ad-book" href="#schedule" data-view-link="schedule" data-sched="">Book these</a></div>'+
    '<p class="ad-disc"><b>Follow your owner\'s manual.</b> These are general intervals and conversation starters, not a diagnosis or a service plan for your exact vehicle. Our team will confirm what your vehicle needs.</p>';
   $('ad-result').innerHTML=out;
   syncBook();
