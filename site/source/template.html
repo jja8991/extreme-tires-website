@@ -9,22 +9,22 @@
    black "Shop for tires" band with a tire finder, then service grid, mobile service, offers, footer.
    Single committed look: black / signal red / white, matching the Extreme Tires badge. */
 :root{
-  --ink:#f5f5f4;        /* primary text (was black; dark restyle) */
-  --char:#17181b;       /* charcoal bands */
+  --ink:#0d0d0e;        /* primary text / black surfaces */
+  --char:#1d1e20;       /* charcoal bands */
   --red:#e3161b;        /* brand red */
   --red-deep:#b80f13;
   --yellow:#ffd21f;     /* prototype/sample tags only */
-  --paper:#0b0b0c;      /* page ground (near black) */
-  --mist:#131316;       /* raised section ground */
-  --steel:#a3a7ad;      /* body grey on dark */
-  --line:rgba(255,255,255,.16);
+  --paper:#ffffff;      /* page ground */
+  --mist:#efefee;       /* raised section ground */
+  --steel:#5d6570;      /* body grey */
+  --line:#d6d6d4;
   --glass-bg:rgba(255,255,255,.12);
   --glass-border:rgba(255,255,255,.25);
   --display:"Instrument Serif",Georgia,serif;
   --body:"Barlow","Helvetica Neue",Arial,sans-serif;
   --gut-l:max(16px, env(safe-area-inset-left, 0px));
   --gut-r:max(16px, env(safe-area-inset-right, 0px));
-  color-scheme:dark;
+  color-scheme:light;
 }
 
 /* ===== v13 LIQUID GLASS (dark luxe restyle) ===== */
@@ -838,6 +838,51 @@ html.launch .note-int{display:none!important}
 .q-body .q-what h3{font-size:22px;margin:0 0 14px}
 .form-grid .err:empty{display:none}
 @media (max-width:860px){.tire .vp{font-size:14px!important}.crumbs a:first-child{min-width:44px!important}}
+
+/* ===== v13 EDITORIAL LAYER: original palette + serif italic headings, pill buttons, glass only over imagery/dark bands ===== */
+/* Instrument Serif ships one weight: kill faux-bold + uppercase that fight it */
+h1,h2,h3{font-weight:400!important;font-style:italic}
+.offer .amt,.big,.trust b,.price .each,.steps b,.how-grid div::before,.lift .hrs,.hero-facts b,.hf-size b{font-weight:400;font-style:italic}
+.foot h4,.filters legend,.how-grid b,.lift b,.onsite-grid b,.actionbar a,.tabs button,.mobile-media .tag{font-family:var(--body)}
+.lines .tot{font-family:var(--body);font-weight:700}
+.zipbox b{font-family:var(--body)!important;text-transform:none!important;letter-spacing:0!important}
+.fil>summary{font-family:var(--body)!important;font-weight:700!important}
+.nav a.top,.mnav a{font-family:var(--body);font-weight:600;text-transform:none;letter-spacing:.01em}
+.drop a{font-weight:600}
+/* pill buttons; .btn-red stays the one solid-red primary */
+.btn,.hero .btn{border-radius:9999px;font-family:var(--body);font-weight:600;text-transform:none;letter-spacing:.02em}
+.hf-go{border-radius:9999px;font-family:var(--body);font-weight:700}
+.nav-cta,.mnav .mnav-cta{border-radius:9999px}
+.seg{border-radius:999px;overflow:hidden}
+.cities a,.ig-chips button,.platforms span{border-radius:999px}
+.days button,.times button,.windows button,.flow-days button{border-radius:12px}
+.offer .sample,.lift .sample,.sample-note,.expires,.tire .vp,.ig-tile .badge{border-radius:999px}
+/* soft corners + subtle borders/shadows on white grounds (glass is invisible on flat white) */
+.svc{border-radius:16px;border:1px solid var(--line);border-bottom:3px solid transparent;box-shadow:0 1px 2px rgba(13,13,14,.04)}
+.svc:hover{border-bottom-color:var(--red)}
+.offer,.tire,.lift,.pk,.empty{border-radius:16px}
+.tire{box-shadow:0 1px 2px rgba(13,13,14,.04)}
+.finance{border-radius:18px}
+.card{border-radius:20px}
+.opt,.trust div{border-radius:12px}
+.pick label{border-radius:14px}
+.zipbox{border-radius:16px}
+.slot{border-radius:14px}
+.rev-strip,.vehicle-chip{border-radius:12px}
+.alert,.checklist,.done,.how-grid .msg{border-radius:10px}
+.drop{border-radius:0 0 14px 14px;overflow:hidden}
+/* liquid glass where it reads: over the hero video / photos / dark bands */
+.play{background:rgba(15,15,17,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.28);border-radius:999px}
+.play.tap{background:rgba(227,22,27,.88)}
+.hv-pause{background:rgba(15,15,17,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.28)}
+.mobile-media .tag{background:rgba(15,15,17,.55);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);border-radius:999px}
+.quick a{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.zipbox input{font-family:var(--body);font-weight:600;letter-spacing:.02em}
+.burger{border-radius:999px}
+@media (max-width:860px){
+  .actionbar{background:rgba(13,13,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .actionbar a{border-radius:999px;text-transform:none;letter-spacing:.01em;font-weight:700}
+}
 </style>
 
 <!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
