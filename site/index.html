@@ -4403,6 +4403,21 @@ h1,h2,h3{font-weight:400!important;font-style:italic}
         if(el.dataset.bi)return; el.dataset.bi='1'; el.classList.add('blur-in'); el.style.setProperty('--bid',(800+i*300)+'ms');
         requestAnimationFrame(function(){el.classList.add('go')});
       });
+      // Phone hero is video-only (headline hidden): give the finder card + play pill a visible entrance there
+      if(matchMedia('(max-width:860px)').matches)[].forEach.call(document.querySelectorAll('.hero-finder-wrap, .play'),function(el,i){
+        if(el.dataset.bi)return; el.dataset.bi='1'; el.classList.add('blur-in'); el.style.setProperty('--bid',(500+i*350)+'ms');
+        requestAnimationFrame(function(){el.classList.add('go')});
+      });
+    }
+    // Sitewide: staggered blur-rise on the major blocks of this view as they scroll in
+    if('IntersectionObserver' in window && !root.dataset.mo){
+      root.dataset.mo='1';
+      var blocks=root.querySelectorAll('.card,.svc,.offer,.lift,article,section > .wrap > .grid > *,[class$="-card"],[class*="-card "],.faq details,.step,.slot');
+      var vio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');vio.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+      var k=0;[].forEach.call(blocks,function(el){
+        if(el.classList.contains('reveal')||el.closest('.proto'))return;
+        if(el.getBoundingClientRect().top>innerHeight*.9){el.classList.add('reveal');el.style.transitionDelay=((k++%5)*90)+'ms';vio.observe(el)}
+      });
     }
   }
   ET.pages=ET.pages||{}; ET.motionFor=motionFor;
