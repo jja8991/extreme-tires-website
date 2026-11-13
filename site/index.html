@@ -642,6 +642,25 @@ header.nav.scrolled .logo img{height:42px}
 .hf-go:hover svg{transform:translateX(4px)}
 .hf-note{margin:12px 2px 0;font-size:13px;color:#7a7f87}
 .hf-note span{color:#a3a7ad}
+/* ===== Footer: calm, spacious, fewer links ===== */
+footer{background:#0d0d0e;border-top:1px solid #1c1c1f}
+.foot2{display:grid;grid-template-columns:1.5fr repeat(3,minmax(0,.8fr)) 1fr;gap:clamp(24px,3.5vw,56px);padding-block:clamp(40px,6vw,72px)}
+.foot2-logo{width:190px;height:auto;display:block;margin:0 0 18px}
+.foot2-tag{margin:0 0 20px;color:#a9adb4;max-width:26em;font-size:15px;line-height:1.6}
+.foot2-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.foot2 h4{font:800 13px/1 var(--display);text-transform:uppercase;letter-spacing:.14em;color:#8a8f98;margin:0 0 18px}
+.foot2 ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.foot2 a{text-decoration:none;color:#e8e8e8;font-weight:500;font-size:15px}
+.foot2 a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+.foot2 .btn{font-weight:800;color:#fff}.foot2 .btn:hover{text-decoration:none}
+.foot2-visit address{font-style:normal;line-height:1.6;margin-bottom:12px}
+.foot2-hours{margin:0;color:#a9adb4;font-size:14px;line-height:1.7}
+.foot2 .socials a{border-color:#3a3a3f}.foot2 .socials a:hover{border-color:#fff;text-decoration:none}
+.legal{background:transparent;border-top:1px solid #1c1c1f}
+.legal .wrap{justify-content:flex-start;font-size:13px;color:#8a8f98;padding-block:20px;gap:6px 22px}
+.legal a{color:#a9adb4}.legal a:hover{color:#fff}
+@media (max-width:1000px){.foot2{grid-template-columns:1fr 1fr 1fr}.foot2-brand{grid-column:1/-1}.foot2-visit{grid-column:1/-1}}
+@media (max-width:560px){.foot2{grid-template-columns:1fr 1fr;gap:28px 18px}.foot2 ul{gap:0}.foot2 li a{display:inline-flex;align-items:center;min-height:40px;padding:0!important}.foot2-brand .btn{width:100%;justify-content:center}.foot2-btns{flex-direction:column}.legal .wrap a{display:inline-flex;align-items:center;min-height:36px;padding:0!important}.legal .wrap{gap:0 18px}}
 /* ===== One continuous dark surface: no more white/grey/dark flips between sections ===== */
 /* ===== Flow: scroll reveals + soft seams ===== */
 .rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s);will-change:opacity,transform}
@@ -3554,30 +3573,23 @@ body{background:#0d0d0e}
 <div class="brands" aria-label="Tire brands we carry"><div class="wrap brands-row"><a href="#brand/continental" data-view-link="brand" data-param="continental" aria-label="Continental tires"><img src="media/brands/continental.svg" alt="Continental"></a><a href="#brand/pirelli" data-view-link="brand" data-param="pirelli" aria-label="Pirelli tires"><img src="media/brands/pirelli.svg" alt="Pirelli"></a><a href="#brand/nexen" data-view-link="brand" data-param="nexen" aria-label="Nexen tires"><img src="media/brands/nexen.svg" alt="Nexen"></a><a href="#brand/nitto" data-view-link="brand" data-param="nitto" aria-label="Nitto tires"><img src="media/brands/nitto.svg" alt="Nitto"></a><a class="brands-all" href="#brands" data-view-link="brands">All 32 brands &rarr;</a></div></div>
 
 <footer id="visit">
-  <div class="foot-cta"><div class="wrap">
-    <div><b>Ready when you are.</b><span>Book in 60 seconds. Shop or mobile van, Broward, Miami-Dade and Palm Beach.</span></div>
-    <div class="foot-cta-btns"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Book now</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a><a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=7712+West+Oakland+Park+Blvd+Sunrise+FL+33351" target="_blank" rel="noopener">Get directions</a></div>
-  </div></div>
-  <div class="wrap foot">
-    <div><h4>Tires &amp; Wheels</h4><ul><li><a href="#tires" data-view-link="tires">Shop Tires</a></li><li><a href="#wheels" data-view-link="wheels">Shop Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial Tires</a></li><li><a href="#brands" data-view-link="brands">Tire Brands</a></li><li><a href="#tires" data-view-link="tires">Tire Size</a></li><li><a href="#tips" data-view-link="tips">Tire Care Tips</a></li></ul></div>
-    <div><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile Tire Service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire Installation</a></li><li><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair">Tire Repair</a></li><li><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation">Tire Rotation</a></li><li><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing">Tire Balancing</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel Alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake Repair</a></li><li><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair">Suspension Repair</a></li><li><a href="#services" data-view-link="services">View All Services</a></li></ul></div>
-    <div><h4>About &amp; Support</h4><ul><li><a href="#about" data-view-link="about">About Us</a></li><li><a href="#locations" data-view-link="locations">Locations</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#gallery" data-view-link="gallery">News &amp; Gallery</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact Us</a></li></ul></div>
-    <div class="visit"><h4>Visit &amp; Contact</h4>
-      <div><small>Phone number</small><b><a href="tel:+19547731896">(954) 773-1896</a></b></div>
-      <div><small>Our location</small><b><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7712+West+Oakland+Park+Blvd+Sunrise+FL+33351" target="_blank" rel="noopener">7712 West Oakland Park Blvd<br>Sunrise, FL 33351</a></b></div>
-      <div><small>Store hours</small><b>Mon–Fri: 8:00 AM–6:30 PM<br>Sat: 8:00 AM–4:00 PM<br>Sun: Closed</b></div>
-      <div><small>Socials</small>
-        <div class="socials">
-          <a href="#visit" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M14 8V6c0-.8.2-1.3 1.4-1.3H17V1.2C16.7 1.1 15.6 1 14.4 1 11.8 1 10 2.6 10 5.5V8H7v3.6h3V23h4V11.6h3l.5-3.6z"/></svg></a>
-          <a href="#visit" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.3" fill="#fff"/></svg></a>
-          <a href="#visit" aria-label="Threads"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="2" d="M17 8.5C16 5.5 14 4 12 4 7.6 4 5 7.3 5 12s2.6 8 7 8c3.4 0 6-2 6-5 0-2.3-1.8-3.9-5-3.9-2.2 0-3.5 1-3.5 2.4 0 1.3 1.1 2.1 2.6 2.1 2.6 0 3.9-2.3 3.4-6"/></svg></a>
-          <a href="#visit" aria-label="TikTok"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M16 2h-3.3v13.2a2.9 2.9 0 1 1-2.1-2.8V9a6.3 6.3 0 1 0 5.4 6.2V8.6a7.9 7.9 0 0 0 4.4 1.4V6.7A4.6 4.6 0 0 1 16 2z"/></svg></a>
-        </div>
-      </div>
+  <div class="wrap foot2">
+    <div class="foot2-brand">
+      <img class="foot2-logo" src="media/logo-extreme-tires.png" width="492" height="140" alt="Extreme Tires Mobile Tire Service" loading="lazy">
+      <p class="foot2-tag">Tires, wheels and service at our Sunrise shop or at your door, across Broward, Miami-Dade and Palm Beach.</p>
+      <div class="foot2-btns"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Book now</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+      <div class="socials"><a href="https://www.instagram.com/extremetires/" target="_blank" rel="noopener" aria-label="Extreme Tires on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg></a></div>
+    </div>
+    <nav class="foot2-col" aria-label="Shop"><h4>Shop</h4><ul><li><a href="#tires" data-view-link="tires">Tires</a></li><li><a href="#wheels" data-view-link="wheels">Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial tires</a></li><li><a href="#brands" data-view-link="brands">Brands</a></li><li><a href="#tips" data-view-link="tips">Tire care tips</a></li></ul></nav>
+    <nav class="foot2-col" aria-label="Services"><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile tire service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire installation</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake repair</a></li><li><a href="#services" data-view-link="services">All services</a></li></ul></nav>
+    <nav class="foot2-col" aria-label="Company"><h4>Company</h4><ul><li><a href="#about" data-view-link="about">About us</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact us</a></li></ul></nav>
+    <div class="foot2-visit"><h4>Visit</h4>
+      <address><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7712+West+Oakland+Park+Blvd+Sunrise+FL+33351" target="_blank" rel="noopener">7712 West Oakland Park Blvd<br>Sunrise, FL 33351</a></address>
+      <p class="foot2-hours">Mon&ndash;Fri 8:00&ndash;6:30<br>Sat 8:00&ndash;4:00 &middot; Sun closed</p>
     </div>
   </div>
   <div class="legal"><div class="wrap">
-    <span>Copyright © 2007–2026 Extreme Tires</span><a href="#terms" data-view-link="terms">Terms of Use</a><a href="#privacy" data-view-link="privacy">Privacy</a><a href="#privacy/choices" data-view-link="privacy" data-param="choices">Your Privacy Choices</a><a href="#accessibility" data-view-link="accessibility">Accessibility</a><a href="#sitemap" data-view-link="sitemap">Sitemap</a>
+    <span>&copy; 2007&ndash;2026 Extreme Tires</span><a href="#terms" data-view-link="terms">Terms</a><a href="#privacy" data-view-link="privacy">Privacy</a><a href="#privacy/choices" data-view-link="privacy" data-param="choices">Your Privacy Choices</a><a href="#accessibility" data-view-link="accessibility">Accessibility</a><a href="#sitemap" data-view-link="sitemap">Sitemap</a>
   </div></div>
 </footer>
 
