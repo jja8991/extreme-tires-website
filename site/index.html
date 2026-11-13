@@ -139,7 +139,8 @@ select:focus,input:focus,textarea:focus{outline:none;border-bottom-color:var(--r
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
 .sec-head h2{font-size:clamp(27px,3.3vw,41px);font-weight:800}
 .sec-head p{margin:8px 0 0;color:var(--steel);max-width:36em}
-.svc-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.svc-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.svc.ic{background:transparent;padding:0;border-bottom:0;display:block}.svc.ic img{display:block;width:100%;height:auto}.svc.ic:hover{box-shadow:none}.svc.ic:hover img{filter:drop-shadow(0 12px 16px rgba(13,13,14,.35))}.svc.ic:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .svc{background:#fff;display:grid;justify-items:center;align-content:center;gap:12px;padding:22px 10px;text-decoration:none;text-align:center;font:700 15px/1.2 var(--body);border-bottom:3px solid transparent;transition:border-color .15s,transform .15s}
 .svc:hover{border-bottom-color:var(--red);transform:translateY(-2px)}
 .svc svg{width:46px;height:46px;color:var(--red)}
@@ -3484,11 +3485,19 @@ header.nav.scrolled .logo img{height:42px}
   var icon=function(id){return '<svg aria-hidden="true"><use href="#i-'+id+'"/></svg>'};
 
   var grid=document.getElementById('svc-grid');
-  grid.innerHTML=SERVICES.map(function(s){
-    var pay=s[0]==='pay';
-    var SL={brake:'brake-repair',wheel:'custom-wheels',lift:'lift-kits',oil:'oil-changes',susp:'suspension-repair',align:'wheel-alignment',balance:'tire-balancing',install:'tire-installation',repair:'tire-repair',rotate:'tire-rotation',tpms:'tpms-service'};
-    return pay?'<a class="svc pay" href="#financing" data-view-link="financing">'+icon(s[0])+s[1]+'</a>'
-      :'<a class="svc" href="#service/'+SL[s[0]]+'" data-view-link="service" data-param="'+SL[s[0]]+'">'+icon(s[0])+s[1]+'</a>';
+  // Branded app-style icons (media/services/*.webp), each a link. The artwork carries its own label, so alt = the label.
+  var SVC_TILES=[
+    ["brake","Brake Repair","service","brake-repair"],["wheels","Custom Wheels Service","service","custom-wheels"],["lift","Lift Kits","service","lift-kits"],["oil","Oil Changes","service","oil-changes"],
+    ["suspension","Suspension Repair","service","suspension-repair"],["alignment","Wheel Alignments","service","wheel-alignment"],["eta","ETA, track your technician","ext","https://extreme-tires-eta.vercel.app/"],
+    ["balancing","Tire Balancing","service","tire-balancing"],["installation","Tire Installation","service","tire-installation"],["repair","Tire Repair","service","tire-repair"],
+    ["rotation","Tire Rotation","service","tire-rotation"],["tpms","TPMS Service","service","tpms-service"],["paylater","Shop Now, Pay Later","financing",""],
+    ["booking","Booking, book a visit","ext","https://extreme-tires-eta.vercel.app/book"]
+  ];
+  grid.innerHTML=SVC_TILES.map(function(s){
+    var img='<img src="media/services/'+s[0]+'.webp" alt="'+s[1]+'" width="300" height="300" loading="lazy" decoding="async">';
+    if(s[2]==='ext') return '<a class="svc ic" href="'+s[3]+'" target="_blank" rel="noopener">'+img+'</a>';
+    if(s[2]==='financing') return '<a class="svc ic" href="#financing" data-view-link="financing">'+img+'</a>';
+    return '<a class="svc ic" href="#service/'+s[3]+'" data-view-link="service" data-param="'+s[3]+'">'+img+'</a>';
   }).join('');
 
   var pick=document.getElementById('pick');
