@@ -1712,6 +1712,10 @@ header.nav.scrolled .logo img{height:42px}
 .photo-quote .num b{color:var(--yellow);font-weight:800}
 .photo-quote .num svg{width:30px;height:30px}
 .photo-quote .num:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+
+.flow #wiz .w-veh-grid{grid-template-columns:1fr 1fr;gap:12px}
+.flow #wiz .hf-f{background:#f6f6f4;color:var(--ink)}
+@media (max-width:560px){.flow #wiz .w-veh-grid{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -3630,16 +3634,16 @@ header.nav.scrolled .logo img{height:42px}
 
 
   // Vehicle finder: full year/make list, models loaded live from the NHTSA vPIC database (free public API)
-  (function(){
-    var Y=document.getElementById('v-year'),M=document.getElementById('v-make'),D=document.getElementById('v-model'),cache={};
-    Y.value='2024';
+  window.initVehPicker=function(Y,M,D,T,init){
+    var cache={};
+    Y.value=init.year;
     function setModels(list,keep){
       var o=list.map(function(n){return '<option>'+n.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</option>'}).join('')+'<option>Other / not listed</option>';
       D.innerHTML=o; if(keep&&list.indexOf(keep)>-1) D.value=keep;
       loadTrims();
     }
     // Trims come from per-make data files (CarQuery data, model years up to 2022). Newer years use the latest year on file.
-    var T=document.getElementById('v-trim'),tc={},GEN='<option>Not sure / any trim</option>';
+    var tc={},GEN='<option>Not sure / any trim</option>';
     var slug=function(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')},norm=function(s){return s.toLowerCase().replace(/[^a-z0-9]/g,'')};
     function esc(x){return x.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
     function fillTrims(data){
@@ -3649,6 +3653,7 @@ header.nav.scrolled .logo img{height:42px}
       if(use===null)use=yrs[0];
       var html=m[use].map(function(t){return '<option>'+esc(t)+'</option>'}).join('');
       T.innerHTML=GEN+(use===y?html:'<optgroup label="From the '+use+' model year">'+html+'</optgroup>');
+      if(init.trim){T.value=init.trim;init.trim=null}
     }
     function loadTrims(){
       T.innerHTML=GEN; if(M.value==='Other / not listed'||D.value==='Other / not listed')return;
@@ -3671,8 +3676,9 @@ header.nav.scrolled .logo img{height:42px}
         .catch(function(){setModels([])});
     }
     Y.addEventListener('change',function(){load(D.value)}); M.addEventListener('change',function(){load()});
-    load('Gladiator');
-  })();
+    load(init.model);
+  };
+  initVehPicker(document.getElementById('v-year'),document.getElementById('v-make'),document.getElementById('v-model'),document.getElementById('v-trim'),{year:'2024',model:'Gladiator'});
   // Tire finder tabs + demo results
   var tabs=[['t-veh','p-veh'],['t-size','p-size']];
   tabs.forEach(function(t){
@@ -3840,7 +3846,11 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       if(W.need==='flat')h+='<div class="alert">Stuck right now? Call or text <b>(954) 773-1896</b> for the fastest dispatch, or keep going to book.</div>';
     } else if(s===1){
       h='<h3>Tell us about the vehicle</h3>'+
-        '<label class="f" for="w-veh">Year, make and model<input id="w-veh" value="'+esc(W.veh)+'" placeholder="e.g. 2021 Toyota Tacoma TRD"></label>'+
+        '<div class="hf-form w-veh-grid">'+
+        '<label class="hf-f" for="w-year"><span>Year</span><select id="w-year"></select></label>'+
+        '<label class="hf-f" for="w-make"><span>Make</span><select id="w-make"></select></label>'+
+        '<label class="hf-f" for="w-model"><span>Model</span><select id="w-model"></select></label>'+
+        '<label class="hf-f" for="w-trim"><span>Trim</span><select id="w-trim"><option>Not sure / any trim</option></select></label></div>'+
         '<label class="f" for="w-size">Tire size (optional)<input id="w-size" value="'+esc(W.size)+'" placeholder="e.g. 265/70R17, printed on the sidewall"></label>'+
         (W.need==='tires'?'<label class="toggle" for="w-byo"><input type="checkbox" id="w-byo"'+(W.byo?' checked':'')+'> I already have my tires, I just need them installed</label>':'');
     } else if(s===2){
@@ -3880,12 +3890,16 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       wbody.innerHTML=h; return;
     }
     wbody.innerHTML='<div class="step'+(W.dir<0?' back':'')+'">'+h+'<div class="err" id="wiz-err"></div></div>';
+    if(s===1){var wy=document.getElementById('w-year'),wm=document.getElementById('w-make');
+      wy.innerHTML=document.getElementById('v-year').innerHTML;wm.innerHTML=document.getElementById('v-make').innerHTML;
+      var vp=W.vp||{year:'2024',make:'Jeep',model:'Gladiator',trim:null};wm.value=vp.make;
+      initVehPicker(wy,wm,document.getElementById('w-model'),document.getElementById('w-trim'),{year:vp.year,model:vp.model,trim:vp.trim});}
   }
   function wizErr(m){var e=document.getElementById('wiz-err');if(e)e.textContent=m;return false}
   function saveStep(){
     var s=W.step, g=function(id){var el=document.getElementById(id);return el?el.value.trim():''};
     if(s===0&&!W.need)return wizErr('Pick what you need to keep going.');
-    if(s===1){W.veh=g('w-veh');W.size=g('w-size');var b=document.getElementById('w-byo');W.byo=!!(b&&b.checked);if(!W.veh)return wizErr('Add your vehicle so we bring the right tools.')}
+    if(s===1){var wv=['w-year','w-make','w-model','w-trim'].map(function(i){return document.getElementById(i).value});W.vp={year:wv[0],make:wv[1],model:wv[2],trim:wv[3]};W.veh=wv.filter(function(x){return x&&x!=='Not sure / any trim'&&x!=='Other / not listed'&&x!=='Loading models…'}).join(' ');W.size=g('w-size');var b=document.getElementById('w-byo');W.byo=!!(b&&b.checked);if(!W.veh)return wizErr('Add your vehicle so we bring the right tools.')}
     if(s===2){if(!W.where)return wizErr('Choose mobile or the shop.');if(W.where==='mobile'){W.zip=g('w-zip');if(!county(W.zip))return wizErr('Enter a ZIP we cover, or pick the shop.')}}
     if(s===3&&!W.win)return wizErr('Pick an arrival window.');
     if(s===4){W.name=g('w-name');W.phone=g('w-phone');W.texts=document.getElementById('w-texts').checked;
