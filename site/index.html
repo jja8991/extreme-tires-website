@@ -3710,7 +3710,7 @@ body{overflow-x:clip}
       </div>
       <div class="gl-grid" id="gl-grid"></div>
       <div class="gl-more"><button type="button" class="btn btn-dark" id="gl-more">Load more</button></div>
-      <p class="gl-sync" id="gl-sync"><span><b>Latest reels from @extremetires</b> &middot; tap one to watch it on Instagram</span></p>
+      <p class="gl-sync" id="gl-sync"><span><b>Latest reels from @extremetires</b> &middot; tap one to watch it on Instagram &middot; customer photos are shared with their Google reviews</span></p>
     </div>
 
     <div role="tabpanel" id="gl-panel-news" aria-labelledby="gl-tab-news" hidden>
@@ -4590,8 +4590,23 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       if(items.length){GALLERY.items.length=0;items.forEach(function(i){GALLERY.items.push(i)});window.dispatchEvent(new Event('et-feed'))}
     }).catch(function(){});
   }
-  var IGCATS=[['all','All']];
-  ET.GALLERY=GALLERY; ET.IGCATS=IGCATS; ET.SHOP=[];
+  var IGCATS=[['all','All'],['reel','Reels'],['google','Customer photos']];
+  /* CUSTOMER PHOTOS: photos customers posted with their Google reviews (credited by first name + last initial). Metadata stripped. */
+  var GLINK='https://www.google.com/maps/place/Extreme+Mobile+Tires/@26.1658848,-80.2520611,17z';
+  var REVIEWS=[
+    {id:'g1',file:'media/reviews/shop-showroom.webp',category:'google',tags:[],isVideo:false,caption:'Wheel and tire showroom · photo by James B. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g2',file:'media/reviews/shop-wheel-wall.webp',category:'google',tags:[],isVideo:false,caption:'Wheel wall at the Sunrise shop · photo by James B. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g3',file:'media/reviews/shop-front-counter.webp',category:'google',tags:[],isVideo:false,caption:'Front counter at the Sunrise shop · photo by James B. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g4',file:'media/reviews/van-motorhome-call.webp',category:'google',tags:[],isVideo:false,caption:'Mobile service van on a motorhome call · photo by Evgen O. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g5',file:'media/reviews/van-beside-motorhome.webp',category:'google',tags:[],isVideo:false,caption:'Mobile service van beside a motorhome · photo by Evgen O. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g6',file:'media/reviews/van-on-location.webp',category:'google',tags:[],isVideo:false,caption:'Mobile tire service van on location · photo by Evgen O. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g7',file:'media/reviews/van-rear.webp',category:'google',tags:[],isVideo:false,caption:'Mobile tire service van, rear view · photo by Taynor G. on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g8',file:'media/reviews/van-roadside.webp',category:'google',tags:[],isVideo:false,caption:'Mobile van on the roadside · photo by Pressure People LLC on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g9',file:'media/reviews/blown-truck-tire.webp',category:'google',tags:[],isVideo:false,caption:'Blown commercial truck tire · photo by Pressure People LLC on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g10',file:'media/reviews/blown-wheel-close.webp',category:'google',tags:[],isVideo:false,caption:'Commercial wheel after a blowout · photo by Pressure People LLC on Google',lbLink:GLINK,pos:'50% 50%'},
+    {id:'g11',file:'media/reviews/blown-wheel-inner.webp',category:'google',tags:[],isVideo:false,caption:'Commercial wheel, inner side · photo by Pressure People LLC on Google',lbLink:GLINK,pos:'50% 50%'}
+  ];
+  ET.GALLERY=GALLERY; ET.IGCATS=IGCATS; ET.SHOP=[]; ET.REVIEWS=REVIEWS;
   /* SHOP PHOTOS: techs add these from the ops app; they go straight into the gallery. Public list, newest first. */
   var SHOP_CATS={tires:'Tires',wheels:'Wheels',mobile:'Mobile van',shop:'Shop',fleet:'Fleet',lifts:'Lifts',other:'Shop work'};
   fetch('https://qaxxwpojwpqkwqlpzrck.supabase.co/functions/v1/gallery-feed',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){return r.ok?r.json():null}).then(function(j){
@@ -4603,7 +4618,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     });
     IGCATS.length=1;
     var seen={};ET.SHOP.forEach(function(i){seen[i.category]=1});
-    if(ET.SHOP.length){IGCATS.push(['reel','Reels']);Object.keys(SHOP_CATS).forEach(function(k){if(seen[k])IGCATS.push([k,SHOP_CATS[k]])})}
+    IGCATS.push(['reel','Reels']);Object.keys(SHOP_CATS).forEach(function(k){if(seen[k])IGCATS.push([k,SHOP_CATS[k]])});IGCATS.push(['google','Customer photos']);
     window.dispatchEvent(new Event('et-feed'));
   }).catch(function(){});
   var igFilter='all', igGrid=document.getElementById('ig-grid');
@@ -6394,7 +6409,7 @@ ET.pages.push({id:'city',param:'davie',label:'City: Davie'});
 var glFilter='all', glShown=8, glFocus=null, glList=[], glIdx=0;
 var glExtra=[['50% 20%','x'],['10% 30%','x'],['95% 40%','x'],['60% 10%','x'],['25% 90%','x'],['85% 90%','x'],['40% 30%','x'],['70% 50%','x']];
 function glItems(){
-  var base=ET.GALLERY.items.slice(), out=(ET.SHOP||[]).slice().concat(base);
+  var base=ET.GALLERY.items.slice(), out=(ET.SHOP||[]).slice().concat(ET.REVIEWS||[]).concat(base);
   for(var r=0;r<2;r++){base.forEach(function(it,k){
     var pp=glExtra[(k+r*3)%glExtra.length][0];
     out.push({id:it.id+'-'+(r+2),file:it.file,category:it.category,tags:it.tags,isVideo:r?false:it.isVideo,caption:it.caption,pos:pp,sample:true});
@@ -6423,7 +6438,7 @@ $('gl-more').addEventListener('click',function(){var before=glShown;glShown+=8;g
 var lb=$('gl-lb');
 function lbShow(){var it=glList[glIdx];if(!it)return;var im=$('gl-lb-img');im.src=it.file;im.alt=it.caption;im.style.objectPosition='50% 50%';
   $('gl-lb-cap').textContent=it.caption;$('gl-lb-cnt').textContent=(glIdx+1)+' / '+glList.length;
-  $('gl-lb-link').href=it.permalink||'https://www.instagram.com/extremetires'}
+  var ll=$('gl-lb-link');ll.href=it.lbLink||it.permalink||'https://www.instagram.com/extremetires';ll.textContent=it.lbLink?'See our Google reviews':'View on Instagram'}
 function lbOpen(k,trigger){glList=glVisible().slice(0,glShown);glIdx=k;glFocus=trigger;lbShow();lb.classList.add('open');lb.setAttribute('aria-hidden','false');$('gl-lb-x').focus()}
 function lbClose(){if(!lb.classList.contains('open'))return;lb.classList.remove('open');lb.setAttribute('aria-hidden','true');if(glFocus&&document.body.contains(glFocus))glFocus.focus()}
 function lbStep(d){glIdx=(glIdx+d+glList.length)%glList.length;lbShow()}
