@@ -112,7 +112,7 @@ function link(slug){return 'href="#service/'+slug+'" data-view-link="service" da
 /* ======================= SERVICES HUB ======================= */
 function card(slug,mob){
   var s=SV[slug];
-  return '<a class="sv-card" '+link(slug)+'><span class="sv-badge '+(mob?'mob':'shp')+'">'+(mob?'Mobile + shop':'Shop')+'</span>'+ET.icon(s.ico)+'<b>'+h(s.name)+'</b><p>'+h(s.blurb)+'</p><span class="sv-more">Details &rarr;</span></a>';
+  return '<a class="sv-card" '+link(slug)+'><span class="sv-badge '+(mob?'mob':'shp')+'">'+(mob?'Mobile + shop':'Shop')+'</span>'+(SP_IMG[slug]?'<img class="sv-img" src="media/services/'+SP_IMG[slug]+'.webp" alt="" loading="lazy">':ET.icon(s.ico))+'<b>'+h(s.name)+'</b><p>'+h(s.blurb)+'</p><span class="sv-more">Details &rarr;</span></a>';
 }
 $('sv-grid-mobile').innerHTML=MOBILE_SLUGS.map(function(s){return card(s,true)}).join('');
 $('sv-grid-shop').innerHTML=SHOP_SLUGS.map(function(s){return card(s,false)}).join('');
@@ -132,7 +132,7 @@ function renderService(param){
   root.innerHTML=
    '<div class="phead sp-phead"><div class="wrap">'+
      '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>'+h(s.name)+'</span></nav>'+
-     '<div class="sp-title">'+(SP_IMG[param]?'<div class="sp-ico has-img"><img src="media/services/'+SP_IMG[param]+'.webp" alt="'+h(s.name)+' icon"></div>':'<div class="sp-ico">'+ET.icon(s.ico)+'</div>')+'<div style="display:grid;gap:12px"><h1>'+h(s.name)+'</h1><div class="sp-tags">'+modeBadge(s.mode)+'</div></div></div>'+
+     '<div class="sp-title">'+(SP_IMG[param]?'<div class="sp-ico has-img"><img src="media/services/dark/'+SP_IMG[param]+'.webp" alt="'+h(s.name)+' icon"></div>':'<div class="sp-ico">'+ET.icon(s.ico)+'</div>')+'<div style="display:grid;gap:12px"><h1>'+h(s.name)+'</h1><div class="sp-tags">'+modeBadge(s.mode)+'</div></div></div>'+
      '<p>'+h(s.intro)+'</p>'+
    '</div></div>'+
    '<div class="wrap sp-body">'+

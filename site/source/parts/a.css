@@ -68,6 +68,7 @@
 .sv-card{background:#fff;border:2px solid var(--ink);padding:22px 20px;display:grid;gap:10px;align-content:start;text-decoration:none;position:relative;transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .15s}
 .sv-shopsec .sv-card{border-color:transparent;border-bottom:3px solid transparent}
 .sv-card:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(13,13,14,.14);border-color:var(--red)}
+.sv-card .sv-img{width:84px;height:84px;object-fit:contain;display:block;margin:2px 0 4px}
 .sv-card svg{width:46px;height:46px;color:var(--red)}
 .sv-card b{font:800 18px/1.15 var(--display);text-transform:uppercase}
 .sv-card p{margin:0;color:var(--steel);font-size:14px}
