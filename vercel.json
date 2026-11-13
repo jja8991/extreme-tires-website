@@ -15,5 +15,11 @@
       ]
     }
   ],
-  "trailingSlash": true
+  "trailingSlash": true,
+  "crons": [
+    {
+      "path": "/api/sync-review-photos",
+      "schedule": "17 8 * * *"
+    }
+  ]
 }
