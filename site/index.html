@@ -4607,6 +4607,14 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     {id:'g11',file:'media/reviews/blown-wheel-inner.webp',category:'google',tags:[],isVideo:false,caption:'Commercial wheel, inner side · photo by Pressure People LLC on Google',lbLink:GLINK,pos:'50% 50%'}
   ];
   ET.GALLERY=GALLERY; ET.IGCATS=IGCATS; ET.SHOP=[]; ET.REVIEWS=REVIEWS;
+  /* Customer photos manifest: review-sync/sync_review_photos.py appends new Google-review photos to this file; no code edit needed. */
+  fetch('media/reviews/gallery.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(j){
+    var rows=(j&&j.items)||[];if(!rows.length)return;
+    REVIEWS.length=0;
+    rows.forEach(function(r,n){if(typeof r.file!=='string'||r.file.indexOf('media/reviews/')!==0)return;
+      REVIEWS.push({id:'g'+n,file:r.file,category:'google',tags:[],isVideo:false,caption:String(r.caption||'Customer photo on Google').slice(0,110),lbLink:j.link||GLINK,pos:'50% 50%'})});
+    window.dispatchEvent(new Event('et-feed'));
+  }).catch(function(){});
   /* SHOP PHOTOS: techs add these from the ops app; they go straight into the gallery. Public list, newest first. */
   var SHOP_CATS={tires:'Tires',wheels:'Wheels',mobile:'Mobile van',shop:'Shop',fleet:'Fleet',lifts:'Lifts',other:'Shop work'};
   fetch('https://qaxxwpojwpqkwqlpzrck.supabase.co/functions/v1/gallery-feed',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){return r.ok?r.json():null}).then(function(j){
