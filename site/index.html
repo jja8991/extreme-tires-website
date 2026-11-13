@@ -2232,6 +2232,54 @@ body{background:#0d0d0e}
       <div class="cities" id="cities"></div>
     </div>
   </section>
+  <section class="mq" id="mobile-quote" aria-labelledby="mq-h">
+    <div class="q-intro">
+      <div class="wrap">
+        <div class="eyebrow">Extreme Tires &middot; Mobile service</div>
+        <h2 id="mq-h">A better quote starts with the right details.</h2>
+        <p>Share a few details about your vehicle and where you are so our team can provide a more accurate quote with less back-and-forth.</p>
+        <div class="checks"><div>Tires, wheels and auto service</div><div>Mobile service at your location</div><div>Pricing confirmed by our team</div><div>Shop now, pay later available</div></div>
+      </div>
+    </div>
+    <form id="mq-form" novalidate>
+      <div class="q-body">
+        <div class="wrap">
+          <h3>What do you need help with?</h3>
+          <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip it and describe the symptoms below.</p>
+          <div class="pick" id="mq-pick"></div>
+          <div class="form-grid">
+            <label class="f" for="mq-first">First name<input id="mq-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="mq-first"></span></label>
+            <label class="f" for="mq-last">Last name<input id="mq-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="mq-last"></span></label>
+            <label class="f" for="mq-phone">Phone number<input id="mq-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="mq-phone"></span></label>
+            <label class="f" for="mq-email">Email<input id="mq-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="mq-email"></span></label>
+            <label class="f" for="mq-loc" style="color:var(--steel)">Location or service area<input id="mq-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
+            <label class="f" for="mq-when">When do you need service?<select id="mq-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="mq-when"></span></label>
+          </div>
+          <label class="chk" for="mq-mobile"><input type="checkbox" id="mq-mobile" name="mobile" checked> I'd prefer mobile service at my location</label>
+        </div>
+      </div>
+      <div class="q-what">
+        <div class="wrap">
+          <h3>What is happening with the vehicle?</h3>
+          <div class="sym">
+            <label for="mq-sy1"><input type="checkbox" id="mq-sy1"> Flat, leak, or tire damage</label>
+            <label for="mq-sy2"><input type="checkbox" id="mq-sy2"> Need new tires or pricing</label>
+            <label for="mq-sy3"><input type="checkbox" id="mq-sy3"> Vibration, balancing, or rotation</label>
+            <label for="mq-sy4"><input type="checkbox" id="mq-sy4"> Brakes, alignment, suspension, or other service</label>
+          </div>
+          <label class="f" for="mq-details" style="margin-top:22px;color:#bbb">Vehicle and service details
+            <textarea id="mq-details" placeholder="Vehicle year/make/model, tire size, symptoms, or service needed"></textarea></label>
+        </div>
+      </div>
+      <div class="q-submit">
+        <div class="wrap">
+          <button class="btn btn-red" type="submit">Request My Quote</button>
+          <p>Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
+          <div class="done" id="mq-done" hidden role="status"></div>
+        </div>
+      </div>
+    </form>
+  </section>
 </section>
 
 
@@ -4186,6 +4234,31 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     done.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(picked.length?' for: '+picked.join(', '):'')+'.';
     done.hidden=false;
   });
+
+  // Mobile page quote form (same fields and messages as the Quote page)
+  var mpick=document.getElementById('mq-pick'), mform=document.getElementById('mq-form');
+  if(mpick&&mform){
+    mpick.innerHTML=SERVICES.map(function(s,i){
+      return '<label for="mpk'+i+'"><input type="checkbox" id="mpk'+i+'" name="svc" value="'+s[1]+'">'+icon(s[0])+s[1]+'</label>';
+    }).join('');
+    var MMSG={'mq-first':'Please enter your name.','mq-last':'Please enter your name.','mq-phone':'This field is required','mq-email':'This field is required','mq-when':'Please select when you need service.'};
+    mform.addEventListener('submit',function(e){
+      e.preventDefault();
+      var bad=null;
+      Object.keys(MMSG).forEach(function(id){
+        var el=document.getElementById(id), err=mform.querySelector('.err[data-for="'+id+'"]')||{};
+        var ok=el.value.trim()!=='' && (id!=='mq-email' || /.+@.+\..+/.test(el.value));
+        if(id==='mq-email' && el.value.trim()!=='' && !ok) err.textContent='Enter an email like name@example.com';
+        else err.textContent=ok?'':MMSG[id];
+        if(!ok && !bad) bad=el;
+      });
+      var md=document.getElementById('mq-done');
+      if(bad){md.hidden=true;bad.focus();return;}
+      var mp=[].slice.call(mpick.querySelectorAll('input:checked')).map(function(i){return i.value});
+      md.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(mp.length?' for: '+mp.join(', '):'')+'.';
+      md.hidden=false;
+    });
+  }
 })();
 </script>
 
