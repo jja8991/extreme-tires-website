@@ -87,13 +87,14 @@ $('cm-form').addEventListener('submit',function(e){
 ET.pages.push({id:'commercial',label:'Commercial & Fleet'});
 
 /* ===================== BRANDS ===================== */
-var BRAND_LOGOS=['bfgoodrich','bridgestone','continental','cooper','falken','firestone','general','hankook','hercules','ironman','kumho','michelin','nexen','nitto','ohtsu','pirelli','toyo','uniroyal','yokohama'];
+var BRAND_LOGOS=['goodyear','dunlop','maxxis','mickey-thompson','mastercraft','laufenn','vredestein','nokian','fuzion','gt-radial','kenda','starfire','kelly','bfgoodrich','bridgestone','continental','cooper','falken','firestone','general','hankook','hercules','ironman','kumho','michelin','nexen','nitto','ohtsu','pirelli','toyo','uniroyal','yokohama'];
 var BRANDS=[
   ['michelin','Michelin',['p']],['bfgoodrich','BFGoodrich',['t']],['uniroyal','Uniroyal',['v']],['cooper','Cooper',['t']],
   ['firestone','Firestone',['v']],['bridgestone','Bridgestone',['p']],['hankook','Hankook',['p']],['hercules','Hercules',['v','t']],
   ['kumho','Kumho',['v']],['general','General',['t']],['continental','Continental',['p']],['pirelli','Pirelli',['p']],
   ['nexen','Nexen',['v']],['nitto','Nitto',['t']],['toyo','Toyo',['t']],['falken','Falken',['t']],
-  ['yokohama','Yokohama',['p']],['ironman','Ironman',['v']],['ohtsu','OHTSU',['v']]
+  ['yokohama','Yokohama',['p']],['ironman','Ironman',['v']],['ohtsu','OHTSU',['v']],
+  ['goodyear','Goodyear',['p']],['dunlop','Dunlop',['p']],['maxxis','Maxxis',['t']],['mickey-thompson','Mickey Thompson',['t']],['mastercraft','Mastercraft',['t']],['laufenn','Laufenn',['v']],['vredestein','Vredestein',['p']],['nokian','Nokian',['p']],['fuzion','Fuzion',['v']],['gt-radial','GT Radial',['v']],['kenda','Kenda',['v']],['starfire','Starfire',['v']],['kelly','Kelly',['v']]
 ];
 var BCATS=[['all','All'],['p','Premium'],['v','Value'],['t','Truck & Off-road']];
 var bsCat='all';

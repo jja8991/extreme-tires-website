@@ -1827,7 +1827,7 @@ header.nav.scrolled .logo img{height:42px}
     <div class="wrap">
       <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,319 reviews on Birdeye</span></div>
       <div><b>Hunter</b><span>Engineering alignment equipment</span></div>
-      <div><b>19+</b><span>Tire brands, from Continental to Nitto</span></div>
+      <div><b>30+</b><span>Tire brands, from Goodyear to Nitto</span></div>
       <div><b>3</b><span>Counties served: Broward, Miami-Dade, Palm Beach</span></div>
     </div>
   </div>
@@ -2664,7 +2664,7 @@ header.nav.scrolled .logo img{height:42px}
     <div class="wrap">
       <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Tire Brands</span></nav>
       <h1>Tire brands</h1>
-      <p>Nineteen brands to choose from. Pick one to see its page, or search by name.</p>
+      <p>Thirty-two brands to choose from. Pick one to see its page, or search by name.</p>
       <p class="cm-trust"><span aria-hidden="true">★</span> 4.7 from 1,319 reviews on Birdeye · Mobile + shop · Hunter alignment</p>
       <span class="sample-note">Sample grouping, confirm with Extreme before launch</span>
       <div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
@@ -2973,7 +2973,7 @@ header.nav.scrolled .logo img{height:42px}
       <div class="eyebrow">What we do</div>
       <h2 id="ab-do-h">Tires, wheels and service</h2>
       <div class="ab-grid4">
-        <a href="#tires" data-view-link="tires"><svg aria-hidden="true"><use href="#i-install"/></svg><b>Tires</b><span>19 brands from Michelin to Toyo, installed at the shop or by van.</span></a>
+        <a href="#tires" data-view-link="tires"><svg aria-hidden="true"><use href="#i-install"/></svg><b>Tires</b><span>30+ brands from Michelin to Yokohama, installed at the shop or by van.</span></a>
         <a href="#wheels" data-view-link="wheels"><svg aria-hidden="true"><use href="#i-wheel"/></svg><b>Wheels</b><span>27 wheel brands, including custom wheel sourcing and lift kits.</span></a>
         <a href="#services" data-view-link="services"><svg aria-hidden="true"><use href="#i-align"/></svg><b>Service</b><span>Alignment, brakes, suspension, TPMS, balancing and more at the shop.</span></a>
         <a href="#mobile" data-view-link="mobile"><svg aria-hidden="true"><use href="#i-van"/></svg><b>Mobile</b><span>Installation, balancing, repairs and oil changes where you are.</span></a>
@@ -3448,7 +3448,7 @@ header.nav.scrolled .logo img{height:42px}
 </section>
 </main>
 
-<div class="brands" aria-label="Tire brands we carry"><div class="wrap brands-row"><a href="#brand/continental" data-view-link="brand" data-param="continental" aria-label="Continental tires"><img src="media/brands/continental.svg" alt="Continental"></a><a href="#brand/pirelli" data-view-link="brand" data-param="pirelli" aria-label="Pirelli tires"><img src="media/brands/pirelli.svg" alt="Pirelli"></a><a href="#brand/nexen" data-view-link="brand" data-param="nexen" aria-label="Nexen tires"><img src="media/brands/nexen.svg" alt="Nexen"></a><a href="#brand/nitto" data-view-link="brand" data-param="nitto" aria-label="Nitto tires"><img src="media/brands/nitto.svg" alt="Nitto"></a><a class="brands-all" href="#brands" data-view-link="brands">All 19 brands &rarr;</a></div></div>
+<div class="brands" aria-label="Tire brands we carry"><div class="wrap brands-row"><a href="#brand/continental" data-view-link="brand" data-param="continental" aria-label="Continental tires"><img src="media/brands/continental.svg" alt="Continental"></a><a href="#brand/pirelli" data-view-link="brand" data-param="pirelli" aria-label="Pirelli tires"><img src="media/brands/pirelli.svg" alt="Pirelli"></a><a href="#brand/nexen" data-view-link="brand" data-param="nexen" aria-label="Nexen tires"><img src="media/brands/nexen.svg" alt="Nexen"></a><a href="#brand/nitto" data-view-link="brand" data-param="nitto" aria-label="Nitto tires"><img src="media/brands/nitto.svg" alt="Nitto"></a><a class="brands-all" href="#brands" data-view-link="brands">All 32 brands &rarr;</a></div></div>
 
 <footer id="visit">
   <div class="foot-cta"><div class="wrap">
@@ -4607,13 +4607,14 @@ $('cm-form').addEventListener('submit',function(e){
 ET.pages.push({id:'commercial',label:'Commercial & Fleet'});
 
 /* ===================== BRANDS ===================== */
-var BRAND_LOGOS=['bfgoodrich','bridgestone','continental','cooper','falken','firestone','general','hankook','hercules','ironman','kumho','michelin','nexen','nitto','ohtsu','pirelli','toyo','uniroyal','yokohama'];
+var BRAND_LOGOS=['goodyear','dunlop','maxxis','mickey-thompson','mastercraft','laufenn','vredestein','nokian','fuzion','gt-radial','kenda','starfire','kelly','bfgoodrich','bridgestone','continental','cooper','falken','firestone','general','hankook','hercules','ironman','kumho','michelin','nexen','nitto','ohtsu','pirelli','toyo','uniroyal','yokohama'];
 var BRANDS=[
   ['michelin','Michelin',['p']],['bfgoodrich','BFGoodrich',['t']],['uniroyal','Uniroyal',['v']],['cooper','Cooper',['t']],
   ['firestone','Firestone',['v']],['bridgestone','Bridgestone',['p']],['hankook','Hankook',['p']],['hercules','Hercules',['v','t']],
   ['kumho','Kumho',['v']],['general','General',['t']],['continental','Continental',['p']],['pirelli','Pirelli',['p']],
   ['nexen','Nexen',['v']],['nitto','Nitto',['t']],['toyo','Toyo',['t']],['falken','Falken',['t']],
-  ['yokohama','Yokohama',['p']],['ironman','Ironman',['v']],['ohtsu','OHTSU',['v']]
+  ['yokohama','Yokohama',['p']],['ironman','Ironman',['v']],['ohtsu','OHTSU',['v']],
+  ['goodyear','Goodyear',['p']],['dunlop','Dunlop',['p']],['maxxis','Maxxis',['t']],['mickey-thompson','Mickey Thompson',['t']],['mastercraft','Mastercraft',['t']],['laufenn','Laufenn',['v']],['vredestein','Vredestein',['p']],['nokian','Nokian',['p']],['fuzion','Fuzion',['v']],['gt-radial','GT Radial',['v']],['kenda','Kenda',['v']],['starfire','Starfire',['v']],['kelly','Kelly',['v']]
 ];
 var BCATS=[['all','All'],['p','Premium'],['v','Value'],['t','Truck & Off-road']];
 var bsCat='all';
@@ -5101,7 +5102,7 @@ var CITIES=[
 var CBY={}; CITIES.forEach(function(c,i){CBY[c[0]]={slug:c[0],name:c[1],county:c[2],near:c[3],i:i}});
 var COUNTIES=['Broward','Palm Beach','Miami-Dade'];
 var SVC_LINKS=[['brake-repair','Brake Repair'],['wheel-alignment','Wheel Alignment'],['tire-installation','Tire Installation'],['tire-repair','Tire Repair'],['tire-balancing','Tire Balancing'],['tire-rotation','Tire Rotation'],['suspension-repair','Suspension Repair'],['oil-changes','Oil Changes'],['tpms-service','TPMS Service'],['custom-wheels','Custom Wheels'],['lift-kits','Lift Kits']];
-var BRANDS=[['michelin','Michelin'],['bfgoodrich','BFGoodrich'],['uniroyal','Uniroyal'],['cooper','Cooper'],['firestone','Firestone'],['bridgestone','Bridgestone'],['hankook','Hankook'],['hercules','Hercules'],['kumho','Kumho'],['general','General'],['continental','Continental'],['pirelli','Pirelli'],['nexen','Nexen'],['nitto','Nitto'],['toyo','Toyo'],['falken','Falken'],['yokohama','Yokohama'],['ironman','Ironman'],['ohtsu','OHTSU']];
+var BRANDS=[['michelin','Michelin'],['bfgoodrich','BFGoodrich'],['uniroyal','Uniroyal'],['cooper','Cooper'],['firestone','Firestone'],['bridgestone','Bridgestone'],['hankook','Hankook'],['hercules','Hercules'],['kumho','Kumho'],['general','General'],['continental','Continental'],['pirelli','Pirelli'],['nexen','Nexen'],['nitto','Nitto'],['toyo','Toyo'],['falken','Falken'],['yokohama','Yokohama'],['ironman','Ironman'],['ohtsu','OHTSU'],['goodyear','Goodyear'],['dunlop','Dunlop'],['maxxis','Maxxis'],['mickey-thompson','Mickey Thompson'],['mastercraft','Mastercraft'],['laufenn','Laufenn'],['vredestein','Vredestein'],['nokian','Nokian'],['fuzion','Fuzion'],['gt-radial','GT Radial'],['kenda','Kenda'],['starfire','Starfire'],['kelly','Kelly']];
 function vl(view,label,param,cls){return '<a href="#'+view+(param?'/'+param:'')+'" data-view-link="'+view+'"'+(param?' data-param="'+param+'"':'')+(cls?' class="'+cls+'"':'')+'>'+label+'</a>'}
 
 /* register jump-menu entries */
