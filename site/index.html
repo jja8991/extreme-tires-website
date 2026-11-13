@@ -444,6 +444,8 @@ header.nav.scrolled .logo img{height:42px}
 .prog{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:16px 22px 0}
 .prog i{height:5px;background:var(--line);transition:background .35s var(--ease)}
 .prog i.on{background:var(--red)}
+.prog{position:relative;padding-top:52px}.prog .van{position:absolute;top:19px;width:74px;height:auto;pointer-events:none;left:calc(22px + (100% - 44px)*var(--p,.2) - 66px);transition:left .6s cubic-bezier(.3,.7,.3,1);filter:drop-shadow(0 2px 2px rgba(0,0,0,.35))}
+@media (prefers-reduced-motion:reduce){.prog .van,.mq-bar i{transition:none}}
 .stepmeta{display:flex;justify-content:space-between;padding:10px 22px 0;font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;color:var(--steel)}
 .steps-wrap{overflow:hidden;overflow:clip}
 .step{padding:18px 22px 6px;display:grid;gap:14px;animation:stepin .4s var(--ease)}
@@ -1106,6 +1108,7 @@ body{background:#0d0d0e}
 
 /* form */
 .cm-form-sec{background:var(--mist);padding-block:60px}
+.cm-flow{padding:0;background:none;overflow:visible;min-width:0}.cm-flow::before{display:none}.cm-flow .wizcard{position:relative;z-index:1}
 .cm-form-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:40px;align-items:start}
 .cm-form-intro{display:grid;gap:14px;align-content:start}
 .cm-form-intro p{margin:0;color:var(--steel)}
@@ -1943,8 +1946,9 @@ body{overflow-x:clip}
 .mq-prog li b{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:2px solid #cfd3d9;background:#fff;color:#8a8f98;font:800 14px var(--display)}
 .mq-prog li.on{color:#111}.mq-prog li.on b{background:var(--red);border-color:var(--red);color:#fff}
 .mq-prog li.ok b{background:#111;border-color:#111;color:#fff}
-.mq-bar{height:4px;background:#e3e5e8;border-radius:4px;overflow:hidden;margin:0 0 22px}
-.mq-bar i{display:block;height:100%;width:25%;background:var(--red);transition:width .35s ease}
+.mq-bar{height:4px;background:#e3e5e8;border-radius:4px;margin:38px 0 22px;position:relative}
+.mq-bar i{display:block;height:100%;width:25%;background:var(--red);border-radius:4px;transition:width .6s cubic-bezier(.3,.7,.3,1);position:relative}
+.mq-bar .van{position:absolute;right:-10px;bottom:2px;width:76px;height:auto;pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
 .mq-step[hidden]{display:none}#mobile-quote .mq-prog{grid-template-columns:repeat(5,1fr)}
 .mq-step{animation:mqIn .28s ease both}
 @keyframes mqIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
@@ -2471,7 +2475,7 @@ body{overflow-x:clip}
             <li data-s="4"><b>4</b><span>When</span></li>
             <li data-s="5"><b>5</b><span>You</span></li>
           </ol>
-          <div class="mq-bar" aria-hidden="true"><i id="mq-barfill"></i></div>
+          <div class="mq-bar" aria-hidden="true"><i id="mq-barfill"><img class="van" src="media/van-progress.webp" alt="" width="76" height="37"></i></div>
           <section class="mq-step" data-step="1" aria-label="Step 1 of 5: Where">
             <h3>Where should the van come?</h3>
             <div class="form-grid mq-where">
@@ -2843,7 +2847,7 @@ body{overflow-x:clip}
           <li data-s="4"><b>4</b><span>When</span></li>
           <li data-s="5"><b>5</b><span>You</span></li>
         </ol>
-        <div class="mq-bar" aria-hidden="true"><i id="sw-barfill"></i></div>
+        <div class="mq-bar" aria-hidden="true"><i id="sw-barfill"><img class="van" src="media/van-progress.webp" alt="" width="76" height="37"></i></div>
 
         <section class="mq-step" data-step="1" aria-label="Step 1 of 5: Where">
           <h3>Where should we do the work?</h3>
@@ -3040,35 +3044,12 @@ body{overflow-x:clip}
             <li><span>Or call <b>(954) 773-1896</b>. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</span></li>
           </ul>
         </div>
-        <form id="cm-form" class="cm-form" novalidate>
-          <div class="cm-fields">
-            <label class="f" for="cm-company">Company name<input id="cm-company" name="company" autocomplete="organization" placeholder="Business or fleet name"><span class="err" data-for="cm-company"></span></label>
-            <label class="f" for="cm-contact">Contact name<input id="cm-contact" name="contact" autocomplete="name" placeholder="Who should we ask for?"><span class="err" data-for="cm-contact"></span></label>
-            <label class="f" for="cm-phone">Phone<input id="cm-phone" name="phone" type="tel" autocomplete="tel" placeholder="(954) 555-0123"><span class="err" data-for="cm-phone"></span></label>
-            <label class="f" for="cm-email">Email<input id="cm-email" name="email" type="email" autocomplete="email" placeholder="name@company.com"><span class="err" data-for="cm-email"></span></label>
-            <label class="f" for="cm-size">Fleet size<select id="cm-size" name="size"><option value="">Choose a range</option><option>1–5 vehicles</option><option>6–20 vehicles</option><option>21–50 vehicles</option><option>50+ vehicles</option></select><span class="err" data-for="cm-size"></span></label>
-            <label class="f" for="cm-zip">Where are vehicles based? (ZIP)<input id="cm-zip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="33351"><span class="err" data-for="cm-zip"></span><span class="zipres" id="cm-zipres" aria-live="polite"></span></label>
-          </div>
-          <fieldset class="cm-set" aria-describedby="cm-veh-err">
-            <legend>Vehicle types</legend>
-            <div class="cm-checks" id="cm-veh"></div>
-            <span class="err" id="cm-veh-err"></span>
-          </fieldset>
-          <fieldset class="cm-set">
-            <legend>Service needs</legend>
-            <div class="cm-checks" id="cm-needs"></div>
-          </fieldset>
-          <fieldset class="cm-set">
-            <legend>Preferred contact</legend>
-            <div class="cm-checks cm-radios" id="cm-pref"></div>
-          </fieldset>
-          <label class="f" for="cm-notes">Notes<textarea id="cm-notes" name="notes" rows="3" placeholder="Tire sizes, current brands, schedules, anything that helps"></textarea></label>
-          <div class="cm-submit">
-            <button class="btn btn-red" type="submit">Request fleet quote</button>
-            <p>We never display your email on the site. Prototype only, nothing is sent.</p>
-          </div>
-          <div class="done" id="cm-done" role="status" hidden></div>
-        </form>
+        <div class="flow cm-flow"><div class="card wizcard" id="cwiz">
+          <div class="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="stepmeta"><span data-w="count">Step 1 of 5</span><span data-w="name">Where</span></div>
+          <div class="steps-wrap" aria-live="polite"><div data-w="body"></div></div>
+          <div class="navrow"><button class="linkbtn" type="button" data-w="back">← Back</button><button class="btn btn-red" type="button" data-w="next">Next</button></div>
+        </div></div>
       </div>
     </div>
   </section>
@@ -4346,11 +4327,15 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   function makeWiz(o){
     var root=document.getElementById(o.root); if(!root)return null;
-    var P=o.p, Q=o.mode==='quote';
+    var P=o.p, F=o.mode==='fleet', Q=o.mode==='quote'||F;
     var body=root.querySelector('[data-w=body]'),nextB=root.querySelector('[data-w=next]'),backB=root.querySelector('[data-w=back]'),cnt=root.querySelector('[data-w=count]'),nm=root.querySelector('[data-w=name]');
-    var STEPN=['Where','Vehicle','Service',Q?'Timing':'When','You'];
+    var STEPN=['Where',F?'Fleet':'Vehicle','Service',Q?'Timing':'When','You'];
+    var FVEH=['Cars & pickups','Work vans','Box trucks','Trailers','RVs','Semis','Boat trailers','Golf carts','Mowers & lawn equipment','Skid steers & equipment','Buses','Other'];
+    var FNEEDS=['Fleet maintenance','General mechanical','A/C repair','New tires','Tire repair / roadside','On-site installation','Oil changes','Alignment','Brakes','Suspension','Scheduled rotation / inspection'];
+    var FSIZE=['1–5 vehicles','6–20 vehicles','21–50 vehicles','50+ vehicles'];
+    var FPREF=['Phone call','Text message','Email'];
     var TIMING=['Today / ASAP','This week','Next week','Just pricing for now'];
-    var W={where:'',loc:'',zip:'',zipOk:null,vp:null,size:'',svc:{},day:null,win:null,timing:'',notes:'',name:'',phone:'',email:'',consent:false,sms:false,step:0,dir:1,busy:false,done:false};
+    var W={where:'',loc:'',zip:'',zipOk:null,vp:null,size:'',svc:{},day:null,win:null,timing:'',notes:'',name:'',phone:'',email:'',consent:false,sms:false,step:0,dir:1,busy:false,done:false,fsize:'',vt:{},needs:{},company:'',pref:'Phone call'};
     var $w=function(id){return document.getElementById(P+id)};
     var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
     var BK=function(){return window.ET&&ET.bk||null};
@@ -4358,10 +4343,10 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     function isoOf(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
     function houseNo(a){return /[0-9]/.test(String(a||'').replace(/\b[0-9]+(?:st|nd|rd|th)\b/gi,' '))}
     function SVm(){return (window.ET&&ET.SV)||{}}
-    function allowed(s){var v=SVm()[s];if(!v)return false;var m=v.mode;return W.where==='mobile'?m!=='shop':W.where==='shop'?m!=='mobile':true}
+    function allowed(s){if(F)return true;var v=SVm()[s];if(!v)return false;var m=v.mode;return W.where==='mobile'?m!=='shop':W.where==='shop'?m!=='mobile':true}
     function navSlugs(){return (BK()&&BK().NAV)||Object.keys(SVm())}
-    function chosen(){return navSlugs().filter(function(s){return W.svc[s]&&allowed(s)})}
-    function labels(a){return a.map(function(s){return SVm()[s].label})}
+    function chosen(){if(F)return FNEEDS.filter(function(n){return W.needs[n]});return navSlugs().filter(function(s){return W.svc[s]&&allowed(s)})}
+    function labels(a){if(F)return a;return a.map(function(s){return SVm()[s].label})}
     function smsText(){var e=document.getElementById('sw-sms'),sp=e&&e.parentNode&&e.parentNode.querySelector('span');return sp?sp.textContent:'By checking this box, I agree to receive service text messages from Extreme Tires-N-Accessories LLC about this request. Message frequency varies. Message and data rates may apply. Reply STOP to cancel or HELP for help. Consent is not a condition of purchase.'}
     function dayInfo(){return W.day?ETCal.info(W.day):null}
     function wins(){var i=dayInfo();if(!i)return [];var b=BK();return b?b.windowsFor(isoOf(i.date)):[]}
@@ -4383,19 +4368,29 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     function render(){
       var s=W.step,h='';
       root.querySelectorAll('.prog i').forEach(function(i,n){i.classList.toggle('on',n<=Math.min(s,4))});
+      var pgE=root.querySelector('.prog');if(pgE){var vn=pgE.querySelector('.van');if(!vn){vn=document.createElement('img');vn.className='van';vn.src='media/van-progress.webp';vn.alt='';vn.width=74;vn.height=36;pgE.appendChild(vn)}pgE.style.setProperty('--p',String(s>=5?1:(Math.min(s,4)+1)/5))}
       cnt.textContent=s<5?'Step '+(s+1)+' of 5':(Q?'Sent':'Booked');
       nm.textContent=s<5?STEPN[s]:'Request received';
       backB.disabled=(s===0||s===5);nextB.hidden=(s===5);
       nextB.textContent=s===4?(Q?'Request my quote':'Send my booking request'):'Next';
       if(s===0){
-        h='<h3>Where should we do <span class="red">it?</span></h3><div class="opts">'+
-          '<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><img class="where-img" src="media/where-mobile.webp" alt="" loading="lazy"><span>At my location<small>Home, work or roadside</small></span></button>'+
+        h=(F?'<h3>Where is your <span class="red">fleet?</span></h3>':'<h3>Where should we do <span class="red">it?</span></h3>')+'<div class="opts">'+
+          '<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><img class="where-img" src="media/where-mobile.webp" alt="" loading="lazy"><span>'+(F?'At our lot or yard':'At my location')+'<small>'+(F?'We come to your fleet':'Home, work or roadside')+'</small></span></button>'+
           '<button type="button" class="opt" data-where="shop" aria-pressed="'+(W.where==='shop')+'"><img class="where-img" src="media/where-shop.webp" alt="" loading="lazy"><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button></div>';
         if(W.where==='mobile'){
           h+='<label class="f sw-acwrap" for="'+P+'loc">Street address<input id="'+P+'loc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="'+P+'ac" value="'+esc(W.loc)+'" placeholder="Start typing your address"><ul class="sw-ac" id="'+P+'ac" role="listbox" hidden></ul></label>'+
             '<label class="f" for="'+P+'zip">ZIP code<input id="'+P+'zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" value="'+esc(W.zip)+'" placeholder="33351"></label><div class="zipres" id="'+P+'zipres"></div>'+
             '<div class="checklist"><b>What your spot needs</b><ul><li>About 5 ft clear around the vehicle</li><li>Flat, firm ground (driveway, lot or garage)</li><li>Keys available and wheel locks in the car</li></ul></div>';
         }
+      }else if(s===1&&F){
+        h='<h3>Tell us about your <span class="red">fleet</span></h3><label class="f" for="'+P+'fsize">Fleet size<select id="'+P+'fsize" style="width:100%"><option value="">Choose a range</option>'+FSIZE.map(function(x){return '<option'+(W.fsize===x?' selected':'')+'>'+esc(x)+'</option>'}).join('')+'</select></label>'+
+          '<div class="chipgrp">Vehicle types (pick all that apply)</div><div class="chips">'+FVEH.map(function(x){return '<button type="button" class="chip" data-vt="'+esc(x)+'" aria-pressed="'+(!!W.vt[x])+'">'+esc(x)+'</button>'}).join('')+'</div>'+
+          '<div class="chipgrp">Most common vehicle (optional)</div><div class="hf-form w-veh-grid">'+
+          '<label class="hf-f" for="'+P+'year"><span>Year</span><select id="'+P+'year"></select></label>'+
+          '<label class="hf-f" for="'+P+'make"><span>Make</span><select id="'+P+'make"></select></label>'+
+          '<label class="hf-f" for="'+P+'model"><span>Model</span><select id="'+P+'model"></select></label>'+
+          '<label class="hf-f" for="'+P+'trim"><span>Trim</span><select id="'+P+'trim"><option>Not sure / any trim</option></select></label></div>'+
+          '<label class="f" for="'+P+'size">Tire size (optional)<input id="'+P+'size" value="'+esc(W.size)+'" placeholder="e.g. 265/70R17, printed on the sidewall"></label>';
       }else if(s===1){
         h='<h3>Tell us about the vehicle</h3><div class="hf-form w-veh-grid">'+
           '<label class="hf-f" for="'+P+'year"><span>Year</span><select id="'+P+'year"></select></label>'+
@@ -4403,6 +4398,8 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
           '<label class="hf-f" for="'+P+'model"><span>Model</span><select id="'+P+'model"></select></label>'+
           '<label class="hf-f" for="'+P+'trim"><span>Trim</span><select id="'+P+'trim"><option>Not sure / any trim</option></select></label></div>'+
           '<label class="f" for="'+P+'size">Tire size (optional)<input id="'+P+'size" value="'+esc(W.size)+'" placeholder="e.g. 265/70R17, printed on the sidewall"></label>';
+      }else if(s===2&&F){
+        h='<h3>What does the fleet <span class="red">need?</span></h3><p style="margin:0;color:#aaa;font-size:14px">Pick one or more.</p><div class="chips" style="margin-top:12px">'+FNEEDS.map(function(x){return '<button type="button" class="chip" data-need="'+esc(x)+'" aria-pressed="'+(!!W.needs[x])+'">'+esc(x)+'</button>'}).join('')+'</div>';
       }else if(s===2){
         var mob=W.where==='mobile',N=navSlugs(),SVx=SVm();
         function chip(sl){var v=SVx[sl],off=!allowed(sl);return '<button type="button" class="chip'+(off?' off':'')+'" data-svc="'+sl+'" aria-pressed="'+(!!(W.svc[sl]&&!off))+'"'+(off?' title="'+(mob?'Shop only. Tap to switch to the shop.':'Mobile only. Tap to switch to mobile.')+'"':'')+'>'+esc(v.label)+'</button>'}
@@ -4421,17 +4418,17 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
             '<p style="margin:0;color:#aaa;font-size:13px">Pick your preferred day and window. This is a request: we confirm the exact time by phone.</p>';
         }
       }else if(s===4){
-        h='<h3>Who should we contact?</h3>'+
-          '<label class="f" for="'+P+'name">Name<input id="'+P+'name" autocomplete="name" value="'+esc(W.name)+'" placeholder="First and last name"></label>'+
+        h='<h3>Who should we contact?</h3>'+(F?'<label class="f" for="'+P+'company">Company name<input id="'+P+'company" autocomplete="organization" value="'+esc(W.company)+'" placeholder="Business or fleet name"></label>':'')+
+          '<label class="f" for="'+P+'name">'+(F?'Contact name':'Name')+'<input id="'+P+'name" autocomplete="name" value="'+esc(W.name)+'" placeholder="First and last name"></label>'+
           '<label class="f" for="'+P+'phone">Mobile number<input id="'+P+'phone" type="tel" autocomplete="tel" value="'+esc(W.phone)+'" placeholder="(954) 555-0123"></label>'+
-          '<label class="f" for="'+P+'email">Email (optional)<input id="'+P+'email" type="email" autocomplete="email" value="'+esc(W.email)+'" placeholder="name@example.com"></label>'+
-          '<label class="f" for="'+P+'notes">Anything else we should know? (optional)<textarea id="'+P+'notes" maxlength="300" placeholder="Symptoms, tire size, gate code, etc.">'+esc(W.notes)+'</textarea></label>'+
+          '<label class="f" for="'+P+'email">Email'+(F?'':' (optional)')+'<input id="'+P+'email" type="email" autocomplete="email" value="'+esc(W.email)+'" placeholder="name@example.com"></label>'+
+          (F?'<div class="chipgrp">Preferred contact</div><div class="chips">'+FPREF.map(function(x){return '<button type="button" class="chip" data-pref="'+esc(x)+'" aria-pressed="'+(W.pref===x)+'">'+esc(x)+'</button>'}).join('')+'</div>':'')+'<label class="f" for="'+P+'notes">Anything else we should know? (optional)<textarea id="'+P+'notes" maxlength="300" placeholder="'+(F?'Tire sizes, current brands, schedules, anything that helps':'Symptoms, tire size, gate code, etc.')+'">'+esc(W.notes)+'</textarea></label>'+
           '<label class="toggle" for="'+P+'consent"><input type="checkbox" id="'+P+'consent"'+(W.consent?' checked':'')+'> It is OK to call or text me about this request.</label>'+
           '<label class="toggle" for="'+P+'sms" style="align-items:flex-start"><input type="checkbox" id="'+P+'sms"'+(W.sms?' checked':'')+' style="margin-top:3px"><span style="font-size:12px;color:#aaa;font-weight:400">'+esc(smsText())+'</span></label>';
       }else{
         var a=chosen(),i2=dayInfo(),wl=wins().filter(function(x){return x.k===W.win})[0];
         h='<div class="done-step step"><h3>'+(Q?'Request received':'Request received')+', '+esc((W.name.split(' ')[0])||'friend')+'.</h3>'+
-          '<p style="margin:0;color:#ccc">'+esc(labels(a).join(', '))+' &middot; '+esc(vehText())+' &middot; '+(W.where==='mobile'?'Mobile at '+esc(W.loc)+' '+esc(W.zip):'Sunrise shop')+(Q?(W.timing?' &middot; '+esc(W.timing):''):(i2&&wl?' &middot; '+esc(i2.d+' '+i2.m)+', '+esc(wl.l):''))+'</p>'+
+          '<p style="margin:0;color:#ccc">'+esc(labels(a).join(', '))+' &middot; '+esc(F?([W.company,W.fsize].filter(Boolean).join(', ')+(vehList()?' ('+vehList()+')':'')):vehText())+' &middot; '+(W.where==='mobile'?'Mobile at '+esc(W.loc)+' '+esc(W.zip):'Sunrise shop')+(Q?(W.timing?' &middot; '+esc(W.timing):''):(i2&&wl?' &middot; '+esc(i2.d+' '+i2.m)+', '+esc(wl.l):''))+'</p>'+
           '<p style="margin:0;color:#ccc">'+esc(o.doneMsg||'This was a request, not a confirmed appointment. We will contact you to confirm.')+' Need it sooner? Call <a href="tel:+19547731896" style="color:#fff"><b>'+PHONE+'</b></a>.</p>'+
           '<button type="button" class="linkbtn" data-w="restart" style="justify-self:start">Start another request</button></div>';
         body.innerHTML=h;return;
@@ -4441,6 +4438,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       if(s===1)buildVeh();
     }
     function vehText(){var v=W.vp||{};return [v.year,v.make,v.model,/^Not sure|^Other/.test(v.trim||'')?'':v.trim].filter(Boolean).join(' ')}
+    function vehList(){return Object.keys(W.vt).filter(function(k){return W.vt[k]}).join(', ')}
     function buildVeh(){
       var Y=$w('year'),M=$w('make'),D=$w('model'),T=$w('trim');if(!Y||typeof initVehPicker!=='function')return;
       var v=W.vp||ETMem.get('et_vehicle')||{};
@@ -4463,18 +4461,24 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
           if(W.zipOk===null)return err('One second, checking your ZIP. Tap Next again.');
         }
       }
-      if(s===1){
+      if(s===1&&F){
+        W.fsize=g('fsize');W.size=g('size');var fv=readVeh();W.vp=(fv.make&&fv.model&&!/^(Loading|Model$|Select)/.test(fv.model))?fv:null;
+        if(!W.fsize)return err('Choose your fleet size.');
+        if(!vehList())return err('Pick at least one vehicle type.');
+      }else if(s===1){
         var v=readVeh();W.vp=v;W.size=g('size');
         if(!v.year||!v.make||!v.model||/^(Loading|Model$|Select)/.test(v.model))return err('Choose your vehicle year, make and model so we have the right parts.');
         try{ETMem.set('et_vehicle',{year:v.year,make:v.make,model:v.model,trim:v.trim,size:W.size})}catch(e){}
       }
-      if(s===2&&!chosen().length)return err('Pick at least one service.');
+      if(s===2&&!chosen().length)return err(F?'Pick at least one service your fleet needs.':'Pick at least one service.');
       if(s===3){if(Q){if(!W.timing)return err('Pick when you need service.')}else if(!W.day||!W.win)return err('Please pick a day and a time window.')}
       if(s===4){
+        if(F){W.company=g('company');if(W.company.length<2)return err('Please enter your company name.')}
         W.name=g('name');W.phone=g('phone');W.email=g('email');W.notes=g('notes');W.consent=$w('consent').checked;W.sms=$w('sms').checked;
         var ph=W.phone.replace(/\D/g,'');if(ph.length===11&&ph[0]==='1')ph=ph.slice(1);
         if(W.name.length<2)return err('Please enter your name.');
         if(!/^[2-9][0-9]{9}$/.test(ph))return err('Enter a 10-digit US phone number.');
+        if(F&&!W.email)return err('Please enter an email so we can send your quote.');
         if(W.email&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(W.email))return err('Enter an email like name@example.com');
         if(!W.consent)return err('Please tick the box so we may contact you about this request.');
       }
@@ -4516,10 +4520,13 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
         if(!allowed(sl)){if(W.where==='mobile'){W.where='shop';W.svc[sl]=true;render()}else{W.where='mobile';W.svc[sl]=true;W.step=0;W.dir=-1;render()}return}
         if(W.svc[sl])delete W.svc[sl];else W.svc[sl]=true;b.setAttribute('aria-pressed',String(!!W.svc[sl]));return}
       if(b.dataset.sw){if(b.dataset.sw==='toshop'){W.where='shop';Object.keys(W.svc).forEach(function(s){if(!allowed(s))delete W.svc[s]});render()}else{W.where='mobile';W.step=0;W.dir=-1;render()}return}
+      if(b.dataset.vt){var k=b.dataset.vt;if(W.vt[k])delete W.vt[k];else W.vt[k]=true;b.setAttribute('aria-pressed',String(!!W.vt[k]));return}
+      if(b.dataset.need){var n=b.dataset.need;if(W.needs[n])delete W.needs[n];else W.needs[n]=true;b.setAttribute('aria-pressed',String(!!W.needs[n]));return}
+      if(b.dataset.pref){W.pref=b.dataset.pref;[].forEach.call(body.querySelectorAll('[data-pref]'),function(x){x.setAttribute('aria-pressed',String(x===b))});return}
       if(b.dataset.day){W.day=b.dataset.day;W.win=null;render();return}
       if(b.dataset.win){W.win=b.dataset.win;render();return}
       if(b.dataset.timing){W.timing=b.dataset.timing;render();return}
-      if(b.dataset.w==='restart'){var keep={name:W.name,phone:W.phone,email:W.email,vp:W.vp};W=Object.assign({where:'',loc:'',zip:'',zipOk:null,vp:null,size:'',svc:{},day:null,win:null,timing:'',notes:'',consent:false,sms:false,step:0,dir:-1,busy:false,done:false},keep);render()}
+      if(b.dataset.w==='restart'){var keep={name:W.name,phone:W.phone,email:W.email,vp:W.vp};W=Object.assign({where:'',loc:'',zip:'',zipOk:null,vp:null,size:'',svc:{},day:null,win:null,timing:'',notes:'',consent:false,sms:false,step:0,dir:-1,busy:false,done:false,fsize:'',vt:{},needs:{},company:W.company,pref:'Phone call'},keep);render()}
     });
     body.addEventListener('input',function(e){if(e.target.id===P+'zip'){W.zip=e.target.value.replace(/\D/g,'').slice(0,5);if(e.target.value!==W.zip)e.target.value=W.zip;zipCheck()}});
     body.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName==='INPUT'&&e.target.type!=='checkbox'&&!(e.target.getAttribute('aria-expanded')==='true')){e.preventDefault();nextB.click()}});
@@ -4536,6 +4543,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
   window.ETWizHome=homeWiz;
   var quoteWiz=makeWiz({root:'qwiz',p:'qz-',mode:'quote',doneMsg:'Our team will review this and contact you with pricing. This is a quote request, not a confirmed appointment.'});
   window.ETWizQuote=quoteWiz;
+  window.ETWizFleet=makeWiz({root:'cwiz',p:'cz-',mode:'fleet',doneMsg:'Our team will review your fleet details and follow up with pricing and service options. This is a quote request, not a confirmed appointment.'});
   /* other pages still prefill the (hidden) legacy quote fields; pull them into the wizard whenever the Quote page opens */
   function importQuote(){
     if(!quoteWiz)return;var g=function(id){return document.getElementById(id)},p={},have=false;
@@ -5749,16 +5757,6 @@ $('cm-cats').innerHTML=CATS.map(function(c){
   return '<article class="cm-cat">'+ic(c[1])+'<h3>'+esc(c[0])+'</h3><p>'+esc(c[2])+'</p><span class="sample">Brands: list to confirm</span></article>';
 }).join('');
 
-$('cm-veh').innerHTML=VEH.concat([['Other','','']]).map(function(v,i){
-  return '<label for="cm-v'+i+'"><input type="checkbox" id="cm-v'+i+'" name="veh" value="'+esc(v[0])+'">'+esc(v[0])+'</label>';
-}).join('');
-var NEEDS=['Fleet maintenance','General mechanical','A/C repair','New tires','Tire repair / roadside','On-site installation','Oil changes','Alignment','Brakes','Suspension','Scheduled rotation / inspection'];
-$('cm-needs').innerHTML=NEEDS.map(function(n,i){
-  return '<label for="cm-n'+i+'"><input type="checkbox" id="cm-n'+i+'" name="need" value="'+esc(n)+'">'+esc(n)+'</label>';
-}).join('');
-$('cm-pref').innerHTML=['Phone call','Text message','Email'].map(function(n,i){
-  return '<label for="cm-p'+i+'"><input type="radio" id="cm-p'+i+'" name="pref" value="'+esc(n)+'"'+(i===0?' checked':'')+'>'+esc(n)+'</label>';
-}).join('');
 
 var FAQ=[
   ['Do you come to our lot or yard?','Our mobile van handles tire installation, balancing, flat repair and oil changes on site within Broward, Miami-Dade and Palm Beach counties. Larger jobs may be better at the shop. Our team will say which when they quote.'],
@@ -5772,39 +5770,6 @@ $('cm-faq').innerHTML=FAQ.map(function(q){
   return '<details><summary>'+esc(q[0])+'</summary><p>'+esc(q[1])+'</p></details>';
 }).join('');
 
-function cmZip(){
-  var z=$('cm-zip').value.trim(), out=$('cm-zipres'), c=ET.county(z);
-  out.className='zipres';
-  if(z.length<5){out.textContent='';return c}
-  if(c){out.textContent='We cover '+z+' in '+c+' County.';out.classList.add('ok')}
-  else if(c===''){out.textContent='Outside our regular route. Call (954) 773-1896 and we will see what we can do.';out.classList.add('no')}
-  else {out.textContent=''}
-  return c;
-}
-$('cm-zip').addEventListener('input',cmZip);
-$('cm-form').addEventListener('submit',function(e){
-  e.preventDefault();
-  var f=$('cm-form'), bad=null;
-  function setErr(id,msg,el){var s=f.querySelector('.err[data-for="'+id+'"]');if(s)s.textContent=msg||'';if(msg&&!bad)bad=el||$(id)}
-  var v=function(id){return $(id).value.trim()};
-  setErr('cm-company',v('cm-company')?'':'Please enter your company name.');
-  setErr('cm-contact',v('cm-contact')?'':'Please enter a contact name.');
-  setErr('cm-phone',v('cm-phone').replace(/\D/g,'').length>=10?'':'Enter a 10-digit phone number.');
-  setErr('cm-email',!v('cm-email')?'This field is required':(/.+@.+\..+/.test(v('cm-email'))?'':'Enter an email like name@example.com'));
-  setErr('cm-size',v('cm-size')?'':'Please choose a fleet size.');
-  var z=v('cm-zip'), c=ET.county(z);
-  setErr('cm-zip',c===null?'Enter a 5-digit ZIP code.':'');
-  var vehs=[].slice.call(f.querySelectorAll('input[name="veh"]:checked')).map(function(i){return i.value});
-  $('cm-veh-err').textContent=vehs.length?'':'Pick at least one vehicle type.';
-  if(!vehs.length&&!bad)bad=$('cm-v0');
-  var done=$('cm-done');
-  if(bad){done.hidden=true;bad.focus();return}
-  var needs=[].slice.call(f.querySelectorAll('input[name="need"]:checked')).map(function(i){return i.value});
-  var pref=f.querySelector('input[name="pref"]:checked');
-  done.innerHTML='<b>Prototype only, nothing was sent.</b> On the live site this would go to the shop as a fleet lead for '+esc(v('cm-company'))+' ('+esc(v('cm-size'))+'; '+esc(vehs.join(', '))+'; based near '+esc(z)+(c?', '+esc(c)+' County':'')+(needs.length?'; needs: '+esc(needs.join(', ')):'')+'). Preferred contact: '+esc(pref?pref.value:'phone call')+'.';
-  done.hidden=false;
-  done.scrollIntoView({block:'nearest'});
-});
 ET.pages.push({id:'commercial',label:'Commercial & Fleet'});
 
 /* ===================== BRANDS ===================== */
