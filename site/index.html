@@ -672,22 +672,24 @@ body{background:#0d0d0e}
 .cities-co h3{font:800 15px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
 .cities-list{display:flex;flex-wrap:wrap;gap:8px}
 /* ===== Booking calendar ===== */
-.cal{background:#151517;border:1px solid #2a2a2d;border-radius:14px;padding:14px;max-width:460px;color:#fff}
+.cal{background:#151517;border:1px solid #2a2a2d;border-radius:18px;padding:clamp(14px,2vw,28px);width:100%;max-width:none;color:#fff}
 .cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.cal-h b{font:800 17px var(--display);letter-spacing:.02em;text-transform:uppercase}
-.cal .cal-nav{width:40px;height:40px;border-radius:10px;border:1px solid #34343a;background:#1d1d20;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.cal-h b{font:800 clamp(20px,2.4vw,30px) var(--display);letter-spacing:.02em;text-transform:uppercase}
+.cal .cal-nav{width:52px;height:52px;border-radius:12px;font-size:28px;border:1px solid #34343a;background:#1d1d20;color:#fff;font-size:22px;line-height:1;cursor:pointer}
 .cal .cal-nav{color:#fff}.cal .cal-nav:hover:not(:disabled){background:var(--red);border-color:var(--red);color:#fff}.cal .cal-nav:disabled{opacity:.3;cursor:default}
-.cal-w,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
-.cal-w span{font:700 11px var(--body);letter-spacing:.08em;color:#8a8f98;padding:4px 0}
-.cal .cal-d{aspect-ratio:1;display:grid;place-items:center;border-radius:10px;border:1px solid transparent;background:#1d1d20;color:#fff;font:700 15px var(--body);min-height:40px;padding:0}
+.cal-w,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:clamp(4px,.8vw,10px);text-align:center}
+.cal-w span{font:700 clamp(11px,1.1vw,14px) var(--body);letter-spacing:.1em;color:#8a8f98;padding:6px 0}
+.cal .cal-d{aspect-ratio:1.9;display:grid;place-items:center;border-radius:12px;border:1px solid transparent;background:#1d1d20;color:#fff;font:700 clamp(16px,1.8vw,24px) var(--body);min-height:48px;padding:0}
 .cal button.cal-d{cursor:pointer;background:#1d1d20;color:#fff;border:1px solid #2c2c31}
 .cal button.cal-d:hover{border-color:var(--red);background:#26262a;color:#fff}
 .cal button.cal-d[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 6px 18px rgba(227,22,27,.4)}
 .cal .cal-off{background:transparent;color:#4a4d54;font-weight:500;border-color:transparent}.cal-x{display:block}
 .cal-t:not(.cal-off){box-shadow:inset 0 0 0 1px #fff3}
-.cal-key{margin:10px 2px 0;font-size:12px;color:#9aa0a8}
+.cal-key{margin:14px 2px 0;font-size:clamp(12px,1.1vw,14px);color:#9aa0a8}
 .slots .cal{margin:14px 0 18px}
-@media (max-width:520px){.cal{max-width:none}}
+@media (max-width:700px){.cal .cal-d{aspect-ratio:1;min-height:42px}}
+.slots .times,.slots .days{width:100%}.slots .times{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.slots .times button{padding:16px 12px;font-size:16px}
+.windows{width:100%}
 .services,.offers,.rev,.lifts,.faq{--paper:#0d0d0e;--mist:#0d0d0e;--ink:#fff;--steel:#b4b8bf;--line:#26262a;background:#0d0d0e;color:#fff}
 .services{background:linear-gradient(#0d0d0e,#111113 40%,#0d0d0e)}
 .mobile,.how-img,.fleet,.ig,.flow{background-color:#0d0d0e}
