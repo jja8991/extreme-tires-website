@@ -668,6 +668,26 @@ body{background:#0d0d0e}
 .onsite-grid b{color:#fff}
 .on-ico{width:84px;height:84px;object-fit:contain;filter:drop-shadow(0 6px 14px rgba(227,22,27,.35))}
 .onsite,.slots,.areas{--paper:#0d0d0e;--mist:#151517;--ink:#fff;--steel:#b4b8bf;--line:#26262a;background:#0d0d0e;color:#fff}
+.cities-grouped{display:grid;gap:22px}
+.cities-co h3{font:800 15px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin:0 0 10px}
+.cities-list{display:flex;flex-wrap:wrap;gap:8px}
+/* ===== Booking calendar ===== */
+.cal{background:#151517;border:1px solid #2a2a2d;border-radius:14px;padding:14px;max-width:460px;color:#fff}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.cal-h b{font:800 17px var(--display);letter-spacing:.02em;text-transform:uppercase}
+.cal .cal-nav{width:40px;height:40px;border-radius:10px;border:1px solid #34343a;background:#1d1d20;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.cal .cal-nav{color:#fff}.cal .cal-nav:hover:not(:disabled){background:var(--red);border-color:var(--red);color:#fff}.cal .cal-nav:disabled{opacity:.3;cursor:default}
+.cal-w,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-w span{font:700 11px var(--body);letter-spacing:.08em;color:#8a8f98;padding:4px 0}
+.cal .cal-d{aspect-ratio:1;display:grid;place-items:center;border-radius:10px;border:1px solid transparent;background:#1d1d20;color:#fff;font:700 15px var(--body);min-height:40px;padding:0}
+.cal button.cal-d{cursor:pointer;background:#1d1d20;color:#fff;border:1px solid #2c2c31}
+.cal button.cal-d:hover{border-color:var(--red);background:#26262a;color:#fff}
+.cal button.cal-d[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 6px 18px rgba(227,22,27,.4)}
+.cal .cal-off{background:transparent;color:#4a4d54;font-weight:500;border-color:transparent}.cal-x{display:block}
+.cal-t:not(.cal-off){box-shadow:inset 0 0 0 1px #fff3}
+.cal-key{margin:10px 2px 0;font-size:12px;color:#9aa0a8}
+.slots .cal{margin:14px 0 18px}
+@media (max-width:520px){.cal{max-width:none}}
 .services,.offers,.rev,.lifts,.faq{--paper:#0d0d0e;--mist:#0d0d0e;--ink:#fff;--steel:#b4b8bf;--line:#26262a;background:#0d0d0e;color:#fff}
 .services{background:linear-gradient(#0d0d0e,#111113 40%,#0d0d0e)}
 .mobile,.how-img,.fleet,.ig,.flow{background-color:#0d0d0e}
@@ -2180,14 +2200,14 @@ body{background:#0d0d0e}
       <div class="days" id="days" role="group" aria-label="Day"></div>
       <div class="times" id="times" role="group" aria-label="Time"></div>
       <button class="btn btn-red" type="button" id="book-slot">Book this slot</button>
-      <p style="color:var(--steel);font-size:14px;margin:10px 0 0" id="slot-note">Sample availability. On the live site this reads the shop's real calendar.</p>
+      <p style="color:var(--steel);font-size:14px;margin:10px 0 0" id="slot-note">Pick your preferred day and time. We confirm by text.</p>
     </div>
   </section>
   <section class="areas" aria-labelledby="ar-h">
     <div class="wrap">
       <div class="eyebrow">Service area</div>
       <h2 id="ar-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Cities we cover</h2>
-      <p style="color:var(--steel);max-width:44em">Each city gets its own page on the live site, for local search. Davie belongs here as a service city, not in the shop's address.</p>
+      <p style="color:var(--steel);max-width:44em">Mobile service across Miami-Dade, Broward and Palm Beach counties, from Homestead to West Palm Beach and beyond. Tap your city for details.</p>
       <div class="cities" id="cities"></div>
     </div>
   </section>
@@ -2471,7 +2491,7 @@ body{background:#0d0d0e}
           <div class="flow-days sc-days" id="sc-days" role="group" aria-label="Preferred day"></div>
           <div class="sc-lbl" style="margin-top:14px">Pick up to two arrival windows <span id="sc-wincount" class="sc-cur"></span></div>
           <div class="windows sc-wins" id="sc-wins" role="group" aria-label="Preferred 2-hour windows"></div>
-          <div class="sc-hint">Sample availability. The live site reads the shop calendar.</div>
+          <div class="sc-hint">Pick your preferred day and windows. We confirm by text.</div>
           <div class="err" id="sc-err-when" role="alert"></div>
         </fieldset>
 
@@ -3836,20 +3856,49 @@ body{background:#0d0d0e}
     if(c){out.textContent='Yes, we cover '+z+' in '+c+' County. Pick a time below.';out.classList.add('ok');document.getElementById('slots-anchor');document.querySelector('.slots').scrollIntoView({behavior:reduce?'auto':'smooth'})}
     else{out.textContent='That ZIP is outside our regular route. Call (954) 773-1896 and we will see what we can do.';out.classList.add('no')}
   });
+  // ===== Real booking calendar (shared by Mobile page, Quote & Book, Schedule) =====
+  // Edit CLOSED_DATES with 'YYYY-MM-DD' strings for holidays/shop closures. Sundays are always closed.
+  // Real availability: call ETCal.setBlocked({'YYYY-MM-DD':true}) with full days from the shop calendar to grey them out.
+  window.ETCal=(function(){
+    var DN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        MF=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var CLOSED_DATES=[], HORIZON=60, blocked={};
+    function iso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+    function key(d){return DN[d.getDay()]+' '+MN[d.getMonth()]+' '+d.getDate()}
+    function today0(){var t=new Date();t.setHours(0,0,0,0);return t}
+    function open(d){var t=today0(),min=new Date(t);min.setDate(min.getDate()+1);var max=new Date(t);max.setDate(max.getDate()+HORIZON);
+      return d>=min&&d<=max&&d.getDay()!==0&&CLOSED_DATES.indexOf(iso(d))<0&&blocked[iso(d)]!==true}
+    function info(k){var t=today0();for(var i=0;i<=HORIZON+2;i++){var d=new Date(t);d.setDate(d.getDate()+i);if(key(d)===k)return {k:k,d:DN[d.getDay()],m:MN[d.getMonth()]+' '+d.getDate(),sat:d.getDay()===6,date:d}}return null}
+    function firstOpen(){var t=today0();for(var i=1;i<=HORIZON;i++){var d=new Date(t);d.setDate(d.getDate()+i);if(open(d))return key(d)}return null}
+    function html(sel,off){
+      var t=today0(),inf=sel?info(sel):null;
+      if(off==null)off=inf?((inf.date.getFullYear()-t.getFullYear())*12+inf.date.getMonth()-t.getMonth()):0;
+      off=Math.max(0,Math.min(2,off));
+      var base=new Date(t.getFullYear(),t.getMonth()+off,1),first=base.getDay(),dim=new Date(base.getFullYear(),base.getMonth()+1,0).getDate(),c='';
+      for(var i=0;i<first;i++)c+='<span class="cal-x"></span>';
+      for(var n=1;n<=dim;n++){var d=new Date(base.getFullYear(),base.getMonth(),n),k=key(d),ok=open(d);
+        c+=ok?'<button type="button" class="cal-d'+(d.getTime()===t.getTime()?' cal-t':'')+'" data-day="'+k+'" data-sat="'+(d.getDay()===6)+'" aria-pressed="'+(k===sel)+'" aria-label="'+DN[d.getDay()]+', '+MF[d.getMonth()]+' '+n+'">'+n+'</button>'
+          :'<span class="cal-d cal-off'+(d.getTime()===t.getTime()?' cal-t':'')+'" aria-hidden="true">'+n+'</span>'}
+      return '<div class="cal" data-m="'+off+'"><div class="cal-h"><button type="button" class="cal-nav" data-cal-nav="-1" aria-label="Previous month"'+(off<=0?' disabled':'')+'>&lsaquo;</button><b aria-live="polite">'+MF[base.getMonth()]+' '+base.getFullYear()+'</b><button type="button" class="cal-nav" data-cal-nav="1" aria-label="Next month"'+(off>=2?' disabled':'')+'>&rsaquo;</button></div>'+
+        '<div class="cal-w" aria-hidden="true"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div><div class="cal-g">'+c+'</div>'+
+        '<p class="cal-key">Mon&ndash;Fri 8&ndash;6:30 &middot; Sat 8&ndash;4 &middot; Closed Sundays. Need today? Call (954) 773-1896.</p></div>'}
+    document.addEventListener('click',function(e){var n=e.target.closest&&e.target.closest('[data-cal-nav]');if(!n)return;
+      e.preventDefault();e.stopPropagation();var cal=n.closest('.cal'),sel=cal.querySelector('.cal-d[aria-pressed="true"]');
+      var tmp=document.createElement('div');tmp.innerHTML=html(sel?sel.dataset.day:null,(+cal.dataset.m)+(+n.dataset.calNav));cal.replaceWith(tmp.firstChild)},true);
+    return {html:html,info:info,firstOpen:firstOpen,isOpen:open,setBlocked:function(o){blocked=o||{}}};
+  })();
   var DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   var daysEl=document.getElementById('days'), timesEl=document.getElementById('times'), pickDay=null, pickTime=null;
-  var d=new Date(), made=0, html='';
-  while(made<6){d.setDate(d.getDate()+1); if(d.getDay()===0)continue;
-    html+='<button type="button" aria-pressed="'+(made===0)+'" data-day="'+DAYS[d.getDay()]+' '+MON[d.getMonth()]+' '+d.getDate()+'" data-sat="'+(d.getDay()===6)+'">'+DAYS[d.getDay()]+'<small>'+MON[d.getMonth()]+' '+d.getDate()+'</small></button>';made++}
-  daysEl.innerHTML=html;
+  var firstKey=ETCal.firstOpen(); daysEl.innerHTML=ETCal.html(firstKey);
+  daysEl.querySelector('.cal-d[data-day="'+firstKey+'"]').setAttribute('aria-pressed','true');
   function renderTimes(sat){
     var t=sat?['8:00 AM','10:00 AM','12:00 PM','2:00 PM']:['8:00 AM','10:00 AM','12:00 PM','2:00 PM','4:00 PM'];
     timesEl.innerHTML=t.map(function(x,i){return '<button type="button" aria-pressed="'+(i===1)+'" data-time="'+x+'">'+x+'</button>'}).join('');
     pickTime=t[1];
   }
-  pickDay=daysEl.querySelector('button').dataset.day; renderTimes(daysEl.querySelector('button').dataset.sat==='true');
-  daysEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
-    daysEl.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickDay=b.dataset.day;renderTimes(b.dataset.sat==='true')});
+  pickDay=firstKey; renderTimes(ETCal.info(firstKey).sat);
+  daysEl.addEventListener('click',function(e){var b=e.target.closest('button.cal-d');if(!b)return;
+    daysEl.querySelectorAll('.cal-d').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickDay=b.dataset.day;renderTimes(b.dataset.sat==='true')});
   timesEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
     timesEl.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickTime=b.dataset.time});
   document.getElementById('book-slot').addEventListener('click',function(){
@@ -3910,13 +3959,12 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
           '<div class="checklist"><b>What your spot needs</b><ul><li>About 5 ft clear around the vehicle</li><li>Flat, firm ground (driveway, lot or garage)</li><li>Keys available and wheel locks in the car</li></ul></div>';
       }
     } else if(s===3){
-      var day=WDAYS.filter(function(x){return x.k===W.day})[0]||WDAYS[0]; if(!W.day)W.day=day.k;
+      var day=WDAYS.filter(function(x){return x.k===W.day})[0]||ETCal.info(W.day)||WDAYS[0]; if(!W.day)W.day=day.k;
       var wins=day.sat?['8–10 AM','10–12 PM','12–2 PM','2–4 PM']:['8–10 AM','10–12 PM','12–2 PM','2–4 PM','4–6 PM'];
       if(wins.indexOf(W.win)<0)W.win=null;
-      h='<h3>Pick a 2-hour window</h3><div class="flow-days" role="group" aria-label="Day">'+WDAYS.map(function(x){
-        return '<button type="button" data-day="'+x.k+'" aria-pressed="'+(x.k===W.day)+'">'+x.d+'<small>'+x.m+'</small></button>'}).join('')+'</div>'+
+      h='<h3>Pick a 2-hour window</h3>'+ETCal.html(W.day)+
         '<div class="windows" role="group" aria-label="Arrival window">'+wins.map(function(w){return '<button type="button" data-win="'+w+'" aria-pressed="'+(w===W.win)+'">'+w+'</button>'}).join('')+'</div>'+
-        '<p style="margin:0;color:var(--steel);font-size:13px">Sample availability. The live site reads the shop calendar.</p>';
+        '<p style="margin:0;color:var(--steel);font-size:13px">Pick your preferred day and window. We confirm by text.</p>';
     } else if(s===4){
       h='<h3>Where do we send updates?</h3>'+
         '<label class="f" for="w-name">Name<input id="w-name" autocomplete="name" value="'+esc(W.name)+'" placeholder="First and last name"></label>'+
@@ -4411,9 +4459,9 @@ sc.day=SDAYS[0].k;
 $('sc-pick').innerHTML=SLUGS.map(function(s){var v=SV[s];return '<label for="sc-s-'+s+'"><input type="checkbox" id="sc-s-'+s+'" name="sc-svc" value="'+s+'" data-mode="'+v.mode+'">'+SI(v.ico,0)+'<span>'+h(v.label)+'</span></label>'}).join('');
 function chosenSvcs(){return [].slice.call($('sc-pick').querySelectorAll('input:checked')).map(function(i){return i.value})}
 function windowsFor(day){return day.sat?['8–10 AM','10–12 PM','12–2 PM','2–4 PM']:['8–10 AM','10–12 PM','12–2 PM','2–4 PM','4–6 PM']}
-function curDay(){return SDAYS.filter(function(x){return x.k===sc.day})[0]||SDAYS[0]}
+function curDay(){return SDAYS.filter(function(x){return x.k===sc.day})[0]||ETCal.info(sc.day)||SDAYS[0]}
 function renderDays(){
-  $('sc-days').innerHTML=SDAYS.map(function(x){return '<button type="button" data-day="'+x.k+'" aria-pressed="'+(x.k===sc.day)+'">'+x.d+'<small>'+x.m+'</small></button>'}).join('');
+  $('sc-days').innerHTML=ETCal.html(sc.day);
   var w=windowsFor(curDay());
   sc.wins=sc.wins.filter(function(x){return w.indexOf(x)>-1});
   $('sc-wins').innerHTML=w.map(function(x){return '<button type="button" data-win="'+x+'" aria-pressed="'+(sc.wins.indexOf(x)>-1)+'">'+x+'</button>'}).join('');
@@ -4435,7 +4483,7 @@ function updateWhere(){
 renderDays(); updateWhere();
 $('sc-where').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;sc.where=b.dataset.where;updateWhere();if(sc.where==='mobile')$('sc-zip').focus()});
 $('sc-pick').addEventListener('change',function(){$('sc-err-svc').textContent='';updateSummary()});
-$('sc-days').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;sc.day=b.dataset.day;renderDays();updateSummary();$('sc-err-when').textContent=''});
+$('sc-days').addEventListener('click',function(e){var b=e.target.closest('button.cal-d');if(!b)return;sc.day=b.dataset.day;renderDays();updateSummary();$('sc-err-when').textContent=''});
 $('sc-wins').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var w=b.dataset.win,i=sc.wins.indexOf(w);
   if(i>-1)sc.wins.splice(i,1);else{sc.wins.push(w);if(sc.wins.length>2)sc.wins.shift()}
   renderDays();updateSummary();$('sc-err-when').textContent=''});
@@ -5189,23 +5237,116 @@ var PHONE='(954) 773-1896';
 
 /* ---------- shared data ---------- */
 var CITIES=[
- ['sunrise','Sunrise','Broward',['plantation','tamarac','lauderhill','weston','davie']],
- ['plantation','Plantation','Broward',['sunrise','davie','lauderhill','fort-lauderdale']],
- ['tamarac','Tamarac','Broward',['sunrise','lauderhill','coral-springs','plantation']],
- ['lauderhill','Lauderhill','Broward',['sunrise','tamarac','plantation','fort-lauderdale']],
+ ['homestead','Homestead','Miami-Dade',['florida-city','cutler-bay']],
+ ['florida-city','Florida City','Miami-Dade',['homestead','cutler-bay','palmetto-bay']],
+ ['cutler-bay','Cutler Bay','Miami-Dade',['florida-city','palmetto-bay','homestead','pinecrest']],
+ ['palmetto-bay','Palmetto Bay','Miami-Dade',['cutler-bay','pinecrest','florida-city','south-miami']],
+ ['pinecrest','Pinecrest','Miami-Dade',['palmetto-bay','south-miami','cutler-bay','coral-gables']],
+ ['south-miami','South Miami','Miami-Dade',['pinecrest','coral-gables','palmetto-bay','west-miami']],
+ ['coral-gables','Coral Gables','Miami-Dade',['south-miami','west-miami','pinecrest','sweetwater']],
+ ['west-miami','West Miami','Miami-Dade',['coral-gables','sweetwater','south-miami','doral']],
+ ['sweetwater','Sweetwater','Miami-Dade',['west-miami','doral','coral-gables','kendall']],
+ ['doral','Doral','Miami-Dade',['sweetwater','kendall','west-miami','westchester']],
+ ['kendall','Kendall','Miami-Dade',['doral','westchester','sweetwater','miami']],
+ ['westchester','Westchester','Miami-Dade',['kendall','miami','doral','key-biscayne']],
+ ['miami','Miami','Miami-Dade',['westchester','key-biscayne','kendall','miami-beach']],
+ ['key-biscayne','Key Biscayne','Miami-Dade',['miami','miami-beach','westchester','virginia-gardens']],
+ ['miami-beach','Miami Beach','Miami-Dade',['key-biscayne','virginia-gardens','miami','medley']],
+ ['virginia-gardens','Virginia Gardens','Miami-Dade',['miami-beach','medley','key-biscayne','hialeah-gardens']],
+ ['medley','Medley','Miami-Dade',['virginia-gardens','hialeah-gardens','miami-beach','hialeah']],
+ ['hialeah-gardens','Hialeah Gardens','Miami-Dade',['medley','hialeah','virginia-gardens','miami-springs']],
+ ['hialeah','Hialeah','Miami-Dade',['miami-gardens','hollywood','miramar']],
+ ['miami-springs','Miami Springs','Miami-Dade',['hialeah','opa-locka','hialeah-gardens','north-bay-village']],
+ ['opa-locka','Opa-locka','Miami-Dade',['miami-springs','north-bay-village','hialeah','miami-shores']],
+ ['north-bay-village','North Bay Village','Miami-Dade',['opa-locka','miami-shores','miami-springs','el-portal']],
+ ['miami-shores','Miami Shores','Miami-Dade',['north-bay-village','el-portal','opa-locka','biscayne-park']],
+ ['el-portal','El Portal','Miami-Dade',['miami-shores','biscayne-park','north-bay-village','bay-harbor-islands']],
+ ['biscayne-park','Biscayne Park','Miami-Dade',['el-portal','bay-harbor-islands','miami-shores','surfside']],
+ ['bay-harbor-islands','Bay Harbor Islands','Miami-Dade',['biscayne-park','surfside','el-portal','bal-harbour']],
+ ['surfside','Surfside','Miami-Dade',['bay-harbor-islands','bal-harbour','biscayne-park','north-miami']],
+ ['bal-harbour','Bal Harbour','Miami-Dade',['surfside','north-miami','bay-harbor-islands','miami-lakes']],
+ ['north-miami','North Miami','Miami-Dade',['bal-harbour','miami-lakes','surfside','miami-gardens']],
+ ['miami-lakes','Miami Lakes','Miami-Dade',['north-miami','miami-gardens','bal-harbour','north-miami-beach']],
+ ['miami-gardens','Miami Gardens','Miami-Dade',['miramar','hollywood','hialeah','pembroke-pines']],
+ ['north-miami-beach','North Miami Beach','Miami-Dade',['miami-gardens','indian-creek','miami-lakes','sunny-isles-beach']],
+ ['indian-creek','Indian Creek','Miami-Dade',['north-miami-beach','sunny-isles-beach','miami-gardens','aventura']],
+ ['sunny-isles-beach','Sunny Isles Beach','Miami-Dade',['indian-creek','aventura','north-miami-beach','golden-beach']],
+ ['aventura','Aventura','Miami-Dade',['sunny-isles-beach','golden-beach','indian-creek']],
+ ['golden-beach','Golden Beach','Miami-Dade',['aventura','sunny-isles-beach']],
+ ['hallandale-beach','Hallandale Beach','Broward',['pembroke-park','west-park']],
+ ['pembroke-park','Pembroke Park','Broward',['hallandale-beach','west-park','miramar']],
+ ['west-park','West Park','Broward',['pembroke-park','miramar','hallandale-beach','pembroke-pines']],
+ ['miramar','Miramar','Broward',['pembroke-pines','hollywood','weston','miami-gardens']],
+ ['pembroke-pines','Pembroke Pines','Broward',['miramar','davie','hollywood','weston']],
+ ['southwest-ranches','Southwest Ranches','Broward',['pembroke-pines','cooper-city','miramar','weston']],
+ ['cooper-city','Cooper City','Broward',['southwest-ranches','weston','pembroke-pines','davie']],
  ['weston','Weston','Broward',['davie','sunrise','pembroke-pines','miramar']],
  ['davie','Davie','Broward',['plantation','weston','pembroke-pines','sunrise']],
- ['coral-springs','Coral Springs','Broward',['tamarac','sunrise','plantation','boca-raton']],
- ['pembroke-pines','Pembroke Pines','Broward',['miramar','davie','hollywood','weston']],
- ['fort-lauderdale','Fort Lauderdale','Broward',['plantation','lauderhill','hollywood','davie']],
  ['hollywood','Hollywood','Broward',['pembroke-pines','fort-lauderdale','miramar','miami-gardens']],
- ['miramar','Miramar','Broward',['pembroke-pines','hollywood','weston','miami-gardens']],
+ ['dania-beach','Dania Beach','Broward',['hollywood','fort-lauderdale','davie','lauderhill']],
+ ['fort-lauderdale','Fort Lauderdale','Broward',['plantation','lauderhill','hollywood','davie']],
+ ['lauderhill','Lauderhill','Broward',['sunrise','tamarac','plantation','fort-lauderdale']],
+ ['plantation','Plantation','Broward',['sunrise','davie','lauderhill','fort-lauderdale']],
+ ['sunrise','Sunrise','Broward',['plantation','tamarac','lauderhill','weston','davie']],
+ ['lauderdale-lakes','Lauderdale Lakes','Broward',['sunrise','tamarac','plantation','north-lauderdale']],
+ ['tamarac','Tamarac','Broward',['sunrise','lauderhill','coral-springs','plantation']],
+ ['north-lauderdale','North Lauderdale','Broward',['tamarac','oakland-park','lauderdale-lakes','wilton-manors']],
+ ['oakland-park','Oakland Park','Broward',['north-lauderdale','wilton-manors','tamarac','lazy-lake']],
+ ['wilton-manors','Wilton Manors','Broward',['oakland-park','lazy-lake','north-lauderdale','lauderdale-by-the-sea']],
+ ['lazy-lake','Lazy Lake','Broward',['wilton-manors','lauderdale-by-the-sea','oakland-park','margate']],
+ ['lauderdale-by-the-sea','Lauderdale-by-the-Sea','Broward',['lazy-lake','margate','wilton-manors','coconut-creek']],
+ ['margate','Margate','Broward',['lauderdale-by-the-sea','coconut-creek','lazy-lake','pompano-beach']],
+ ['coconut-creek','Coconut Creek','Broward',['margate','pompano-beach','lauderdale-by-the-sea','lighthouse-point']],
+ ['pompano-beach','Pompano Beach','Broward',['coconut-creek','lighthouse-point','margate','sea-ranches']],
+ ['lighthouse-point','Lighthouse Point','Broward',['pompano-beach','sea-ranches','coconut-creek','hillsboro-beach']],
+ ['sea-ranches','Sea Ranches','Broward',['lighthouse-point','hillsboro-beach','pompano-beach','coral-springs']],
+ ['hillsboro-beach','Hillsboro Beach','Broward',['sea-ranches','coral-springs','lighthouse-point','parkland']],
+ ['coral-springs','Coral Springs','Broward',['tamarac','sunrise','plantation','boca-raton']],
+ ['parkland','Parkland','Broward',['coral-springs','deerfield-beach','hillsboro-beach']],
+ ['deerfield-beach','Deerfield Beach','Broward',['parkland','coral-springs']],
  ['boca-raton','Boca Raton','Palm Beach',['coral-springs','tamarac','sunrise']],
- ['miami-gardens','Miami Gardens','Miami-Dade',['miramar','hollywood','hialeah','pembroke-pines']],
- ['hialeah','Hialeah','Miami-Dade',['miami-gardens','hollywood','miramar']]
+ ['highland-beach','Highland Beach','Palm Beach',['boca-raton','delray-beach','boynton-beach']],
+ ['delray-beach','Delray Beach','Palm Beach',['highland-beach','boynton-beach','boca-raton','gulf-stream']],
+ ['boynton-beach','Boynton Beach','Palm Beach',['delray-beach','gulf-stream','highland-beach','ocean-ridge']],
+ ['gulf-stream','Gulf Stream','Palm Beach',['boynton-beach','ocean-ridge','delray-beach','briny-breezes']],
+ ['ocean-ridge','Ocean Ridge','Palm Beach',['gulf-stream','briny-breezes','boynton-beach','hypoluxo']],
+ ['briny-breezes','Briny Breezes','Palm Beach',['ocean-ridge','hypoluxo','gulf-stream','manalapan']],
+ ['hypoluxo','Hypoluxo','Palm Beach',['briny-breezes','manalapan','ocean-ridge','lantana']],
+ ['manalapan','Manalapan','Palm Beach',['hypoluxo','lantana','briny-breezes','greenacres']],
+ ['lantana','Lantana','Palm Beach',['manalapan','greenacres','hypoluxo','atlantis']],
+ ['greenacres','Greenacres','Palm Beach',['lantana','atlantis','manalapan','glen-ridge']],
+ ['atlantis','Atlantis','Palm Beach',['greenacres','glen-ridge','lantana','lake-worth-beach']],
+ ['glen-ridge','Glen Ridge','Palm Beach',['atlantis','lake-worth-beach','greenacres','palm-springs']],
+ ['lake-worth-beach','Lake Worth Beach','Palm Beach',['glen-ridge','palm-springs','atlantis','haverhill']],
+ ['palm-springs','Palm Springs','Palm Beach',['lake-worth-beach','haverhill','glen-ridge','cloud-lake']],
+ ['haverhill','Haverhill','Palm Beach',['palm-springs','cloud-lake','lake-worth-beach','golf']],
+ ['cloud-lake','Cloud Lake','Palm Beach',['haverhill','golf','palm-springs','lake-clarke-shores']],
+ ['golf','Golf','Palm Beach',['cloud-lake','lake-clarke-shores','haverhill','wellington']],
+ ['lake-clarke-shores','Lake Clarke Shores','Palm Beach',['golf','wellington','cloud-lake','royal-palm-beach']],
+ ['wellington','Wellington','Palm Beach',['lake-clarke-shores','royal-palm-beach','golf','loxahatchee-groves']],
+ ['royal-palm-beach','Royal Palm Beach','Palm Beach',['wellington','loxahatchee-groves','lake-clarke-shores','westlake']],
+ ['loxahatchee-groves','Loxahatchee Groves','Palm Beach',['royal-palm-beach','westlake','wellington','south-palm-beach']],
+ ['westlake','Westlake','Palm Beach',['loxahatchee-groves','south-palm-beach','royal-palm-beach','palm-beach']],
+ ['south-palm-beach','South Palm Beach','Palm Beach',['westlake','palm-beach','loxahatchee-groves','palm-beach-shores']],
+ ['palm-beach','Palm Beach','Palm Beach',['south-palm-beach','palm-beach-shores','westlake','west-palm-beach']],
+ ['palm-beach-shores','Palm Beach Shores','Palm Beach',['palm-beach','west-palm-beach','south-palm-beach','mangonia-park']],
+ ['west-palm-beach','West Palm Beach','Palm Beach',['palm-beach-shores','mangonia-park','palm-beach','riviera-beach']],
+ ['mangonia-park','Mangonia Park','Palm Beach',['west-palm-beach','riviera-beach','palm-beach-shores','lake-park']],
+ ['riviera-beach','Riviera Beach','Palm Beach',['mangonia-park','lake-park','west-palm-beach','north-palm-beach']],
+ ['lake-park','Lake Park','Palm Beach',['riviera-beach','north-palm-beach','mangonia-park','palm-beach-gardens']],
+ ['north-palm-beach','North Palm Beach','Palm Beach',['lake-park','palm-beach-gardens','riviera-beach','juno-beach']],
+ ['palm-beach-gardens','Palm Beach Gardens','Palm Beach',['north-palm-beach','juno-beach','lake-park','tequesta']],
+ ['juno-beach','Juno Beach','Palm Beach',['palm-beach-gardens','tequesta','north-palm-beach','jupiter-inlet-colony']],
+ ['tequesta','Tequesta','Palm Beach',['juno-beach','jupiter-inlet-colony','palm-beach-gardens','jupiter']],
+ ['jupiter-inlet-colony','Jupiter Inlet Colony','Palm Beach',['tequesta','jupiter','juno-beach','belle-glade']],
+ ['jupiter','Jupiter','Palm Beach',['jupiter-inlet-colony','belle-glade','tequesta','south-bay']],
+ ['belle-glade','Belle Glade','Palm Beach',['jupiter','south-bay','jupiter-inlet-colony','pahokee']],
+ ['south-bay','South Bay','Palm Beach',['belle-glade','pahokee','jupiter']],
+ ['pahokee','Pahokee','Palm Beach',['south-bay','belle-glade']]
 ];
 var CBY={}; CITIES.forEach(function(c,i){CBY[c[0]]={slug:c[0],name:c[1],county:c[2],near:c[3],i:i}});
 var COUNTIES=['Broward','Palm Beach','Miami-Dade'];
+(function(){var el=document.getElementById('cities');if(!el)return;el.classList.add('cities-grouped');el.innerHTML=['Miami-Dade','Broward','Palm Beach'].map(function(co){return '<div class="cities-co"><h3>'+co+' County</h3><div class="cities-list">'+CITIES.filter(function(c){return c[2]===co}).map(function(c){return '<a href="#city/'+c[0]+'" data-view-link="city" data-param="'+c[0]+'">'+c[1]+'</a>'}).join('')+'</div></div>'}).join('')})();
 var SVC_LINKS=[['brake-repair','Brake Repair'],['wheel-alignment','Wheel Alignment'],['tire-installation','Tire Installation'],['tire-repair','Tire Repair'],['tire-balancing','Tire Balancing'],['tire-rotation','Tire Rotation'],['suspension-repair','Suspension Repair'],['oil-changes','Oil Changes'],['tpms-service','TPMS Service'],['custom-wheels','Custom Wheels'],['lift-kits','Lift Kits']];
 var BRANDS=[['michelin','Michelin'],['bfgoodrich','BFGoodrich'],['uniroyal','Uniroyal'],['cooper','Cooper'],['firestone','Firestone'],['bridgestone','Bridgestone'],['hankook','Hankook'],['hercules','Hercules'],['kumho','Kumho'],['general','General'],['continental','Continental'],['pirelli','Pirelli'],['nexen','Nexen'],['nitto','Nitto'],['toyo','Toyo'],['falken','Falken'],['yokohama','Yokohama'],['ironman','Ironman'],['ohtsu','OHTSU'],['goodyear','Goodyear'],['dunlop','Dunlop'],['maxxis','Maxxis'],['mickey-thompson','Mickey Thompson'],['mastercraft','Mastercraft'],['laufenn','Laufenn'],['vredestein','Vredestein'],['nokian','Nokian'],['fuzion','Fuzion'],['gt-radial','GT Radial'],['kenda','Kenda'],['starfire','Starfire'],['kelly','Kelly']];
 function vl(view,label,param,cls){return '<a href="#'+view+(param?'/'+param:'')+'" data-view-link="'+view+'"'+(param?' data-param="'+param+'"':'')+(cls?' class="'+cls+'"':'')+'>'+label+'</a>'}
