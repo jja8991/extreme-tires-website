@@ -1,3 +1,1560 @@
 {
-  "_note": "Optional real local facts per city slug. Adding these is the single biggest ranking lift. Example: \"sunrise\": {\"zips\": [\"33313\",\"33322\",\"33351\"], \"areas\": [\"Sawgrass Mills area\",\"Sunrise Blvd corridor\"], \"note\": \"One true, specific sentence about serving this city.\"}"
+ "_note": "Per-city local facts (lat/lon approx; areas/roads are real landmarks and roads; note is one factual sentence). Do not add reviews, prices, stats or addresses.",
+ "homestead": {
+  "lat": 25.468,
+  "lon": -80.477,
+  "areas": [
+   "Downtown Homestead",
+   "Homestead-Miami Speedway",
+   "Homestead Air Reserve Base"
+  ],
+  "roads": [
+   "US-1 (South Dixie Highway)",
+   "Florida's Turnpike",
+   "Krome Avenue"
+  ],
+  "note": "Homestead is the gateway to Everglades and Biscayne national parks, so it is a long run south for our van and worth booking ahead."
+ },
+ "florida-city": {
+  "lat": 25.448,
+  "lon": -80.479,
+  "areas": [
+   "the Everglades National Park entrance corridor",
+   "Florida City Historic District"
+  ],
+  "roads": [
+   "US-1",
+   "Krome Avenue",
+   "Palm Drive"
+  ],
+  "note": "Florida City is the southern end of the mainland road network and the start of the Overseas Highway toward the Keys."
+ },
+ "cutler-bay": {
+  "lat": 25.578,
+  "lon": -80.347,
+  "areas": [
+   "Southland Mall area",
+   "Black Point Park & Marina",
+   "Lakes by the Bay"
+  ],
+  "roads": [
+   "US-1",
+   "Old Cutler Road",
+   "Florida's Turnpike"
+  ],
+  "note": "Cutler Bay sits along Biscayne Bay in southern Miami-Dade, mostly reached via US-1 and Old Cutler Road."
+ },
+ "palmetto-bay": {
+  "lat": 25.622,
+  "lon": -80.325,
+  "areas": [
+   "Deering Estate",
+   "Coral Reef Park",
+   "Palmetto Bay Village Center"
+  ],
+  "roads": [
+   "US-1",
+   "Old Cutler Road",
+   "Coral Reef Drive (SW 152nd Street)"
+  ],
+  "note": "Palmetto Bay is a residential village on Biscayne Bay between Cutler Bay and Pinecrest."
+ },
+ "pinecrest": {
+  "lat": 25.667,
+  "lon": -80.308,
+  "areas": [
+   "Pinecrest Gardens",
+   "the Killian Drive corridor"
+  ],
+  "roads": [
+   "US-1",
+   "Old Cutler Road",
+   "Killian Drive"
+  ],
+  "note": "Pinecrest is a village of larger residential lots, so please include a gate code or driveway note when you request a visit."
+ },
+ "south-miami": {
+  "lat": 25.707,
+  "lon": -80.293,
+  "areas": [
+   "Downtown South Miami",
+   "Shops at Sunset Place",
+   "the South Miami Metrorail station area"
+  ],
+  "roads": [
+   "US-1",
+   "Sunset Drive",
+   "Red Road"
+  ],
+  "note": "South Miami is a compact city with a walkable downtown, wedged between US-1 and Red Road."
+ },
+ "coral-gables": {
+  "lat": 25.721,
+  "lon": -80.268,
+  "areas": [
+   "Miracle Mile",
+   "the Biltmore Hotel",
+   "the University of Miami campus",
+   "Venetian Pool"
+  ],
+  "roads": [
+   "Coral Way",
+   "Ponce de Leon Boulevard",
+   "Bird Road"
+  ],
+  "note": "Coral Gables has tree-lined residential streets and a busy downtown business district, so we confirm parking and street access before arrival."
+ },
+ "west-miami": {
+  "lat": 25.763,
+  "lon": -80.294,
+  "areas": [
+   "the Tamiami Trail corridor",
+   "Calle Ocho west of the Gables"
+  ],
+  "roads": [
+   "Tamiami Trail (SW 8th Street)",
+   "SW 57th Avenue (Red Road)"
+  ],
+  "note": "West Miami is a small city along the Tamiami Trail, close to Coral Gables and Sweetwater."
+ },
+ "sweetwater": {
+  "lat": 25.763,
+  "lon": -80.373,
+  "areas": [
+   "the Dolphin Mall area",
+   "the FIU Modesto Maidique campus area"
+  ],
+  "roads": [
+   "Tamiami Trail (SW 8th Street)",
+   "Dolphin Expressway (SR 836)",
+   "Florida's Turnpike"
+  ],
+  "note": "Sweetwater sits at the western edge of urban Miami-Dade near the Dolphin Expressway."
+ },
+ "doral": {
+  "lat": 25.819,
+  "lon": -80.355,
+  "areas": [
+   "Downtown Doral",
+   "Doral Central Park",
+   "CityPlace Doral",
+   "Trump National Doral"
+  ],
+  "roads": [
+   "NW 36th Street",
+   "Palmetto Expressway (SR 826)",
+   "Dolphin Expressway (SR 836)",
+   "Florida's Turnpike"
+  ],
+  "note": "Doral mixes office parks, warehouses and residential communities, so we can meet you at home or at a workplace lot."
+ },
+ "kendall": {
+  "lat": 25.68,
+  "lon": -80.36,
+  "areas": [
+   "Dadeland Mall",
+   "Kendall Town & Country",
+   "Miami Executive Airport"
+  ],
+  "roads": [
+   "Kendall Drive (SW 88th Street)",
+   "Don Shula Expressway (SR 874)",
+   "Florida's Turnpike",
+   "Killian Parkway"
+  ],
+  "note": "Kendall is a large, mostly residential part of western Miami-Dade, so an exact street address helps us plan the route."
+ },
+ "westchester": {
+  "lat": 25.755,
+  "lon": -80.33,
+  "areas": [
+   "Tropical Park",
+   "the Bird Road corridor",
+   "Coral Way shopping strips"
+  ],
+  "roads": [
+   "Bird Road (SW 40th Street)",
+   "Coral Way (SW 24th Street)",
+   "Palmetto Expressway (SR 826)"
+  ],
+  "note": "Westchester is a dense residential area west of Coral Gables, served from our Sunrise base by way of the Palmetto Expressway."
+ },
+ "miami": {
+  "lat": 25.762,
+  "lon": -80.192,
+  "areas": [
+   "Brickell",
+   "Downtown Miami",
+   "Wynwood",
+   "Little Havana",
+   "Port Miami"
+  ],
+  "roads": [
+   "I-95",
+   "I-395",
+   "Biscayne Boulevard",
+   "Dolphin Expressway (SR 836)"
+  ],
+  "note": "Miami has many high-rise and garage parking situations, so tell us where the vehicle is parked and whether the spot has room to work."
+ },
+ "key-biscayne": {
+  "lat": 25.69,
+  "lon": -80.163,
+  "areas": [
+   "Crandon Park",
+   "Bill Baggs Cape Florida State Park",
+   "the Village Green"
+  ],
+  "roads": [
+   "Crandon Boulevard",
+   "Rickenbacker Causeway"
+  ],
+  "note": "Key Biscayne is an island village reached by the Rickenbacker Causeway, so please book ahead for visits there."
+ },
+ "miami-beach": {
+  "lat": 25.79,
+  "lon": -80.13,
+  "areas": [
+   "South Beach",
+   "Lincoln Road",
+   "Ocean Drive",
+   "Mid-Beach"
+  ],
+  "roads": [
+   "Collins Avenue",
+   "Alton Road",
+   "MacArthur Causeway",
+   "Julia Tuttle Causeway"
+  ],
+  "note": "Miami Beach is a barrier island reached by causeway, with limited street parking, so we plan around your building's access and parking rules."
+ },
+ "virginia-gardens": {
+  "lat": 25.81,
+  "lon": -80.3,
+  "areas": [
+   "the area around Miami International Airport",
+   "the Le Jeune Road corridor"
+  ],
+  "roads": [
+   "NW 36th Street",
+   "Le Jeune Road (NW 42nd Avenue)"
+  ],
+  "note": "Virginia Gardens is a very small village next to Miami Springs and Miami International Airport."
+ },
+ "medley": {
+  "lat": 25.84,
+  "lon": -80.33,
+  "areas": [
+   "the Medley industrial district",
+   "the Okeechobee Road corridor"
+  ],
+  "roads": [
+   "Okeechobee Road (US-27)",
+   "Palmetto Expressway (SR 826)"
+  ],
+  "note": "Medley is known for warehouses and industrial operations, so we can meet you at a business lot as well as at home."
+ },
+ "hialeah-gardens": {
+  "lat": 25.865,
+  "lon": -80.325,
+  "areas": [
+   "the Okeechobee Road corridor",
+   "Hialeah Gardens City Hall area"
+  ],
+  "roads": [
+   "Okeechobee Road (US-27)",
+   "Palmetto Expressway (SR 826)",
+   "NW 138th Street"
+  ],
+  "note": "Hialeah Gardens is on the western side of Hialeah, close to the Palmetto Expressway."
+ },
+ "hialeah": {
+  "lat": 25.858,
+  "lon": -80.278,
+  "areas": [
+   "Hialeah Park Race Track & Casino",
+   "Westland Mall",
+   "Palm Avenue"
+  ],
+  "roads": [
+   "Okeechobee Road (US-27)",
+   "West 49th Street",
+   "East 4th Avenue",
+   "Palmetto Expressway (SR 826)"
+  ],
+  "note": "Hialeah is one of Miami-Dade's largest cities, with many apartment and driveway situations, so an exact address matters."
+ },
+ "miami-springs": {
+  "lat": 25.82,
+  "lon": -80.29,
+  "areas": [
+   "the Curtiss Mansion",
+   "Miami Springs Golf & Country Club",
+   "the area around Miami International Airport"
+  ],
+  "roads": [
+   "Curtiss Parkway",
+   "Okeechobee Road",
+   "NW 36th Street"
+  ],
+  "note": "Miami Springs is a residential city just north of Miami International Airport."
+ },
+ "opa-locka": {
+  "lat": 25.903,
+  "lon": -80.25,
+  "areas": [
+   "Opa-locka Executive Airport",
+   "Opa-locka City Hall (Moorish Revival)"
+  ],
+  "roads": [
+   "Opa-locka Boulevard",
+   "NW 27th Avenue",
+   "NW 135th Street"
+  ],
+  "note": "Opa-locka is known for its Moorish Revival architecture and its general-aviation airport."
+ },
+ "north-bay-village": {
+  "lat": 25.847,
+  "lon": -80.155,
+  "areas": [
+   "the Biscayne Bay islands along the 79th Street Causeway"
+  ],
+  "roads": [
+   "79th Street Causeway (John F. Kennedy Causeway)"
+  ],
+  "note": "North Bay Village is a small island community on the 79th Street Causeway between Miami and Miami Beach."
+ },
+ "miami-shores": {
+  "lat": 25.865,
+  "lon": -80.19,
+  "areas": [
+   "Barry University",
+   "Miami Shores Country Club",
+   "the Biscayne Boulevard corridor"
+  ],
+  "roads": [
+   "Biscayne Boulevard",
+   "NE 2nd Avenue",
+   "NE 96th Street"
+  ],
+  "note": "Miami Shores is a residential village on Biscayne Boulevard, home to Barry University."
+ },
+ "el-portal": {
+  "lat": 25.85,
+  "lon": -80.195,
+  "areas": [
+   "the Biscayne Boulevard corridor",
+   "El Portal Village"
+  ],
+  "roads": [
+   "Biscayne Boulevard",
+   "NE 2nd Avenue"
+  ],
+  "note": "El Portal is a small residential village beside Miami Shores."
+ },
+ "biscayne-park": {
+  "lat": 25.88,
+  "lon": -80.18,
+  "areas": [
+   "Biscayne Park Village",
+   "the Biscayne Boulevard corridor"
+  ],
+  "roads": [
+   "Biscayne Boulevard",
+   "NE 2nd Avenue",
+   "NE 6th Avenue"
+  ],
+  "note": "Biscayne Park is a small residential village of tree-lined streets bordering North Miami and Miami Shores."
+ },
+ "bay-harbor-islands": {
+  "lat": 25.888,
+  "lon": -80.13,
+  "areas": [
+   "Kane Concourse",
+   "the 96th Street bridge",
+   "Bay Harbor Islands marinas"
+  ],
+  "roads": [
+   "Kane Concourse",
+   "96th Street",
+   "Broad Causeway"
+  ],
+  "note": "Bay Harbor Islands is a two-island town on Biscayne Bay with compact streets and limited street parking."
+ },
+ "surfside": {
+  "lat": 25.878,
+  "lon": -80.125,
+  "areas": [
+   "Surfside Beach",
+   "Harding Avenue",
+   "the Surfside Community Center"
+  ],
+  "roads": [
+   "Collins Avenue",
+   "Harding Avenue",
+   "96th Street"
+  ],
+  "note": "Surfside is a small oceanfront town where many vehicles are parked in building garages, so please tell us where yours is."
+ },
+ "bal-harbour": {
+  "lat": 25.89,
+  "lon": -80.126,
+  "areas": [
+   "Bal Harbour Shops",
+   "Haulover Beach nearby"
+  ],
+  "roads": [
+   "Collins Avenue",
+   "Broad Causeway"
+  ],
+  "note": "Bal Harbour is an oceanfront village with condo buildings and garage parking, so confirm access details when you book."
+ },
+ "north-miami": {
+  "lat": 25.89,
+  "lon": -80.187,
+  "areas": [
+   "FIU Biscayne Bay Campus",
+   "Museum of Contemporary Art North Miami",
+   "the NE 125th Street corridor"
+  ],
+  "roads": [
+   "Biscayne Boulevard",
+   "NE 125th Street",
+   "NE 163rd Street (Sunny Isles Boulevard)"
+  ],
+  "note": "North Miami stretches from Biscayne Bay inland along Biscayne Boulevard and NE 125th Street."
+ },
+ "miami-lakes": {
+  "lat": 25.909,
+  "lon": -80.31,
+  "areas": [
+   "Main Street Miami Lakes",
+   "Don Shula's Hotel & Golf Club",
+   "the Miami Lakes business parks"
+  ],
+  "roads": [
+   "Palmetto Expressway (SR 826)",
+   "I-75",
+   "Miami Lakes Drive"
+  ],
+  "note": "Miami Lakes is a planned community with business parks, so we can meet you at home or at the office."
+ },
+ "miami-gardens": {
+  "lat": 25.942,
+  "lon": -80.245,
+  "areas": [
+   "Hard Rock Stadium",
+   "Calder Casino & Race Course",
+   "the NW 27th Avenue corridor"
+  ],
+  "roads": [
+   "NW 27th Avenue",
+   "Miami Gardens Drive (NW 183rd Street)",
+   "Florida's Turnpike",
+   "I-95"
+  ],
+  "note": "Miami Gardens is home to Hard Rock Stadium and is a short hop from our Broward County service area."
+ },
+ "north-miami-beach": {
+  "lat": 25.93,
+  "lon": -80.163,
+  "areas": [
+   "Greynolds Park",
+   "the NE 163rd Street corridor",
+   "the West Dixie Highway corridor"
+  ],
+  "roads": [
+   "NE 163rd Street (Sunny Isles Boulevard)",
+   "West Dixie Highway",
+   "Biscayne Boulevard"
+  ],
+  "note": "North Miami Beach is an inland city west of Sunny Isles Beach along NE 163rd Street."
+ },
+ "indian-creek": {
+  "lat": 25.88,
+  "lon": -80.14,
+  "areas": [
+   "Indian Creek Country Club"
+  ],
+  "roads": [],
+  "note": "Indian Creek is a tiny, gated island village in Biscayne Bay, so access arrangements need to be confirmed before the van arrives."
+ },
+ "sunny-isles-beach": {
+  "lat": 25.95,
+  "lon": -80.12,
+  "areas": [
+   "the Collins Avenue high-rise corridor",
+   "Heritage Park",
+   "Samson Oceanfront Park"
+  ],
+  "roads": [
+   "Collins Avenue (A1A)",
+   "Sunny Isles Boulevard (NE 163rd Street)",
+   "Sunny Isles Causeway"
+  ],
+  "note": "Sunny Isles Beach is a strip of oceanfront high-rises, so garage and valet access should be sorted out before we arrive."
+ },
+ "aventura": {
+  "lat": 25.957,
+  "lon": -80.139,
+  "areas": [
+   "Aventura Mall",
+   "Town Center Aventura",
+   "Turnberry"
+  ],
+  "roads": [
+   "Biscayne Boulevard",
+   "William Lehman Causeway (NE 192nd Street)",
+   "Country Club Drive"
+  ],
+  "note": "Aventura is a dense city of condos and offices near the Broward line, with its own garage-parking situations."
+ },
+ "golden-beach": {
+  "lat": 25.97,
+  "lon": -80.12,
+  "areas": [
+   "the Golden Beach oceanfront"
+  ],
+  "roads": [
+   "Ocean Boulevard (A1A)"
+  ],
+  "note": "Golden Beach is a small oceanfront town at Miami-Dade's northern edge."
+ },
+ "hallandale-beach": {
+  "lat": 25.981,
+  "lon": -80.148,
+  "areas": [
+   "Gulfstream Park",
+   "Hallandale Beach oceanfront",
+   "the Hallandale Beach Boulevard corridor"
+  ],
+  "roads": [
+   "Hallandale Beach Boulevard",
+   "US-1",
+   "A1A",
+   "I-95"
+  ],
+  "note": "Hallandale Beach sits right on the Broward-Miami-Dade line, close to our Sunrise shop by way of Hallandale Beach Boulevard and I-95."
+ },
+ "pembroke-park": {
+  "lat": 25.99,
+  "lon": -80.18,
+  "areas": [
+   "the Pembroke Road corridor"
+  ],
+  "roads": [
+   "Pembroke Road",
+   "US-1",
+   "I-95"
+  ],
+  "note": "Pembroke Park is a small town on the Hollywood and Hallandale Beach border."
+ },
+ "west-park": {
+  "lat": 25.985,
+  "lon": -80.2,
+  "areas": [
+   "the State Road 7 corridor",
+   "the Pembroke Road corridor"
+  ],
+  "roads": [
+   "Pembroke Road",
+   "State Road 7 (US-441)",
+   "Hallandale Beach Boulevard"
+  ],
+  "note": "West Park is a small residential city along Pembroke Road and State Road 7."
+ },
+ "miramar": {
+  "lat": 25.977,
+  "lon": -80.232,
+  "areas": [
+   "Miramar Town Center",
+   "Miramar Regional Park",
+   "the Miramar Parkway corridor"
+  ],
+  "roads": [
+   "Miramar Parkway",
+   "Pembroke Road",
+   "I-75",
+   "Florida's Turnpike"
+  ],
+  "note": "Miramar is a large residential city in southwest Broward with easy access to I-75 and the Turnpike."
+ },
+ "pembroke-pines": {
+  "lat": 26.003,
+  "lon": -80.296,
+  "areas": [
+   "Pembroke Lakes Mall",
+   "City Center Pembroke Pines",
+   "Pines Boulevard"
+  ],
+  "roads": [
+   "Pines Boulevard",
+   "Pembroke Road",
+   "Flamingo Road",
+   "I-75"
+  ],
+  "note": "Pembroke Pines is one of Broward's largest cities, so we ask for your exact address and the closest cross street."
+ },
+ "southwest-ranches": {
+  "lat": 26.05,
+  "lon": -80.34,
+  "areas": [
+   "Rolling Oaks Park",
+   "the Dykes Road and Griffin Road area"
+  ],
+  "roads": [
+   "Griffin Road",
+   "Dykes Road",
+   "Flamingo Road"
+  ],
+  "note": "Southwest Ranches is a rural, large-lot town of equestrian-style properties, so please tell us about gates and long driveways when you book."
+ },
+ "cooper-city": {
+  "lat": 26.057,
+  "lon": -80.272,
+  "areas": [
+   "Brian Piccolo Park",
+   "the Griffin Road corridor"
+  ],
+  "roads": [
+   "Griffin Road",
+   "Flamingo Road",
+   "Stirling Road",
+   "Sheridan Street"
+  ],
+  "note": "Cooper City is a mostly residential city next to Davie and Pembroke Pines."
+ },
+ "weston": {
+  "lat": 26.1,
+  "lon": -80.4,
+  "areas": [
+   "Weston Town Center",
+   "Bonaventure Town Center",
+   "Weston Regional Park",
+   "Cleveland Clinic Florida"
+  ],
+  "roads": [
+   "Weston Road",
+   "Bonaventure Boulevard",
+   "I-75",
+   "Royal Palm Boulevard"
+  ],
+  "note": "Weston is a planned community of gated neighborhoods, so please share any gate code or visitor-access steps when you book."
+ },
+ "davie": {
+  "lat": 26.063,
+  "lon": -80.233,
+  "areas": [
+   "Nova Southeastern University",
+   "Bergeron Rodeo Grounds",
+   "Downtown Davie"
+  ],
+  "roads": [
+   "Davie Road",
+   "University Drive",
+   "Griffin Road",
+   "I-595"
+  ],
+  "note": "Davie has a Western-themed downtown and many larger rural-style lots, and it is a short drive from our Sunrise shop."
+ },
+ "hollywood": {
+  "lat": 26.01,
+  "lon": -80.15,
+  "areas": [
+   "Hollywood Beach Broadwalk",
+   "Young Circle",
+   "Downtown Hollywood",
+   "Hard Rock Hotel & Casino"
+  ],
+  "roads": [
+   "Hollywood Boulevard",
+   "US-1",
+   "Sheridan Street",
+   "I-95",
+   "A1A"
+  ],
+  "note": "Hollywood stretches from the Broadwalk to I-95 and beyond, so we confirm your exact address first."
+ },
+ "dania-beach": {
+  "lat": 26.05,
+  "lon": -80.145,
+  "areas": [
+   "Dania Pointe",
+   "Dania Beach Fishing Pier",
+   "the Dania Beach Antique District"
+  ],
+  "roads": [
+   "Dania Beach Boulevard",
+   "US-1",
+   "Griffin Road",
+   "I-95"
+  ],
+  "note": "Dania Beach neighbors Fort Lauderdale-Hollywood International Airport and has a historic antique district on US-1."
+ },
+ "fort-lauderdale": {
+  "lat": 26.122,
+  "lon": -80.144,
+  "areas": [
+   "Las Olas Boulevard",
+   "Fort Lauderdale Beach",
+   "The Galleria at Fort Lauderdale",
+   "Port Everglades"
+  ],
+  "roads": [
+   "I-95",
+   "I-595",
+   "Federal Highway (US-1)",
+   "Sunrise Boulevard"
+  ],
+  "note": "Fort Lauderdale has many downtown garages and waterfront condos, so tell us where the vehicle is parked."
+ },
+ "lauderhill": {
+  "lat": 26.14,
+  "lon": -80.213,
+  "areas": [
+   "Central Broward Regional Park",
+   "Lauderhill Mall",
+   "Inverrary"
+  ],
+  "roads": [
+   "State Road 7",
+   "Oakland Park Boulevard",
+   "Inverrary Boulevard"
+  ],
+  "note": "Lauderhill is right next door to Sunrise along Oakland Park Boulevard."
+ },
+ "plantation": {
+  "lat": 26.134,
+  "lon": -80.231,
+  "areas": [
+   "Broward Mall",
+   "Plantation Heritage Park",
+   "Plantation Central Park"
+  ],
+  "roads": [
+   "Broward Boulevard",
+   "University Drive",
+   "Pine Island Road",
+   "I-595"
+  ],
+  "note": "Plantation is a close neighbor of our Sunrise shop, reached via Broward Boulevard or University Drive."
+ },
+ "sunrise": {
+  "lat": 26.134,
+  "lon": -80.286,
+  "areas": [
+   "Sawgrass Mills",
+   "Amerant Bank Arena",
+   "Markham Park"
+  ],
+  "roads": [
+   "Oakland Park Boulevard",
+   "Sunrise Boulevard",
+   "Flamingo Road",
+   "Sawgrass Expressway (SR 869)",
+   "University Drive"
+  ],
+  "note": "Sunrise is our home base: the shop is at 7712 West Oakland Park Boulevard, and the van starts its day here."
+ },
+ "lauderdale-lakes": {
+  "lat": 26.166,
+  "lon": -80.209,
+  "areas": [
+   "the Oakland Park Boulevard corridor"
+  ],
+  "roads": [
+   "Oakland Park Boulevard",
+   "State Road 7 (US-441)",
+   "Florida's Turnpike"
+  ],
+  "note": "Lauderdale Lakes is a short drive east of our Sunrise shop along Oakland Park Boulevard."
+ },
+ "tamarac": {
+  "lat": 26.21,
+  "lon": -80.25,
+  "areas": [
+   "Caporella Park",
+   "Colony West Country Club",
+   "the Commercial Boulevard corridor"
+  ],
+  "roads": [
+   "University Drive",
+   "Commercial Boulevard",
+   "State Road 7 (US-441)",
+   "McNab Road"
+  ],
+  "note": "Tamarac is a residential city with many condo and community parking lots, so we check the community's rules for vendor visits."
+ },
+ "north-lauderdale": {
+  "lat": 26.217,
+  "lon": -80.226,
+  "areas": [
+   "the State Road 7 corridor",
+   "Kimberly Boulevard"
+  ],
+  "roads": [
+   "State Road 7 (US-441)",
+   "Kimberly Boulevard",
+   "Southgate Boulevard"
+  ],
+  "note": "North Lauderdale is a compact residential city west of I-95 and north of Tamarac."
+ },
+ "oakland-park": {
+  "lat": 26.172,
+  "lon": -80.132,
+  "areas": [
+   "Jaco Pastorius Park",
+   "the Oakland Park Boulevard corridor",
+   "the Dixie Highway corridor"
+  ],
+  "roads": [
+   "Oakland Park Boulevard",
+   "Commercial Boulevard",
+   "Dixie Highway",
+   "Powerline Road"
+  ],
+  "note": "Oakland Park shares its main road with our shop: Oakland Park Boulevard runs straight from Sunrise to the coast."
+ },
+ "wilton-manors": {
+  "lat": 26.16,
+  "lon": -80.138,
+  "areas": [
+   "Wilton Drive",
+   "Hagen Park"
+  ],
+  "roads": [
+   "Wilton Drive",
+   "Andrews Avenue",
+   "Dixie Highway"
+  ],
+  "note": "Wilton Manors is a compact island city around Wilton Drive, so on-street parking may need a quick plan."
+ },
+ "lazy-lake": {
+  "lat": 26.17,
+  "lon": -80.12,
+  "areas": [
+   "the Oakland Park and Wilton Manors area"
+  ],
+  "roads": [
+   "Oakland Park Boulevard",
+   "Dixie Highway"
+  ],
+  "note": "Lazy Lake is one of Broward's smallest municipalities, near Wilton Manors and Oakland Park, so we serve it along the same route."
+ },
+ "lauderdale-by-the-sea": {
+  "lat": 26.19,
+  "lon": -80.097,
+  "areas": [
+   "Anglin's Fishing Pier",
+   "the A1A beach shopping strip"
+  ],
+  "roads": [
+   "A1A",
+   "Commercial Boulevard"
+  ],
+  "note": "Lauderdale-by-the-Sea is a small beachfront town along A1A where street parking is tight."
+ },
+ "margate": {
+  "lat": 26.245,
+  "lon": -80.21,
+  "areas": [
+   "the Atlantic Boulevard corridor",
+   "Margate Boulevard"
+  ],
+  "roads": [
+   "State Road 7 (US-441)",
+   "Atlantic Boulevard",
+   "Coconut Creek Parkway",
+   "Florida's Turnpike"
+  ],
+  "note": "Margate sits in north-central Broward and is a straight shot from Sunrise up the Turnpike."
+ },
+ "coconut-creek": {
+  "lat": 26.25,
+  "lon": -80.18,
+  "areas": [
+   "Butterfly World at Tradewinds Park",
+   "Seminole Casino Coconut Creek",
+   "Lyons Road"
+  ],
+  "roads": [
+   "Coconut Creek Parkway",
+   "Sample Road",
+   "Lyons Road",
+   "Florida's Turnpike"
+  ],
+  "note": "Coconut Creek is known for Tradewinds Park and Butterfly World."
+ },
+ "pompano-beach": {
+  "lat": 26.236,
+  "lon": -80.125,
+  "areas": [
+   "Pompano Beach Pier",
+   "Pompano Citi Centre",
+   "Pompano Beach Airpark"
+  ],
+  "roads": [
+   "Atlantic Boulevard",
+   "Copans Road",
+   "Federal Highway (US-1)",
+   "A1A",
+   "I-95"
+  ],
+  "note": "Pompano Beach runs from the Intracoastal inland to I-95, so we confirm your exact address before dispatch."
+ },
+ "lighthouse-point": {
+  "lat": 26.275,
+  "lon": -80.087,
+  "areas": [
+   "the Hillsboro Inlet area",
+   "the Intracoastal Waterway"
+  ],
+  "roads": [
+   "Sample Road",
+   "Federal Highway (US-1)"
+  ],
+  "note": "Lighthouse Point is a quiet residential city on the Intracoastal Waterway near Hillsboro Inlet."
+ },
+ "sea-ranches": {
+  "lat": 26.29,
+  "lon": -80.08,
+  "areas": [
+   "the A1A oceanfront"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Sea Ranches is a very small oceanside village on Broward's northern coast."
+ },
+ "hillsboro-beach": {
+  "lat": 26.3,
+  "lon": -80.08,
+  "areas": [
+   "the Hillsboro Beach oceanfront"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Hillsboro Beach is a narrow oceanfront town along A1A on Broward's northern coast."
+ },
+ "coral-springs": {
+  "lat": 26.27,
+  "lon": -80.27,
+  "areas": [
+   "Coral Springs Center for the Arts",
+   "Coral Square mall",
+   "Sportsplex"
+  ],
+  "roads": [
+   "University Drive",
+   "Sample Road",
+   "Atlantic Boulevard",
+   "Sawgrass Expressway (SR 869)"
+  ],
+  "note": "Coral Springs is a large planned city in northwest Broward, a straight run north from our Sunrise shop."
+ },
+ "parkland": {
+  "lat": 26.31,
+  "lon": -80.24,
+  "areas": [
+   "Pine Trails Park",
+   "Heron Bay"
+  ],
+  "roads": [
+   "Sample Road",
+   "Holmberg Road",
+   "University Drive"
+  ],
+  "note": "Parkland is a residential city of larger lots and gated communities on Broward's northern edge."
+ },
+ "deerfield-beach": {
+  "lat": 26.318,
+  "lon": -80.1,
+  "areas": [
+   "Deerfield Beach Pier",
+   "Quiet Waters Park",
+   "Deerfield Beach oceanfront"
+  ],
+  "roads": [
+   "Hillsboro Boulevard (SR 810)",
+   "Federal Highway (US-1)",
+   "Military Trail",
+   "I-95"
+  ],
+  "note": "Deerfield Beach is the last Broward city before Palm Beach County and reachable via I-95 or the Turnpike."
+ },
+ "boca-raton": {
+  "lat": 26.355,
+  "lon": -80.083,
+  "areas": [
+   "Mizner Park",
+   "Town Center at Boca Raton",
+   "Florida Atlantic University"
+  ],
+  "roads": [
+   "Glades Road",
+   "Palmetto Park Road",
+   "Military Trail",
+   "Federal Highway (US-1)",
+   "I-95"
+  ],
+  "note": "Boca Raton is the first major Palm Beach County city north of Broward and an easy trip up I-95 or the Turnpike."
+ },
+ "highland-beach": {
+  "lat": 26.4,
+  "lon": -80.065,
+  "areas": [
+   "the A1A oceanfront",
+   "the Intracoastal Waterway"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Highland Beach is a narrow barrier-island town between Boca Raton and Delray Beach, so most visits are along A1A."
+ },
+ "delray-beach": {
+  "lat": 26.46,
+  "lon": -80.073,
+  "areas": [
+   "Atlantic Avenue",
+   "Pineapple Grove Arts District",
+   "Old School Square",
+   "Morikami Museum & Japanese Gardens"
+  ],
+  "roads": [
+   "Atlantic Avenue",
+   "Linton Boulevard",
+   "Congress Avenue",
+   "I-95"
+  ],
+  "note": "Delray Beach has a busy Atlantic Avenue downtown and plenty of residential areas west of I-95."
+ },
+ "boynton-beach": {
+  "lat": 26.525,
+  "lon": -80.066,
+  "areas": [
+   "Boynton Beach Mall",
+   "Boynton Beach Town Square",
+   "Boynton Harbor"
+  ],
+  "roads": [
+   "Boynton Beach Boulevard",
+   "Congress Avenue",
+   "Military Trail",
+   "I-95"
+  ],
+  "note": "Boynton Beach is a large city that spans from the Intracoastal Waterway to west of the Turnpike."
+ },
+ "gulf-stream": {
+  "lat": 26.485,
+  "lon": -80.056,
+  "areas": [
+   "Gulf Stream Golf Club",
+   "the A1A oceanfront"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Gulf Stream is a very small, quiet oceanfront town in southern Palm Beach County."
+ },
+ "ocean-ridge": {
+  "lat": 26.52,
+  "lon": -80.05,
+  "areas": [
+   "Ocean Ridge Hammock Park",
+   "Boynton Inlet nearby"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Ocean Ridge is a barrier-island town between Boynton Beach and the Intracoastal Waterway."
+ },
+ "briny-breezes": {
+  "lat": 26.54,
+  "lon": -80.05,
+  "areas": [
+   "the Briny Breezes oceanfront community"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Briny Breezes is a small, cooperatively owned oceanfront community on A1A, so please give us full access details."
+ },
+ "hypoluxo": {
+  "lat": 26.56,
+  "lon": -80.05,
+  "areas": [
+   "Hypoluxo Island",
+   "the Lake Worth Lagoon waterfront"
+  ],
+  "roads": [
+   "Federal Highway (US-1)",
+   "Hypoluxo Road"
+  ],
+  "note": "Hypoluxo is a small town on the Lake Worth Lagoon between Boynton Beach and Lantana."
+ },
+ "manalapan": {
+  "lat": 26.58,
+  "lon": -80.04,
+  "areas": [
+   "Eau Palm Beach Resort & Spa",
+   "the Lake Worth Lagoon shoreline"
+  ],
+  "roads": [
+   "A1A (South Ocean Boulevard)"
+  ],
+  "note": "Manalapan is a quiet, oceanfront town on a barrier island south of Palm Beach."
+ },
+ "lantana": {
+  "lat": 26.585,
+  "lon": -80.052,
+  "areas": [
+   "Lantana Municipal Beach",
+   "Lantana Airport",
+   "the Lake Worth Lagoon waterfront"
+  ],
+  "roads": [
+   "Lantana Road",
+   "Dixie Highway",
+   "Federal Highway (US-1)"
+  ],
+  "note": "Lantana is a small town on the Lake Worth Lagoon, an easy hop from Lake Worth Beach and Boynton Beach."
+ },
+ "greenacres": {
+  "lat": 26.62,
+  "lon": -80.126,
+  "areas": [
+   "the Jog Road corridor",
+   "the 10th Avenue North corridor"
+  ],
+  "roads": [
+   "Jog Road",
+   "10th Avenue North",
+   "Lake Worth Road",
+   "Forest Hill Boulevard"
+  ],
+  "note": "Greenacres is a residential city west of Lake Worth Beach in central Palm Beach County."
+ },
+ "atlantis": {
+  "lat": 26.59,
+  "lon": -80.1,
+  "areas": [
+   "the Congress Avenue corridor",
+   "the Lantana Road corridor"
+  ],
+  "roads": [
+   "Congress Avenue",
+   "Lantana Road",
+   "Lake Worth Road"
+  ],
+  "note": "Atlantis is a small city in central Palm Beach County, near Lantana and Greenacres."
+ },
+ "glen-ridge": {
+  "lat": 26.62,
+  "lon": -80.06,
+  "areas": [
+   "the Lake Worth Beach and Palm Springs area"
+  ],
+  "roads": [
+   "Lake Worth Road",
+   "I-95"
+  ],
+  "note": "Glen Ridge is one of Palm Beach County's smallest towns, next to Lake Worth Beach."
+ },
+ "lake-worth-beach": {
+  "lat": 26.617,
+  "lon": -80.056,
+  "areas": [
+   "Lake Worth Beach Pier",
+   "Lake Avenue",
+   "Lucerne Avenue",
+   "the Lake Worth Beach Casino complex"
+  ],
+  "roads": [
+   "Lake Avenue",
+   "Lake Worth Road",
+   "Dixie Highway",
+   "Congress Avenue",
+   "I-95"
+  ],
+  "note": "Lake Worth Beach (formerly Lake Worth) has a walkable downtown around Lake Avenue and an oceanfront pier."
+ },
+ "palm-springs": {
+  "lat": 26.63,
+  "lon": -80.09,
+  "areas": [
+   "Palm Springs Village Hall",
+   "the Congress Avenue corridor"
+  ],
+  "roads": [
+   "Congress Avenue",
+   "Lake Worth Road",
+   "Forest Hill Boulevard"
+  ],
+  "note": "Palm Springs is a village in central Palm Beach County, next to Lake Worth Beach and Greenacres."
+ },
+ "haverhill": {
+  "lat": 26.72,
+  "lon": -80.12,
+  "areas": [
+   "the Haverhill Road corridor"
+  ],
+  "roads": [
+   "Haverhill Road",
+   "Belvedere Road"
+  ],
+  "note": "Haverhill is a very small town in the West Palm Beach area."
+ },
+ "cloud-lake": {
+  "lat": 26.65,
+  "lon": -80.08,
+  "areas": [
+   "the West Palm Beach and Lake Worth Beach area"
+  ],
+  "roads": [
+   "I-95",
+   "Okeechobee Boulevard"
+  ],
+  "note": "Cloud Lake is one of Palm Beach County's smallest towns, in the Lake Worth-West Palm Beach area."
+ },
+ "golf": {
+  "lat": 26.5,
+  "lon": -80.12,
+  "areas": [
+   "the Boynton Beach and Lake Worth Beach area"
+  ],
+  "roads": [
+   "I-95",
+   "Military Trail"
+  ],
+  "note": "Golf is a small village in central Palm Beach County, served along our Boynton Beach and Lake Worth Beach routes."
+ },
+ "lake-clarke-shores": {
+  "lat": 26.64,
+  "lon": -80.075,
+  "areas": [
+   "the Lake Clarke shoreline"
+  ],
+  "roads": [
+   "Forest Hill Boulevard",
+   "Congress Avenue"
+  ],
+  "note": "Lake Clarke Shores is a small residential town on the Lake Clarke waterway in central Palm Beach County."
+ },
+ "wellington": {
+  "lat": 26.66,
+  "lon": -80.27,
+  "areas": [
+   "Palm Beach International Equestrian Center",
+   "The Mall at Wellington Green",
+   "Village Park"
+  ],
+  "roads": [
+   "Forest Hill Boulevard",
+   "State Road 7 (US-441)",
+   "Southern Boulevard",
+   "Wellington Trace"
+  ],
+  "note": "Wellington is a major equestrian center in western Palm Beach County and a long run west from the coast."
+ },
+ "royal-palm-beach": {
+  "lat": 26.7,
+  "lon": -80.23,
+  "areas": [
+   "Commons Park",
+   "the Royal Palm Beach Boulevard corridor"
+  ],
+  "roads": [
+   "Southern Boulevard",
+   "Okeechobee Boulevard",
+   "State Road 7 (US-441)",
+   "Royal Palm Beach Boulevard"
+  ],
+  "note": "Royal Palm Beach is a residential village in the western communities along State Road 7."
+ },
+ "loxahatchee-groves": {
+  "lat": 26.68,
+  "lon": -80.27,
+  "areas": [
+   "the B Road and D Road area"
+  ],
+  "roads": [
+   "Southern Boulevard",
+   "Okeechobee Boulevard",
+   "B Road",
+   "D Road"
+  ],
+  "note": "Loxahatchee Groves is a rural, large-lot town west of Wellington, so please send exact directions and gate details."
+ },
+ "westlake": {
+  "lat": 26.75,
+  "lon": -80.29,
+  "areas": [
+   "Westlake's planned neighborhoods"
+  ],
+  "roads": [
+   "Seminole Pratt Whitney Road",
+   "Persimmon Boulevard",
+   "Northlake Boulevard"
+  ],
+  "note": "Westlake is a newer planned city in western Palm Beach County."
+ },
+ "south-palm-beach": {
+  "lat": 26.59,
+  "lon": -80.04,
+  "areas": [
+   "the A1A oceanfront"
+  ],
+  "roads": [
+   "A1A (South Ocean Boulevard)"
+  ],
+  "note": "South Palm Beach is a tiny barrier-island town south of Lake Worth Beach."
+ },
+ "palm-beach": {
+  "lat": 26.705,
+  "lon": -80.036,
+  "areas": [
+   "Worth Avenue",
+   "Royal Poinciana Way",
+   "the Flagler Museum"
+  ],
+  "roads": [
+   "A1A (South Ocean Boulevard)",
+   "Royal Palm Way",
+   "Southern Boulevard Bridge"
+  ],
+  "note": "Palm Beach is a barrier island reached by bridge, with strict street parking, so we plan access with you first."
+ },
+ "palm-beach-shores": {
+  "lat": 26.78,
+  "lon": -80.035,
+  "areas": [
+   "Singer Island",
+   "Peanut Island nearby"
+  ],
+  "roads": [
+   "A1A",
+   "Blue Heron Boulevard"
+  ],
+  "note": "Palm Beach Shores is a small town on Singer Island."
+ },
+ "west-palm-beach": {
+  "lat": 26.715,
+  "lon": -80.053,
+  "areas": [
+   "CityPlace (Rosemary Square)",
+   "Clematis Street",
+   "the Kravis Center",
+   "the Norton Museum of Art"
+  ],
+  "roads": [
+   "I-95",
+   "Okeechobee Boulevard",
+   "Military Trail",
+   "Southern Boulevard",
+   "Florida's Turnpike"
+  ],
+  "note": "West Palm Beach is the county seat of Palm Beach County and home to Palm Beach International Airport."
+ },
+ "mangonia-park": {
+  "lat": 26.75,
+  "lon": -80.07,
+  "areas": [
+   "the Tri-Rail Mangonia Park station area",
+   "the 45th Street corridor"
+  ],
+  "roads": [
+   "Broadway (US-1)",
+   "45th Street"
+  ],
+  "note": "Mangonia Park is a small town between West Palm Beach and Riviera Beach."
+ },
+ "riviera-beach": {
+  "lat": 26.775,
+  "lon": -80.058,
+  "areas": [
+   "the Port of Palm Beach",
+   "Singer Island",
+   "Phil Foster Park"
+  ],
+  "roads": [
+   "Blue Heron Boulevard",
+   "Broadway (US-1)",
+   "I-95"
+  ],
+  "note": "Riviera Beach is a port city with Singer Island to the east, and a long drive from Sunrise, so book early."
+ },
+ "lake-park": {
+  "lat": 26.8,
+  "lon": -80.06,
+  "areas": [
+   "Park Avenue",
+   "Lake Park Harbor Marina"
+  ],
+  "roads": [
+   "Northlake Boulevard",
+   "Federal Highway (US-1)",
+   "Park Avenue"
+  ],
+  "note": "Lake Park is a small town between North Palm Beach and Riviera Beach along US-1."
+ },
+ "north-palm-beach": {
+  "lat": 26.82,
+  "lon": -80.06,
+  "areas": [
+   "North Palm Beach Country Club",
+   "the Lake Worth Lagoon waterfront"
+  ],
+  "roads": [
+   "Federal Highway (US-1)",
+   "Prosperity Farms Road",
+   "Northlake Boulevard"
+  ],
+  "note": "North Palm Beach is a village on the Intracoastal Waterway with winding residential streets."
+ },
+ "palm-beach-gardens": {
+  "lat": 26.82,
+  "lon": -80.14,
+  "areas": [
+   "PGA National Resort",
+   "The Gardens Mall",
+   "Downtown at the Gardens"
+  ],
+  "roads": [
+   "PGA Boulevard",
+   "Northlake Boulevard",
+   "Military Trail",
+   "I-95",
+   "Florida's Turnpike"
+  ],
+  "note": "Palm Beach Gardens is a large city of residential and resort communities in northern Palm Beach County."
+ },
+ "juno-beach": {
+  "lat": 26.88,
+  "lon": -80.054,
+  "areas": [
+   "Loggerhead Marinelife Center",
+   "Juno Beach Pier"
+  ],
+  "roads": [
+   "US-1",
+   "A1A",
+   "Donald Ross Road"
+  ],
+  "note": "Juno Beach is a small oceanfront town known for its pier and its sea turtle center."
+ },
+ "tequesta": {
+  "lat": 26.97,
+  "lon": -80.1,
+  "areas": [
+   "Tequesta Park",
+   "the Loxahatchee River waterfront"
+  ],
+  "roads": [
+   "US-1",
+   "Tequesta Drive",
+   "Indiantown Road"
+  ],
+  "note": "Tequesta is a village on the Loxahatchee River near Jupiter, at the north end of our service area."
+ },
+ "jupiter-inlet-colony": {
+  "lat": 26.95,
+  "lon": -80.07,
+  "areas": [
+   "the Jupiter Inlet shoreline"
+  ],
+  "roads": [
+   "A1A"
+  ],
+  "note": "Jupiter Inlet Colony is a tiny town next to Jupiter Inlet."
+ },
+ "jupiter": {
+  "lat": 26.934,
+  "lon": -80.094,
+  "areas": [
+   "Roger Dean Chevrolet Stadium",
+   "Abacoa",
+   "Jupiter Inlet Lighthouse & Museum",
+   "Harbourside Place"
+  ],
+  "roads": [
+   "Indiantown Road",
+   "Military Trail",
+   "Donald Ross Road",
+   "I-95",
+   "Florida's Turnpike"
+  ],
+  "note": "Jupiter is the northern anchor of our service area, a long drive from Sunrise, so please book ahead."
+ },
+ "belle-glade": {
+  "lat": 26.685,
+  "lon": -80.667,
+  "areas": [
+   "Lake Okeechobee",
+   "Torry Island"
+  ],
+  "roads": [
+   "State Road 80",
+   "US-27"
+  ],
+  "note": "Belle Glade is an agricultural community on Lake Okeechobee, and a long run west from the coast, so please book ahead."
+ },
+ "south-bay": {
+  "lat": 26.66,
+  "lon": -80.72,
+  "areas": [
+   "the south shore of Lake Okeechobee"
+  ],
+  "roads": [
+   "US-27",
+   "State Road 80"
+  ],
+  "note": "South Bay is a small community on the south shore of Lake Okeechobee."
+ },
+ "pahokee": {
+  "lat": 26.82,
+  "lon": -80.665,
+  "areas": [
+   "Pahokee Marina & Campground",
+   "Lake Okeechobee"
+  ],
+  "roads": [
+   "State Road 715"
+  ],
+  "note": "Pahokee sits on the east shore of Lake Okeechobee, a long drive from the coast, so please book ahead."
+ },
+ "_counties": {
+  "Miami-Dade": {
+   "note": "Miami-Dade covers everything from Homestead and Florida City in the south to Aventura and Golden Beach at the Broward line, including Miami, Coral Gables, Doral and Miami Beach. Main routes include I-95, the Palmetto Expressway (SR 826), the Dolphin Expressway (SR 836), US-1 and Florida's Turnpike.",
+   "hubs": [
+    "Brickell",
+    "Wynwood",
+    "Doral",
+    "Kendall",
+    "Coral Gables",
+    "Miami Beach"
+   ]
+  },
+  "Broward": {
+   "note": "Broward is where our shop sits. Sunrise is our home base on Oakland Park Boulevard, and the county runs from Hallandale Beach in the south to Deerfield Beach in the north, including Fort Lauderdale, Hollywood, Pembroke Pines, Weston and Coral Springs. Main routes include I-95, I-595, I-75, the Sawgrass Expressway (SR 869) and Florida's Turnpike.",
+   "hubs": [
+    "Sawgrass Mills",
+    "Las Olas Boulevard",
+    "Pembroke Lakes",
+    "Weston Town Center",
+    "Coral Springs"
+   ]
+  },
+  "Palm Beach": {
+   "note": "Palm Beach County stretches from Boca Raton in the south to Jupiter in the north, and west to Wellington and the Lake Okeechobee communities of Belle Glade, South Bay and Pahokee. The coastal cities are a straight run up I-95 or the Turnpike, while the western communities are a longer drive, so book ahead.",
+   "hubs": [
+    "Boca Raton",
+    "Delray Beach",
+    "West Palm Beach",
+    "Palm Beach Gardens",
+    "Wellington",
+    "Jupiter"
+   ]
+  }
+ }
 }
