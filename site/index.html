@@ -642,6 +642,16 @@ header.nav.scrolled .logo img{height:42px}
 .hf-go:hover svg{transform:translateX(4px)}
 .hf-note{margin:12px 2px 0;font-size:13px;color:#7a7f87}
 .hf-note span{color:#a3a7ad}
+/* Hero finder: search + proof in one clean card */
+.hf .hf-title p{color:#4a5059}
+.hf .hf-note{color:#5d6570;margin:10px 2px 0}
+.hf .hf-note span{color:#5d6570}
+.hf .trust{background:transparent;border:0;border-top:1px solid #ececea;margin-top:14px}
+.hf .trust .wrap{padding:14px 0 2px;gap:8px 18px;max-width:none}
+.hf .trust div{font-size:13px;line-height:1.3;color:#4a5059}
+.hf .trust b{font-size:18px}
+.hf .trust div+div{border-left:1px solid #ececea;padding-left:18px}
+@media (max-width:860px){.hf .trust div+div{border-left:0;padding-left:0}.hf .trust .wrap{padding-top:12px}}
 @media (max-width:1060px){.hf-form{grid-template-columns:repeat(2,minmax(0,1fr))}.hf-form.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hf-form .hf-size{grid-column:1/-1}.hf-go{grid-column:1/-1}}
 @media (max-width:860px){.hero-finder-wrap{margin-top:-56px}.hf{padding:14px 14px 12px;border-radius:18px}.hf-tabs{width:100%}.hf-tabs button{flex:1;padding:9px 12px}.hf-ico,.hf-title p{display:none}.hf-top{margin-bottom:10px}.hf h2{font-size:17px}.hf-f{padding:7px 12px 2px;border-radius:12px}.hf-f select{font-size:16px;padding:4px 18px 4px 0}.hf-go{min-height:52px;border-radius:12px}.hf-form{gap:9px}.hf-note{display:none}.hero-media{height:104px}.hero-copy{padding:18px var(--gut-r) 74px var(--gut-l);gap:12px}.hero-copy .eyebrow,.hero-copy p,.hero-copy .btn-ghost{display:none}.hero-copy h1{font-size:clamp(26px,7.6vw,34px)}}
 @media (max-width:520px){.hf-form.three{grid-template-columns:repeat(2,minmax(0,1fr))}.hf-form.three .hf-f:nth-child(3){grid-column:1/-1}.hf-note span{display:block}.hf-ico{width:42px;height:42px}}
@@ -1863,17 +1873,17 @@ header.nav.scrolled .logo img{height:42px}
         <button class="hf-go" type="submit">Search this size <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       </form>
       <p class="hf-note">Not sure of your size? It's printed on the tire sidewall, like 225/65R17.</p>
+      <div class="trust" aria-label="Why Extreme Tires">
+          <div class="wrap">
+            <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,319 reviews on Birdeye</span></div>
+            <div><b>Hunter</b><span>Engineering alignment equipment</span></div>
+            <div><b>30+</b><span>Tire brands, from Goodyear to Nitto</span></div>
+            <div><b>3</b><span>Counties served: Broward, Miami-Dade, Palm Beach</span></div>
+          </div>
+        </div>
     </div>
   </div>
 
-  <div class="trust" aria-label="Why Extreme Tires">
-    <div class="wrap">
-      <div><b>4.7</b><span><span class="stars" aria-label="4.7 out of 5 stars">★★★★★</span><br>1,319 reviews on Birdeye</span></div>
-      <div><b>Hunter</b><span>Engineering alignment equipment</span></div>
-      <div><b>30+</b><span>Tire brands, from Goodyear to Nitto</span></div>
-      <div><b>3</b><span>Counties served: Broward, Miami-Dade, Palm Beach</span></div>
-    </div>
-  </div>
 
   <section class="flow" id="start" aria-labelledby="flow-h">
     <div class="wrap">
