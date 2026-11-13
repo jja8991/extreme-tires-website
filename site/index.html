@@ -642,6 +642,24 @@ header.nav.scrolled .logo img{height:42px}
 .hf-go:hover svg{transform:translateX(4px)}
 .hf-note{margin:12px 2px 0;font-size:13px;color:#7a7f87}
 .hf-note span{color:#a3a7ad}
+/* ===== One continuous dark surface: no more white/grey/dark flips between sections ===== */
+/* soft fade when switching pages, no flash */
+@keyframes etFade{from{opacity:0}to{opacity:1}}
+[data-view]:not([hidden]){animation:etFade .28s ease both}
+body{background:#0d0d0e}
+.services,.offers,.rev,.lifts,.faq{--paper:#0d0d0e;--mist:#0d0d0e;--ink:#fff;--steel:#b4b8bf;--line:#26262a;background:#0d0d0e;color:#fff}
+.services{background:linear-gradient(#0d0d0e,#111113 40%,#0d0d0e)}
+.mobile,.how-img,.fleet,.ig,.flow{background-color:#0d0d0e}
+.mobile{background:#0d0d0e}.fleet{background:#0d0d0e;border-top:1px solid #1c1c1f}
+.services h2,.offers h2,.rev h2,.lifts h2,.faq h2,.faq summary{color:#fff}
+.services .lead,.offers .lead,.lifts .lead,.rev .lead{color:#b4b8bf}
+.services .btn-dark,.offers .btn-dark,.rev .btn-dark,.lifts .btn-dark,.faq .btn-dark{background:var(--red);color:#fff}
+.services .btn-dark:hover,.offers .btn-dark:hover,.rev .btn-dark:hover,.lifts .btn-dark:hover,.faq .btn-dark:hover{background:#fff;color:#0d0d0e}
+.platforms span{background:#151517;color:#fff;border-color:#2a2a2d}
+.rev-slots div{background:#151517;color:#b4b8bf}.rev-slots b{color:#fff}
+.finance{background:#151517;border:1px solid #26262a}
+.offers .finance .btn-dark{background:var(--red)}
+.faq details{border-bottom-color:#26262a}
 /* Hero finder: search + proof in one clean card */
 .hf .hf-title p{color:#4a5059}
 .hf .hf-note{color:#5d6570;margin:10px 2px 0}
