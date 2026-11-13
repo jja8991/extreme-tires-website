@@ -2017,6 +2017,8 @@ body{overflow-x:clip}
 
 .cm-fleet,.sv-all{padding:56px 0;background:#fff}.sv-all{background:var(--mist,#f4f4f4)}
 .cm-fleet .eyebrow,.sv-all .eyebrow{margin-bottom:10px}.cm-fleet h2,.sv-all h2{margin:0 0 10px}
+.mt-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:26px}@media(max-width:900px){.mt-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:560px){.mt-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+.mt-grid a{display:block;border-radius:22px;transition:transform .18s,filter .18s;filter:drop-shadow(0 6px 14px rgba(0,0,0,.14))}.mt-grid a:hover{transform:translateY(-4px);filter:drop-shadow(0 12px 22px rgba(0,0,0,.24))}.mt-grid a:focus-visible{outline:3px solid var(--red);outline-offset:3px}.mt-grid img{display:block;width:100%;height:auto}
 .dk-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:26px}@media(max-width:900px){.dk-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:560px){.dk-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
 .dk-grid figure{margin:0}.dk-grid img{display:block;width:100%;aspect-ratio:1.1;object-fit:cover;border-radius:18px}
 .sc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:24px}
@@ -2056,6 +2058,7 @@ body{overflow-x:clip}
 #view-tires .packages{background:var(--mist);color:#0d0d0e}
 #view-tires .packages p{color:#4a4f57!important}
 #view-tires .pk{background:#fff;border-color:#d6d6d4}#view-tires .pk p{color:#4a4f57!important}
+#view-service{background:#fff;color:#0d0d0e}#view-service .sp-phead{color:#fff}#view-service .sp-faqsec{background:#fff}#view-service .sp-pn a:hover{color:#fff}
 </style>
 </head>
 <body>
@@ -2719,7 +2722,7 @@ body{overflow-x:clip}
       <div class="eyebrow">The full list</div>
       <h2 id="sv-all-h">More of what we do</h2>
       <p class="cm-lead">A/C and mechanical work to custom builds, lighting, train horns, and service for fleets, semis, mowers and skid steers.</p>
-      <div class="dk-grid"><figure><img src="media/services/dark/ac-repair.webp" alt="A/C repair" loading="lazy"></figure><figure><img src="media/services/dark/mechanical.webp" alt="General mechanical work" loading="lazy"></figure><figure><img src="media/services/dark/caliper-paint.webp" alt="Caliper painting" loading="lazy"></figure><figure><img src="media/services/dark/rim-repair.webp" alt="Rim repair" loading="lazy"></figure><figure><img src="media/services/dark/custom-builds.webp" alt="Custom builds" loading="lazy"></figure><figure><img src="media/services/dark/lighting.webp" alt="Custom lighting" loading="lazy"></figure><figure><img src="media/services/dark/train-horns.webp" alt="Train horns" loading="lazy"></figure><figure><img src="media/services/dark/golf-cart.webp" alt="Golf cart upgrades" loading="lazy"></figure><figure><img src="media/services/dark/fleet.webp" alt="Fleet maintenance" loading="lazy"></figure><figure><img src="media/services/dark/semi.webp" alt="Semi truck service" loading="lazy"></figure><figure><img src="media/services/dark/mower.webp" alt="Mower service" loading="lazy"></figure><figure><img src="media/services/dark/skid-steer.webp" alt="Skid steer service" loading="lazy"></figure></div>
+      <div class="mt-grid"><a href="#service/ac-repair" data-view-link="service" data-param="ac-repair" aria-label="A/C repair: view details"><img src="media/services/ac-repair.webp" alt="A/C repair" loading="lazy"></a><a href="#service/general-mechanical" data-view-link="service" data-param="general-mechanical" aria-label="General mechanical work: view details"><img src="media/services/mechanical.webp" alt="General mechanical work" loading="lazy"></a><a href="#service/caliper-painting" data-view-link="service" data-param="caliper-painting" aria-label="Caliper painting: view details"><img src="media/services/caliper-paint.webp" alt="Caliper painting" loading="lazy"></a><a href="#service/rim-repair" data-view-link="service" data-param="rim-repair" aria-label="Rim repair: view details"><img src="media/services/rim-repair.webp" alt="Rim repair" loading="lazy"></a><a href="#service/custom-builds" data-view-link="service" data-param="custom-builds" aria-label="Custom builds: view details"><img src="media/services/custom-builds.webp" alt="Custom builds" loading="lazy"></a><a href="#service/custom-lighting" data-view-link="service" data-param="custom-lighting" aria-label="Custom lighting: view details"><img src="media/services/lighting.webp" alt="Custom lighting" loading="lazy"></a><a href="#service/train-horns" data-view-link="service" data-param="train-horns" aria-label="Train horns: view details"><img src="media/services/train-horns.webp" alt="Train horns" loading="lazy"></a><a href="#service/golf-cart-upgrades" data-view-link="service" data-param="golf-cart-upgrades" aria-label="Golf cart upgrades: view details"><img src="media/services/golf-cart.webp" alt="Golf cart upgrades" loading="lazy"></a><a href="#service/fleet-maintenance" data-view-link="service" data-param="fleet-maintenance" aria-label="Fleet maintenance: view details"><img src="media/services/fleet.webp" alt="Fleet maintenance" loading="lazy"></a><a href="#service/semi-truck-service" data-view-link="service" data-param="semi-truck-service" aria-label="Semi truck: view details"><img src="media/services/semi.webp" alt="Semi truck" loading="lazy"></a><a href="#service/mower-service" data-view-link="service" data-param="mower-service" aria-label="Mower: view details"><img src="media/services/mower.webp" alt="Mower" loading="lazy"></a><a href="#service/skid-steer-service" data-view-link="service" data-param="skid-steer-service" aria-label="Skid steer: view details"><img src="media/services/skid-steer.webp" alt="Skid steer" loading="lazy"></a></div>
       <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule a repair</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
     </div>
   </section>
@@ -4613,7 +4616,7 @@ var h=ET.esc, $=function(id){return document.getElementById(id)};
 var SLUGS=['brake-repair','wheel-alignment','tire-installation','tire-repair','tire-balancing','tire-rotation','suspension-repair','oil-changes','tpms-service','custom-wheels','lift-kits'];
 
 /* ======================= SERVICE DATA ======================= */
-var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift'};
+var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift','ac-repair':'ac-repair','general-mechanical':'mechanical','caliper-painting':'caliper-paint','rim-repair':'rim-repair','custom-builds':'custom-builds','custom-lighting':'lighting','train-horns':'train-horns','golf-cart-upgrades':'golf-cart','fleet-maintenance':'fleet','semi-truck-service':'semi','mower-service':'mower','skid-steer-service':'skid-steer'};
 var SV={
  'brake-repair':{label:'Brake Repair',name:'Brake Repair',ico:'brake',mode:'shop',
   blurb:'Pads, rotors, calipers and fluid, inspected and explained.',
@@ -4713,9 +4716,94 @@ var SV={
   faq:[['What is the difference between leveling and lifting?','A leveling kit usually raises the front of a truck or SUV to match the rear. A lift kit raises the whole vehicle by more and uses different parts.'],
        ['Do I need an alignment after a lift?','Yes. Changing the ride height changes the wheel angles, so an alignment is part of doing it right.'],
        ['Does a lift change how the vehicle drives?','It can affect handling, braking, headlight aim and speedometer accuracy if the tires get larger. That is why we plan the build as a whole.']],
-  rel:['custom-wheels','wheel-alignment','suspension-repair']}
+  rel:['custom-wheels','wheel-alignment','suspension-repair']},
+ 'ac-repair':{label:'A/C Repair',name:'A/C Repair',ico:'repair',mode:'shop',
+  blurb:'Diagnosis and repair for cars, trucks and more.',
+  intro:'When the air stops blowing cold, we find out why and fix it, so the cabin is comfortable again.',
+  inc:['Diagnosis of why the A/C is not cooling','Refrigerant level and leak checks','Compressor, condenser and related component repair','Check of blower and controls','A test that the system cools properly after the work'],
+  signs:['Air from the vents is warm or only slightly cool','Cooling comes and goes','Strange noises when the A/C is on','Weak airflow from the vents','A musty smell when the system runs'],
+  faq:[['What can cause an A/C to stop cooling?','Common causes include low refrigerant from a leak, a failing compressor, electrical faults and blocked or damaged components. A technician checks the system to find the actual cause.'],['Is a recharge enough?','Sometimes, but low refrigerant usually points to a leak. We look for the cause so the fix lasts.'],['Do you work on trucks and equipment too?','Ask the shop. Tell us the vehicle and what it is doing and we will confirm what we can take on.']],
+  rel:['general-mechanical','custom-builds','fleet-maintenance']},
+ 'general-mechanical':{label:'General Mechanical Work',name:'General Mechanical Work',ico:'repair',mode:'shop',
+  blurb:'Routine service, diagnostics and repairs.',
+  intro:'From routine maintenance to a problem you cannot quite name, our technicians diagnose it and fix it.',
+  inc:['Inspection and diagnosis of the problem','Routine maintenance and service','Repairs once you approve the scope','Fluid and filter service as needed','A check that the vehicle runs right after the work'],
+  signs:['A warning light is on','New noises, vibration or leaks','The vehicle is running rough or hesitating','Maintenance is overdue','You want a second look before a long trip'],
+  faq:[['Do I need to know what is wrong before I come in?','No. Describe what you notice and we will diagnose it and explain what we find before any work starts.'],['Can you do routine maintenance too?','Yes. Routine service is part of what we do, along with repairs.'],['How do I get a price?','Call the shop or request a quote. Pricing depends on the vehicle and the work.']],
+  rel:['ac-repair','brake-repair','oil-changes']},
+ 'caliper-painting':{label:'Caliper Painting',name:'Caliper Painting',ico:'brake',mode:'shop',
+  blurb:'Custom caliper paint in any color.',
+  intro:'Painted calipers add a finished look behind your wheels. Pick the color and we handle the rest.',
+  inc:['Brake caliper paint in the color you choose','Surface prep before painting','Careful masking of the parts that should not be painted','Reinstallation and a check of the brake system','Advice on how the finish will hold up'],
+  signs:['You want your wheels to stand out','You are doing a custom build or wheel upgrade','Your calipers are rusty or faded','You want colors that match your vehicle'],
+  faq:[['What colors can you do?','Any color. Tell us what you have in mind and we will confirm the options.'],['Does painting affect braking?','Paint is for looks. We check the brake system while the calipers are off so it works as it should.'],['Can this be done with new wheels or brakes?','Yes, it pairs well with a wheel or brake job. Ask the shop about timing.']],
+  rel:['brake-repair','custom-wheels','rim-repair']},
+ 'rim-repair':{label:'Rim Repair',name:'Rim Repair',ico:'wheel',mode:'shop',
+  blurb:'Curb rash, bends and surface damage fixed.',
+  intro:'A scraped or bent rim does not always need replacing. We look at the damage and tell you what can be repaired.',
+  inc:['Inspection of the rim damage','Curb rash and surface repair','Straightening of bent rims where it can be done','Refinishing to match','Check that the wheel and tire seal and balance properly'],
+  signs:['Scrapes or gouges from hitting a curb','A bent rim or a vibration at speed','A tire that keeps losing air at the rim','Corrosion or peeling finish'],
+  faq:[['Can every damaged rim be repaired?','Not always. Some damage is too deep or cracked. A technician inspects it and tells you honestly.'],['Will the repaired rim match the others?','We refinish to match as closely as possible. Ask the shop what to expect for your wheel.'],['Do you replace rims too?','Yes. See our Custom Wheels page or ask for a quote.']],
+  rel:['custom-wheels','tire-balancing','caliper-painting']},
+ 'custom-builds':{label:'Custom Builds',name:'Custom Builds',ico:'lift',mode:'shop',
+  blurb:'From off-road setups to show-ready builds.',
+  intro:'Tell us the look and the use, from trail-ready to show-ready, and we plan the build with you.',
+  inc:['A planning conversation about what you want','Lift or lowering, wheels and tires','Lighting and exterior upgrades','Suspension and mechanical work to support the build','A final check before you pick it up'],
+  signs:['You want a vehicle that stands out','You are planning an off-road setup','You want upgrades done in one place','You are not sure where to start'],
+  faq:[['What kinds of builds do you do?','Everything from off-road setups to show-ready builds. Bring your idea and we will talk it through.'],['Can you do the work in stages?','Often yes. Tell us your budget and timeline and we will suggest an order.'],['How do I get a price?','Call the shop or request a quote with the vehicle and what you want to do.']],
+  rel:['lift-kits','custom-wheels','custom-lighting']},
+ 'custom-lighting':{label:'Custom Lighting',name:'Custom Lighting',ico:'lift',mode:'shop',
+  blurb:'LED, underglow, rock lights and full setups.',
+  intro:'Light up the road ahead and your build too, from a single light bar to a full custom lighting setup.',
+  inc:['LED light bars and pods','Underglow and rock lights','Wiring and switches done cleanly','Full custom lighting setups','A check that everything works before you leave'],
+  signs:['You want better visibility off-road or at night','You want your build to stand out','You are adding accessories to a truck, cart or other vehicle','Your current lights are dim or failing'],
+  faq:[['What lighting do you install?','LED bars and pods, underglow, rock lights and complete custom setups. Tell us the vehicle and the look.'],['Is the wiring done properly?','Yes. We route and protect the wiring and add switches so it is clean and reliable.'],['Do you do lighting on carts and equipment?','Ask the shop with the vehicle and what you have in mind.']],
+  rel:['custom-builds','golf-cart-upgrades','lift-kits']},
+ 'train-horns':{label:'Train Horns',name:'Train Horns',ico:'lift',mode:'shop',
+  blurb:'Loud, durable horn systems with custom installs.',
+  intro:'Be heard. We install train horn systems built to last, with a clean custom install.',
+  inc:['Train horn system installation','Custom mounting for your vehicle','Wiring and controls','A function test before you leave','Advice on placement and setup'],
+  signs:['You want a louder horn','You are finishing a custom truck build','You want a durable, long-lasting system'],
+  faq:[['What vehicles can take a train horn?','Many trucks and other vehicles can. Tell us what you drive and we will confirm what fits.'],['Are there rules about using them?','Local rules on horn use and loudness can apply. Check your area, and ask us if you are unsure.'],['Is the install custom?','Yes. We mount and wire it for your vehicle.']],
+  rel:['custom-builds','custom-lighting','golf-cart-upgrades']},
+ 'golf-cart-upgrades':{label:'Golf Cart Upgrades',name:'Golf Cart Upgrades',ico:'lift',mode:'shop',
+  blurb:'Lifts, wheels, tires, lighting and performance upgrades.',
+  intro:'Make your golf cart your own, with lifts, wheels and tires, lighting and performance upgrades.',
+  inc:['Lift kits','Wheels and tires','Lighting','Performance upgrades','A check that everything works before you ride'],
+  signs:['You want a lifted, custom look','You want better ride or traction','You want lights for night use','You want more performance'],
+  faq:[['What upgrades do you offer?','Lifts, wheels, tires, lighting and performance upgrades. Tell us the cart and what you want.'],['Can you upgrade any cart?','Tell us the make and model and the shop will confirm.'],['Can I combine upgrades?','Yes. Many people do lift, wheels and tires, and lights together.']],
+  rel:['custom-lighting','custom-wheels','lift-kits']},
+ 'fleet-maintenance':{label:'Fleet Maintenance',name:'Fleet Maintenance',ico:'van',mode:'both',
+  blurb:'Scheduled service and repairs for cars and trucks to semis.',
+  intro:'Keep every vehicle on the road. We handle scheduled service and repairs for fleets of cars, trucks and larger equipment.',
+  inc:['Scheduled maintenance for your vehicles','Repairs when something goes wrong','Tire service','Service at your lot or at our shop where it fits','One shop for the whole fleet'],
+  signs:['You have several vehicles that need regular service','Downtime is costing you','Maintenance is hard to keep up with','You want one place to handle it all'],
+  faq:[['What counts as a fleet?','Any group of vehicles that run for your business, from a few vans to trucks, semis and equipment.'],['Do you come to us?','Often. Ask the shop what we can do at your location for your fleet.'],['How do we set it up?','Call the shop or use our Commercial page and tell us what you run.']],
+  rel:['semi-truck-service','general-mechanical','tire-installation']},
+ 'semi-truck-service':{label:'Semi Truck Service',name:'Semi Truck Service',ico:'van',mode:'both',
+  blurb:'Tires, maintenance and repairs for semis.',
+  intro:'Semis earn when they roll. We keep them there with tires, maintenance and repairs.',
+  inc:['Semi tire service','Routine maintenance','Repairs','Service at your lot or at our shop where it fits'],
+  signs:['Tires are worn or damaged','Maintenance is due','Something does not sound or feel right','You need to avoid downtime'],
+  faq:[['Can you come to my truck?','Often. Ask the shop what we can do where your truck is.'],['Do you do tires and repairs?','Yes, tires, maintenance and repairs.'],['Can you handle several trucks?','Yes. See Fleet Maintenance.']],
+  rel:['fleet-maintenance','general-mechanical','tire-installation']},
+ 'mower-service':{label:'Mower Service',name:'Mower Service',ico:'repair',mode:'both',
+  blurb:'Tire, maintenance and repair for commercial and residential mowers.',
+  intro:'Keep the lawn crew moving. We service mowers, commercial or residential.',
+  inc:['Mower tire service','Maintenance','Repairs','Service for commercial and residential mowers'],
+  signs:['A flat or worn mower tire','The mower is due for service','The mower runs rough or will not start','You run several mowers and want one shop'],
+  faq:[['Do you service commercial mowers?','Yes, commercial and residential.'],['Can you do mower tires?','Yes. Tell us the size or the mower and we will help.'],['Can you come to us?','Ask the shop what we can do where your equipment is.']],
+  rel:['skid-steer-service','fleet-maintenance','tire-repair']},
+ 'skid-steer-service':{label:'Skid Steer Service',name:'Skid Steer Service',ico:'repair',mode:'both',
+  blurb:'Tires, maintenance and repairs for compact equipment.',
+  intro:'Skid steers and compact equipment take a beating. We handle tires, maintenance and repairs.',
+  inc:['Tire service','Routine maintenance','Repairs','Service at your site or at our shop where it fits'],
+  signs:['A flat or worn tire','Maintenance is due','Something feels off when operating','You need to keep a job on schedule'],
+  faq:[['What equipment do you service?','Skid steers and other compact equipment. Tell us the machine and the problem.'],['Can you come to the job site?','Ask the shop what we can do at your location.'],['Can you handle tires?','Yes, tires, maintenance and repairs.']],
+  rel:['mower-service','fleet-maintenance','semi-truck-service']}
 };
 var MOBILE_SLUGS=['tire-installation','tire-balancing','tire-repair','oil-changes'];
+var MORE_SLUGS=['ac-repair','general-mechanical','caliper-painting','rim-repair','custom-builds','custom-lighting','train-horns','golf-cart-upgrades','fleet-maintenance','semi-truck-service','mower-service','skid-steer-service'];var NAV_SLUGS=SLUGS.concat(MORE_SLUGS);
 var SHOP_SLUGS=['wheel-alignment','brake-repair','suspension-repair','tire-rotation','tpms-service','custom-wheels','lift-kits'];
 function modeBadge(m){return m==='both'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile or shop</span>':'<span class="sp-badge sp-bs">Shop only</span>'}
 function link(slug){return 'href="#service/'+slug+'" data-view-link="service" data-param="'+slug+'"'}
@@ -4736,10 +4824,10 @@ function renderService(param){
       '<div class="wrap sp-nf"><h1>We could not find that service</h1><p>The page you wanted is not here, but every service we offer is on our Auto Service page.</p><a class="btn btn-red" href="#services" data-view-link="services">See all services</a></div>';
     return;
   }
-  var i=SLUGS.indexOf(param), prev=SV[SLUGS[(i+SLUGS.length-1)%SLUGS.length]], next=SV[SLUGS[(i+1)%SLUGS.length]];
-  var ps=SLUGS[(i+SLUGS.length-1)%SLUGS.length], ns=SLUGS[(i+1)%SLUGS.length];
+  var i=NAV_SLUGS.indexOf(param), prev=SV[NAV_SLUGS[(i+NAV_SLUGS.length-1)%NAV_SLUGS.length]], next=SV[NAV_SLUGS[(i+1)%NAV_SLUGS.length]];
+  var ps=NAV_SLUGS[(i+NAV_SLUGS.length-1)%NAV_SLUGS.length], ns=NAV_SLUGS[(i+1)%NAV_SLUGS.length];
   var listHtml=function(a,cls){return '<ul class="sp-list '+cls+'">'+a.map(function(x){return '<li><span>'+h(x)+'</span></li>'}).join('')+'</ul>'};
-  var isGear=(param==='custom-wheels'||param==='lift-kits');
+  var isGear=/^(custom-wheels|lift-kits|custom-builds|custom-lighting|train-horns|golf-cart-upgrades|caliper-painting)$/.test(param);
   root.innerHTML=
    '<div class="phead sp-phead"><div class="wrap">'+
      '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>'+h(s.name)+'</span></nav>'+
