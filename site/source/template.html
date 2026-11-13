@@ -692,7 +692,32 @@ header.nav.scrolled .logo img{height:42px}
   .hero-media::after{background:linear-gradient(180deg,rgba(13,13,14,.05) 0%,rgba(13,13,14,0) 55%,rgba(13,13,14,.45) 100%)}
   .play{top:auto;bottom:76px;left:14px;z-index:4}
 }
-.how-img{background:#0b0b0c;padding:0}.how-img .wrap{padding-top:0;padding-bottom:0}.how-img img{display:block;width:100%;height:auto;max-width:1200px;margin:0 auto}.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}</style>
+.how-img{background:#0b0b0c;padding:0}.how-img .wrap{padding-top:0;padding-bottom:0}.how-img img{display:block;width:100%;height:auto;max-width:1200px;margin:0 auto}.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Quote & book: dark hero + glowing card */
+.flow-grid{display:block}
+.flow-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:24px;align-items:center;margin-bottom:34px}
+.flow-van img{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 100%);mask-image:linear-gradient(90deg,transparent 0,#000 22%,#000 100%)}
+.flow h2{font-style:italic;text-transform:uppercase}
+.flow h2 span{display:inline-block;color:#fff;background:var(--red);padding:0 14px 0 10px;transform:skewX(-8deg);margin-top:4px}
+.flow #wiz.card{background:linear-gradient(180deg,#151517,#0a0a0b);color:#fff;border:1.5px solid var(--red);border-radius:22px;box-shadow:0 0 0 1px rgba(227,22,27,.25),0 0 44px rgba(227,22,27,.35),0 30px 60px rgba(0,0,0,.5)}
+.flow #wiz .prog i{background:#3b3b3f;border-radius:3px}.flow #wiz .prog i.on{background:var(--red)}
+.flow #wiz .stepmeta{color:#fff}
+.flow #wiz .step h3{color:#fff;font-style:italic;text-transform:uppercase;font-size:clamp(26px,3.4vw,40px)}
+.flow #wiz .step h3 .red{color:var(--red);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.flow #wiz .opt{position:relative;grid-template-columns:64px 1fr 20px;background:linear-gradient(180deg,#232326,#141416);border:1px solid #46464a;border-radius:12px;color:#fff;font-style:italic;font-weight:700;font-size:20px;padding:12px 16px 12px 12px}
+.flow #wiz .opt::after{content:"›";font-size:30px;line-height:1;color:#fff;font-style:normal}
+.flow #wiz .opt:hover{border-color:var(--red);transform:translateY(-2px)}
+.flow #wiz .opt:focus-visible{outline:3px solid var(--yellow)}
+.flow #wiz .opt[aria-pressed="true"]{border-color:var(--red);background:linear-gradient(180deg,#2a1214,#170a0b);box-shadow:0 0 0 1px var(--red),0 0 22px rgba(227,22,27,.45)}
+.flow #wiz .opt small{color:#d6d6d8;font-style:normal;font-weight:500;font-size:15px}
+.flow #wiz .opt.urgent{background:linear-gradient(180deg,#f0252b,#b10f14);border-color:#ff5a5f}
+.flow #wiz .opt.urgent small{color:#ffe1e1}
+.flow #wiz .opt .ico-img{width:60px;height:60px;border-radius:10px;object-fit:cover}
+.flow #wiz .alert{background:rgba(227,22,27,.12);color:#fff;border-left-color:var(--red)}
+.flow #wiz .checklist{background:#1b1b1e;color:#ddd}.flow #wiz .checklist ul{color:#bdbdbd}
+.flow #wiz .linkbtn{color:#fff}
+@media (max-width:860px){.flow-top{grid-template-columns:1fr}.flow-van{order:-1}.flow #wiz .opts{grid-template-columns:1fr}}
+</style>
 
 <!-- Inline icon set (red pictograms like Melissa's quote mockup) -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -846,17 +871,20 @@ header.nav.scrolled .logo img{height:42px}
   </div>
 
   <section class="flow" id="start" aria-labelledby="flow-h">
-    <div class="wrap flow-grid">
-      <div>
-        <div class="eyebrow">Quote &amp; book</div>
-        <h2 id="flow-h">Booked in <span>60 seconds.</span></h2>
-        <p class="lead">Five quick taps. You get a 2-hour arrival window, a text when your tech is on the way, and the out-the-door price before we start.</p>
-        <ul class="promise">
-          <li>Out-the-door price before we start, no surprise fees</li>
-          <li>Text updates from booking to "tech on the way"</li>
-          <li>Bring your own tires? We install those too</li>
-          <li>Shop now, pay later with Kafene financing</li>
-        </ul>
+    <div class="wrap">
+      <div class="flow-top">
+        <div class="flow-copy">
+          <div class="eyebrow">Quote &amp; book</div>
+          <h2 id="flow-h">Booked in <span>60 seconds.</span></h2>
+          <p class="lead">Five quick taps. You get a 2-hour arrival window, a text when your tech is on the way, and the out-the-door price before we start.</p>
+          <ul class="promise">
+            <li>Out-the-door price before we start, no surprise fees</li>
+            <li>Text updates from booking to "tech on the way"</li>
+            <li>Bring your own tires? We install those too</li>
+            <li>Shop now, pay later with Kafene financing</li>
+          </ul>
+        </div>
+        <div class="flow-van"><img src="media/quote-vans.webp" width="613" height="385" alt="Extreme Mobile Tires service vans parked at dusk in front of the Miami skyline"></div>
       </div>
       <div class="card" id="wiz">
         <div class="prog" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
@@ -1521,8 +1549,8 @@ header.nav.scrolled .logo img{height:42px}
   var NEEDS=[
     ['tires','install','New tires','Shop, price and install'],
     ['service','brake','Repair or service','Brakes, alignment, oil and more'],
-    ['wheels','lift','Wheels or lift','Packages, lifts, leveling'],
-    ['flat','repair','Flat right now','We come to you today']
+    ['wheels','wheel','Wheels or lift','Packages, lifts, leveling'],
+    ['flat','tpms','Flat right now','We come to you today']
   ];
   var STEPNAMES=['What you need','Your vehicle','Where','When','Your details'];
   var wbody=document.getElementById('wiz-body'), wnext=document.getElementById('wiz-next'), wback=document.getElementById('wiz-back');
@@ -1538,8 +1566,8 @@ header.nav.scrolled .logo img{height:42px}
     wnext.hidden=(s===5);
     wnext.textContent=s===4?'Book it':'Next';
     if(s===0){
-      h='<h3>What do you need today?</h3><div class="opts">'+NEEDS.map(function(n){
-        return '<button type="button" class="opt'+(n[0]==='flat'?' urgent':'')+'" data-need="'+n[0]+'" aria-pressed="'+(W.need===n[0])+'"><svg aria-hidden="true"><use href="#i-'+n[1]+'"/></svg><span>'+n[2]+'<small>'+n[3]+'</small></span></button>'}).join('')+'</div>';
+      h='<h3>What do you need <span class="red">today?</span></h3><div class="opts">'+NEEDS.map(function(n){
+        return '<button type="button" class="opt'+(n[0]==='flat'?' urgent':'')+'" data-need="'+n[0]+'" aria-pressed="'+(W.need===n[0])+'">'+SI(n[1],1)+'<span>'+n[2]+'<small>'+n[3]+'</small></span></button>'}).join('')+'</div>';
       if(W.need==='flat')h+='<div class="alert">Stuck right now? Call or text <b>(954) 773-1896</b> for the fastest dispatch, or keep going to book.</div>';
     } else if(s===1){
       h='<h3>Tell us about the vehicle</h3>'+
