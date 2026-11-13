@@ -1875,6 +1875,15 @@ body{background:#0d0d0e}
 #view-mobile .slots .times button{background:#fff;border-color:#0d0d0e;color:#0d0d0e}
 #view-mobile .slots .times button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
 #view-mobile .onsite-pic img{box-shadow:0 18px 50px rgba(13,13,14,.18)}
+/* lifts banner */
+.lifts.lifts-img{padding-block:40px}
+.lift-banner{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+.lift-banner-in{position:relative;min-width:860px}
+.lift-banner-in img{display:block;width:100%;height:auto;border-radius:12px}
+.lift-cta{position:absolute;left:78.8%;top:19.5%;width:19.9%;height:11.5%;border-radius:10px;transition:box-shadow .25s var(--ease),transform .25s var(--ease)}
+.lift-cta:hover{box-shadow:0 0 0 3px rgba(255,255,255,.55),0 12px 30px rgba(227,22,27,.5);transform:translateY(-2px)}
+.lift-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(min-width:900px){.lift-banner{overflow:visible}.lift-banner-in{min-width:0}}
 </style>
 </head>
 <body>
@@ -2134,17 +2143,13 @@ body{background:#0d0d0e}
     </div>
   </section>
 
-  <section class="lifts" aria-labelledby="lift-h">
+  <section class="lifts lifts-img" aria-labelledby="lift-h">
     <div class="wrap">
-      <div class="sec-head"><div><div class="eyebrow">Lifts &amp; leveling</div><h2 id="lift-h">Build it here</h2>
-      <p>Every kit lists its install time up front, so you know how long the truck will be with us.</p></div>
-      <a class="btn btn-dark" href="#quote" data-view-link="quote">Quote my build</a></div>
-      <div class="lift-grid">
-        <div class="lift"><b>Leveling kit</b><div class="hrs">X hrs <small>install time</small></div><p>Trucks and SUVs. Sample time, set by the shop.</p></div>
-        <div class="lift"><b>2–3.5" lift</b><div class="hrs">X hrs</div><p>Jeep, Bronco, Tacoma and more.</p></div>
-        <div class="lift"><b>4–6" lift</b><div class="hrs">X hrs</div><p>Includes alignment on Hunter equipment.</p></div>
-        <div class="lift"><b>Tire + wheel package</b><div class="hrs">X hrs</div><p>Mounted, balanced and fitment-checked.</p></div>
-      </div>
+      <h2 id="lift-h" class="sr-only">Lifts &amp; leveling: build it here</h2>
+      <div class="lift-banner"><div class="lift-banner-in">
+        <img src="media/lifts-banner.webp" width="2172" height="724" loading="lazy" decoding="async" alt="Lifts and leveling, build it here. Every kit lists its install time up front. Leveling kit: 1 to 2 hours. 2 to 3.5 inch lift: 2 to 4 hours. 4 to 6 inch lift, includes alignment on Hunter equipment: 4 to 6 hours. Tire and wheel package, mounted, balanced and fitment-checked: 1 to 2 hours.">
+        <a class="lift-cta" href="#quote" data-view-link="quote" aria-label="Quote my build"></a>
+      </div></div>
     </div>
   </section>
 
