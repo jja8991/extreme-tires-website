@@ -2009,8 +2009,8 @@ header.nav.scrolled .logo img{height:42px}
 
   <section class="ig" id="gallery" aria-labelledby="ig-h">
     <div class="wrap">
-      <div class="sec-head"><div><div class="eyebrow">Gallery · @extremetires</div><h2 id="ig-h">Fresh off the lift</h2>
-      <p>Every build we post on Instagram lands here automatically, sorted by vehicle.</p></div>
+      <div class="sec-head"><div><div class="eyebrow">Gallery · @extremetires</div><h2 id="ig-h">Fresh from the shop</h2>
+      <p>The newest reels from @extremetires. Tap any one to watch it on Instagram.</p></div>
       <div class="btns"><a class="btn btn-ghost" href="#gallery" data-view-link="gallery">See full gallery</a><a class="btn btn-red" href="https://www.instagram.com/extremetires" target="_blank" rel="noopener">Follow on Instagram</a></div></div>
       <div class="ig-chips" id="ig-chips" role="group" aria-label="Filter gallery"></div>
       <div class="ig-grid" id="ig-grid"></div>
@@ -3263,7 +3263,7 @@ header.nav.scrolled .logo img{height:42px}
       </div>
       <div class="gl-grid" id="gl-grid"></div>
       <div class="gl-more"><button type="button" class="btn btn-dark" id="gl-more">Load more</button></div>
-      <p class="gl-sync" id="gl-sync"><span><b>Auto-synced from Instagram every 6 hours</b> &middot; <b>#nogallery</b> hides a post &middot; sample tiles shown</span></p>
+      <p class="gl-sync" id="gl-sync"><span><b>Latest reels from @extremetires</b> &middot; tap one to watch it on Instagram</span></p>
     </div>
 
     <div role="tabpanel" id="gl-panel-news" aria-labelledby="gl-tab-news" hidden>
@@ -3928,33 +3928,44 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
 
   // ===== v5: Instagram gallery =====
   // Live site: fetch('/gallery/gallery.json') written by sync-instagram.mjs every 6 hours.
-  // Prototype: same shape, sample items using the storefront photo until the feed is connected.
-  var STORE=document.querySelector('.hero-media img').src;
-  var GALLERY={updated:null,items:[
-    {id:'s1',file:STORE,category:'jeep',tags:['jeep','lift'],isVideo:false,caption:'Sample: lifted Gladiator on new all-terrains',pos:'78% 70%'},
-    {id:'s2',file:STORE,category:'jeep',tags:['jeep','wheels'],isVideo:false,caption:'Sample: Gladiator Rubicon, custom wheels',pos:'15% 75%'},
-    {id:'s3',file:STORE,category:'shop',tags:[],isVideo:false,caption:'Sample: the Sunrise shop',pos:'50% 40%'},
-    {id:'s4',file:STORE,category:'mobile',tags:['mobile'],isVideo:true,caption:'Sample: mobile install video',pos:'90% 60%'},
-    {id:'s5',file:STORE,category:'truck',tags:['truck','lift'],isVideo:false,caption:'Sample: leveled pickup',pos:'30% 55%'},
-    {id:'s6',file:STORE,category:'wheels',tags:['wheels'],isVideo:false,caption:'Sample: wheel package mounted and balanced',pos:'65% 80%'},
-    {id:'s7',file:STORE,category:'shop',tags:[],isVideo:false,caption:'Sample: bay doors open, 8 AM',pos:'5% 50%'},
-    {id:'s8',file:STORE,category:'truck',tags:['truck'],isVideo:false,caption:'Sample: fleet truck on site',pos:'45% 85%'}
+  // Latest public reels from @extremetires (thumbnails hosted locally; tiles link to the real posts).
+  var GALLERY={updated:'2026-11-13',items:[
+    {id:'r1',file:'media/ig/Dfrx3ZsgdfF.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 13 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/Dfrx3ZsgdfF/'},
+    {id:'r2',file:'media/ig/DfpNGY7nJC1.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 12 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/DfpNGY7nJC1/'},
+    {id:'r3',file:'media/ig/Dfmoas6CjeM.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 11 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/Dfmoas6CjeM/'},
+    {id:'r4',file:'media/ig/DfkDYv6D7WI.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 10 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/DfkDYv6D7WI/'},
+    {id:'r5',file:'media/ig/DfhetrtkoNS.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 9 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/DfhetrtkoNS/'},
+    {id:'r6',file:'media/ig/DfcYyjLOAVV.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 7 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/DfcYyjLOAVV/'},
+    {id:'r7',file:'media/ig/DfZwZ3YnDs3.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 6 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/DfZwZ3YnDs3/'},
+    {id:'r8',file:'media/ig/DfXLh_ujQXS.jpg',category:'reel',tags:[],isVideo:true,caption:'Reel · Nov 5 · watch on Instagram',permalink:'https://www.instagram.com/extremetires/reel/DfXLh_ujQXS/'}
   ]};
-  var IGCATS=[['all','All'],['jeep','Jeep'],['truck','Trucks'],['lift','Lifts'],['wheels','Wheels'],['mobile','Mobile']];
+  // LIVE FEED: paste the Behold (or compatible JSON) feed URL below and the grid updates itself whenever @extremetires posts.
+  // Leave empty to keep the built-in latest reels above.
+  var IG_FEED_URL='';
+  if(IG_FEED_URL){
+    fetch(IG_FEED_URL,{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){
+      var posts=(j&&(j.posts||j.data||j))||[];
+      var items=posts.slice(0,12).map(function(p,n){
+        var img=p.thumbnailUrl||(p.sizes&&p.sizes.medium&&p.sizes.medium.mediaUrl)||p.mediaUrl||p.media_url||p.thumbnail_url;
+        var cap=String(p.prunedCaption||p.caption||'View on Instagram').replace(/\s+/g,' ').slice(0,110);
+        return img&&(p.permalink)?{id:'l'+n,file:img,category:'reel',tags:[],isVideo:/VIDEO|REEL/i.test(p.mediaType||p.media_type||''),caption:cap,permalink:p.permalink}:null}).filter(Boolean);
+      if(items.length){GALLERY.items.length=0;items.forEach(function(i){GALLERY.items.push(i)});window.dispatchEvent(new Event('et-feed'))}
+    }).catch(function(){});
+  }
+  var IGCATS=[['all','All']];
   ET.GALLERY=GALLERY; ET.IGCATS=IGCATS;
   var igFilter='all', igGrid=document.getElementById('ig-grid');
   function igRender(){
     var rows=GALLERY.items.filter(function(i){return igFilter==='all'||i.category===igFilter||i.tags.indexOf(igFilter)>-1});
     igGrid.innerHTML=rows.map(function(i){
-      return '<button type="button" class="ig-tile" data-ig="'+i.id+'" aria-label="'+esc(i.caption)+'"><img src="'+i.file+'" alt="" loading="lazy" style="object-position:'+(i.pos||'50% 50%')+'">'+
-        (i.id.charAt(0)==='s'?'<span class="badge">Sample</span>':'')+
-        (i.isVideo?'<span class="vid"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></span>':'')+
-        '<span class="cap">'+esc(i.caption)+'</span></button>'}).join('')||'<p style="color:#999">No posts in this category yet.</p>';
+      return '<a class="ig-tile" href="'+i.permalink+'" target="_blank" rel="noopener" aria-label="'+esc(i.caption)+' (opens Instagram)"><img src="'+i.file+'" alt="" loading="lazy" width="280" height="280">'+
+        '<span class="vid"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></span>'+
+        '<span class="cap">'+esc(i.caption)+'</span></a>'}).join('')||'<p style="color:#999">No posts in this category yet.</p>';
   }
   document.getElementById('ig-chips').innerHTML=IGCATS.map(function(c){return '<button type="button" data-igf="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+c[1]+'</button>'}).join('');
   document.getElementById('ig-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;igFilter=b.dataset.igf;
     this.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});igRender()});
-  document.getElementById('ig-updated').textContent='Auto-syncs from Instagram every 6 hours · sample tiles shown in this prototype';
+  document.getElementById('ig-updated').textContent='Latest reels from @extremetires. Tap one to watch it on Instagram.';document.getElementById('ig-chips').hidden=true;
   var lb=document.getElementById('lb');
   igGrid.addEventListener('click',function(e){var t=e.target.closest('[data-ig]');if(!t)return;
     var it=GALLERY.items.filter(function(i){return i.id===t.dataset.ig})[0];
@@ -3967,6 +3978,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
   lb.addEventListener('click',function(e){if(e.target===lb)lbClose()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')lbClose()});
   igRender();
+  window.addEventListener('et-feed',igRender);
 
   // ===== v9: hero background video (YouTube, muted, looping). Poster photo stays until playback really starts =====
   (function(){
@@ -5181,25 +5193,24 @@ function glRender(){
   $('gl-grid').innerHTML=part.map(function(i,k){
     var sh=SHAPES[k%SHAPES.length];
     return '<button type="button" class="gl-tile '+sh+'" data-i="'+k+'" aria-label="'+esc(i.caption)+'"><img src="'+i.file+'" alt="" loading="lazy" style="object-position:'+esc(i.pos||'50% 50%')+'">'+
-      '<span class="badge">Sample</span>'+
       (i.isVideo?'<span class="vid"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></span>':'')+
       '<span class="cap">'+esc(i.caption)+'</span></button>';
   }).join('')||'<p class="gl-empty">No posts in this category yet.</p>';
   $('gl-more').parentNode.hidden=glShown>=rows.length;
 }
-$('gl-chips').innerHTML=ET.IGCATS.map(function(c){return '<button type="button" data-f="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+esc(c[1])+'</button>'}).join('');
+window.addEventListener('et-feed',function(){glShown=8;glRender()});$('gl-chips').hidden=ET.IGCATS.length<2;$('gl-chips').innerHTML=ET.IGCATS.map(function(c){return '<button type="button" data-f="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+esc(c[1])+'</button>'}).join('');
 $('gl-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;glFilter=b.dataset.f;glShown=8;
   this.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});glRender()});
 $('gl-more').addEventListener('click',function(){var before=glShown;glShown+=8;glRender();
   var t=$('gl-grid').querySelectorAll('.gl-tile')[before];if(t)t.focus({preventScroll:false})});
 var lb=$('gl-lb');
 function lbShow(){var it=glList[glIdx];if(!it)return;var im=$('gl-lb-img');im.src=it.file;im.alt=it.caption;im.style.objectPosition='50% 50%';
-  $('gl-lb-cap').textContent=it.caption;$('gl-lb-cnt').textContent=(glIdx+1)+' / '+glList.length+' · sample';
+  $('gl-lb-cap').textContent=it.caption;$('gl-lb-cnt').textContent=(glIdx+1)+' / '+glList.length;
   $('gl-lb-link').href=it.permalink||'https://www.instagram.com/extremetires'}
 function lbOpen(k,trigger){glList=glVisible().slice(0,glShown);glIdx=k;glFocus=trigger;lbShow();lb.classList.add('open');lb.setAttribute('aria-hidden','false');$('gl-lb-x').focus()}
 function lbClose(){if(!lb.classList.contains('open'))return;lb.classList.remove('open');lb.setAttribute('aria-hidden','true');if(glFocus&&document.body.contains(glFocus))glFocus.focus()}
 function lbStep(d){glIdx=(glIdx+d+glList.length)%glList.length;lbShow()}
-$('gl-grid').addEventListener('click',function(e){var t=e.target.closest('.gl-tile');if(t)lbOpen(+t.dataset.i,t)});
+$('gl-grid').addEventListener('click',function(e){var t=e.target.closest('.gl-tile');if(!t)return;var it=glVisible().slice(0,glShown)[+t.dataset.i];if(it&&it.permalink){window.open(it.permalink,'_blank','noopener')}else lbOpen(+t.dataset.i,t)});
 $('gl-lb-x').addEventListener('click',lbClose);
 $('gl-lb-prev').addEventListener('click',function(){lbStep(-1)});
 $('gl-lb-next').addEventListener('click',function(){lbStep(1)});
