@@ -78,6 +78,14 @@
 .bs-tile:hover .bs-go{color:var(--yellow)}
 .bs-grid>li{display:flex}.bs-grid>li>.bs-tile{flex:1;min-height:170px}
 .bs-logo{position:relative;display:flex;align-items:center;justify-content:center;background:#fff;height:64px;padding:10px 14px;margin:-4px -4px 0}.bs-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}.bs-tile.has-logo{gap:12px}.bs-tile.has-logo .bs-name{font-size:13px;letter-spacing:.08em}.bs-tile.has-logo::before{display:none}
+.bs-tile{background:#fff;color:var(--ink);border:1px solid var(--line);border-bottom:4px solid var(--red);box-shadow:0 1px 0 rgba(13,13,14,.03)}
+.bs-tile::before{color:#f3f3f2}
+.bs-tile:hover .bs-go,.bs-tile:focus-visible .bs-go{color:var(--red)}
+.bs-go{color:#5d6570}
+.bs-logo{background:transparent;margin:0;height:84px;padding:6px 8px}
+.bs-tile.has-logo .bs-name{color:var(--ink)}
+.bs-grid>li>.bs-tile{min-height:190px}
+
 .bs-name{position:relative;font:900 clamp(19px,2vw,24px)/1.05 var(--display);text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere}
 .bs-go{position:relative;font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.12em;color:#bdbdbd;transition:color .15s}
 .bs-fine{margin:22px 0 0;color:var(--steel);font-size:13px}

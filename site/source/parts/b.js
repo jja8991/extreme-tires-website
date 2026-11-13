@@ -87,7 +87,7 @@ $('cm-form').addEventListener('submit',function(e){
 ET.pages.push({id:'commercial',label:'Commercial & Fleet'});
 
 /* ===================== BRANDS ===================== */
-var BRAND_LOGOS=['bridgestone','continental','falken','firestone','hankook','kumho','pirelli','toyo'];
+var BRAND_LOGOS=['bfgoodrich','bridgestone','continental','cooper','falken','firestone','general','hankook','hercules','kumho','michelin','nexen','nitto','ohtsu','pirelli','toyo','uniroyal','yokohama'];
 var BRANDS=[
   ['michelin','Michelin',['p']],['bfgoodrich','BFGoodrich',['t']],['uniroyal','Uniroyal',['v']],['cooper','Cooper',['t']],
   ['firestone','Firestone',['v']],['bridgestone','Bridgestone',['p']],['hankook','Hankook',['p']],['hercules','Hercules',['v','t']],
@@ -145,7 +145,7 @@ ET.onShow.brand=function(param){
   root.innerHTML=
   '<div class="phead"><div class="wrap">'+
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#brands" data-view-link="brands">Tire Brands</a><span>/</span><span>'+n+'</span></nav>'+
-    '<h1>'+n+' tires</h1><p>Shop '+n+' at Extreme Tires, installed at the shop or by our mobile van.</p>'+TRUST+
+    '<div class="br-title">'+(BRAND_LOGOS.indexOf(b[0])>-1?'<span class="br-logo"><img src="media/brands/'+b[0]+'.svg" alt="'+n+' logo"></span>':'')+'<h1>'+n+' tires</h1></div><p>Shop '+n+' at Extreme Tires, installed at the shop or by our mobile van.</p>'+TRUST+
     '<div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop tires</a></div>'+
   '</div></div>'+
   '<section class="br-lines" aria-labelledby="br-l"><div class="wrap br-grid"><div><div class="eyebrow">Popular lines</div><h2 id="br-l" style="font-size:clamp(26px,3.2vw,40px);font-weight:900">Popular '+n+' lines</h2>'+linesHtml+'</div>'+

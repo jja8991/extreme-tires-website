@@ -2,6 +2,7 @@ var h=ET.esc, $=function(id){return document.getElementById(id)};
 var SLUGS=['brake-repair','wheel-alignment','tire-installation','tire-repair','tire-balancing','tire-rotation','suspension-repair','oil-changes','tpms-service','custom-wheels','lift-kits'];
 
 /* ======================= SERVICE DATA ======================= */
+var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift'};
 var SV={
  'brake-repair':{label:'Brake Repair',name:'Brake Repair',ico:'brake',mode:'shop',
   blurb:'Pads, rotors, calipers and fluid, inspected and explained.',
@@ -131,7 +132,7 @@ function renderService(param){
   root.innerHTML=
    '<div class="phead sp-phead"><div class="wrap">'+
      '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>'+h(s.name)+'</span></nav>'+
-     '<div class="sp-title"><div class="sp-ico">'+ET.icon(s.ico)+'</div><div style="display:grid;gap:12px"><h1>'+h(s.name)+'</h1><div class="sp-tags">'+modeBadge(s.mode)+'</div></div></div>'+
+     '<div class="sp-title">'+(SP_IMG[param]?'<div class="sp-ico has-img"><img src="media/services/'+SP_IMG[param]+'.webp" alt="'+h(s.name)+' icon"></div>':'<div class="sp-ico">'+ET.icon(s.ico)+'</div>')+'<div style="display:grid;gap:12px"><h1>'+h(s.name)+'</h1><div class="sp-tags">'+modeBadge(s.mode)+'</div></div></div>'+
      '<p>'+h(s.intro)+'</p>'+
    '</div></div>'+
    '<div class="wrap sp-body">'+
