@@ -2088,7 +2088,7 @@ body{overflow-x:clip}
 .sw-pick input{position:absolute;opacity:0;pointer-events:none;inset:0}
 .sw-pick label:has(input:checked){border-color:var(--red);background:#fff4f4;box-shadow:0 0 0 1px var(--red)}
 .sw-pick label:has(input:checked)::after{content:"\2713";position:absolute;top:6px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--red);color:#fff;font:800 11px/18px var(--body);text-align:center}
-.sw-pick label:has(input:focus-visible){outline:3px solid var(--yellow,#ffd400);outline-offset:2px}
+.sw-pick label.off{opacity:.45;filter:grayscale(1);cursor:pointer;background:#f1f2f4}.sw-pick label.off:hover{transform:none;border-color:#d9dce1}.sw-pick label em{display:block;font:700 10px/1.2 var(--body);color:#777;text-transform:uppercase;letter-spacing:.06em;margin-top:3px}.sw-lnk{background:none;border:0;padding:0;color:var(--red);font:inherit;font-weight:800;text-decoration:underline;cursor:pointer}.sw-pick label:has(input:focus-visible){outline:3px solid var(--yellow,#ffd400);outline-offset:2px}
 @media(max-width:860px){.sw-pick{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.sw-pick{grid-template-columns:1fr}}
 .sw .mq-slots{margin-top:6px}
 .sw-sumbox{background:#fff;border:1px solid #dcdde0;border-radius:14px;padding:16px 18px}.sw-sumbox b{display:block;font:800 13px var(--body);text-transform:uppercase;letter-spacing:.09em;color:#444;margin-bottom:6px}
@@ -2877,7 +2877,7 @@ body{overflow-x:clip}
         <section class="mq-step" data-step="3" aria-label="Step 3 of 5: Service" hidden>
           <h3>What needs to be done?</h3>
           <p class="sw-lead">Pick one or more. Not sure? Pick the closest and describe it at the end.</p>
-          <div class="sw-note" id="sw-mobnote" hidden>Showing the services our van can do at your location. Brakes, alignment, A/C and the other shop jobs need a visit to the Sunrise shop. Go back to step 1 to switch.</div>
+          <div class="sw-note" id="sw-mobnote" hidden></div>
           <div class="sw-pick" id="sw-pick"></div>
           <span class="err" id="sw-e3" aria-live="polite"></span>
         </section>
@@ -5118,11 +5118,18 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   /* ---- step 3: services (filtered by where) ---- */
   function renderPick(){
     var both=NAV_SLUGS.filter(function(s){return SV[s].mode!=='shop'}),shop=NAV_SLUGS.filter(function(s){return SV[s].mode==='shop'});
-    function lab(s){var v=SV[s];return '<label for="sw-s-'+s+'"><input type="checkbox" id="sw-s-'+s+'" value="'+s+'"'+(chosen[s]?' checked':'')+'>'+(SP_IMG[s]?'<img src="media/services/'+SP_IMG[s]+'.webp" alt="" loading="lazy">':ET.icon(v.ico))+'<span>'+h(v.label)+'</span></label>'}
-    var out='<div class="sw-grp">'+(where==='mobile'?'We come to you':'Mobile or at the shop')+'</div>'+both.map(lab).join('');
-    if(where!=='mobile')out+='<div class="sw-grp">Shop only</div>'+shop.map(lab).join('');
-    $('sw-pick').innerHTML=out;$('sw-mobnote').hidden=where!=='mobile';
+    var mob=where==='mobile';
+    function lab(s,off){var v=SV[s];return '<label for="sw-s-'+s+'"'+(off?' class="off" title="Shop only. Tap to switch to the shop."':'')+'><input type="checkbox" id="sw-s-'+s+'" value="'+s+'"'+(chosen[s]&&!off?' checked':'')+(off?' disabled':'')+'>'+(SP_IMG[s]?'<img src="media/services/'+SP_IMG[s]+'.webp" alt="" loading="lazy">':ET.icon(v.ico))+'<span>'+h(v.label)+(off?'<em>Shop only</em>':'')+'</span></label>'}
+    var out='<div class="sw-grp">'+(mob?'We come to you':'Mobile or at the shop')+'</div>'+both.map(function(s){return lab(s,false)}).join('');
+    out+='<div class="sw-grp">Shop only'+(mob?' (not available for mobile)':'')+'</div>'+shop.map(function(s){return lab(s,mob)}).join('');
+    $('sw-pick').innerHTML=out;
+    var n=$('sw-mobnote');n.hidden=false;
+    n.innerHTML=mob?'You picked <b>at my location</b>, so the shop-only services are greyed out. <button type="button" class="sw-lnk" data-sw="toshop">Switch to the shop to unlock them</button>'
+      :'You picked <b>the Sunrise shop</b>, so every service is available. Want us to come to you instead? <button type="button" class="sw-lnk" data-sw="tomobile">Switch to mobile</button> (mobile skips the shop-only jobs)';
   }
+  function setWhere(w){where=w;updateWhere();if(step===3)renderPick()}
+  $('sw-mobnote').addEventListener('click',function(e){var b=e.target.closest('[data-sw]');if(!b)return;if(b.dataset.sw==='toshop')setWhere('shop');else{where='mobile';updateWhere();show(1);try{$('sw-loc').focus({preventScroll:true})}catch(x){}}});
+  $('sw-pick').addEventListener('click',function(e){var l=e.target.closest('label.off');if(!l)return;e.preventDefault();setWhere('shop');var i=$('sw-pick').querySelector('#'+l.getAttribute('for'));if(i){i.checked=true;chosen[i.value]=true;setErr('sw-e3','')}});
   $('sw-pick').addEventListener('change',function(e){var i=e.target;if(i&&i.type==='checkbox'){if(i.checked)chosen[i.value]=true;else delete chosen[i.value];setErr('sw-e3','')}});
   function slugs(){return NAV_SLUGS.filter(function(s){return chosen[s]&&allowed(s)})}
   function labelsOf(a){return a.map(function(s){return SV[s].label})}
