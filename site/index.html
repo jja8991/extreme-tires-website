@@ -1884,6 +1884,94 @@ body{background:#0d0d0e}
 .lift-cta:hover{box-shadow:0 0 0 3px rgba(255,255,255,.55),0 12px 30px rgba(227,22,27,.5);transform:translateY(-2px)}
 .lift-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
 @media(min-width:900px){.lift-banner{overflow:visible}.lift-banner-in{min-width:0}}
+
+/* ===== v11 DEVICE POLISH: iPhone / Android / iPad (touch targets, safe areas, dynamic viewport, no sticky-hover) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:rgba(214,31,38,.18)}
+a,button,label,select,summary,input,[role=button],[data-view-link]{touch-action:manipulation}
+img,video{max-width:100%}
+body{overflow-x:clip}
+@media (pointer:coarse){
+  /* 44px minimum hit area on every touch device (phones + iPads, any width) */
+  .filters label{min-height:44px;padding:2px 0}
+  .filters input[type=checkbox]{width:22px;height:22px}
+  .filters input[type=range]{min-height:44px}
+  .crumbs a,.crumbs span{display:inline-flex;align-items:center;min-height:44px}
+  header.nav a,header.nav button,.drawer a,.drawer button,footer a,.ig-chips button,.wh-chips button,.bs-chips button,.hf-tabs button,.tabs button,summary,.btn,.btn-red,.btn-dark,.btn-ghost,select,.lift-cta,.opt,.pick label,label.chk{min-height:44px}
+  header.nav a,footer a,.crumbs a{padding-top:6px;padding-bottom:6px}
+  a[href^="tel:"],a[href^="sms:"],.go,.bs-go,.sv-more{min-height:44px;display:inline-flex;align-items:center}
+  [data-view] button:not(.burger){min-height:44px}
+  select,input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea{font-size:16px;min-height:44px} /* 16px stops iOS zoom-on-focus */
+}
+/* Phones: dynamic viewport + safe areas */
+@media (max-width:860px){
+  footer{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .actionbar a{min-height:48px}
+  .drawer{height:100vh;height:100dvh;padding-bottom:env(safe-area-inset-bottom,0px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .lb{height:100vh;height:100dvh}
+}
+/* iPad / small tablets and landscape phones: readable text floor, comfortable gutters */
+@media (min-width:600px) and (max-width:1100px) and (pointer:coarse){
+  small,.crumbs,.crumbs a,.fine,.sample,.badge,.meta,.cap,figcaption,.hf-note,footer small{font-size:max(1em,13px)}
+  body{font-size:max(1rem,16px)}
+  .wrap{padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+}
+/* Landscape phones: keep sticky chrome from eating the screen */
+@media (max-height:480px) and (orientation:landscape){
+  header.nav{position:static}
+  .actionbar{position:static;transform:none}
+  .lg-toc{position:static;max-height:none}
+}
+/* Touch screens have no hover: stop hover transforms sticking after a tap */
+@media (hover:none){
+  *:hover{transition-duration:.01ms}
+  .tire-card:hover,.svc:hover,.card:hover,.lift-cta:hover{transform:none}
+}
+/* Honor reduced motion everywhere */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+/* ===== Mobile quote: step-by-step wizard (no long scroll) ===== */
+.mq-prog{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 10px;padding:0}
+.mq-prog li{display:flex;flex-direction:column;align-items:center;gap:4px;font:700 12px var(--display);letter-spacing:.05em;text-transform:uppercase;color:#8a8f98}
+.mq-prog li b{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:2px solid #cfd3d9;background:#fff;color:#8a8f98;font:800 14px var(--display)}
+.mq-prog li.on{color:#111}.mq-prog li.on b{background:var(--red);border-color:var(--red);color:#fff}
+.mq-prog li.ok b{background:#111;border-color:#111;color:#fff}
+.mq-bar{height:4px;background:#e3e5e8;border-radius:4px;overflow:hidden;margin:0 0 22px}
+.mq-bar i{display:block;height:100%;width:25%;background:var(--red);transition:width .35s ease}
+.mq-step[hidden]{display:none}
+.mq-step{animation:mqIn .28s ease both}
+@keyframes mqIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.mq-step .sym{display:grid;gap:10px;margin:10px 0 0}
+.mq-step .sym label{display:flex;gap:12px;align-items:center;min-height:48px;padding:10px 14px;background:#fff;border:1.5px solid #d9dce1;border-radius:10px;color:#111;font-weight:600}
+.mq-step .sym input{width:22px;height:22px;accent-color:var(--red)}
+#mobile-quote .mq-step textarea{width:100%;min-height:110px;margin-top:8px;background:#fff;color:#111;border:1.5px solid #d9dce1;border-radius:10px;padding:12px 14px;font:16px var(--body);resize:vertical}
+#mobile-quote .mq-step .f{color:#444}
+.mq-nav{display:flex;gap:10px;margin-top:26px;position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:5}
+.mq-nav .btn{flex:1;min-height:52px;font-size:16px;justify-content:center}
+.mq-nav #mq-back{flex:0 0 32%}
+.mq-fine{font-size:13px;color:#6b7078;margin:12px 0 0}
+@media(max-width:860px){.mq-nav{bottom:calc(env(safe-area-inset-bottom,0px) + 70px)}}
+@media(prefers-reduced-motion:reduce){.mq-step{animation:none}}
+
+.mq-prog{scroll-margin-top:90px}
+.mq-nav{padding:10px 0;background:linear-gradient(to top,var(--mist,#f4f4f4) 78%,rgba(244,244,244,0));margin-inline:-2px}
+.mq-nav #mq-back{background:#fff;color:#111;border:2px solid #111}
+.mq-step .err:empty{display:none}
+.mq-step .form-grid{gap:14px}
+/* ===== v11 TOUCH/TABLET PASS: tap targets, min 12px text, 360px calendar ===== */
+.fn-card label.f{min-height:44px;align-content:center}
+@media (pointer:coarse){
+  .lg-toc ol a{padding:12px 0;min-height:44px;display:flex;align-items:center}
+  .lg-toc ol{gap:0}
+  .crumbs a,.ct-info a,.bs-order a{display:inline-flex;align-items:center;min-height:44px;padding-inline:4px}
+  .bs-order a{display:inline-block;line-height:44px;padding-block:0;vertical-align:middle}
+  a[href="#about"][data-anchor="ab-team"]{display:inline-flex;align-items:center;min-height:44px}
+  .sv-badge,.tp-top span,.ab-person small,.ct-soon small,.hf-f>span,.cal-w span{font-size:12px}
+}
+@media (max-width:400px){
+  .cal-w,.cal-g{grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+  .cal .cal-d{min-width:0;font-size:15px;min-height:42px;border-radius:9px}
+  .cal-w span{letter-spacing:.02em;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -2301,12 +2389,29 @@ body{background:#0d0d0e}
       </div>
     </div>
     <form id="mq-form" novalidate autocomplete="on">
-      <div class="q-body">
+      <div class="mq-wiz q-body">
         <div class="wrap">
-          <h3>What do you need help with?</h3>
-          <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip it and describe the symptoms below.</p>
+          <ol class="mq-prog" id="mq-prog" aria-label="Quote steps">
+            <li data-s="1"><b>1</b><span>Service</span></li>
+            <li data-s="2"><b>2</b><span>Vehicle</span></li>
+            <li data-s="3"><b>3</b><span>When</span></li>
+            <li data-s="4"><b>4</b><span>You</span></li>
+          </ol>
+          <div class="mq-bar" aria-hidden="true"><i id="mq-barfill"></i></div>
+          <section class="mq-step" data-step="1" aria-label="Step 1 of 4: Service">
+            <h3>What do you need help with?</h3>
+          <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip ahead and describe it at the end.</p>
           <div class="pick" id="mq-pick"></div>
-          <h3 class="mq-vh">Your vehicle</h3>
+            <h3 class="mq-vh">What is happening?</h3>
+            <div class="sym">
+            <label for="mq-sy1"><input type="checkbox" id="mq-sy1"> Flat, leak, or tire damage</label>
+            <label for="mq-sy2"><input type="checkbox" id="mq-sy2"> Need new tires or pricing</label>
+            <label for="mq-sy3"><input type="checkbox" id="mq-sy3"> Vibration, balancing, or rotation</label>
+            <label for="mq-sy4"><input type="checkbox" id="mq-sy4"> Brakes, alignment, suspension, or other service</label>
+          </div>
+          </section>
+          <section class="mq-step" data-step="2" aria-label="Step 2 of 4: Vehicle" hidden>
+            <h3 class="mq-vh">Your vehicle</h3>
           <p class="mq-vnote" id="mq-vnote" hidden></p>
           <div class="form-grid veh-grid">
             <label class="f" for="mq-vyear">Year<select id="mq-vyear" name="vyear" autocomplete="off"></select></label>
@@ -2315,34 +2420,33 @@ body{background:#0d0d0e}
             <label class="f" for="mq-vtrim">Trim<select id="mq-vtrim" name="vtrim" autocomplete="off"><option>Not sure / any trim</option></select></label>
           </div>
           <div class="form-grid" style="margin-bottom:26px"><label class="f" for="mq-size">Tire size (optional)<input id="mq-size" name="tiresize" autocomplete="off" placeholder="Like 225/65R17, printed on the tire sidewall" maxlength="14"></label></div>
-          <div class="form-grid">
-            <label class="f" for="mq-first">First name<input id="mq-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="mq-first"></span></label>
-            <label class="f" for="mq-last">Last name<input id="mq-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="mq-last"></span></label>
-            <label class="f" for="mq-phone">Phone number<input id="mq-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="mq-phone"></span></label>
-            <label class="f" for="mq-email">Email<input id="mq-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="mq-email"></span></label>
-            <label class="f" for="mq-loc" style="color:var(--steel)">Location or service area<input id="mq-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err"></span></label>
-            <label class="f" for="mq-when">When do you need service?<select id="mq-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="mq-when"></span></label>
-          </div>
-          <label class="chk" for="mq-mobile"><input type="checkbox" id="mq-mobile" name="mobile" checked> I'd prefer mobile service at my location</label>
-        </div>
-      </div>
-      <div class="q-what">
-        <div class="wrap">
-          <h3>What is happening with the vehicle?</h3>
-          <div class="sym">
-            <label for="mq-sy1"><input type="checkbox" id="mq-sy1"> Flat, leak, or tire damage</label>
-            <label for="mq-sy2"><input type="checkbox" id="mq-sy2"> Need new tires or pricing</label>
-            <label for="mq-sy3"><input type="checkbox" id="mq-sy3"> Vibration, balancing, or rotation</label>
-            <label for="mq-sy4"><input type="checkbox" id="mq-sy4"> Brakes, alignment, suspension, or other service</label>
-          </div>
-          <label class="f" for="mq-details" style="margin-top:22px;color:#bbb">Vehicle and service details
+          </section>
+          <section class="mq-step" data-step="3" aria-label="Step 3 of 4: When and where" hidden>
+            <h3>When and where?</h3>
+            <div class="form-grid">
+              <label class="f" for="mq-when">When do you need service?<select id="mq-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="mq-when"></span></label>
+              <label class="f" for="mq-loc" style="color:var(--steel)">Location or service area<input id="mq-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err"></span></label>
+            </div>
+            <label class="chk" for="mq-mobile"><input type="checkbox" id="mq-mobile" name="mobile" checked> I'd prefer mobile service at my location</label>
+          </section>
+          <section class="mq-step" data-step="4" aria-label="Step 4 of 4: Your details" hidden>
+            <h3>Who should we contact?</h3>
+            <div class="form-grid">
+              <label class="f" for="mq-first">First name<input id="mq-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="mq-first"></span></label>
+<label class="f" for="mq-last">Last name<input id="mq-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="mq-last"></span></label>
+<label class="f" for="mq-phone">Phone number<input id="mq-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="mq-phone"></span></label>
+<label class="f" for="mq-email">Email<input id="mq-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="mq-email"></span></label>
+
+            </div>
+            <label class="f" for="mq-details">Vehicle and service details
             <textarea id="mq-details" placeholder="Vehicle year/make/model, tire size, symptoms, or service needed"></textarea></label>
-        </div>
-      </div>
-      <div class="q-submit">
-        <div class="wrap">
-          <button class="btn btn-red" type="submit">Request My Quote</button>
-          <p>Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
+          </section>
+          <div class="mq-nav">
+            <button type="button" class="btn btn-ghost" id="mq-back" hidden>Back</button>
+            <button type="button" class="btn btn-red" id="mq-next">Next: Vehicle</button>
+            <button class="btn btn-red" type="submit" id="mq-submit" hidden>Request My Quote</button>
+          </div>
+          <p class="mq-fine">Your request starts a quote conversation. Pricing and service recommendations will be confirmed by our team.</p>
           <div class="done" id="mq-done" hidden role="status"></div>
         </div>
       </div>
@@ -5818,6 +5922,49 @@ $('cy-root').addEventListener('submit',function(e){
 
 <script>
 (function(){var old=ET.onShow.mobile;ET.onShow.mobile=function(p){if(old)old(p);try{if(window.mqRefreshVehicle)mqRefreshVehicle()}catch(e){console.error(e)}}})();
+</script>
+<script>
+/* mobile quote wizard */
+(function(){
+  var f=document.getElementById('mq-form'); if(!f)return;
+  var steps=[].slice.call(f.querySelectorAll('.mq-step')), cur=1;
+  var back=document.getElementById('mq-back'), next=document.getElementById('mq-next'), sub=document.getElementById('mq-submit');
+  var prog=[].slice.call(document.querySelectorAll('#mq-prog li')), fill=document.getElementById('mq-barfill');
+  var NEXT={1:'Next: Vehicle',2:'Next: When',3:'Next: Your details'};
+  var REQ={3:{'mq-when':'Please select when you need service.'},4:{'mq-first':'Please enter your name.','mq-last':'Please enter your name.','mq-phone':'This field is required','mq-email':'This field is required'}};
+  function check(n){
+    var bad=null,m=REQ[n]||{};
+    Object.keys(m).forEach(function(id){
+      var el=document.getElementById(id), err=f.querySelector('.err[data-for="'+id+'"]');
+      var ok=el.value.trim()!==''&&(id!=='mq-email'||/.+@.+\..+/.test(el.value));
+      if(err)err.textContent=ok?'':(id==='mq-email'&&el.value.trim()?'Enter an email like name@example.com':m[id]);
+      if(!ok&&!bad)bad=el;
+    });
+    if(bad)bad.focus();
+    return !bad;
+  }
+  function go(n,noScroll){
+    cur=n;
+    steps.forEach(function(s){s.hidden=(+s.dataset.step!==n)});
+    prog.forEach(function(li){var k=+li.dataset.s;li.classList.toggle('on',k===n);li.classList.toggle("ok",k<n)});
+    fill.style.width=(n*25)+'%';
+    back.hidden=n===1; next.hidden=n===4; sub.hidden=n!==4;
+    if(NEXT[n])next.textContent=NEXT[n];
+    if(!noScroll){var t=document.getElementById('mq-prog');if(t&&t.scrollIntoView)t.scrollIntoView({behavior:'smooth',block:'start'})}
+  }
+  next.addEventListener('click',function(){if(check(cur))go(cur+1)});
+  back.addEventListener('click',function(){go(cur-1)});
+  prog.forEach(function(li){li.addEventListener('click',function(){var k=+li.dataset.s;if(k<cur)go(k)})});
+  f.addEventListener('keydown',function(e){if(e.key==='Enter'&&cur<4&&e.target.tagName!=='TEXTAREA'&&e.target.tagName!=='BUTTON'){e.preventDefault();next.click()}});
+  /* if the existing submit validator finds a problem, jump to that step */
+  f.addEventListener('submit',function(){
+    setTimeout(function(){
+      var e=f.querySelector('.err:not(:empty)');
+      if(e){var st=e.closest('.mq-step');if(st&&+st.dataset.step!==cur)go(+st.dataset.step,true);var inp=e.parentNode.querySelector('input,select');if(inp)inp.focus()}
+    },0);
+  },true);
+  go(1,true);
+})();
 </script>
 </body>
 </html>
