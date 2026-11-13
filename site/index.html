@@ -2496,7 +2496,7 @@ body{overflow-x:clip}
           <section class="mq-step" data-step="3" aria-label="Step 3 of 4: Where and when" hidden>
             <h3>Where and when?</h3>
             <div class="form-grid mq-where">
-              <label class="f" for="mq-loc">Where should the van come? (street address)<input id="mq-loc" name="loc" autocomplete="street-address" placeholder="House number and street"><span class="err" data-for="mq-loc"></span></label>
+              <label class="f sw-acwrap" for="mq-loc">Where should the van come? (street address)<input id="mq-loc" name="loc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="mq-ac" placeholder="Start typing your address"><ul class="sw-ac" id="mq-ac" role="listbox" hidden></ul><span class="err" data-for="mq-loc"></span></label>
               <label class="f" for="mq-zip">ZIP code<input id="mq-zip" name="zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="5-digit ZIP"><span class="err" data-for="mq-zip"></span><span class="mq-zipnote" id="mq-zip-note" aria-live="polite"></span></label>
             </div>
             <label class="chk" for="mq-mobile"><input type="checkbox" id="mq-mobile" name="mobile" checked> I'd prefer mobile service at my location</label>
@@ -3918,7 +3918,7 @@ body{overflow-x:clip}
           <label class="f" for="q-last">Last name<input id="q-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="q-last"></span></label>
           <label class="f" for="q-phone">Phone number<input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="q-phone"></span></label>
           <label class="f" for="q-email">Email<input id="q-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="q-email"></span></label>
-          <label class="f" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err"></span></label>
+          <label class="f sw-acwrap" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="q-ac" placeholder="City, ZIP, or start typing an address"><ul class="sw-ac" id="q-ac" role="listbox" hidden></ul><span class="err"></span></label>
           <label class="f" for="q-when">When do you need service?<select id="q-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="q-when"></span></label>
         </div>
         <label class="chk" for="q-mobile"><input type="checkbox" id="q-mobile" name="mobile"> I'd prefer mobile service at my location</label>
@@ -5414,6 +5414,40 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     }
   };
   show(1,true);
+})();
+
+/* ======================= ADDRESS SUGGESTIONS for Mobile + Quote pages (Geoapify, South Florida) ======================= */
+(function(){
+  var GEOKEY='3570c909d86347369fb7bc9292cc96fb';
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function wire(inp,box,zipEl,full){
+    if(!inp||!box)return;
+    var timer=null,seq=0,items=[],cur=-1;
+    function close(){box.hidden=true;box.innerHTML='';items=[];cur=-1;inp.setAttribute('aria-expanded','false')}
+    function paint(){box.innerHTML=items.map(function(it,i){return '<li role="option" data-i="'+i+'" aria-selected="'+(i===cur)+'">'+esc(it.l1)+'<small>'+esc(it.l2)+'</small></li>'}).join('');box.hidden=!items.length;inp.setAttribute('aria-expanded',String(!!items.length))}
+    function pick(i){var it=items[i];if(!it)return;
+      inp.value=full?(it.l1+', '+it.l2):it.l1;
+      inp.dispatchEvent(new Event('input',{bubbles:true}));
+      if(zipEl&&/^[0-9]{5}$/.test(it.zip)){zipEl.value=it.zip;zipEl.dispatchEvent(new Event('input',{bubbles:true}))}
+      close();}
+    function look(q){var my=++seq;
+      fetch('https://api.geoapify.com/v1/geocode/autocomplete?format=json&limit=8&lang=en&filter=rect:-81.35,25.10,-79.90,27.25&text='+encodeURIComponent(q)+'&apiKey='+encodeURIComponent(GEOKEY),{credentials:'omit',referrerPolicy:'no-referrer'})
+        .then(function(r){return r.ok?r.json():null}).then(function(j){
+          if(my!==seq||!j)return;var seen={};
+          items=(j.results||[]).filter(function(p){return (p.country_code||'').toLowerCase()==='us'&&/florida/i.test(p.state||'')&&(p.street||p.address_line1)}).map(function(p){return {l1:((p.housenumber?p.housenumber+' ':'')+(p.street||'')).trim()||p.address_line1,l2:[p.city||p.town||p.suburb,'FL',p.postcode].filter(Boolean).join(', '),zip:p.postcode||''}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
+          cur=-1;paint();
+        }).catch(function(){close()});}
+    inp.addEventListener('input',function(){clearTimeout(timer);var q=inp.value.trim();if(q.length<4||/^[0-9]{0,5}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},260)});
+    inp.addEventListener('keydown',function(e){if(box.hidden||!items.length)return;
+      if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%items.length;paint()}
+      else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+items.length)%items.length;paint()}
+      else if(e.key==='Enter'&&cur>-1){e.preventDefault();pick(cur)}
+      else if(e.key==='Escape'){close()}});
+    box.addEventListener('mousedown',function(e){var li=e.target.closest('li');if(li){e.preventDefault();pick(+li.dataset.i)}});
+    inp.addEventListener('blur',function(){setTimeout(close,120)});
+  }
+  wire(document.getElementById('mq-loc'),document.getElementById('mq-ac'),document.getElementById('mq-zip'),false);
+  wire(document.getElementById('q-loc'),document.getElementById('q-ac'),null,true);
 })();
 
 /* ======================= ADVISOR: tabs ======================= */
