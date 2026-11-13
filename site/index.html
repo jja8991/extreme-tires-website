@@ -643,6 +643,17 @@ header.nav.scrolled .logo img{height:42px}
 .hf-note{margin:12px 2px 0;font-size:13px;color:#7a7f87}
 .hf-note span{color:#a3a7ad}
 /* ===== One continuous dark surface: no more white/grey/dark flips between sections ===== */
+/* ===== Flow: scroll reveals + soft seams ===== */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s);will-change:opacity,transform}
+.rv.in{opacity:1;transform:none}
+.photo-quote,.combo,.club{position:relative}
+.combo::before,.combo::after{content:"";position:absolute;left:0;right:0;height:44px;pointer-events:none;z-index:1}
+.combo::before,.club::before{top:0;background:linear-gradient(#0d0d0e,rgba(13,13,14,0))}
+.combo::after{bottom:0;background:linear-gradient(rgba(13,13,14,0),#0d0d0e)}
+.club::before{content:"";position:absolute;left:0;right:0;height:64px;pointer-events:none;z-index:1}
+.photo-quote .wrap,.combo .wrap,.club .wrap{position:relative;z-index:2}
+a,button,.opt,summary{transition:color .25s var(--ease),background-color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
 /* soft fade when switching pages, no flash */
 @keyframes etFade{from{opacity:0}to{opacity:1}}
 [data-view]:not([hidden]){animation:etFade .28s ease both}
@@ -5404,6 +5415,23 @@ $('cy-root').addEventListener('submit',function(e){
     s.innerHTML='<div class="wrap"><div><h2>Ready when you are</h2><p>Book in 60 seconds, or call and talk to a real person. Mon–Fri 8–6:30 · Sat 8–4.</p></div><div class="cta-actions"><a class="btn btn-red" href="#start" data-go="home">Book in 60 seconds</a><a class="btn btn-ghost" href="#quote" data-view-link="quote">Request a quote</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div></div>';
     el.appendChild(s);
   });
+  // Scroll-reveal: sections and card grids glide in as they enter the screen (safe fallback: everything visible without IO)
+  (function(){
+    if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.06});
+    function arm(root){
+      root.querySelectorAll('section > .wrap, .photo-quote .wrap, .flow-top, #wiz, .how-img .wrap').forEach(function(el){
+        if(el.classList.contains('rv')||el.closest('.hero'))return;
+        el.classList.add('rv');
+        el.querySelectorAll(':scope > .opts > *, :scope > .rev-slots > *, :scope > .grid > *, :scope > .tiles > *, :scope > .ig-grid > *').forEach(function(c,i){c.classList.add('rv');c.style.setProperty('--d',(i%6)*.07+'s');io.observe(c)});
+        io.observe(el);
+      });
+    }
+    arm(document);
+    // views are shown/hidden by the router; arm any that appear later
+    new MutationObserver(function(){arm(document)}).observe(document.body,{subtree:true,attributes:true,attributeFilter:['hidden']});
+    setTimeout(function(){document.querySelectorAll('.rv:not(.in)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)el.classList.add('in')})},1200);
+  })();
   ET.start();
 })();
 </script>
