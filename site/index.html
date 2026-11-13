@@ -583,6 +583,11 @@ header.nav.scrolled .logo img{height:42px}
   .logo img{height:44px}
   .util .wrap{font-size:13px;gap:4px 18px}
   .util .hide-sm{display:none}
+  .util .ad-full{display:none}
+  .util .wrap{flex-wrap:nowrap;justify-content:space-between;gap:12px;padding-block:0}
+  .util .wrap a{white-space:nowrap}
+  .util .wrap>div:first-child a:before{content:'\260E\00a0'}
+  .util .wrap>div:nth-child(2) a:before{content:'\1F4CD\00a0'}
 }
 /* ===== v7: sitewide conversion ===== */
 .nav-cta{background:var(--red);margin-left:8px;border-radius:2px}
@@ -2058,7 +2063,7 @@ body{overflow-x:clip}
 <div class="util">
   <div class="wrap">
     <div><a href="tel:+19547731896">(954) 773-1896</a></div>
-    <div><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7712+West+Oakland+Park+Blvd+Sunrise+FL+33351" target="_blank" rel="noopener">7712 West Oakland Park Blvd | Sunrise, FL 33351</a></div>
+    <div><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7712+West+Oakland+Park+Blvd+Sunrise+FL+33351" target="_blank" rel="noopener"><span class="ad-full">7712 West Oakland Park Blvd | </span>Sunrise, FL 33351</a></div>
     <div class="hide-sm"><span>Mon–Fri 8–6:30 · Sat 8–4 · Sun Closed</span></div>
   </div>
 </div>
