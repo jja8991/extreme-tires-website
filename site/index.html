@@ -2722,8 +2722,8 @@ body{overflow-x:clip}
       <div class="eyebrow">The full list</div>
       <h2 id="sv-all-h">More of what we do</h2>
       <p class="cm-lead">A/C and mechanical work to custom builds, lighting, train horns, and service for fleets, semis, mowers and skid steers.</p>
-      <div class="mt-grid"><a href="#service/ac-repair" data-view-link="service" data-param="ac-repair" aria-label="A/C repair: view details"><img src="media/services/ac-repair.webp" alt="A/C repair" loading="lazy"></a><a href="#service/general-mechanical" data-view-link="service" data-param="general-mechanical" aria-label="General mechanical work: view details"><img src="media/services/mechanical.webp" alt="General mechanical work" loading="lazy"></a><a href="#service/caliper-painting" data-view-link="service" data-param="caliper-painting" aria-label="Caliper painting: view details"><img src="media/services/caliper-paint.webp" alt="Caliper painting" loading="lazy"></a><a href="#service/rim-repair" data-view-link="service" data-param="rim-repair" aria-label="Rim repair: view details"><img src="media/services/rim-repair.webp" alt="Rim repair" loading="lazy"></a><a href="#service/custom-builds" data-view-link="service" data-param="custom-builds" aria-label="Custom builds: view details"><img src="media/services/custom-builds.webp" alt="Custom builds" loading="lazy"></a><a href="#service/custom-lighting" data-view-link="service" data-param="custom-lighting" aria-label="Custom lighting: view details"><img src="media/services/lighting.webp" alt="Custom lighting" loading="lazy"></a><a href="#service/train-horns" data-view-link="service" data-param="train-horns" aria-label="Train horns: view details"><img src="media/services/train-horns.webp" alt="Train horns" loading="lazy"></a><a href="#service/golf-cart-upgrades" data-view-link="service" data-param="golf-cart-upgrades" aria-label="Golf cart upgrades: view details"><img src="media/services/golf-cart.webp" alt="Golf cart upgrades" loading="lazy"></a><a href="#service/fleet-maintenance" data-view-link="service" data-param="fleet-maintenance" aria-label="Fleet maintenance: view details"><img src="media/services/fleet.webp" alt="Fleet maintenance" loading="lazy"></a><a href="#service/semi-truck-service" data-view-link="service" data-param="semi-truck-service" aria-label="Semi truck: view details"><img src="media/services/semi.webp" alt="Semi truck" loading="lazy"></a><a href="#service/mower-service" data-view-link="service" data-param="mower-service" aria-label="Mower: view details"><img src="media/services/mower.webp" alt="Mower" loading="lazy"></a><a href="#service/skid-steer-service" data-view-link="service" data-param="skid-steer-service" aria-label="Skid steer: view details"><img src="media/services/skid-steer.webp" alt="Skid steer" loading="lazy"></a></div>
-      <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule a repair</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
+      <div class="sv-grid" id="sv-grid-more"></div>
+      <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule a repair</a><a class="btn btn-dark" href="tel:+19547731896">Call (954) 773-1896</a></div>
     </div>
   </section>
 
@@ -4815,6 +4815,7 @@ function card(slug,mob){
 }
 $('sv-grid-mobile').innerHTML=MOBILE_SLUGS.map(function(s){return card(s,true)}).join('');
 $('sv-grid-shop').innerHTML=SHOP_SLUGS.map(function(s){return card(s,false)}).join('');
+$('sv-grid-more').innerHTML=MORE_SLUGS.map(function(s){return card(s,SV[s].mode==='both')}).join('');
 
 /* ======================= SERVICE PAGE ======================= */
 function renderService(param){
