@@ -2070,6 +2070,8 @@ body{overflow-x:clip}
 .sw .f input:focus,.sw .f textarea:focus{outline:3px solid rgba(227,22,27,.25);border-color:var(--red)}
 .sw .err{display:block;color:#b80f13;font:600 14px var(--body);margin-top:6px}.sw .err:empty{display:none}
 .sw-opt{text-transform:none;letter-spacing:0;font-weight:500}
+.sw-grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}@media(max-width:860px){.sw-grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:420px){.sw-grid4{grid-template-columns:1fr}}
+.sw-acwrap{position:relative}.sw-ac{position:absolute;z-index:30;left:0;right:0;top:calc(100% - 22px);margin:0;padding:6px;list-style:none;background:#fff;color:#111;border:1.5px solid #d9dce1;border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.18);max-height:300px;overflow:auto}.sw-ac li{padding:10px 12px;border-radius:8px;cursor:pointer;font:600 14px/1.3 var(--body);text-transform:none;letter-spacing:0}.sw-ac li small{display:block;font-weight:500;color:#5b6068;font-size:12.5px}.sw-ac li[aria-selected=true],.sw-ac li:hover{background:#fff4f4}.sw-achint{font:500 12.5px var(--body);text-transform:none;letter-spacing:0;color:#6b7078}
 .sw-grid2{display:grid;grid-template-columns:2fr 1fr;gap:14px}.sw-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 @media(max-width:640px){.sw-grid2,.sw-grid3{grid-template-columns:1fr}}
 .sw .opts{margin-top:4px}.sw .opt{background:#fff;border:2px solid #d9dce1;border-radius:14px}.sw .opt[aria-pressed="true"]{border-color:var(--red);background:#fff4f4}
@@ -2854,7 +2856,7 @@ body{overflow-x:clip}
           </div>
           <div id="sw-mobile" class="sw-sub" hidden>
             <div class="sw-grid2">
-              <label class="f" for="sw-loc">Street address<input id="sw-loc" autocomplete="street-address" placeholder="House number and street"><span class="err" id="sw-e-loc"></span></label>
+              <label class="f sw-acwrap" for="sw-loc">Street address<input id="sw-loc" autocomplete="off" autocapitalize="words" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sw-ac" placeholder="Start typing your address"><ul class="sw-ac" id="sw-ac" role="listbox" hidden></ul><span class="sw-achint">Pick your address from the list and we fill in the ZIP.</span><span class="err" id="sw-e-loc"></span></label>
               <label class="f" for="sw-zip">ZIP code<input id="sw-zip" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="5-digit ZIP"><span class="err" id="sw-e-zip"></span><span class="sw-zipnote" id="sw-zipnote" aria-live="polite"></span></label>
             </div>
             <div class="sw-check"><b>What your spot needs</b><ul><li>About 5 ft clear around the vehicle</li><li>Flat, firm ground (driveway, lot or garage)</li><li>Keys available and wheel locks in the car</li></ul></div>
@@ -2865,10 +2867,11 @@ body{overflow-x:clip}
         <section class="mq-step" data-step="2" aria-label="Step 2 of 5: Vehicle" hidden>
           <h3>Your vehicle</h3>
           <p class="sw-lead">So we have the right parts and tires ready.</p>
-          <div class="sw-grid3">
-            <label class="f" for="sw-year">Year<input id="sw-year" inputmode="numeric" maxlength="4" placeholder="2021" autocomplete="off"></label>
-            <label class="f" for="sw-make">Make<input id="sw-make" placeholder="Toyota" autocomplete="off"></label>
-            <label class="f" for="sw-model">Model<input id="sw-model" placeholder="Tacoma" autocomplete="off"></label>
+          <div class="sw-grid4">
+            <label class="f" for="sw-year">Year<select id="sw-year" autocomplete="off"></select></label>
+            <label class="f" for="sw-make">Make<select id="sw-make" autocomplete="off"></select></label>
+            <label class="f" for="sw-model">Model<select id="sw-model" autocomplete="off"></select></label>
+            <label class="f" for="sw-trim">Trim<select id="sw-trim" autocomplete="off"><option>Not sure / any trim</option></select></label>
           </div>
           <label class="f" for="sw-size" style="margin-top:14px;max-width:420px">Tire size (optional)<input id="sw-size" maxlength="14" autocomplete="off" placeholder="Like 225/65R17, printed on the tire sidewall"></label>
           <span class="err" id="sw-e2" aria-live="polite"></span>
@@ -5184,9 +5187,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
       }
     }
     if(n===2){
-      var y=($('sw-year').value||'').trim(),yr=new Date().getFullYear();
-      if(!(/^(19|20)\d\d$/.test(y)&&+y<=yr+1))return {id:'sw-e2',msg:'Enter a 4-digit year.',focus:$('sw-year')};
-      if(!$('sw-make').value.trim()||!$('sw-model').value.trim())return {id:'sw-e2',msg:'Enter your vehicle make and model so we have the right parts.',focus:$('sw-make')};
+      if(!vehOK())return {id:'sw-e2',msg:'Choose your vehicle year, make and model so we have the right parts.',focus:!$('sw-year').value?$('sw-year'):!$('sw-make').value?$('sw-make'):$('sw-model')};
     }
     if(n===3&&!slugs().length)return {id:'sw-e3',msg:'Pick at least one service.',focus:$('sw-pick').querySelector('input')};
     if(n===4){if(!pressedDay()||!chosenWin())return {id:'sw-e4',msg:'Please pick a day and a time window.',focus:null}}
@@ -5224,7 +5225,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   backB.addEventListener('click',function(){if(step>1)show(step-1)});
   $('sw-prog').addEventListener('click',function(e){var li=e.target.closest('li');if(li&&+li.dataset.s<step)show(+li.dataset.s)});
   document.querySelectorAll('input[name="sw-contact"]').forEach(function(r){r.addEventListener('change',function(){$('sw-email-opt').textContent=radio('sw-contact')==='email'?'(required)':'(optional)'})});
-  ['sw-year','sw-make','sw-model'].forEach(function(i){$(i).addEventListener('input',function(){setErr('sw-e2','')})});
+  
   ['name','phone','email'].forEach(function(i){$('sw-'+i).addEventListener('input',function(){setErr('sw-e-'+i,'')})});
   $('sw-consent').addEventListener('change',function(){setErr('sw-e-consent','')});
   $('sw-mkt').addEventListener('change',function(){setErr('sw-e-mkt','')});
@@ -5240,7 +5241,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     for(var n=1;n<=5;n++){var p=check(n);if(p){if(n<step)show(n,true);showProblem(p);return}}
     if(!live){setErr('sw-live-err','Online booking is not open right now, so nothing was sent. Please call '+PHONE+' and we will book you in.');return}
     var a=slugs(),d=pressedDay(),w=chosenWin(),sz=($('sw-size').value||'').trim(),how={text:'text',call:'phone call',email:'email'}[radio('sw-contact')]||'text';
-    var parts=[where==='mobile'?'MOBILE: service at customer location':'AT SHOP ('+(radio('sw-drop')==='leave'?'customer leaving vehicle':'customer waiting')+')','Services: '+labelsOf(a).join(', '),'Contact by: '+how];
+    var parts=[where==='mobile'?'MOBILE: service at customer location':'AT SHOP ('+(radio('sw-drop')==='leave'?'customer leaving vehicle':'customer waiting')+')','Services: '+labelsOf(a).join(', '),'Contact by: '+how];var tr=$('sw-trim').value;if(tr&&!/^Not sure/i.test(tr))parts.splice(2,0,'Trim: '+tr);
     var det=($('sw-details').value||'').trim();if(det)parts.push(det);
     var body={name:$('sw-name').value.trim(),phone:$('sw-phone').value.trim(),email:$('sw-email').value.trim(),
       address:where==='mobile'?$('sw-loc').value.trim():SHOP.addr,zip:where==='mobile'?zip.value:SHOP.zip,
@@ -5291,12 +5292,77 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   idleCb(boot);
 
   /* prefill vehicle from the homepage finder / Mobile page (shared et_vehicle) */
-  function prefill(){
-    try{var o=ETMem.get('et_vehicle')||{};
-      if(o.year&&!$('sw-year').value)$('sw-year').value=o.year;if(o.make&&!$('sw-make').value)$('sw-make').value=o.make;
-      if(o.model&&!$('sw-model').value&&!/Loading/.test(o.model))$('sw-model').value=o.model;if(o.size&&!$('sw-size').value)$('sw-size').value=o.size;
-    }catch(e){}
+  var builtSig=null;
+  function vehSig(v){return v&&v.make?[v.year,v.make,v.model,v.trim].join('|'):''}
+  function vehOK(){var y=$('sw-year').value,m=$('sw-make').value,d=$('sw-model').value;return !!y&&!!m&&!!d&&!/^(Loading|Model$|Select)/.test(d)}
+  function saveVeh(){
+    if(!vehOK())return;
+    var o=ETMem.get('et_vehicle')||{},v={year:$('sw-year').value,make:$('sw-make').value,model:$('sw-model').value,trim:$('sw-trim').value,size:$('sw-size').value||o.size||''};
+    builtSig=vehSig(v);ETMem.set('et_vehicle',v);
   }
+  /* same Year / Make / Model / Trim picker as the homepage finder, shared with the Mobile page through et_vehicle */
+  function buildVeh(){
+    var v=ETMem.get('et_vehicle')||{},sig=vehSig(v);
+    if(builtSig!==null&&sig===builtSig)return;
+    if(typeof window.initVehPicker!=='function'||!$('v-year')||!$('v-make'))return;
+    ['sw-year','sw-make','sw-model','sw-trim'].forEach(function(id){var o=$(id),n=o.cloneNode(false);o.parentNode.replaceChild(n,o)});
+    var Y=$('sw-year'),M=$('sw-make'),D=$('sw-model'),T=$('sw-trim');
+    Y.innerHTML='<option value="">Year</option>'+$('v-year').innerHTML.replace(/ selected(="[^"]*")?/g,'');
+    M.innerHTML='<option value="">Make</option>'+$('v-make').innerHTML.replace(/ selected(="[^"]*")?/g,'');
+    T.innerHTML='<option>Not sure / any trim</option>';
+    M.value=v.make||'';Y.value='';
+    window.initVehPicker(Y,M,D,T,{year:v.make?(v.year||''):'',model:v.make?(v.model||''):'',trim:v.make?(v.trim||null):null,blank:true});
+    [Y,M,D,T].forEach(function(el){el.addEventListener('change',function(){setErr('sw-e2','');saveVeh();setTimeout(saveVeh,1600)})});
+    if(v.size&&!$('sw-size').value)$('sw-size').value=v.size;
+    builtSig=sig;
+  }
+  function prefill(){try{buildVeh()}catch(e){}}
+  buildVeh();
+
+  /* ---- address suggestions (Photon / OpenStreetMap, South Florida only). Typing still works if the lookup is unavailable. ---- */
+  (function(){
+    var inp=$('sw-loc'),box=$('sw-ac'),timer=null,seq=0,items=[],cur=-1,cache={};
+    var BBOX='-81.35,25.10,-79.90,27.25';
+    function close(){box.hidden=true;box.innerHTML='';items=[];cur=-1;inp.setAttribute('aria-expanded','false')}
+    function line1(p){var st=p.street||p.name||'';return ((p.housenumber?p.housenumber+' ':'')+st).trim()}
+    function sub(p){return [p.city||p.town||p.village||p.locality||p.district,'FL',p.postcode].filter(Boolean).join(', ')}
+    function paint(){
+      box.innerHTML=items.map(function(it,i){return '<li role="option" id="sw-ac-'+i+'" data-i="'+i+'" aria-selected="'+(i===cur)+'">'+h(it.l1)+'<small>'+h(it.l2)+'</small></li>'}).join('');
+      box.hidden=!items.length;inp.setAttribute('aria-expanded',String(!!items.length));
+    }
+    function pick(i){
+      var it=items[i];if(!it)return;
+      inp.value=it.l1;setErr('sw-e-loc','');
+      if(it.zip&&/^[0-9]{5}$/.test(it.zip)){zip.value=it.zip;zipCheck();setErr('sw-e-zip','')}
+      close();
+      if(!/[0-9]/.test(it.l1)){inp.focus();setErr('sw-e-loc','Add your house number at the start, like 1234 '+it.l1+'.')}
+    }
+    function lookup(q){
+      var my=++seq;
+      if(cache[q]){items=cache[q];cur=-1;paint();return}
+      fetch('https://photon.komoot.io/api/?lang=en&limit=8&bbox='+BBOX+'&q='+encodeURIComponent(q),{credentials:'omit',referrerPolicy:'no-referrer'})
+        .then(function(r){return r.ok?r.json():null}).then(function(j){
+          if(my!==seq||!j)return;var seen={};
+          var out=(j.features||[]).map(function(f){return f.properties||{}}).filter(function(p){return (p.countrycode||'').toUpperCase()==='US'&&/florida/i.test(p.state||'')&&(p.street||p.housenumber||p.type==='house'||p.type==='street')}).map(function(p){return {l1:line1(p),l2:sub(p),zip:p.postcode||''}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
+          cache[q]=out;items=out;cur=-1;paint();
+        }).catch(function(){close()});
+    }
+    inp.addEventListener('input',function(){
+      setErr('sw-e-loc','');clearTimeout(timer);var q=inp.value.trim();
+      if(q.length<4){close();return}
+      timer=setTimeout(function(){lookup(q)},260);
+    });
+    inp.addEventListener('keydown',function(e){
+      if(box.hidden||!items.length)return;
+      if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%items.length;paint()}
+      else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+items.length)%items.length;paint()}
+      else if(e.key==='Enter'&&cur>-1){e.preventDefault();pick(cur)}
+      else if(e.key==='Escape'){close()}
+    });
+    box.addEventListener('mousedown',function(e){var li=e.target.closest('li');if(li){e.preventDefault();pick(+li.dataset.i)}});
+    inp.addEventListener('blur',function(){setTimeout(close,120)});
+  })();
+
   ET.onShow.schedule=function(){
     boot();prefill();
     if(pendingSvc){
