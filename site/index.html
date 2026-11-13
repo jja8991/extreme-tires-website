@@ -1824,6 +1824,24 @@ body{background:#0d0d0e}
 .opts .opt:has(.where-img){grid-template-columns:96px 1fr}
 .flow .wizcard .opt:has(.where-img){grid-template-columns:96px 1fr 20px}
 .opt .where-img{width:96px;height:64px;object-fit:contain;display:block}
+/* ===== Commercial widget: light theme (matches the white Mobile / Schedule forms) ===== */
+.flow.cm-flow .wizcard.card{background:#fff;color:var(--ink);border:1px solid #dcdde0;border-top:6px solid var(--red);border-radius:6px;box-shadow:0 20px 40px rgba(13,13,14,.08)}
+.flow.cm-flow .wizcard .prog i{background:#e3e5e8}.flow.cm-flow .wizcard .prog i.on{background:var(--red)}
+.flow.cm-flow .wizcard .stepmeta{color:#5b6068}.flow.cm-flow .wizcard .stepmeta [data-w=name]{color:var(--ink)}
+.flow.cm-flow .wizcard .step h3{color:var(--ink);font-style:normal;font-size:clamp(24px,2.8vw,32px)}
+.flow.cm-flow .wizcard .opt{background:#fff;border:1.5px solid #cfd1d5;color:var(--ink);font-style:normal}
+.flow.cm-flow .wizcard .opt::after{color:var(--ink)}
+.flow.cm-flow .wizcard .opt small{color:#5b6068}
+.flow.cm-flow .wizcard .opt[aria-pressed="true"]{background:#fff1f1;border-color:var(--red);box-shadow:0 0 0 1px var(--red)}
+.flow.cm-flow .wizcard .chip{background:#fff;color:var(--ink);border-color:#cfd1d5}.flow.cm-flow .wizcard .chip[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.flow.cm-flow .wizcard .chipgrp{color:#5b6068}
+.flow.cm-flow .wizcard .alert{background:#fff1f1;color:var(--ink)}
+.flow.cm-flow .wizcard .checklist{background:#f4f4f2;color:var(--ink)}.flow.cm-flow .wizcard .checklist ul{color:#5b6068}
+.flow.cm-flow .wizcard .linkbtn,.flow.cm-flow .wizcard .toggle{color:var(--ink)}
+.flow.cm-flow .wizcard .hf-f{background:#fff;border:1.5px solid #cfd1d5}
+.flow.cm-flow .wizcard label.f{color:#5b6068}
+.flow.cm-flow .wizcard p[style*="#aaa"],.flow.cm-flow .wizcard span[style*="#aaa"]{color:#5b6068!important}
+.flow.cm-flow .wizcard .done-step p{color:#333!important}.flow.cm-flow .wizcard .done-step a{color:var(--red)!important}
 /* ===== Quote form: dark by default (Quote page), light on the Mobile page. Colors come from --q* variables ===== */
 #view-quote,#mobile-quote{--qb:#0d0d0e;--qc:#151517;--qbd:#26262a;--qt:#fff;--qm:#9aa0a8;--qin:#151517;--qinbd:#2c2c30;--qalt:#101012;--qchk:#1a1012;--qph:#6f747c;--qerr:#ff8a8d;--qglow:rgba(227,22,27,.28)}
 #mobile-quote{--qb:#f4f4f2;--qc:#fff;--qbd:#dcdde0;--qt:#0d0d0e;--qm:#5b6068;--qin:#fff;--qinbd:#cfd1d5;--qalt:#fff;--qchk:#fff1f1;--qph:#8a8f98;--qerr:#b80f13;--qglow:rgba(227,22,27,.18)}
