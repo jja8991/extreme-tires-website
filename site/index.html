@@ -1701,6 +1701,17 @@ header.nav.scrolled .logo img{height:42px}
 .flow #wiz .checklist{background:#1b1b1e;color:#ddd}.flow #wiz .checklist ul{color:#bdbdbd}
 .flow #wiz .linkbtn{color:#fff}
 @media (max-width:860px){.flow-top{grid-template-columns:1fr}.flow-van{order:-1}.flow #wiz .opts{grid-template-columns:1fr}}
+
+/* Text-a-photo band */
+.photo-quote .wrap{display:grid;grid-template-columns:1fr;justify-items:start;gap:14px;padding-block:44px}
+.photo-quote .cam{width:94px;height:94px}.photo-quote .cam svg{width:46px;height:46px}
+.photo-quote h3{font-size:clamp(34px,5vw,64px);line-height:1;font-weight:900;text-transform:uppercase;max-width:14em}
+.photo-quote p{font-size:clamp(16px,1.7vw,21px);margin:0}
+.photo-quote .num{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:#fff;padding:14px 24px;border-radius:14px;font:800 clamp(18px,2vw,26px) var(--display);letter-spacing:0;margin-top:8px;text-decoration:none;transition:transform .2s var(--ease)}
+.photo-quote .num:hover{transform:translateY(-2px)}
+.photo-quote .num b{color:var(--yellow);font-weight:800}
+.photo-quote .num svg{width:30px;height:30px}
+.photo-quote .num:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -1885,11 +1896,11 @@ header.nav.scrolled .logo img{height:42px}
   <div class="photo-quote">
     <div class="wrap">
       <div class="cam"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#ffd21f" d="M9 3h6l2 3h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3zm3 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2.2a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6z"/></svg></div>
-      <div><h3>Text a photo of your tire, get a quote</h3><p>Snap the sidewall size or the damage and send it. We reply with options and a price.</p></div>
-      <div class="num">Text (954) 773-1896</div>
+      <h3>Text a photo of your tire, get a quote</h3>
+      <p>Snap the sidewall size or the damage and send it. We reply with options and a price.</p>
+      <a class="num" href="sms:+19547731896"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"><path d="M4 4h16v12H10l-5 4v-4H4z"/><path d="M8 8.5h8M8 12h5" stroke-linecap="round"/></svg>Text <b>(954) 773-1896</b></a>
     </div>
   </div>
-
   <section class="services" id="services" aria-labelledby="svc-h">
     <div class="wrap">
       <div class="sec-head">
@@ -3833,9 +3844,11 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
         '<label class="f" for="w-size">Tire size (optional)<input id="w-size" value="'+esc(W.size)+'" placeholder="e.g. 265/70R17, printed on the sidewall"></label>'+
         (W.need==='tires'?'<label class="toggle" for="w-byo"><input type="checkbox" id="w-byo"'+(W.byo?' checked':'')+'> I already have my tires, I just need them installed</label>':'');
     } else if(s===2){
+      var shopOnlyNeed=(W.need==='wheels'); if(shopOnlyNeed)W.where='shop';
       h='<h3>Where should we do it?</h3><div class="opts">'+
-        '<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Home, work or roadside</small></span></button>'+
+        (shopOnlyNeed?'':'<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Home, work or roadside</small></span></button>')+
         '<button type="button" class="opt" data-where="shop" aria-pressed="'+(W.where==='shop')+'"><svg aria-hidden="true"><use href="#i-align"/></svg><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button></div>';
+      if(shopOnlyNeed)h+='<div class="alert">Lifts, leveling and wheel packages are done at our Sunrise shop. Mobile service is for tires and everyday service only.</div>';
       if(W.where==='mobile'){
         var c=W.zip?county(W.zip):null;
         h+='<label class="f" for="w-zip">ZIP code<input id="w-zip" inputmode="numeric" maxlength="5" value="'+esc(W.zip)+'" placeholder="33351"></label>'+
