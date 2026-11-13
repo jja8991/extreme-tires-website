@@ -745,6 +745,8 @@ header.nav.scrolled .logo img{height:42px}
 .sp-badge{font:800 12px/1 var(--display);text-transform:uppercase;letter-spacing:.09em;padding:8px 10px;background:var(--red);color:#fff;display:inline-flex;gap:6px;align-items:center}
 .sp-badge.sp-bs{background:#fff;color:var(--ink)}
 .sp-ico svg{width:100%;height:100%;display:block}
+.sp-ico.has-img{width:104px;height:104px;padding:0;background:transparent}.sp-ico.has-img img{width:100%;height:100%;object-fit:contain;display:block}
+.br-title{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:6px}.br-title h1{margin:0}.br-logo{display:flex;align-items:center;justify-content:center;background:#fff;height:88px;min-width:120px;max-width:260px;padding:12px 18px}.br-logo img{max-height:100%;max-width:100%;object-fit:contain;display:block}
 .sp-ico{width:76px;height:76px;color:var(--red);background:#fff;padding:12px;flex:none}
 .sp-title{display:flex;gap:18px;align-items:center}
 .sp-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;padding-block:52px 40px;align-items:start}
@@ -3960,6 +3962,7 @@ var h=ET.esc, $=function(id){return document.getElementById(id)};
 var SLUGS=['brake-repair','wheel-alignment','tire-installation','tire-repair','tire-balancing','tire-rotation','suspension-repair','oil-changes','tpms-service','custom-wheels','lift-kits'];
 
 /* ======================= SERVICE DATA ======================= */
+var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift'};
 var SV={
  'brake-repair':{label:'Brake Repair',name:'Brake Repair',ico:'brake',mode:'shop',
   blurb:'Pads, rotors, calipers and fluid, inspected and explained.',
@@ -4089,7 +4092,7 @@ function renderService(param){
   root.innerHTML=
    '<div class="phead sp-phead"><div class="wrap">'+
      '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#services" data-view-link="services">Auto Service</a><span>/</span><span>'+h(s.name)+'</span></nav>'+
-     '<div class="sp-title"><div class="sp-ico">'+ET.icon(s.ico)+'</div><div style="display:grid;gap:12px"><h1>'+h(s.name)+'</h1><div class="sp-tags">'+modeBadge(s.mode)+'</div></div></div>'+
+     '<div class="sp-title">'+(SP_IMG[param]?'<div class="sp-ico has-img"><img src="media/services/'+SP_IMG[param]+'.webp" alt="'+h(s.name)+' icon"></div>':'<div class="sp-ico">'+ET.icon(s.ico)+'</div>')+'<div style="display:grid;gap:12px"><h1>'+h(s.name)+'</h1><div class="sp-tags">'+modeBadge(s.mode)+'</div></div></div>'+
      '<p>'+h(s.intro)+'</p>'+
    '</div></div>'+
    '<div class="wrap sp-body">'+
@@ -4597,7 +4600,7 @@ ET.onShow.brand=function(param){
   root.innerHTML=
   '<div class="phead"><div class="wrap">'+
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#brands" data-view-link="brands">Tire Brands</a><span>/</span><span>'+n+'</span></nav>'+
-    '<h1>'+n+' tires</h1><p>Shop '+n+' at Extreme Tires, installed at the shop or by our mobile van.</p>'+TRUST+
+    '<div class="br-title">'+(BRAND_LOGOS.indexOf(b[0])>-1?'<span class="br-logo"><img src="media/brands/'+b[0]+'.svg" alt="'+n+' logo"></span>':'')+'<h1>'+n+' tires</h1></div><p>Shop '+n+' at Extreme Tires, installed at the shop or by our mobile van.</p>'+TRUST+
     '<div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop tires</a></div>'+
   '</div></div>'+
   '<section class="br-lines" aria-labelledby="br-l"><div class="wrap br-grid"><div><div class="eyebrow">Popular lines</div><h2 id="br-l" style="font-size:clamp(26px,3.2vw,40px);font-weight:900">Popular '+n+' lines</h2>'+linesHtml+'</div>'+
