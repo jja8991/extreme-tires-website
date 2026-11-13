@@ -398,6 +398,10 @@ header.nav.scrolled .logo img{height:42px}
 .zipres.no{color:var(--red-deep)}
 .mhero{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center}
 .onsite{padding-block:56px}
+/* on-site services banner */
+.onsite-pic{margin-top:20px;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px}
+.onsite-pic img{display:block;width:100%;min-width:860px;height:auto}
+@media(min-width:900px){.onsite-pic{overflow:visible}.onsite-pic img{min-width:0}}
 .onsite-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
 .onsite-grid div{background:var(--mist);padding:20px;display:grid;gap:10px;align-content:start}
 .onsite-grid svg{width:40px;height:40px;color:var(--red)}
@@ -2199,12 +2203,7 @@ body{background:#0d0d0e}
     <div class="wrap">
       <div class="eyebrow">What we do on site</div>
       <h2 id="on-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">The shop, on wheels</h2>
-      <div class="onsite-grid">
-        <div><img class="on-ico" src="media/services/dark/installation.webp" alt="" width="84" height="84" loading="lazy"><b>Tire installation</b><p>New tires mounted on your vehicle, old ones hauled away.</p></div>
-        <div><img class="on-ico" src="media/services/dark/balancing.webp" alt="" width="84" height="84" loading="lazy"><b>High-speed balancing</b><p>The same balancing equipment as the shop, built into the van.</p></div>
-        <div><img class="on-ico" src="media/services/dark/repair.webp" alt="" width="84" height="84" loading="lazy"><b>Repairs &amp; roadside</b><p>Flats and leaks patched where you are, including roadside.</p></div>
-        <div><img class="on-ico" src="media/services/dark/oil.webp" alt="" width="84" height="84" loading="lazy"><b>Oil changes</b><p>Mobile oil change while you work. Fleets welcome.</p></div>
-      </div>
+      <div class="onsite-pic"><img src="media/mobile-onsite.webp" width="2172" height="724" loading="lazy" decoding="async" alt="What we do on site: tire installation (30 to 60 minutes), high-speed balancing (10 to 15 minutes), repairs and roadside (15 to 30 minutes), and oil changes (20 to 40 minutes)."></div>
     </div>
   </section>
   <section class="how how-img" aria-labelledby="how-h">
