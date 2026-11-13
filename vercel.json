@@ -2,15 +2,18 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
   "installCommand": "echo no-install",
-  "buildCommand": "mkdir -p out && cp site/index.html out/index.html && cp -r site/media out/media && printf 'User-agent: *\\nDisallow: /\\n' > out/robots.txt",
+  "buildCommand": "mkdir -p out && cp site/index.html out/index.html && cp -r site/media out/media && node seo/build-seo.js out",
   "outputDirectory": "out",
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
       ]
     }
-  ]
+  ],
+  "trailingSlash": true
 }

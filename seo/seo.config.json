@@ -1,0 +1,5 @@
+{
+  "_note": "Flip indexable to true ONLY when the real domain is live. While false, every page ships noindex and robots.txt blocks crawlers.",
+  "indexable": false,
+  "domain": "https://www.extrememobiletires.com"
+}
