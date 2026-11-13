@@ -4689,8 +4689,8 @@ var SV={
        ['How often should I check alignment?','Many shops suggest a check about once a year, or any time you notice symptoms or have suspension work done. Your owner\'s manual and driving conditions matter too.']],
   rel:['tire-rotation','tire-installation','suspension-repair','lift-kits']},
  'tire-installation':{label:'Tire Installation',name:'Tire Installation',ico:'install',mode:'both',
-  blurb:'New tires mounted and balanced at the shop or your driveway.',
-  intro:'New tires installed on your schedule, either in our Sunrise shop or by our mobile team where you are.',
+  blurb:'New or used tires mounted and balanced at the shop or your driveway.',
+  intro:'New or used tires installed on your schedule, either in our Sunrise shop or by our mobile team where you are.',
   inc:['Removing the old tires and mounting the new ones','Balancing each wheel and tire assembly','New valve stems or caps as needed','Lug nuts tightened to the vehicle\'s torque spec','TPMS check and reset where the vehicle has it','Old tire disposal'],
   signs:['Tread worn down to the wear bars, or about 2/32 inch','Cracks, bulges or bubbles in the sidewall','A tire that keeps losing air or has been repaired more than once','Tires six or more years old with visible aging (check the DOT date code)','Vibration that balancing does not fix'],
   faq:[['How do I read my tire size?','A size like 265/70R17 means 265 millimeters wide, a sidewall height that is 70 percent of the width, radial construction and a 17 inch wheel. The size is printed on the tire sidewall and on a placard in the door jamb.'],
@@ -4715,9 +4715,9 @@ var SV={
        ['How often should tires be balanced?','At installation, after a tire repair, and any time you feel vibration. Some owners also have it checked at each rotation.'],
        ['Why do wheel weights fall off?','They can be knocked loose by curbs, potholes or rough roads. If you feel a new vibration, a lost weight is one of the things to check.']],
   rel:['tire-installation','tire-rotation','wheel-alignment']},
- 'tire-rotation':{label:'Tire Rotation',name:'Tire Rotation',ico:'rotate',mode:'shop',
-  blurb:'Even wear and longer life from regular rotation.',
-  intro:'Tires wear differently depending on where they sit on the vehicle. Rotating them keeps the wear more even.',
+ 'tire-rotation':{label:'Tire Rotation',name:'Tire Rotation',ico:'rotate',mode:'both',
+  blurb:'Even wear and longer life from regular rotation, at the shop or your location.',
+  intro:'Tires wear differently depending on where they sit on the vehicle. Rotating them keeps the wear more even. We do it at our Sunrise shop or bring the van to you.',
   inc:['Moving the tires to new positions in a pattern that suits your vehicle','Checking tread depth and tire pressure','Looking over each tire for damage or uneven wear','Lug nuts tightened to the vehicle\'s torque spec','Balance check if you feel vibration'],
   signs:['You are near the interval in your owner\'s manual (often every 5,000 to 7,500 miles)','The front tires look more worn than the rear, or the reverse','You notice a new hum or vibration','Your tire maker requires regular rotation for coverage'],
   faq:[['Why rotate tires?','Front and rear tires carry different loads and do different work, so they wear at different rates. Rotation spreads that wear around.'],
@@ -4852,11 +4852,25 @@ var SV={
   inc:['Tire service','Routine maintenance','Repairs','Service at your site or at our shop where it fits'],
   signs:['A flat or worn tire','Maintenance is due','Something feels off when operating','You need to keep a job on schedule'],
   faq:[['What equipment do you service?','Skid steers and other compact equipment. Tell us the machine and the problem.'],['Can you come to the job site?','Ask the shop what we can do at your location.'],['Can you handle tires?','Yes, tires, maintenance and repairs.']],
-  rel:['mower-service','fleet-maintenance','semi-truck-service']}
+  rel:['mower-service','fleet-maintenance','semi-truck-service']},
+ 'lockout-assistance':{label:'Vehicle Lockout Assistance',name:'Vehicle Lockout Assistance',ico:'van',mode:'mobile',
+  blurb:'Locked out? Our mobile team comes to you.',
+  intro:'Keys locked in the car or can\'t get in? Our mobile team comes to your location to help you get back in.',
+  inc:['Mobile response to your location','Help getting into your locked vehicle','Care taken to avoid damaging the door, lock or paint','Mobile only. We come to you'],
+  signs:['Keys locked inside the vehicle','A lost or broken key','A key fob that will not unlock the doors','You are stuck at home, work or on the road'],
+  faq:[['Do you do lockouts at the shop?','No. Lockout assistance is a mobile service, so we come to you.'],['How do I request it?','Call (954) 773-1896 for the fastest response, or send a request on the Schedule page.'],['Will it damage my car?','Our technicians work to get you in without damaging the door, lock or paint.']],
+  rel:['jump-starts','tire-repair','tire-installation']},
+ 'jump-starts':{label:'Battery Jump Starts',name:'Battery Jump Starts',ico:'van',mode:'mobile',
+  blurb:'Dead battery? We bring the jump to you.',
+  intro:'A dead battery does not have to ruin your day. Our mobile team comes to your location and gets you started.',
+  inc:['Mobile response to your location','Jump start for a dead or weak battery','Mobile only. We come to you'],
+  signs:['The engine clicks but will not start','Dim lights or a dash that flickers','You left the lights on','The vehicle has sat unused for a while'],
+  faq:[['Do you do jump starts at the shop?','No. Jump starts are a mobile service, so we come to you.'],['How do I request one?','Call (954) 773-1896 for the fastest response, or send a request on the Schedule page.'],['What if it will not stay started?','A battery that keeps dying may need to be replaced. Tell us when you call.']],
+  rel:['lockout-assistance','tire-repair','tire-installation']}
 };
-var MOBILE_SLUGS=['tire-installation','tire-balancing','tire-repair','oil-changes'];
-var MORE_SLUGS=['ac-repair','general-mechanical','caliper-painting','rim-repair','custom-builds','custom-lighting','train-horns','golf-cart-upgrades','fleet-maintenance','semi-truck-service','mower-service','skid-steer-service'];var NAV_SLUGS=SLUGS.concat(MORE_SLUGS);
-var SHOP_SLUGS=['wheel-alignment','brake-repair','suspension-repair','tire-rotation','tpms-service','custom-wheels','lift-kits'];
+var MOBILE_SLUGS=['tire-installation','tire-repair','tire-rotation','lockout-assistance','jump-starts','tire-balancing','oil-changes'];
+var MORE_SLUGS=['ac-repair','general-mechanical','caliper-painting','rim-repair','custom-builds','custom-lighting','train-horns','golf-cart-upgrades','fleet-maintenance','semi-truck-service','mower-service','skid-steer-service'];var NAV_SLUGS=SLUGS.concat(MORE_SLUGS,['lockout-assistance','jump-starts']);
+var SHOP_SLUGS=['wheel-alignment','brake-repair','suspension-repair','tpms-service','custom-wheels','lift-kits'];
 function modeBadge(m){return m==='mobile'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile only</span>':m==='both'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile or shop</span>':'<span class="sp-badge sp-bs">Shop only</span>'}
 function link(slug){return 'href="#service/'+slug+'" data-view-link="service" data-param="'+slug+'"'}
 
@@ -5036,7 +5050,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   var daysEl=$('sw-days'),timesEl=$('sw-times'),zip=$('sw-zip'),znote=$('sw-zipnote'),nextB=$('sw-next'),backB=$('sw-back'),subB=$('sw-submit');
   var WIN=[{k:'morning',l:'Morning (8 am to noon)',a:480,b:720},{k:'midday',l:'Midday (noon to 3 pm)',a:720,b:900},{k:'afternoon',l:'Afternoon (3 to 6 pm)',a:900,b:1080},{k:'evening',l:'Evening (6 to 9 pm)',a:1080,b:1260},{k:'any',l:'Any time that day',a:0,b:1440}];
   var NEXTL=['','Next: Vehicle','Next: What you need','Next: Pick a time','Next: Your details'];
-  var TYPE={'tire-installation':'new_tires','tire-repair':'flat_repair','tire-balancing':'mount_balance','tire-rotation':'rotation_check','oil-changes':'oil_change','brake-repair':'brake_repair','wheel-alignment':'alignment_suspension','suspension-repair':'alignment_suspension','ac-repair':'mechanical_ac_tpms','tpms-service':'mechanical_ac_tpms','general-mechanical':'mechanical_ac_tpms','custom-wheels':'wheels_rims','rim-repair':'wheels_rims','caliper-painting':'wheels_rims','lift-kits':'lift_custom','custom-builds':'lift_custom','custom-lighting':'lift_custom','train-horns':'lift_custom','golf-cart-upgrades':'lift_custom','fleet-maintenance':'fleet_equipment','semi-truck-service':'fleet_equipment','mower-service':'fleet_equipment','skid-steer-service':'fleet_equipment'};
+  var TYPE={'tire-installation':'new_tires','tire-repair':'flat_repair','tire-balancing':'mount_balance','tire-rotation':'rotation_check','oil-changes':'oil_change','lockout-assistance':'roadside_assist','jump-starts':'roadside_assist','brake-repair':'brake_repair','wheel-alignment':'alignment_suspension','suspension-repair':'alignment_suspension','ac-repair':'mechanical_ac_tpms','tpms-service':'mechanical_ac_tpms','general-mechanical':'mechanical_ac_tpms','custom-wheels':'wheels_rims','rim-repair':'wheels_rims','caliper-painting':'wheels_rims','lift-kits':'lift_custom','custom-builds':'lift_custom','custom-lighting':'lift_custom','train-horns':'lift_custom','golf-cart-upgrades':'lift_custom','fleet-maintenance':'fleet_equipment','semi-truck-service':'fleet_equipment','mower-service':'fleet_equipment','skid-steer-service':'fleet_equipment'};
   function tm(s){var m=/^(\d\d):(\d\d)/.exec(s||'');return m?(+m[1])*60+(+m[2]):0}
   function isoOf(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
   function setErr(id,msg){var e=$(id);if(e)e.textContent=msg||''}
@@ -5092,11 +5106,11 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     timesEl.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});setErr('sw-e4','')});
 
   /* ---- step 1: where ---- */
-  function allowed(slug){return where!=='mobile'||SV[slug].mode!=='shop'}
+  function allowed(slug){var m=SV[slug].mode;return where==='mobile'?m!=='shop':where==='shop'?m!=='mobile':true}
   function updateWhere(){
     [].forEach.call($('sw-where').children,function(b){b.setAttribute('aria-pressed',String(b.dataset.where===where))});
     $('sw-shop').hidden=where!=='shop';$('sw-mobile').hidden=where!=='mobile';
-    if(where==='mobile')Object.keys(chosen).forEach(function(s){if(!allowed(s))delete chosen[s]});
+    Object.keys(chosen).forEach(function(s){if(!allowed(s))delete chosen[s]});
     setErr('sw-e1','');
   }
   $('sw-where').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;where=b.dataset.where;updateWhere();if(where==='mobile'){try{$('sw-loc').focus({preventScroll:true})}catch(x){}}});
@@ -5117,19 +5131,22 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
 
   /* ---- step 3: services (filtered by where) ---- */
   function renderPick(){
-    var both=NAV_SLUGS.filter(function(s){return SV[s].mode!=='shop'}),shop=NAV_SLUGS.filter(function(s){return SV[s].mode==='shop'});
+    var both=NAV_SLUGS.filter(function(s){return SV[s].mode==='both'}),monly=NAV_SLUGS.filter(function(s){return SV[s].mode==='mobile'}),shop=NAV_SLUGS.filter(function(s){return SV[s].mode==='shop'});
     var mob=where==='mobile';
-    function lab(s,off){var v=SV[s];return '<label for="sw-s-'+s+'"'+(off?' class="off" title="Shop only. Tap to switch to the shop."':'')+'><input type="checkbox" id="sw-s-'+s+'" value="'+s+'"'+(chosen[s]&&!off?' checked':'')+(off?' disabled':'')+'>'+(SP_IMG[s]?'<img src="media/services/'+SP_IMG[s]+'.webp" alt="" loading="lazy">':ET.icon(v.ico))+'<span>'+h(v.label)+(off?'<em>Shop only</em>':'')+'</span></label>'}
-    var out='<div class="sw-grp">'+(mob?'We come to you':'Mobile or at the shop')+'</div>'+both.map(function(s){return lab(s,false)}).join('');
-    out+='<div class="sw-grp">Shop only'+(mob?' (not available for mobile)':'')+'</div>'+shop.map(function(s){return lab(s,mob)}).join('');
+    function lab(s){var v=SV[s],off=!allowed(s);return '<label for="sw-s-'+s+'"'+(off?' class="off" title="'+(mob?'Shop only. Tap to switch to the shop.':'Mobile only. Tap to switch to mobile.')+'"':'')+'><input type="checkbox" id="sw-s-'+s+'" value="'+s+'"'+(chosen[s]&&!off?' checked':'')+(off?' disabled':'')+'>'+(SP_IMG[s]?'<img src="media/services/'+SP_IMG[s]+'.webp" alt="" loading="lazy">':ET.icon(v.ico))+'<span>'+h(v.label)+(off?'<em>'+(mob?'Shop only':'Mobile only')+'</em>':'')+'</span></label>'}
+    var out='<div class="sw-grp">Mobile or at the shop</div>'+both.map(lab).join('');
+    out+='<div class="sw-grp">Mobile only (we come to you)'+(mob?'':' (not available at the shop)')+'</div>'+monly.map(lab).join('');
+    out+='<div class="sw-grp">Shop only'+(mob?' (not available for mobile)':'')+'</div>'+shop.map(lab).join('');
     $('sw-pick').innerHTML=out;
     var n=$('sw-mobnote');n.hidden=false;
     n.innerHTML=mob?'You picked <b>at my location</b>, so the shop-only services are greyed out. <button type="button" class="sw-lnk" data-sw="toshop">Switch to the shop to unlock them</button>'
-      :'You picked <b>the Sunrise shop</b>, so every service is available. Want us to come to you instead? <button type="button" class="sw-lnk" data-sw="tomobile">Switch to mobile</button> (mobile skips the shop-only jobs)';
+      :'You picked <b>the Sunrise shop</b>, so lockouts and jump starts are greyed out (we come to you for those). <button type="button" class="sw-lnk" data-sw="tomobile">Switch to mobile</button>';
   }
   function setWhere(w){where=w;updateWhere();if(step===3)renderPick()}
   $('sw-mobnote').addEventListener('click',function(e){var b=e.target.closest('[data-sw]');if(!b)return;if(b.dataset.sw==='toshop')setWhere('shop');else{where='mobile';updateWhere();show(1);try{$('sw-loc').focus({preventScroll:true})}catch(x){}}});
-  $('sw-pick').addEventListener('click',function(e){var l=e.target.closest('label.off');if(!l)return;e.preventDefault();setWhere('shop');var i=$('sw-pick').querySelector('#'+l.getAttribute('for'));if(i){i.checked=true;chosen[i.value]=true;setErr('sw-e3','')}});
+  $('sw-pick').addEventListener('click',function(e){var l=e.target.closest('label.off');if(!l)return;e.preventDefault();var sl=l.getAttribute('for').replace('sw-s-','');
+    if(where==='mobile'){setWhere('shop');chosen[sl]=true;renderPick();setErr('sw-e3','')}
+    else{where='mobile';updateWhere();chosen[sl]=true;show(1);try{$('sw-loc').focus({preventScroll:true})}catch(x){}}});
   $('sw-pick').addEventListener('change',function(e){var i=e.target;if(i&&i.type==='checkbox'){if(i.checked)chosen[i.value]=true;else delete chosen[i.value];setErr('sw-e3','')}});
   function slugs(){return NAV_SLUGS.filter(function(s){return chosen[s]&&allowed(s)})}
   function labelsOf(a){return a.map(function(s){return SV[s].label})}
