@@ -153,7 +153,7 @@ ET.onShow.brand=function(param){
     '<p>Manufacturer rebates change often. Ask the shop what is available for your tires.</p>'+
     '<a class="btn btn-dark" href="#coupons" data-view-link="coupons">See coupons and offers</a></div></div></section>'+
   '<section class="br-install" aria-labelledby="br-i"><div class="wrap"><div class="eyebrow">Install it where you are</div><h2 id="br-i">Mobile or at the shop</h2>'+
-    '<div class="br-strip"><div>'+'<img class="ico-img" src="media/services/mobile.webp" alt="">'+'<b>Mobile install</b><p>Our van brings the tires and balancer to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p><a href="#mobile" data-view-link="mobile">Check your ZIP</a></div>'+
+    '<div class="br-strip"><div class="light">'+'<img class="ico-img" src="media/services/mobile.webp" alt="">'+'<b>Mobile install</b><p>Our van brings the tires and balancer to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p><a href="#mobile" data-view-link="mobile">Check your ZIP</a></div>'+
     '<div>'+SI('install',1)+'<b>At the Sunrise shop</b><p>7712 West Oakland Park Blvd. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</p><a href="#locations" data-view-link="locations">Hours and directions</a></div></div>'+
   '</div></section>'+
   '<section class="br-story-sec" aria-labelledby="br-h"><div class="wrap"><div class="eyebrow">About the brand</div><h2 id="br-h" style="font-size:clamp(22px,2.6vw,30px);font-weight:900">Shop '+n+' at Extreme Tires</h2>'+

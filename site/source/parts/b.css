@@ -115,6 +115,8 @@
 .br-strip b{font:800 19px var(--display);text-transform:uppercase}
 .br-strip p{margin:0;color:#bdbdbd;font-size:15px}
 .br-strip a{color:var(--yellow);font-weight:700}
+.br-strip .light{background:#fff;color:var(--ink);border:1px solid var(--line)}.br-strip .light p{color:var(--steel)}.br-strip .light a{color:var(--red)}
+
 .br-nav{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .br-nav .wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding-block:18px}
 .br-nav a{display:grid;gap:4px;text-decoration:none;padding:12px 4px;min-height:56px}
