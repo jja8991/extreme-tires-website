@@ -4805,13 +4805,13 @@ var SV={
 var MOBILE_SLUGS=['tire-installation','tire-balancing','tire-repair','oil-changes'];
 var MORE_SLUGS=['ac-repair','general-mechanical','caliper-painting','rim-repair','custom-builds','custom-lighting','train-horns','golf-cart-upgrades','fleet-maintenance','semi-truck-service','mower-service','skid-steer-service'];var NAV_SLUGS=SLUGS.concat(MORE_SLUGS);
 var SHOP_SLUGS=['wheel-alignment','brake-repair','suspension-repair','tire-rotation','tpms-service','custom-wheels','lift-kits'];
-function modeBadge(m){return m==='both'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile or shop</span>':'<span class="sp-badge sp-bs">Shop only</span>'}
+function modeBadge(m){return m==='mobile'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile only</span>':m==='both'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile or shop</span>':'<span class="sp-badge sp-bs">Shop only</span>'}
 function link(slug){return 'href="#service/'+slug+'" data-view-link="service" data-param="'+slug+'"'}
 
 /* ======================= SERVICES HUB ======================= */
 function card(slug,mob){
   var s=SV[slug];
-  return '<a class="sv-card" '+link(slug)+'><span class="sv-badge '+(mob?'mob':'shp')+'">'+(mob?'Mobile + shop':'Shop')+'</span>'+(SP_IMG[slug]?'<img class="sv-img" src="media/services/'+SP_IMG[slug]+'.webp" alt="" loading="lazy">':ET.icon(s.ico))+'<b>'+h(s.name)+'</b><p>'+h(s.blurb)+'</p><span class="sv-more">Details &rarr;</span></a>';
+  return '<a class="sv-card" '+link(slug)+'><span class="sv-badge '+(s.mode==='mobile'?'mob':(s.mode==='both'?'mob':'shp'))+'">'+(s.mode==='mobile'?'Mobile only':(s.mode==='both'?'Mobile + shop':'Shop only'))+'</span>'+(SP_IMG[slug]?'<img class="sv-img" src="media/services/'+SP_IMG[slug]+'.webp" alt="" loading="lazy">':ET.icon(s.ico))+'<b>'+h(s.name)+'</b><p>'+h(s.blurb)+'</p><span class="sv-more">Details &rarr;</span></a>';
 }
 $('sv-grid-mobile').innerHTML=MOBILE_SLUGS.map(function(s){return card(s,true)}).join('');
 $('sv-grid-shop').innerHTML=SHOP_SLUGS.map(function(s){return card(s,false)}).join('');
@@ -4843,7 +4843,7 @@ function renderService(param){
          '<p style="margin:14px 0 0;color:var(--steel);font-size:14px">These are general signs, not a diagnosis. Have a technician inspect the vehicle to know for sure.</p></section>'+
      '</div>'+
      '<aside class="sp-aside" aria-label="Service details"><div class="sp-card">'+
-       '<div class="sp-fact"><small>Where</small><b>'+(s.mode==='both'?'Mobile or at the shop':'At the Sunrise shop')+'</b></div>'+
+       '<div class="sp-fact"><small>Where</small><b>'+(s.mode==='both'?'Mobile or at the shop':(s.mode==='mobile'?'We come to you':'At the Sunrise shop'))+'</b></div>'+
        '<div class="sp-fact"><small>Typical time</small><b>Ask the shop</b></div>'+
        '<div class="sp-fact"><small>Starting at</small><b>Call for pricing</b></div>'+
        '<a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="'+h(s.label)+'">Request a quote</a>'+
