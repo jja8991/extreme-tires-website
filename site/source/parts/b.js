@@ -149,12 +149,12 @@ ET.onShow.brand=function(param){
     '<div class="btns"><a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="Tire Installation">Request a quote</a><a class="btn btn-ghost" href="#tires" data-view-link="tires">Shop tires</a></div>'+
   '</div></div>'+
   '<section class="br-lines" aria-labelledby="br-l"><div class="wrap br-grid"><div><div class="eyebrow">Popular lines</div><h2 id="br-l" style="font-size:clamp(26px,3.2vw,40px);font-weight:900">Popular '+n+' lines</h2>'+linesHtml+'</div>'+
-    '<div class="br-rebate"><span class="sample">Sample</span><div class="eyebrow">Current rebate</div><div class="amt">$XX</div>'+
-    '<p>Confirm with the manufacturer\'s promotion before publishing. Terms and dates come from the manufacturer.</p>'+
+    '<div class="br-rebate"><span class="sample">Sample</span><div class="eyebrow">Current rebate</div><div class="amt">Ask us</div>'+
+    '<p>Manufacturer rebates change often. Ask the shop what is available for your tires.</p>'+
     '<a class="btn btn-dark" href="#coupons" data-view-link="coupons">See coupons and offers</a></div></div></section>'+
   '<section class="br-install" aria-labelledby="br-i"><div class="wrap"><div class="eyebrow">Install it where you are</div><h2 id="br-i">Mobile or at the shop</h2>'+
     '<div class="br-strip"><div>'+ic('van')+'<b>Mobile install</b><p>Our van brings the tires and balancer to your home, office or job site in Broward, Miami-Dade and Palm Beach counties.</p><a href="#mobile" data-view-link="mobile">Check your ZIP</a></div>'+
-    '<div>'+ic('install')+'<b>At the Sunrise shop</b><p>7712 West Oakland Park Blvd. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</p><a href="#locations" data-view-link="locations">Hours and directions</a></div></div>'+
+    '<div>'+SI('install',1)+'<b>At the Sunrise shop</b><p>7712 West Oakland Park Blvd. Mon–Fri 8:00 AM–6:30 PM, Sat 8:00 AM–4:00 PM.</p><a href="#locations" data-view-link="locations">Hours and directions</a></div></div>'+
   '</div></section>'+
   '<section class="br-story-sec" aria-labelledby="br-h"><div class="wrap"><div class="eyebrow">About the brand</div><h2 id="br-h" style="font-size:clamp(22px,2.6vw,30px);font-weight:900">Shop '+n+' at Extreme Tires</h2>'+
     '<div class="br-story"><span class="sample-note">Placeholder</span><p style="margin-top:8px">Brand story to be written or approved by Extreme.</p></div></div></section>'+
@@ -382,7 +382,7 @@ ET.onShow.tip=function(param){
       (x.ul?'<ul class="ta-ul">'+x.ul.map(function(u){return '<li>'+esc(u)+'</li>'}).join('')+'</ul>':'');
   }).join('');
   var rel=t.rel.length?'<div class="ta-box"><h2>Related services</h2><ul>'+t.rel.map(function(s){var d=SVCS[s];return '<li><a href="#service/'+s+'" data-view-link="service" data-param="'+s+'">'+ic(d[0])+esc(d[1])+'</a></li>'}).join('')+'</ul></div>'
-    :'<div class="ta-box"><h2>Related services</h2><ul><li><a href="#services" data-view-link="services">'+ic('repair')+'See all services</a></li></ul><p style="margin:0;font-size:14px;color:var(--steel)">Ask the shop what we can do for this one.</p></div>';
+    :'<div class="ta-box"><h2>Related services</h2><ul><li><a href="#services" data-view-link="services">'+SI('repair',0,'ico-img sm')+'See all services</a></li></ul><p style="margin:0;font-size:14px;color:var(--steel)">Ask the shop what we can do for this one.</p></div>';
   root.innerHTML=
   '<div class="phead"><div class="wrap">'+
     '<nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><a href="#tips" data-view-link="tips">Tips</a><span>/</span><span>'+esc(t.t)+'</span></nav>'+

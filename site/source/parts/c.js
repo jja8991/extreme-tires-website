@@ -4,12 +4,12 @@ var esc=ET.esc;
 
 /* ---------- COUPONS ---------- */
 var OFFERS=[
-  {id:'align',kind:'tire',label:'House offer',title:'Alignment with tire purchase',amt:'$XX off',svc:'Wheel Alignments',how:'house'},
-  {id:'oil',kind:'service',label:'House offer',title:'Oil change special',amt:'$XX',svc:'Oil Changes',how:'house'},
-  {id:'mich',kind:'rebate',label:'Manufacturer rebate',title:'Michelin rebate',amt:'$XX',svc:'Tire Installation',how:'rebate'},
-  {id:'bfg',kind:'rebate',label:'Manufacturer rebate',title:'BFGoodrich rebate',amt:'$XX',svc:'Tire Installation',how:'rebate'},
-  {id:'coop',kind:'rebate',label:'Manufacturer rebate',title:'Cooper rebate',amt:'$XX',svc:'Tire Installation',how:'rebate'},
-  {id:'good',kind:'rebate',label:'Manufacturer rebate',title:'Goodyear rebate',amt:'$XX',svc:'Tire Installation',how:'rebate'},
+  {id:'align',kind:'tire',label:'House offer',title:'Alignment with tire purchase',amt:'Ask us',svc:'Wheel Alignments',how:'house'},
+  {id:'oil',kind:'service',label:'House offer',title:'Oil change special',amt:'Ask us',svc:'Oil Changes',how:'house'},
+  {id:'mich',kind:'rebate',label:'Manufacturer rebate',title:'Michelin rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
+  {id:'bfg',kind:'rebate',label:'Manufacturer rebate',title:'BFGoodrich rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
+  {id:'coop',kind:'rebate',label:'Manufacturer rebate',title:'Cooper rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
+  {id:'good',kind:'rebate',label:'Manufacturer rebate',title:'Goodyear rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
   {id:'gen',kind:'rebate',label:'Manufacturer rebate',title:'Brand rebate',amt:'Rebate',svc:'Tire Installation',how:'rebate'}
 ];
 var CP_TABS=[['all','All offers'],['tire','Tire specials'],['service','Service specials'],['rebate','Manufacturer rebates']];

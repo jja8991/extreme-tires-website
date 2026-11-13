@@ -145,7 +145,7 @@ function cityPage(c){
   var q=c.i;
   var steps=[['Tell us what you need','Request a quote or call '+PHONE+' with your vehicle, tire size if you know it, and your ZIP.'],['Pick a time','We confirm the details and an arrival window that works for you.'],['We come to you','Our tech brings the tires and equipment to your location in '+esc(c.name)+' and does the work there.']];
   var svcs='<section class="d-sec alt" aria-labelledby="cy-h-svc"><div class="wrap"><div class="eyebrow">At your location</div><h2 class="d-h2" id="cy-h-svc">What we do at your location</h2><p class="d-lead">The van brings the tools to you in '+esc(c.name)+'.</p><div class="cy-svcs">'+
-    mob.map(function(m){return '<a class="cy-svc" href="#service/'+m[3]+'" data-view-link="service" data-param="'+m[3]+'">'+ET.icon(m[0])+'<b>'+m[1]+'</b><span>'+m[2]+'</span></a>'}).join('')+'</div></div></section>';
+    mob.map(function(m){return '<a class="cy-svc" href="#service/'+m[3]+'" data-view-link="service" data-param="'+m[3]+'">'+SI(m[0],0)+'<b>'+m[1]+'</b><span>'+m[2]+'</span></a>'}).join('')+'</div></div></section>';
   var how='<section class="d-sec" aria-labelledby="cy-h-how"><div class="wrap"><div class="eyebrow">Simple</div><h2 class="d-h2" id="cy-h-how">How it works</h2><ol class="cy-steps">'+
     steps.map(function(s){return '<li><b>'+s[0]+'</b><p>'+s[1]+'</p></li>'}).join('')+'</ol></div></section>';
   var shop='<section class="d-sec" style="padding-top:0"><div class="wrap"><div class="cy-shop"><div><div class="eyebrow">Shop services</div><h2 style="margin-top:8px">Bigger jobs at our Sunrise shop</h2>'+

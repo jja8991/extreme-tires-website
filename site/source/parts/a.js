@@ -2,6 +2,7 @@ var h=ET.esc, $=function(id){return document.getElementById(id)};
 var SLUGS=['brake-repair','wheel-alignment','tire-installation','tire-repair','tire-balancing','tire-rotation','suspension-repair','oil-changes','tpms-service','custom-wheels','lift-kits'];
 
 /* ======================= SERVICE DATA ======================= */
+window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'installation',lift:'lift',oil:'oil',repair:'repair',rotate:'rotation',susp:'suspension',tpms:'tpms',wheel:'wheels'};window.SI=function(ico,dark,cls){return ICO_FILE[ico]?'<img class="'+(cls||'ico-img')+'" src="media/services/'+(dark?'dark/':'')+ICO_FILE[ico]+'.webp" alt="" loading="lazy">':ET.icon(ico)};
 var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift'};
 var SV={
  'brake-repair':{label:'Brake Repair',name:'Brake Repair',ico:'brake',mode:'shop',
@@ -144,8 +145,8 @@ function renderService(param){
      '</div>'+
      '<aside class="sp-aside" aria-label="Service details"><div class="sp-card">'+
        '<div class="sp-fact"><small>Where</small><b>'+(s.mode==='both'?'Mobile or at the shop':'At the Sunrise shop')+'</b></div>'+
-       '<div class="sp-fact"><small>Typical time</small><b>X min</b><span class="sample-note">Shop to confirm</span></div>'+
-       '<div class="sp-fact"><small>Starting at</small><b>$XX</b><span class="sample-note">Sample · pricing set by the shop</span></div>'+
+       '<div class="sp-fact"><small>Typical time</small><b>Ask the shop</b></div>'+
+       '<div class="sp-fact"><small>Starting at</small><b>Call for pricing</b></div>'+
        '<a class="btn btn-red" href="#quote" data-view-link="quote" data-svc="'+h(s.label)+'">Request a quote</a>'+
        '<a class="btn btn-ghost" href="#schedule" data-view-link="schedule" data-sched="'+param+'">Schedule a repair</a>'+
        '<p class="sp-trust"><b>4.7★ from 1,319 Birdeye reviews</b><br>Hunter alignment · Mobile + shop</p>'+
@@ -278,7 +279,7 @@ var DAYN=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], MONN=['Jan','Feb','Mar','A
 var sc={where:'shop',day:null,wins:[]}, pendingSvc=null, pendingTab=null;
 var SDAYS=(function(){var out=[],d=new Date();while(out.length<6){d.setDate(d.getDate()+1);if(d.getDay()===0)continue;out.push({k:DAYN[d.getDay()]+' '+MONN[d.getMonth()]+' '+d.getDate(),d:DAYN[d.getDay()],m:MONN[d.getMonth()]+' '+d.getDate(),sat:d.getDay()===6})}return out})();
 sc.day=SDAYS[0].k;
-$('sc-pick').innerHTML=SLUGS.map(function(s){var v=SV[s];return '<label for="sc-s-'+s+'"><input type="checkbox" id="sc-s-'+s+'" name="sc-svc" value="'+s+'" data-mode="'+v.mode+'">'+ET.icon(v.ico)+'<span>'+h(v.label)+'</span></label>'}).join('');
+$('sc-pick').innerHTML=SLUGS.map(function(s){var v=SV[s];return '<label for="sc-s-'+s+'"><input type="checkbox" id="sc-s-'+s+'" name="sc-svc" value="'+s+'" data-mode="'+v.mode+'">'+SI(v.ico,0)+'<span>'+h(v.label)+'</span></label>'}).join('');
 function chosenSvcs(){return [].slice.call($('sc-pick').querySelectorAll('input:checked')).map(function(i){return i.value})}
 function windowsFor(day){return day.sat?['8–10 AM','10–12 PM','12–2 PM','2–4 PM']:['8–10 AM','10–12 PM','12–2 PM','2–4 PM','4–6 PM']}
 function curDay(){return SDAYS.filter(function(x){return x.k===sc.day})[0]||SDAYS[0]}
@@ -458,7 +459,7 @@ function renderAdvisor(m,c){
   var out='<div class="ad-sumline"><b>'+h(fmt(m))+' miles · '+h(CONDN[c])+'</b><span>'+h(band(m))+'</span></div>'+
    '<div class="ad-items" id="ad-items">'+items.map(function(i,n){
      var ex=i.extra?i.extra(m,c):'';
-     return '<label class="ad-item" for="ad-i-'+i.k+'"><input type="checkbox" id="ad-i-'+i.k+'" '+(i.slug?'data-slug="'+i.slug+'" checked':'disabled')+'>'+ET.icon(i.ico)+
+     return '<label class="ad-item" for="ad-i-'+i.k+'"><input type="checkbox" id="ad-i-'+i.k+'" '+(i.slug?'data-slug="'+i.slug+'" checked':'disabled')+'>'+SI(i.ico,0)+
        '<span><b>'+h(i.n)+'</b><span class="ad-int">Typical: '+h(i.iv[c])+'</span><p>'+h(i.why)+'</p>'+(ex?'<p class="ad-extra">'+h(ex)+'</p>':'')+'</span></label>'}).join('')+'</div>'+
    '<div class="ad-book"><div><b style="font:800 18px var(--display);text-transform:uppercase">Ask about these</b><p id="ad-book-n"></p></div><a class="btn btn-red" id="ad-book" href="#schedule" data-view-link="schedule" data-sched="">Book these</a></div>'+
    '<p class="ad-disc"><b>Follow your owner\'s manual.</b> These are general intervals and conversation starters, not a diagnosis or a service plan for your exact vehicle. Our team will confirm what your vehicle needs.</p>';
