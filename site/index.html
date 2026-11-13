@@ -2017,6 +2017,12 @@ body{overflow-x:clip}
 
 .cm-fleet,.sv-all{padding:56px 0;background:#fff}.sv-all{background:var(--mist,#f4f4f4)}
 .cm-fleet .eyebrow,.sv-all .eyebrow{margin-bottom:10px}.cm-fleet h2,.sv-all h2{margin:0 0 10px}
+.ic-groups h3{font-size:20px;margin:30px 0 4px}.ic-groups h3:first-child{margin-top:20px}
+.ic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:14px;margin-top:14px}
+.ic-grid>*{display:block;border-radius:22px;transition:transform .18s,box-shadow .18s}.ic-grid img{display:block;width:100%;height:auto}
+.ic-grid a:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.18)}.ic-grid a:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.cm-fleet .ic-grid{margin:22px 0 8px}
+@media(max-width:520px){.ic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .fl-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:22px}
 .fl-groups article{background:#fff;border:1px solid #e2e3e6;border-radius:14px;padding:20px 20px 16px;color:#0d0d0e}
 .cm-fleet .fl-groups article{background:var(--mist,#f4f4f4)}
@@ -2693,34 +2699,7 @@ body{overflow-x:clip}
       <div class="eyebrow">The full list</div>
       <h2 id="sv-all-h">Full auto service, start to finish</h2>
       <p class="cm-lead">Oil changes to custom builds. If it rolls, we can work on it.</p>
-      <div class="fl-groups">
-        <article><svg aria-hidden="true"><use href="#i-oil"/></svg><h3>Maintenance and repair</h3><ul>
-          <li><a href="#service/oil-changes" data-view-link="service" data-param="oil-changes">Oil changes</a></li>
-          <li>General mechanical work</li>
-          <li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brakes</a></li>
-          <li>Caliper painting</li>
-          <li>A/C repair</li>
-          <li><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair">Suspension work</a></li></ul></article>
-        <article><svg aria-hidden="true"><use href="#i-wheel"/></svg><h3>Tires and wheels</h3><ul>
-          <li><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair">Tire patches and repair</a></li>
-          <li><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation">Rotations</a></li>
-          <li><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing">Balancing</a></li>
-          <li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Alignments</a></li>
-          <li>Rim repair</li>
-          <li><a href="#service/custom-wheels" data-view-link="service" data-param="custom-wheels">Custom wheels</a></li></ul></article>
-        <article><svg aria-hidden="true"><use href="#i-lift"/></svg><h3>Custom and upgrades</h3><ul>
-          <li><a href="#service/lift-kits" data-view-link="service" data-param="lift-kits">Lift and lowering kits</a></li>
-          <li>Custom builds</li>
-          <li>Custom lighting</li>
-          <li>Train horns</li>
-          <li>Golf cart upgrades</li></ul></article>
-        <article><svg aria-hidden="true"><use href="#i-van"/></svg><h3>Fleet maintenance</h3><ul>
-          <li>Cars and trucks</li>
-          <li>Semis</li>
-          <li>Mowers</li>
-          <li>Skid steers</li>
-          <li><a href="#commercial" data-view-link="commercial">Commercial and fleet page</a></li></ul></article>
-      </div>
+      <div class="ic-groups"><h3>Maintenance and repair</h3><div class="ic-grid"><a href="#service/oil-changes" data-view-link="service" data-param="oil-changes"><img src="media/services/oil.webp" alt="Oil changes" loading="lazy" width="150" height="150"></a><span><img src="media/services/mechanical.webp" alt="General mechanical work" loading="lazy" width="150" height="150"></span><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair"><img src="media/services/brake.webp" alt="Brakes" loading="lazy" width="150" height="150"></a><span><img src="media/services/caliper-paint.webp" alt="Caliper painting" loading="lazy" width="150" height="150"></span><span><img src="media/services/ac-repair.webp" alt="A/C repair" loading="lazy" width="150" height="150"></span><a href="#service/suspension-repair" data-view-link="service" data-param="suspension-repair"><img src="media/services/suspension.webp" alt="Suspension work" loading="lazy" width="150" height="150"></a></div><h3>Tires and wheels</h3><div class="ic-grid"><a href="#service/tire-repair" data-view-link="service" data-param="tire-repair"><img src="media/services/repair.webp" alt="Tire patches and repair" loading="lazy" width="150" height="150"></a><a href="#service/tire-rotation" data-view-link="service" data-param="tire-rotation"><img src="media/services/rotation.webp" alt="Tire rotations" loading="lazy" width="150" height="150"></a><a href="#service/tire-balancing" data-view-link="service" data-param="tire-balancing"><img src="media/services/balancing.webp" alt="Tire balancing" loading="lazy" width="150" height="150"></a><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment"><img src="media/services/alignment.webp" alt="Wheel alignments" loading="lazy" width="150" height="150"></a><span><img src="media/services/rim-repair.webp" alt="Rim repair" loading="lazy" width="150" height="150"></span><a href="#service/custom-wheels" data-view-link="service" data-param="custom-wheels"><img src="media/services/wheels.webp" alt="Custom wheels" loading="lazy" width="150" height="150"></a></div><h3>Custom and upgrades</h3><div class="ic-grid"><a href="#service/lift-kits" data-view-link="service" data-param="lift-kits"><img src="media/services/lift.webp" alt="Lift and lowering kits" loading="lazy" width="150" height="150"></a><span><img src="media/services/custom-builds.webp" alt="Custom builds" loading="lazy" width="150" height="150"></span><span><img src="media/services/lighting.webp" alt="Custom lighting" loading="lazy" width="150" height="150"></span><span><img src="media/services/train-horns.webp" alt="Train horns" loading="lazy" width="150" height="150"></span><span><img src="media/services/golf-cart.webp" alt="Golf cart upgrades" loading="lazy" width="150" height="150"></span></div><h3>Fleet maintenance</h3><div class="ic-grid"><span><img src="media/services/fleet.webp" alt="Fleet maintenance" loading="lazy" width="150" height="150"></span><span><img src="media/services/semi.webp" alt="Semi trucks" loading="lazy" width="150" height="150"></span><span><img src="media/services/mower.webp" alt="Mowers" loading="lazy" width="150" height="150"></span><span><img src="media/services/skid-steer.webp" alt="Skid steers" loading="lazy" width="150" height="150"></span><span><img src="media/services/golf-cart.webp" alt="Golf carts" loading="lazy" width="150" height="150"></span></div></div>
       <div class="btns" style="margin-top:22px"><a class="btn btn-red" href="#schedule" data-view-link="schedule">Schedule a repair</a><a class="btn btn-ghost" href="tel:+19547731896">Call (954) 773-1896</a></div>
     </div>
   </section>
@@ -3046,6 +3025,7 @@ body{overflow-x:clip}
       <div class="eyebrow">Fleet maintenance</div>
       <h2 id="cm-fleet-h">One shop for the whole fleet</h2>
       <p class="cm-lead">We handle fleet maintenance for everything from cars and trucks to semis, mowers and skid steers, so one call keeps every unit moving.</p>
+      <div class="ic-grid"><span><img src="media/services/fleet.webp" alt="Fleet maintenance" loading="lazy" width="150" height="150"></span><span><img src="media/services/semi.webp" alt="Semi trucks" loading="lazy" width="150" height="150"></span><span><img src="media/services/mower.webp" alt="Mowers" loading="lazy" width="150" height="150"></span><span><img src="media/services/skid-steer.webp" alt="Skid steers" loading="lazy" width="150" height="150"></span><span><img src="media/services/golf-cart.webp" alt="Golf carts" loading="lazy" width="150" height="150"></span><span><img src="media/services/custom-builds.webp" alt="Custom builds" loading="lazy" width="150" height="150"></span></div>
       <div class="fl-groups">
         <article><svg aria-hidden="true"><use href="#i-oil"/></svg><h3>Keep them running</h3><ul><li>Oil changes</li><li>General mechanical work</li><li>A/C repair</li><li>Brakes and caliper painting</li><li>Suspension work</li></ul></article>
         <article><svg aria-hidden="true"><use href="#i-wheel"/></svg><h3>Tires and wheels</h3><ul><li>New tires and patches</li><li>Rotations and balancing</li><li>Alignments</li><li>Rim repair</li></ul></article>
