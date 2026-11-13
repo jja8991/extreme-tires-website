@@ -1813,37 +1813,68 @@ body{background:#0d0d0e}
 .opts .opt:has(.where-img){grid-template-columns:96px 1fr}
 .flow #wiz .opt:has(.where-img){grid-template-columns:96px 1fr 20px}
 .opt .where-img{width:96px;height:64px;object-fit:contain;display:block}
-/* ===== Quote form redesign: dark, 3D service icons (Quote page + Mobile page) ===== */
-#view-quote .q-intro,#mobile-quote .q-intro{background:linear-gradient(180deg,#0d0d0e,#121214);border-left:0;border-top:3px solid var(--red);color:#fff}
+/* ===== Quote form: dark by default (Quote page), light on the Mobile page. Colors come from --q* variables ===== */
+#view-quote,#mobile-quote{--qb:#0d0d0e;--qc:#151517;--qbd:#26262a;--qt:#fff;--qm:#9aa0a8;--qin:#151517;--qinbd:#2c2c30;--qalt:#101012;--qchk:#1a1012;--qph:#6f747c;--qerr:#ff8a8d;--qglow:rgba(227,22,27,.28)}
+#mobile-quote{--qb:#f4f4f2;--qc:#fff;--qbd:#dcdde0;--qt:#0d0d0e;--qm:#5b6068;--qin:#fff;--qinbd:#cfd1d5;--qalt:#fff;--qchk:#fff1f1;--qph:#8a8f98;--qerr:#b80f13;--qglow:rgba(227,22,27,.18)}
+#view-quote .q-intro,#mobile-quote .q-intro{background:var(--qalt);border-left:0;border-top:3px solid var(--red);color:var(--qt)}
+#mobile-quote .q-intro{background:#fff}
 #view-quote .q-intro .wrap,#mobile-quote .q-intro .wrap{padding-block:34px 18px}
-#view-quote .q-intro h2,#mobile-quote .q-intro h2{color:#fff;max-width:20ch}
-#view-quote .q-intro p,#mobile-quote .q-intro p{color:#b4b8bf}
+#view-quote .q-intro h2,#mobile-quote .q-intro h2{color:var(--qt);max-width:20ch}
+#view-quote .q-intro p,#mobile-quote .q-intro p{color:var(--qm)}
 #view-quote .q-intro .eyebrow,#mobile-quote .q-intro .eyebrow{display:block;color:var(--red)}
-#view-quote .checks div,#mobile-quote .checks div{background:#151517;border:1px solid #26262a;color:#e8eaee;border-radius:10px}
-#view-quote .q-body,#mobile-quote .q-body{background:#0d0d0e;color:#fff;padding-block:30px 40px}
-#view-quote .q-body h3,#mobile-quote .q-body h3{color:#fff;font-size:clamp(22px,2.6vw,30px)}
-#view-quote .q-body>.wrap>p,#mobile-quote .q-body>.wrap>p{color:#8d929b!important}
+#view-quote .checks div,#mobile-quote .checks div{background:var(--qc);border:1px solid var(--qbd);color:var(--qt);border-radius:10px}
+#view-quote .q-body,#mobile-quote .q-body{background:var(--qb);color:var(--qt);padding-block:30px 40px}
+#view-quote .q-body h3,#mobile-quote .q-body h3{color:var(--qt);font-size:clamp(22px,2.6vw,30px)}
+#view-quote .q-body>.wrap>p,#mobile-quote .q-body>.wrap>p{color:var(--qm)!important}
 #view-quote .pick,#mobile-quote .pick{gap:12px;margin:22px 0 34px}
-#view-quote .pick label,#mobile-quote .pick label{background:#151517;border:1px solid #26262a;border-radius:14px;padding:16px 8px 14px;gap:8px;color:#e8eaee;font:700 13px/1.2 var(--body);transition:transform .25s var(--ease),border-color .2s,box-shadow .25s,background .2s}
+#view-quote .pick label,#mobile-quote .pick label{background:var(--qc);border:1px solid var(--qbd);border-radius:14px;padding:16px 8px 14px;gap:8px;color:var(--qt);font:700 13px/1.2 var(--body);transition:transform .25s var(--ease),border-color .2s,box-shadow .25s,background .2s}
 #view-quote .pick .pk-img,#mobile-quote .pick .pk-img{width:68px;height:68px;object-fit:contain;display:block;filter:drop-shadow(0 6px 14px rgba(227,22,27,.25))}
-#view-quote .pick label:hover,#mobile-quote .pick label:hover{transform:translateY(-3px);border-color:#4a1214}
-#view-quote .pick label:has(input:checked),#mobile-quote .pick label:has(input:checked){border-color:var(--red);background:linear-gradient(180deg,#1d1012,#151517);box-shadow:0 0 0 1px var(--red),0 10px 28px rgba(227,22,27,.28)}
-#view-quote .pick label:has(input:checked)::after,#mobile-quote .pick label:has(input:checked)::after{content:"✓";position:absolute;top:8px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font:800 12px/20px var(--body)}
-#view-quote .form-grid label.f,#mobile-quote .form-grid label.f{color:#9aa0a8}
-#view-quote .form-grid input,#view-quote .form-grid select,#mobile-quote .form-grid input,#mobile-quote .form-grid select,#view-quote .q-what textarea,#mobile-quote .q-what textarea{background:#151517;color:#fff;border:1px solid #2c2c30;border-radius:10px;padding:14px 14px;min-height:50px;transition:border-color .2s,box-shadow .2s}
-#view-quote .form-grid input::placeholder,#mobile-quote .form-grid input::placeholder,#view-quote .q-what textarea::placeholder,#mobile-quote .q-what textarea::placeholder{color:#6f747c}
-#view-quote .form-grid input:focus,#view-quote .form-grid select:focus,#mobile-quote .form-grid input:focus,#mobile-quote .form-grid select:focus,#view-quote .q-what textarea:focus,#mobile-quote .q-what textarea:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(227,22,27,.25)}
-#view-quote .form-grid select option,#mobile-quote .form-grid select option{background:#151517;color:#fff}
-#view-quote .err,#mobile-quote .err{color:#ff8a8d}
-#view-quote .chk,#mobile-quote .chk{background:#151517;border:1px solid #26262a;border-radius:10px;padding:14px 16px;width:fit-content;color:#e8eaee}
-#view-quote .q-what,#mobile-quote .q-what{background:#101012;border-top:1px solid #1e1e21;padding-block:34px}
-#view-quote .sym label,#mobile-quote .sym label{background:#151517;border:1px solid #26262a;border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s}
-#view-quote .sym label:has(input:checked),#mobile-quote .sym label:has(input:checked){border-color:var(--red);background:#1a1012}
+#view-quote .pick label:hover,#mobile-quote .pick label:hover{transform:translateY(-3px);border-color:var(--red)}
+#view-quote .pick label:has(input:checked),#mobile-quote .pick label:has(input:checked){border-color:var(--red);background:var(--qchk);box-shadow:0 0 0 1px var(--red),0 10px 28px var(--qglow)}
+#view-quote .pick label:has(input:checked)::after,#mobile-quote .pick label:has(input:checked)::after{content:"\2713";position:absolute;top:8px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font:800 12px/20px var(--body)}
+#view-quote .form-grid label.f,#mobile-quote .form-grid label.f{color:var(--qm)}
+#view-quote .form-grid input,#view-quote .form-grid select,#mobile-quote .form-grid input,#mobile-quote .form-grid select,#view-quote .q-what textarea,#mobile-quote .q-what textarea{background:var(--qin);color:var(--qt);border:1px solid var(--qinbd);border-radius:10px;padding:14px;min-height:50px;transition:border-color .2s,box-shadow .2s}
+#view-quote .form-grid input::placeholder,#mobile-quote .form-grid input::placeholder,#view-quote .q-what textarea::placeholder,#mobile-quote .q-what textarea::placeholder{color:var(--qph)}
+#view-quote .form-grid input:focus,#view-quote .form-grid select:focus,#mobile-quote .form-grid input:focus,#mobile-quote .form-grid select:focus,#view-quote .q-what textarea:focus,#mobile-quote .q-what textarea:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(227,22,27,.22)}
+#view-quote .form-grid select option,#mobile-quote .form-grid select option{background:var(--qin);color:var(--qt)}
+#view-quote .form-grid input:-webkit-autofill,#mobile-quote .form-grid input:-webkit-autofill{-webkit-text-fill-color:var(--qt);box-shadow:0 0 0 100px var(--qin) inset}
+#view-quote .err,#mobile-quote .err{color:var(--qerr)}
+#view-quote .chk,#mobile-quote .chk{background:var(--qc);border:1px solid var(--qbd);border-radius:10px;padding:14px 16px;width:fit-content;color:var(--qt)}
+#view-quote .q-what,#mobile-quote .q-what{background:var(--qalt);color:var(--qt);border-top:1px solid var(--qbd);padding-block:34px}
+#view-quote .sym label,#mobile-quote .sym label{background:var(--qc);border:1px solid var(--qbd);border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s}
+#view-quote .sym label:has(input:checked),#mobile-quote .sym label:has(input:checked){border-color:var(--red);background:var(--qchk)}
 #view-quote .q-what textarea,#mobile-quote .q-what textarea{margin-top:8px;min-height:110px}
-#view-quote .q-submit,#mobile-quote .q-submit{background:#0d0d0e;border-top:1px solid #1e1e21;padding-block:30px 40px}
+#mobile-quote .q-what label.f{color:var(--qm)!important}
+#view-quote .q-submit,#mobile-quote .q-submit{background:var(--qb);color:var(--qt);border-top:1px solid var(--qbd);padding-block:30px 40px}
+#view-quote .q-submit p,#mobile-quote .q-submit p{color:var(--qm)}
 #view-quote .q-submit .btn,#mobile-quote .q-submit .btn{padding-block:18px;font-size:16px;box-shadow:0 10px 30px rgba(227,22,27,.35);border-radius:10px}
-#view-quote .done,#mobile-quote .done{background:#151517;color:#fff;border:1px solid #26262a;border-left:6px solid var(--red);border-radius:10px}
+#view-quote .done,#mobile-quote .done{background:var(--qc);color:var(--qt);border:1px solid var(--qbd);border-left:6px solid var(--red);border-radius:10px}
+#mobile-quote .q-body h3.mq-vh{margin-top:6px}
+.veh-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;margin-bottom:22px}
+.mq-vnote{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 16px!important;font-size:15px}
+.mq-vnote b{color:var(--red)}.mq-vnote button{background:none;border:0;color:var(--qt);text-decoration:underline;font:600 14px var(--body);cursor:pointer;padding:6px 4px;min-height:0}
+@media(max-width:900px){.veh-grid{grid-template-columns:1fr 1fr!important}}
 @media(max-width:700px){#view-quote .pick .pk-img,#mobile-quote .pick .pk-img{width:56px;height:56px}#view-quote .pick label,#mobile-quote .pick label{padding:12px 4px;font-size:12px}}
+
+/* ===== Mobile Tire Service page: white background ===== */
+#view-mobile .onsite,#view-mobile .slots,#view-mobile .areas,#view-mobile .how-img{--paper:#fff;--mist:#f4f4f2;--ink:#0d0d0e;--steel:#5b6068;--line:#e3e3e0;background:#fff;color:#0d0d0e}
+#view-mobile .slots{background:#f7f7f5;border-block:1px solid #ececea}
+#view-mobile .how-img{padding:40px 0 20px}
+#view-mobile .how-img img{border-radius:14px;box-shadow:0 18px 50px rgba(13,13,14,.18)}
+#view-mobile .cal{background:#fff;border:1px solid #dcdde0;color:#0d0d0e;box-shadow:0 8px 28px rgba(13,13,14,.06)}
+#view-mobile .cal .cal-nav{background:#f4f4f2;border-color:#dcdde0;color:#0d0d0e}
+#view-mobile .cal .cal-nav:hover:not(:disabled){background:var(--red);border-color:var(--red);color:#fff}
+#view-mobile .cal-w span{color:#6b7078}
+#view-mobile .cal .cal-d{background:#f4f4f2;color:#0d0d0e}
+#view-mobile .cal button.cal-d{background:#f4f4f2;color:#0d0d0e;border:1px solid #e2e3e6}
+#view-mobile .cal button.cal-d:hover{background:#fff;border-color:var(--red);color:#0d0d0e}
+#view-mobile .cal button.cal-d[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+#view-mobile .cal .cal-off{background:transparent;color:#b3b6bc;border-color:transparent}
+#view-mobile .cal-t:not(.cal-off){box-shadow:inset 0 0 0 1px #0d0d0e22}
+#view-mobile .cal-key{color:#6b7078}
+#view-mobile .slots .times button{background:#fff;border-color:#0d0d0e;color:#0d0d0e}
+#view-mobile .slots .times button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+#view-mobile .onsite-pic img{box-shadow:0 18px 50px rgba(13,13,14,.18)}
 </style>
 </head>
 <body>
@@ -2264,18 +2295,27 @@ body{background:#0d0d0e}
         <div class="checks"><div>Tires, wheels and auto service</div><div>Mobile service at your location</div><div>Pricing confirmed by our team</div><div>Shop now, pay later available</div></div>
       </div>
     </div>
-    <form id="mq-form" novalidate>
+    <form id="mq-form" novalidate autocomplete="on">
       <div class="q-body">
         <div class="wrap">
           <h3>What do you need help with?</h3>
           <p style="margin:0;color:var(--steel)">Pick one or more. Not sure? Skip it and describe the symptoms below.</p>
           <div class="pick" id="mq-pick"></div>
+          <h3 class="mq-vh">Your vehicle</h3>
+          <p class="mq-vnote" id="mq-vnote" hidden></p>
+          <div class="form-grid veh-grid">
+            <label class="f" for="mq-vyear">Year<select id="mq-vyear" name="vyear" autocomplete="off"></select></label>
+            <label class="f" for="mq-vmake">Make<select id="mq-vmake" name="vmake" autocomplete="off"></select></label>
+            <label class="f" for="mq-vmodel">Model<select id="mq-vmodel" name="vmodel" autocomplete="off"></select></label>
+            <label class="f" for="mq-vtrim">Trim<select id="mq-vtrim" name="vtrim" autocomplete="off"><option>Not sure / any trim</option></select></label>
+          </div>
+          <div class="form-grid" style="margin-bottom:26px"><label class="f" for="mq-size">Tire size (optional)<input id="mq-size" name="tiresize" autocomplete="off" placeholder="Like 225/65R17, printed on the tire sidewall" maxlength="14"></label></div>
           <div class="form-grid">
             <label class="f" for="mq-first">First name<input id="mq-first" name="first" autocomplete="given-name" placeholder="Enter your first name" required><span class="err" data-for="mq-first"></span></label>
             <label class="f" for="mq-last">Last name<input id="mq-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="mq-last"></span></label>
-            <label class="f" for="mq-phone">Phone number<input id="mq-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="mq-phone"></span></label>
-            <label class="f" for="mq-email">Email<input id="mq-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="mq-email"></span></label>
-            <label class="f" for="mq-loc" style="color:var(--steel)">Location or service area<input id="mq-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
+            <label class="f" for="mq-phone">Phone number<input id="mq-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="mq-phone"></span></label>
+            <label class="f" for="mq-email">Email<input id="mq-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="mq-email"></span></label>
+            <label class="f" for="mq-loc" style="color:var(--steel)">Location or service area<input id="mq-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err"></span></label>
             <label class="f" for="mq-when">When do you need service?<select id="mq-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="mq-when"></span></label>
           </div>
           <label class="chk" for="mq-mobile"><input type="checkbox" id="mq-mobile" name="mobile" checked> I'd prefer mobile service at my location</label>
@@ -3608,7 +3648,7 @@ body{background:#0d0d0e}
     </div>
   </div>
 
-  <form id="quote-form" novalidate>
+  <form id="quote-form" novalidate autocomplete="on">
     <div class="q-body">
       <div class="wrap">
         <h3>What do you need help with?</h3>
@@ -3619,7 +3659,7 @@ body{background:#0d0d0e}
           <label class="f" for="q-last">Last name<input id="q-last" name="last" autocomplete="family-name" placeholder="Enter your last name" required><span class="err" data-for="q-last"></span></label>
           <label class="f" for="q-phone">Phone number<input id="q-phone" name="phone" type="tel" autocomplete="tel" placeholder="Enter your number" required><span class="err" data-for="q-phone"></span></label>
           <label class="f" for="q-email">Email<input id="q-email" name="email" type="email" autocomplete="email" placeholder="Enter your email" required><span class="err" data-for="q-email"></span></label>
-          <label class="f" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" placeholder="City, ZIP, or address"><span class="err"></span></label>
+          <label class="f" for="q-loc" style="color:var(--steel)">Location or service area<input id="q-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err"></span></label>
           <label class="f" for="q-when">When do you need service?<select id="q-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="q-when"></span></label>
         </div>
         <label class="chk" for="q-mobile"><input type="checkbox" id="q-mobile" name="mobile"> I'd prefer mobile service at my location</label>
@@ -3728,7 +3768,7 @@ body{background:#0d0d0e}
   }).join('');
 
   var PK={brake:'brake',wheel:'wheels',lift:'lift',oil:'oil',susp:'suspension',align:'alignment',balance:'balancing',install:'installation',repair:'repair',rotate:'rotation',tpms:'tpms',pay:'paylater'};
-  var pimg=function(id){return '<img class="pk-img" src="media/services/dark/'+PK[id]+'.webp" alt="" width="72" height="72" loading="lazy" decoding="async">'};
+  var pimg=function(id,light){return '<img class="pk-img" src="media/services/'+(light?'':'dark/')+PK[id]+'.webp" alt="" width="72" height="72" loading="lazy" decoding="async">'};
   var pick=document.getElementById('pick');
   pick.innerHTML=SERVICES.map(function(s,i){
     return '<label for="pk'+i+'"><input type="checkbox" id="pk'+i+'" name="svc" value="'+s[1]+'">'+pimg(s[0])+'<span>'+s[1]+'</span></label>';
@@ -3792,12 +3832,15 @@ body{background:#0d0d0e}
   });
 
 
+  // Tiny remember-me store (vehicle, tire size, contact). Fails silently if storage is blocked.
+  window.ETMem={get:function(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del:function(k){try{localStorage.removeItem(k)}catch(e){}}};
+
   // Vehicle finder: full year/make list, models loaded live from the NHTSA vPIC database (free public API)
   window.initVehPicker=function(Y,M,D,T,init){
     var cache={};
     Y.value=init.year;
     function setModels(list,keep){
-      var o=list.map(function(n){return '<option>'+n.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</option>'}).join('')+'<option>Other / not listed</option>';
+      var o=(init.blank?'<option value="">Model</option>':'')+list.map(function(n){return '<option>'+n.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</option>'}).join('')+'<option>Other / not listed</option>';
       D.innerHTML=o; if(keep&&list.indexOf(keep)>-1) D.value=keep;
       loadTrims();
     }
@@ -3823,6 +3866,7 @@ body{background:#0d0d0e}
     D.addEventListener('change',loadTrims);
     function titleCase(s){return s.toLowerCase().replace(/(^|[\s\-\/])([a-z])/g,function(m,a,b){return a+b.toUpperCase()})}
     function load(keep){
+      if(!M.value||!Y.value){D.innerHTML='<option value="">'+(init.blank?'Model':'Select year and make')+'</option>';T.innerHTML=GEN;return}
       if(M.value==='Other / not listed'){setModels([]);return}
       var key=Y.value+'|'+M.value; D.innerHTML='<option>Loading models…</option>';
       if(cache[key]){setModels(cache[key],keep);return}
@@ -3837,7 +3881,18 @@ body{background:#0d0d0e}
     Y.addEventListener('change',function(){load(D.value)}); M.addEventListener('change',function(){load()});
     load(init.model);
   };
-  initVehPicker(document.getElementById('v-year'),document.getElementById('v-make'),document.getElementById('v-model'),document.getElementById('v-trim'),{year:'2024',model:'Gladiator'});
+  var SV=ETMem.get('et_vehicle')||{};
+  if(SV.make){document.getElementById('v-make').value=SV.make}
+  initVehPicker(document.getElementById('v-year'),document.getElementById('v-make'),document.getElementById('v-model'),document.getElementById('v-trim'),{year:SV.year||'2024',model:SV.make?(SV.model||''):'Gladiator',trim:SV.trim||null});
+  // Remember the vehicle and tire size so the Mobile page quote form can pre-fill them
+  function saveHomeVeh(){
+    var g=function(id){return document.getElementById(id).value},mo=g('v-model');
+    if(/Loading/.test(mo)||!g('v-make'))return;
+    var o=ETMem.get('et_vehicle')||{};
+    ETMem.set('et_vehicle',{year:g('v-year'),make:g('v-make'),model:mo,trim:g('v-trim'),size:o.size||''});
+  }
+  ['v-year','v-make','v-model','v-trim'].forEach(function(id){document.getElementById(id).addEventListener('change',function(){saveHomeVeh();setTimeout(saveHomeVeh,1600)})});
+  document.getElementById('p-veh').addEventListener('submit',saveHomeVeh);
   // Tire finder tabs + demo results
   var tabs=[['t-veh','p-veh'],['t-size','p-size']];
   tabs.forEach(function(t){
@@ -3851,6 +3906,9 @@ body{background:#0d0d0e}
   });
   function size(){return document.getElementById('s-w').value+'/'+document.getElementById('s-a').value+'R'+document.getElementById('s-r').value}
   ['s-w','s-a','s-r'].forEach(function(id){document.getElementById(id).addEventListener('change',function(){document.getElementById('sz').textContent=size()})});
+  function saveSize(){var o=ETMem.get('et_vehicle')||{};o.size=size();ETMem.set('et_vehicle',o)}
+  ['s-w','s-a','s-r'].forEach(function(id){document.getElementById(id).addEventListener('change',function(){if(document.getElementById('p-size')){/*only after the person picks*/saveSize()}})});
+  document.getElementById('p-size').addEventListener('submit',saveSize);
   document.getElementById('p-veh').addEventListener('submit',function(e){
     e.preventDefault();
     var v=['v-year','v-make','v-model','v-trim'].map(function(id){return document.getElementById(id).value}).join(' ');
@@ -4268,12 +4326,64 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     done.hidden=false;
   });
 
-  // Mobile page quote form (same fields and messages as the Quote page)
+  // Mobile page quote form (same fields and messages as the Quote page, plus vehicle + remembered details)
   var mpick=document.getElementById('mq-pick'), mform=document.getElementById('mq-form');
   if(mpick&&mform){
+    var $m=function(id){return document.getElementById(id)};
     mpick.innerHTML=SERVICES.map(function(s,i){
-      return '<label for="mpk'+i+'"><input type="checkbox" id="mpk'+i+'" name="svc" value="'+s[1]+'">'+pimg(s[0])+'<span>'+s[1]+'</span></label>';
+      return '<label for="mpk'+i+'"><input type="checkbox" id="mpk'+i+'" name="svc" value="'+s[1]+'">'+pimg(s[0],true)+'<span>'+s[1]+'</span></label>';
     }).join('');
+
+    /* ---- vehicle: pre-filled from the homepage finder (shared et_vehicle), saved back when changed ---- */
+    var builtSig=null;
+    function vehSig(v){return v&&v.make?[v.year,v.make,v.model,v.trim].join('|'):''}
+    function vehNow(){
+      var y=$m('mq-vyear').value,mk=$m('mq-vmake').value,d=$m('mq-vmodel').value,t=$m('mq-vtrim').value;
+      if(!y||!mk)return '';
+      return [y,mk,(d&&!/Loading|^Model$/.test(d))?d:'',/^Not sure/.test(t)?'':t].filter(Boolean).join(' ');
+    }
+    function saveMobVeh(){
+      var y=$m('mq-vyear').value,mk=$m('mq-vmake').value,d=$m('mq-vmodel').value;
+      if(!y||!mk||/Loading/.test(d))return;
+      var o=ETMem.get('et_vehicle')||{};
+      var v={year:y,make:mk,model:d,trim:$m('mq-vtrim').value,size:$m('mq-size').value||o.size||''};
+      builtSig=vehSig(v);ETMem.set('et_vehicle',v);
+    }
+    function buildVeh(){
+      var v=ETMem.get('et_vehicle')||{}, sig=vehSig(v);
+      if(builtSig!==null&&sig===builtSig)return;               // nothing new since the last build
+      ['mq-vyear','mq-vmake','mq-vmodel','mq-vtrim'].forEach(function(id){var o=$m(id),n=o.cloneNode(false);o.parentNode.replaceChild(n,o)}); // drop old listeners
+      var Y=$m('mq-vyear'),M=$m('mq-vmake'),D=$m('mq-vmodel'),T=$m('mq-vtrim');
+      Y.innerHTML='<option value="">Year</option>'+$m('v-year').innerHTML.replace(/ selected(="[^"]*")?/g,'');
+      M.innerHTML='<option value="">Make</option>'+$m('v-make').innerHTML.replace(/ selected(="[^"]*")?/g,'');
+      T.innerHTML='<option>Not sure / any trim</option>';
+      M.value=v.make||'';Y.value='';
+      initVehPicker(Y,M,D,T,{year:v.make?(v.year||''):'',model:v.make?(v.model||''):'',trim:v.make?(v.trim||null):null,blank:true});
+      [Y,M,D,T].forEach(function(el){el.addEventListener('change',function(){saveMobVeh();setTimeout(saveMobVeh,1600);note()})});
+      if(v.size&&!$m('mq-size').value)$m('mq-size').value=v.size;
+      builtSig=sig; note(v.make?v:null);
+    }
+    function note(v){
+      var n=$m('mq-vnote');
+      if(v&&v.make){n.innerHTML='<b>&#10003; Vehicle saved from your search:</b> '+ET.esc([v.year,v.make,v.model].filter(Boolean).join(' '))+' <button type="button" id="mq-vclear">Not your vehicle? Clear</button>';n.hidden=false;
+        $m('mq-vclear').onclick=function(){ETMem.del('et_vehicle');builtSig=null;$m('mq-size').value='';buildVeh();n.hidden=true}}
+      else n.hidden=true;
+    }
+    $m('mq-size').addEventListener('change',function(){var o=ETMem.get('et_vehicle')||{};o.size=this.value.trim();ETMem.set('et_vehicle',o)});
+    buildVeh();
+    window.mqRefreshVehicle=buildVeh;
+
+    /* ---- contact details: browser autofill + our own remember-me (shared with the Quote page) ---- */
+    var CF=[['first','first'],['last','last'],['phone','phone'],['email','email'],['loc','loc']];
+    function rememberContact(pfx){
+      var o={};CF.forEach(function(f){var el=document.getElementById(pfx+f[0]);if(el&&el.value.trim())o[f[1]]=el.value.trim()});
+      if(Object.keys(o).length)ETMem.set('et_contact',Object.assign(ETMem.get('et_contact')||{},o));
+    }
+    ['mq-','q-'].forEach(function(pfx){
+      var c=ETMem.get('et_contact')||{};
+      CF.forEach(function(f){var el=document.getElementById(pfx+f[0]);if(!el)return;if(c[f[1]]&&!el.value)el.value=c[f[1]];el.addEventListener('change',function(){rememberContact(pfx)})});
+    });
+
     var MMSG={'mq-first':'Please enter your name.','mq-last':'Please enter your name.','mq-phone':'This field is required','mq-email':'This field is required','mq-when':'Please select when you need service.'};
     mform.addEventListener('submit',function(e){
       e.preventDefault();
@@ -4287,8 +4397,10 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       });
       var md=document.getElementById('mq-done');
       if(bad){md.hidden=true;bad.focus();return;}
+      rememberContact('mq-');saveMobVeh();
       var mp=[].slice.call(mpick.querySelectorAll('input:checked')).map(function(i){return i.value});
-      md.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(mp.length?' for: '+mp.join(', '):'')+'.';
+      var veh=vehNow(), sz=$m('mq-size').value.trim();
+      md.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(mp.length?' for: '+mp.join(', '):'')+(veh?' | Vehicle: '+veh:'')+(sz?' | Tire size: '+sz:'')+'.';
       md.hidden=false;
     });
   }
@@ -5699,5 +5811,8 @@ $('cy-root').addEventListener('submit',function(e){
 })();
 </script>
 
+<script>
+(function(){var old=ET.onShow.mobile;ET.onShow.mobile=function(p){if(old)old(p);try{if(window.mqRefreshVehicle)mqRefreshVehicle()}catch(e){console.error(e)}}})();
+</script>
 </body>
 </html>
