@@ -4455,6 +4455,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
         if(!W.where)return err('Choose the shop or your location so we plan the visit.');
         if(W.where==='mobile'){
           W.loc=g('loc');W.zip=g('zip');
+          var le=$w('loc');W.lat=le&&le.dataset.lat?+le.dataset.lat:null;W.lng=le&&le.dataset.lng?+le.dataset.lng:null;
           if(W.loc.length<5||!houseNo(W.loc))return err('Enter the street address with the house number.');
           if(!/^[0-9]{5}$/.test(W.zip))return err('Enter a 5-digit ZIP code.');
           if(W.zipOk===false)return err('That ZIP is outside our service area. Call '+PHONE+' or pick the shop.');
@@ -4489,27 +4490,31 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       var a=chosen(),parts=[W.where==='mobile'?'MOBILE: service at customer location':'AT SHOP',(Q?'QUOTE REQUEST, timing: '+W.timing:''),'Services: '+labels(a).join(', ')].filter(Boolean);
       if(W.vp&&W.vp.trim&&!/^Not sure|^Other/.test(W.vp.trim))parts.push('Trim: '+W.vp.trim);
       if(W.notes)parts.push(W.notes);
-      if(Q){W.done=true;W.step=5;W.dir=1;render();return}  /* quote requests are not wired to the booking backend yet */
       var b=BK();
-      if(!b||!b.live())return err('Online booking is not open right now, so nothing was sent. Please call '+PHONE+' and we will book you in.');
-      var d=dayInfo(),sz=W.size,v=W.vp;
+      if(!b||(!Q&&!b.live()))return err('Online booking is not open right now, so nothing was sent. Please call '+PHONE+' and we will book you in.');
+      var d=dayInfo(),sz=W.size,v=W.vp||{};
+      var svcs=labels(a).join('|'),pin=W.where==='mobile'&&W.lat!=null&&W.lng!=null;
+      var tr=v.trim&&!/^Not sure|^Other/.test(v.trim)?v.trim:'';
       var bodyJ={name:W.name,phone:W.phone,email:W.email,address:W.where==='mobile'?W.loc:b.SHOP.addr,zip:W.where==='mobile'?W.zip:b.SHOP.zip,
         vehicle_year:v.year,vehicle_make:v.make,vehicle_model:v.model,tire_size:/^[A-Za-z0-9\/ .\-]{1,20}$/.test(sz)?sz:'',
-        service_type:b.serviceKey(a),pref_date:isoOf(d.date),pref_window:W.win,notes:parts.join(' | ').slice(0,500),consent:true,sms_consent:W.sms,sms_marketing_consent:false,lang:'en',website:''};
+        service_type:Q?'':b.serviceKey(a),pref_date:Q?'':isoOf(d.date),pref_window:Q?'':W.win,notes:parts.join(' | ').slice(0,500),consent:true,sms_consent:W.sms,sms_marketing_consent:false,lang:'en',website:'',
+        location_type:W.where||'',lat:pin?W.lat:'',lng:pin?W.lng:'',vehicle_trim:tr,services:svcs.slice(0,500)};
+      if(Q){bodyJ.kind=F?'fleet':'quote';bodyJ.timing=F?(W.timing||''):W.timing;
+        if(F){bodyJ.company=W.company;bodyJ.fleet_size=W.fsize;bodyJ.vehicle_types=vehList().split(', ').join('|');bodyJ.contact_pref=W.pref||'';if(!W.where){bodyJ.location_type=''}}}
       Object.keys(bodyJ).forEach(function(k){if(bodyJ[k]===''&&k!=='website')delete bodyJ[k]});
       W.busy=true;nextB.disabled=true;var lbl=nextB.textContent;nextB.textContent='Sending...';
       function idle(){W.busy=false;nextB.disabled=false;nextB.textContent=lbl}
       fetch(b.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(bodyJ)})
         .then(function(r){return r.json().catch(function(){return null})}).then(function(j){
           idle();j=j||{};
-          if(j.ok===true){W.done=true;W.step=5;W.dir=1;o.doneMsg=(typeof j.message==='string'&&j.message?j.message+'. ':'')+'This was a request, not a confirmed appointment. We will contact you to confirm the day and time.';render();return}
+          if(j.ok===true){W.done=true;W.step=5;W.dir=1;if(!Q)o.doneMsg=(typeof j.message==='string'&&j.message?j.message+'. ':'')+'This was a request, not a confirmed appointment. We will contact you to confirm the day and time.';render();return}
           var c=j.code,msg=typeof j.message==='string'&&j.message?j.message:'';
           var back=function(n,m){W.step=n;W.dir=-1;render();err(m)};
           if(c==='out_of_area')back(0,'That ZIP is outside our service area. Call '+PHONE+'.');
           else if(c==='closed'||c==='notice'||c==='date_range')back(3,msg||'That day or time is not available. Please pick another.');
           else if(c==='rate_limited')err('We got a lot of requests just now. Please try again in a bit, or call '+PHONE+'.');
           else if(c==='disabled')err('Online booking is paused right now. Please call '+PHONE+'.');
-          else if(c==='invalid'&&j.field){var st={address:0,zip:0,vehicle_year:1,vehicle_make:1,vehicle_model:1,tire_size:1,service_type:2,pref_date:3,pref_window:3}[j.field];if(st!=null)back(st,msg||'Please check that and try again.');else err(msg||'Please check that and try again.')}
+          else if(c==='invalid'&&j.field){var st={address:0,zip:0,services:2,company:4,email:4,name:4,phone:4,vehicle_year:1,vehicle_make:1,vehicle_model:1,tire_size:1,service_type:2,pref_date:3,pref_window:3}[j.field];if(st!=null)back(st,msg||'Please check that and try again.');else err(msg||'Please check that and try again.')}
           else err('We could not send that just now. Please try again, or call '+PHONE+'.');
         }).catch(function(){idle();err('We could not send that just now. Please check your connection and try again, or call '+PHONE+'.')});
     }
@@ -5561,16 +5566,17 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     function pick(i){var it=items[i];if(!it)return;
       inp.value=full?(it.l1+', '+it.l2):it.l1;
       inp.dispatchEvent(new Event('input',{bubbles:true}));
+      if(typeof it.lat==='number'&&typeof it.lon==='number'){inp.dataset.lat=String(it.lat);inp.dataset.lng=String(it.lon);inp.dataset.pin=inp.value}
       if(zipEl&&/^[0-9]{5}$/.test(it.zip)){zipEl.value=it.zip;zipEl.dispatchEvent(new Event('input',{bubbles:true}))}
       close();}
     function look(q){var my=++seq;
       fetch('https://api.geoapify.com/v1/geocode/autocomplete?format=json&limit=8&lang=en&filter=rect:-81.35,25.10,-79.90,27.25&text='+encodeURIComponent(q)+'&apiKey='+encodeURIComponent(GEOKEY),{credentials:'omit',referrerPolicy:'no-referrer'})
         .then(function(r){return r.ok?r.json():null}).then(function(j){
           if(my!==seq||!j)return;var seen={};
-          items=(j.results||[]).filter(function(p){return (p.country_code||'').toLowerCase()==='us'&&/florida/i.test(p.state||'')&&(p.street||p.address_line1)}).map(function(p){return {l1:((p.housenumber?p.housenumber+' ':'')+(p.street||'')).trim()||p.address_line1,l2:[p.city||p.town||p.suburb,'FL',p.postcode].filter(Boolean).join(', '),zip:p.postcode||''}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
+          items=(j.results||[]).filter(function(p){return (p.country_code||'').toLowerCase()==='us'&&/florida/i.test(p.state||'')&&(p.street||p.address_line1)}).map(function(p){return {l1:((p.housenumber?p.housenumber+' ':'')+(p.street||'')).trim()||p.address_line1,l2:[p.city||p.town||p.suburb,'FL',p.postcode].filter(Boolean).join(', '),zip:p.postcode||'',lat:p.lat,lon:p.lon}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
           cur=-1;paint();
         }).catch(function(){close()});}
-    inp.addEventListener('input',function(){clearTimeout(timer);var q=inp.value.trim();if(q.length<3||/^[0-9]{0,2}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},120)});
+    inp.addEventListener('input',function(){if(inp.dataset.pin&&inp.dataset.pin!==inp.value){delete inp.dataset.lat;delete inp.dataset.lng;delete inp.dataset.pin}clearTimeout(timer);var q=inp.value.trim();if(q.length<3||/^[0-9]{0,2}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},120)});
     inp.addEventListener('keydown',function(e){if(box.hidden||!items.length)return;
       if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%items.length;paint()}
       else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+items.length)%items.length;paint()}
