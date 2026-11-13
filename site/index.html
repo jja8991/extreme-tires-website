@@ -5323,6 +5323,9 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   (function(){
     var inp=$('sw-loc'),box=$('sw-ac'),timer=null,seq=0,items=[],cur=-1,cache={};
     var BBOX='-81.35,25.10,-79.90,27.25';
+    /* Paste a Google Maps Platform key (Places API (New), restricted to this site's domains) to switch to Google address search. Empty = free OpenStreetMap fallback. */
+    var GKEY='',GEOKEY='',gtok=null; /* GEOKEY = free Geoapify key (no card needed), used when GKEY is empty */
+    function newTok(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2)}
     function close(){box.hidden=true;box.innerHTML='';items=[];cur=-1;inp.setAttribute('aria-expanded','false')}
     function line1(p){var st=p.street||p.name||'';return ((p.housenumber?p.housenumber+' ':'')+st).trim()}
     function sub(p){return [p.city||p.town||p.village||p.locality||p.district,'FL',p.postcode].filter(Boolean).join(', ')}
@@ -5330,14 +5333,53 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
       box.innerHTML=items.map(function(it,i){return '<li role="option" id="sw-ac-'+i+'" data-i="'+i+'" aria-selected="'+(i===cur)+'">'+h(it.l1)+'<small>'+h(it.l2)+'</small></li>'}).join('');
       box.hidden=!items.length;inp.setAttribute('aria-expanded',String(!!items.length));
     }
-    function pick(i){
-      var it=items[i];if(!it)return;
+    function finish(it){
       inp.value=it.l1;setErr('sw-e-loc','');
       if(it.zip&&/^[0-9]{5}$/.test(it.zip)){zip.value=it.zip;zipCheck();setErr('sw-e-zip','')}
       close();
       if(!/[0-9]/.test(it.l1)){inp.focus();setErr('sw-e-loc','Add your house number at the start, like 1234 '+it.l1+'.')}
     }
-    function lookup(q){
+    function pick(i){
+      var it=items[i];if(!it)return;
+      if(it.pid){
+        var tk=gtok;gtok=null;
+        fetch('https://places.googleapis.com/v1/places/'+encodeURIComponent(it.pid)+'?sessionToken='+encodeURIComponent(tk||''),{headers:{'X-Goog-Api-Key':GKEY,'X-Goog-FieldMask':'addressComponents'}})
+          .then(function(r){return r.ok?r.json():null}).then(function(j){
+            var c=(j&&j.addressComponents)||[],g=function(t){for(var k=0;k<c.length;k++)if((c[k].types||[]).indexOf(t)>-1)return c[k].longText||c[k].shortText||'';return ''};
+            var l1=((g('street_number')+' '+g('route')).trim())||it.l1;
+            finish({l1:l1,zip:g('postal_code')});
+          }).catch(function(){finish({l1:it.l1,zip:''})});
+        return;
+      }
+      inp.value=it.l1;setErr('sw-e-loc','');
+      if(it.zip&&/^[0-9]{5}$/.test(it.zip)){zip.value=it.zip;zipCheck();setErr('sw-e-zip','')}
+      close();
+      if(!/[0-9]/.test(it.l1)){inp.focus();setErr('sw-e-loc','Add your house number at the start, like 1234 '+it.l1+'.')}
+    }
+    function glookup(q){
+      var my=++seq;if(!gtok)gtok=newTok();
+      fetch('https://places.googleapis.com/v1/places:autocomplete',{method:'POST',headers:{'Content-Type':'application/json','X-Goog-Api-Key':GKEY},
+        body:JSON.stringify({input:q,sessionToken:gtok,includedRegionCodes:['us'],includedPrimaryTypes:['street_address','premise','subpremise'],languageCode:'en',
+          locationRestriction:{rectangle:{low:{latitude:25.10,longitude:-81.35},high:{latitude:27.25,longitude:-79.90}}}})})
+        .then(function(r){return r.ok?r.json():null}).then(function(j){
+          if(my!==seq)return;
+          if(!j){lookupOSM(q);return}
+          items=(j.suggestions||[]).map(function(x){return x.placePrediction}).filter(Boolean).map(function(p){var sf=p.structuredFormat||{};return {l1:(sf.mainText&&sf.mainText.text)||(p.text&&p.text.text)||'',l2:(sf.secondaryText&&sf.secondaryText.text)||'',pid:p.placeId}}).filter(function(x){return x.l1&&x.pid}).slice(0,6);
+          cur=-1;paint();
+        }).catch(function(){lookupOSM(q)});
+    }
+    function geolookup(q){
+      var my=++seq;
+      fetch('https://api.geoapify.com/v1/geocode/autocomplete?format=json&limit=8&lang=en&type=amenity,street&filter=rect:-81.35,25.10,-79.90,27.25&text='+encodeURIComponent(q)+'&apiKey='+encodeURIComponent(GEOKEY),{credentials:'omit',referrerPolicy:'no-referrer'})
+        .then(function(r){return r.ok?r.json():null}).then(function(j){
+          if(my!==seq)return;if(!j){lookupOSM(q);return}
+          var seen={};
+          items=(j.results||[]).filter(function(p){return (p.country_code||'').toLowerCase()==='us'&&/florida/i.test(p.state||'')&&(p.street||p.address_line1)}).map(function(p){var l1=((p.housenumber?p.housenumber+' ':'')+(p.street||'')).trim()||p.address_line1;return {l1:l1,l2:[p.city||p.town||p.suburb,'FL',p.postcode].filter(Boolean).join(', '),zip:p.postcode||''}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
+          cur=-1;paint();
+        }).catch(function(){lookupOSM(q)});
+    }
+    function lookup(q){if(GKEY)glookup(q);else if(GEOKEY)geolookup(q);else lookupOSM(q)}
+    function lookupOSM(q){
       var my=++seq;
       if(cache[q]){items=cache[q];cur=-1;paint();return}
       fetch('https://photon.komoot.io/api/?lang=en&limit=8&bbox='+BBOX+'&q='+encodeURIComponent(q),{credentials:'omit',referrerPolicy:'no-referrer'})
