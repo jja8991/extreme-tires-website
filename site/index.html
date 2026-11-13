@@ -139,7 +139,7 @@ select:focus,input:focus,textarea:focus{outline:none;border-bottom-color:var(--r
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
 .sec-head h2{font-size:clamp(27px,3.3vw,41px);font-weight:800}
 .sec-head p{margin:8px 0 0;color:var(--steel);max-width:36em}
-.svc-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.svc-grid{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:12px}
 .svc.ic{background:transparent;padding:0;border-bottom:0;display:block}.svc.ic img{display:block;width:100%;height:auto}.svc.ic:hover{box-shadow:none}.svc.ic:hover img{filter:drop-shadow(0 12px 16px rgba(13,13,14,.35))}.svc.ic:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .svc{background:#fff;display:grid;justify-items:center;align-content:center;gap:12px;padding:22px 10px;text-decoration:none;text-align:center;font:700 15px/1.2 var(--body);border-bottom:3px solid transparent;transition:border-color .15s,transform .15s}
 .svc:hover{border-bottom-color:var(--red);transform:translateY(-2px)}
@@ -2475,7 +2475,7 @@ body{overflow-x:clip}
             <label for="mq-sy1"><input type="checkbox" id="mq-sy1"> Flat, leak, or tire damage</label>
             <label for="mq-sy2"><input type="checkbox" id="mq-sy2"> Need new tires or pricing</label>
             <label for="mq-sy3"><input type="checkbox" id="mq-sy3"> Vibration, balancing, or rotation</label>
-            <label for="mq-sy4"><input type="checkbox" id="mq-sy4"> Brakes, alignment, suspension, or other service</label>
+            <label for="mq-sy4"><input type="checkbox" id="mq-sy4"> Locked out or dead battery</label>
           </div>
           <span class="err" id="mq-s1err" aria-live="polite"></span>
           </section>
@@ -3956,7 +3956,7 @@ body{overflow-x:clip}
       <div class="socials"><a href="https://www.instagram.com/extremetires/" target="_blank" rel="noopener" aria-label="Extreme Tires on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="#fff"/></svg></a></div>
     </div>
     <nav class="foot2-col" aria-label="Shop"><h4>Shop</h4><ul><li><a href="#tires" data-view-link="tires">Tires</a></li><li><a href="#wheels" data-view-link="wheels">Wheels</a></li><li><a href="#commercial" data-view-link="commercial">Commercial tires</a></li><li><a href="#brands" data-view-link="brands">Brands</a></li><li><a href="#tips" data-view-link="tips">Tire care tips</a></li></ul></nav>
-    <nav class="foot2-col" aria-label="Services"><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile tire service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire installation</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake repair</a></li><li><a href="#commercial" data-view-link="commercial">Commercial &amp; fleet</a></li><li><a href="#services" data-view-link="services">All services</a></li></ul></nav>
+    <nav class="foot2-col" aria-label="Services"><h4>Services</h4><ul><li><a href="#mobile" data-view-link="mobile">Mobile tire service</a></li><li><a href="#service/tire-installation" data-view-link="service" data-param="tire-installation">Tire installation</a></li><li><a href="#service/wheel-alignment" data-view-link="service" data-param="wheel-alignment">Wheel alignment</a></li><li><a href="#service/brake-repair" data-view-link="service" data-param="brake-repair">Brake repair</a></li><li><a href="#service/lockout-assistance" data-view-link="service" data-param="lockout-assistance">Vehicle lockout</a></li><li><a href="#service/jump-starts" data-view-link="service" data-param="jump-starts">Battery jump starts</a></li><li><a href="#commercial" data-view-link="commercial">Commercial &amp; fleet</a></li><li><a href="#services" data-view-link="services">All services</a></li></ul></nav>
     <nav class="foot2-col" aria-label="Company"><h4>Company</h4><ul><li><a href="#about" data-view-link="about">About us</a></li><li><a href="#reviews" data-view-link="reviews">Reviews</a></li><li><a href="#coupons" data-view-link="coupons">Coupons</a></li><li><a href="#financing" data-view-link="financing">Financing</a></li><li><a href="#contact" data-view-link="contact">Contact us</a></li></ul></nav>
     <div class="foot2-visit"><h4>Visit</h4>
       <address><a href="https://www.google.com/maps/dir/?api=1&amp;destination=7712+West+Oakland+Park+Blvd+Sunrise+FL+33351" target="_blank" rel="noopener">7712 West Oakland Park Blvd<br>Sunrise, FL 33351</a></address>
@@ -4013,7 +4013,7 @@ body{overflow-x:clip}
     ["brake","Brake Repair","service","brake-repair"],["wheels","Custom Wheels Service","service","custom-wheels"],["lift","Lift Kits","service","lift-kits"],["oil","Oil Changes","service","oil-changes"],
     ["suspension","Suspension Repair","service","suspension-repair"],["alignment","Wheel Alignments","service","wheel-alignment"],["eta","ETA, track your technician","ext","https://extreme-tires-eta.vercel.app/"],
     ["balancing","Tire Balancing","service","tire-balancing"],["installation","Tire Installation","service","tire-installation"],["repair","Tire Repair","service","tire-repair"],
-    ["rotation","Tire Rotation","service","tire-rotation"],["tpms","TPMS Service","service","tpms-service"],["paylater","Shop Now, Pay Later","financing",""],
+    ["rotation","Tire Rotation","service","tire-rotation"],["tpms","TPMS Service","service","tpms-service"],["lockout","Vehicle Lockout Assistance","service","lockout-assistance"],["jump-start","Battery Jump Starts","service","jump-starts"],["paylater","Shop Now, Pay Later","financing",""],
     ["booking","Booking, book a visit","ext","https://extreme-tires-eta.vercel.app/book"]
   ];
   grid.innerHTML=SVC_TILES.map(function(s){
@@ -4668,7 +4668,7 @@ var h=ET.esc, $=function(id){return document.getElementById(id)};
 var SLUGS=['brake-repair','wheel-alignment','tire-installation','tire-repair','tire-balancing','tire-rotation','suspension-repair','oil-changes','tpms-service','custom-wheels','lift-kits'];
 
 /* ======================= SERVICE DATA ======================= */
-var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift','ac-repair':'ac-repair','general-mechanical':'mechanical','caliper-painting':'caliper-paint','rim-repair':'rim-repair','custom-builds':'custom-builds','custom-lighting':'lighting','train-horns':'train-horns','golf-cart-upgrades':'golf-cart','fleet-maintenance':'fleet','semi-truck-service':'semi','mower-service':'mower','skid-steer-service':'skid-steer'};
+var SP_IMG={'brake-repair':'brake','wheel-alignment':'alignment','tire-installation':'installation','tire-repair':'repair','tire-balancing':'balancing','tire-rotation':'rotation','suspension-repair':'suspension','oil-changes':'oil','tpms-service':'tpms','custom-wheels':'wheels','lift-kits':'lift','ac-repair':'ac-repair','general-mechanical':'mechanical','caliper-painting':'caliper-paint','rim-repair':'rim-repair','custom-builds':'custom-builds','custom-lighting':'lighting','train-horns':'train-horns','golf-cart-upgrades':'golf-cart','fleet-maintenance':'fleet','semi-truck-service':'semi','mower-service':'mower','skid-steer-service':'skid-steer','lockout-assistance':'lockout','jump-starts':'jump-start'};
 var SV={
  'brake-repair':{label:'Brake Repair',name:'Brake Repair',ico:'brake',mode:'shop',
   blurb:'Pads, rotors, calipers and fluid, inspected and explained.',
@@ -4742,7 +4742,7 @@ var SV={
        ['Synthetic or conventional?','Use the oil type and viscosity your manual specifies. Synthetic oils generally hold up longer under heat and stress, but the manual is the rule.'],
        ['Can you really do it at my location?','Yes, our mobile team does oil changes in our service area. You will need a level, firm place for the van to work, such as a driveway or lot.']],
   rel:['tire-rotation','brake-repair','tpms-service']},
- 'tpms-service':{label:'TPMS Service',name:'TPMS Service',ico:'tpms',mode:'shop',
+ 'tpms-service':{label:'TPMS Service',name:'TPMS Service',ico:'tpms',mode:'both',
   blurb:'Tire pressure sensors scanned, reset or replaced.',
   intro:'When the tire pressure light stays on, the cause is either low air or a sensor problem. We check both.',
   inc:['Scanning each sensor with a TPMS tool','Checking pressure and sensor signal','Resetting or relearning the system after tire work','Replacing or programming sensors when needed','Checking valve stems at the same time'],
@@ -4868,9 +4868,20 @@ var SV={
   faq:[['Do you do jump starts at the shop?','No. Jump starts are a mobile service, so we come to you.'],['How do I request one?','Call (954) 773-1896 for the fastest response, or send a request on the Schedule page.'],['What if it will not stay started?','A battery that keeps dying may need to be replaced. Tell us when you call.']],
   rel:['lockout-assistance','tire-repair','tire-installation']}
 };
-var MOBILE_SLUGS=['tire-installation','tire-repair','tire-rotation','lockout-assistance','jump-starts','tire-balancing','oil-changes'];
+var MOBILE_SLUGS=['tire-installation','tire-repair','tire-rotation','tpms-service','lockout-assistance','jump-starts','tire-balancing','oil-changes'];
 var MORE_SLUGS=['ac-repair','general-mechanical','caliper-painting','rim-repair','custom-builds','custom-lighting','train-horns','golf-cart-upgrades','fleet-maintenance','semi-truck-service','mower-service','skid-steer-service'];var NAV_SLUGS=SLUGS.concat(MORE_SLUGS,['lockout-assistance','jump-starts']);
-var SHOP_SLUGS=['wheel-alignment','brake-repair','suspension-repair','tpms-service','custom-wheels','lift-kits'];
+var SHOP_SLUGS=['wheel-alignment','brake-repair','suspension-repair','custom-wheels','lift-kits'];
+ET.SV=SV;
+/* Booking pickers (Quote page + Mobile page) built from the same service list as the Services pages */
+(function(){
+  var DARK={},LIGHT=true;
+  function img(slug,light){var n=SP_IMG[slug];return n&&n!=='x'?'<img class="pk-img" src="media/services/'+(light?'':'dark/')+n+'.webp" alt="" width="72" height="72" loading="lazy" decoding="async">':'<svg class="pk-img" aria-hidden="true" width="72" height="72"><use href="#i-'+(SV[slug].ico||'van')+'"/></svg>'}
+  function lab(id,i,slug,light,tag){var v=SV[slug];return '<label for="'+id+i+'"><input type="checkbox" id="'+id+i+'" name="svc" value="'+h(v.label)+'">'+img(slug,light)+'<span>'+h(v.label)+(tag?'<em class="pk-tag">'+tag+'</em>':'')+'</span></label>'}
+  var qp=$('pick'),mp=$('mq-pick');
+  if(qp){var order=['tire-installation','tire-repair','tire-balancing','tire-rotation','tpms-service','oil-changes','lockout-assistance','jump-starts','brake-repair','wheel-alignment','suspension-repair','custom-wheels','lift-kits','ac-repair','general-mechanical','rim-repair','caliper-painting','custom-builds','custom-lighting','train-horns','golf-cart-upgrades','fleet-maintenance','semi-truck-service','mower-service','skid-steer-service'];
+    qp.innerHTML=order.map(function(s,i){var m=SV[s].mode;return lab('pk',i,s,false,m==='mobile'?'Mobile only':m==='shop'?'Shop only':'Mobile or shop')}).join('')+'<label for="pk99"><input type="checkbox" id="pk99" name="svc" value="Shop Now, Pay Later"><img class="pk-img" src="media/services/dark/paylater.webp" alt="" width="72" height="72" loading="lazy" decoding="async"><span>Shop Now, Pay Later</span></label>'}
+  if(mp){mp.innerHTML=MOBILE_SLUGS.concat(['fleet-maintenance','semi-truck-service','mower-service','skid-steer-service']).map(function(s,i){return lab('mpk',i,s,true,'')}).join('')}
+})();
 function modeBadge(m){return m==='mobile'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile only</span>':m==='both'?'<span class="sp-badge"><svg width="14" height="14" aria-hidden="true"><use href="#i-van"/></svg>Mobile or shop</span>':'<span class="sp-badge sp-bs">Shop only</span>'}
 function link(slug){return 'href="#service/'+slug+'" data-view-link="service" data-param="'+slug+'"'}
 
@@ -5050,7 +5061,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   var daysEl=$('sw-days'),timesEl=$('sw-times'),zip=$('sw-zip'),znote=$('sw-zipnote'),nextB=$('sw-next'),backB=$('sw-back'),subB=$('sw-submit');
   var WIN=[{k:'morning',l:'Morning (8 am to noon)',a:480,b:720},{k:'midday',l:'Midday (noon to 3 pm)',a:720,b:900},{k:'afternoon',l:'Afternoon (3 to 6 pm)',a:900,b:1080},{k:'evening',l:'Evening (6 to 9 pm)',a:1080,b:1260},{k:'any',l:'Any time that day',a:0,b:1440}];
   var NEXTL=['','Next: Vehicle','Next: What you need','Next: Pick a time','Next: Your details'];
-  var TYPE={'tire-installation':'new_tires','tire-repair':'flat_repair','tire-balancing':'mount_balance','tire-rotation':'rotation_check','oil-changes':'oil_change','lockout-assistance':'roadside_assist','jump-starts':'roadside_assist','brake-repair':'brake_repair','wheel-alignment':'alignment_suspension','suspension-repair':'alignment_suspension','ac-repair':'mechanical_ac_tpms','tpms-service':'mechanical_ac_tpms','general-mechanical':'mechanical_ac_tpms','custom-wheels':'wheels_rims','rim-repair':'wheels_rims','caliper-painting':'wheels_rims','lift-kits':'lift_custom','custom-builds':'lift_custom','custom-lighting':'lift_custom','train-horns':'lift_custom','golf-cart-upgrades':'lift_custom','fleet-maintenance':'fleet_equipment','semi-truck-service':'fleet_equipment','mower-service':'fleet_equipment','skid-steer-service':'fleet_equipment'};
+  var TYPE={'tire-installation':'new_tires','tire-repair':'flat_repair','tire-balancing':'mount_balance','tire-rotation':'rotation_check','oil-changes':'oil_change','lockout-assistance':'roadside_assist','jump-starts':'roadside_assist','brake-repair':'brake_repair','wheel-alignment':'alignment_suspension','suspension-repair':'alignment_suspension','ac-repair':'mechanical_ac_tpms','tpms-service':'mechanical_ac_tpms','general-mechanical':'mechanical_ac_tpms','custom-wheels':'wheels_rims','rim-repair':'wheels_rims','caliper-painting':'wheels_rims','lift-kits':'lift_custom','custom-builds':'lift_custom','custom-lighting':'lift_custom','train-horns':'lift_custom','golf-cart-upgrades':'lift_custom','fleet-maintenance':'fleet_equipment','semi-truck-service':'fleet_equipment','mower-service':'fleet_equipment','skid-steer-service':'fleet_equipment'};ET.SVC_TYPE=TYPE;
   function tm(s){var m=/^(\d\d):(\d\d)/.exec(s||'');return m?(+m[1])*60+(+m[2]):0}
   function isoOf(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
   function setErr(id,msg){var e=$(id);if(e)e.textContent=msg||''}
@@ -6486,11 +6497,13 @@ $('cy-root').addEventListener('submit',function(e){
     var names=[].slice.call(document.querySelectorAll('#mq-pick input:checked')).map(function(i){return i.value});
     var sy=[1,2,3,4].filter(function(n){return $('mq-sy'+n).checked});
     var has=function(x){return names.indexOf(x)>-1};
-    var key=has('Tire Repair')||sy.indexOf(1)>-1?'flat_repair':has('Tire Installation')||sy.indexOf(2)>-1?'new_tires':has('Tire Balancing')?'mount_balance':(has('Tire Rotation')||sy.indexOf(3)>-1)?'rotation_check':(names.length||sy.length)?'new_tires':'';
+    var T=(window.ET&&ET.SVC_TYPE)||{},SVm=(window.ET&&ET.SV)||{},key='',i,sl;
+    for(i=0;i<names.length&&!key;i++){for(sl in SVm){if(SVm[sl].label===names[i]&&T[sl]){key=T[sl];break}}}
+    if(!key)key=sy.indexOf(1)>-1?'flat_repair':sy.indexOf(2)>-1?'new_tires':sy.indexOf(3)>-1?'rotation_check':sy.indexOf(4)>-1?'roadside_assist':(names.length?'new_tires':'');
     var okKeys=(cfg&&cfg.service_types||[]).map(function(t){return t.key});
     if(key&&okKeys.length&&okKeys.indexOf(key)<0)key=okKeys[0];
     var extra=names.slice();
-    if(sy.indexOf(4)>-1)extra.push('Brakes/alignment/suspension/other');
+    if(sy.indexOf(4)>-1)extra.push('Locked out or dead battery');
     return {key:key,list:extra};
   }
   function pv(id,re){var v=($(id).value||'').trim();return re.test(v)?'':v}
