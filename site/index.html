@@ -1813,6 +1813,37 @@ body{background:#0d0d0e}
 .opts .opt:has(.where-img){grid-template-columns:96px 1fr}
 .flow #wiz .opt:has(.where-img){grid-template-columns:96px 1fr 20px}
 .opt .where-img{width:96px;height:64px;object-fit:contain;display:block}
+/* ===== Quote form redesign: dark, 3D service icons (Quote page + Mobile page) ===== */
+#view-quote .q-intro,#mobile-quote .q-intro{background:linear-gradient(180deg,#0d0d0e,#121214);border-left:0;border-top:3px solid var(--red);color:#fff}
+#view-quote .q-intro .wrap,#mobile-quote .q-intro .wrap{padding-block:34px 18px}
+#view-quote .q-intro h2,#mobile-quote .q-intro h2{color:#fff;max-width:20ch}
+#view-quote .q-intro p,#mobile-quote .q-intro p{color:#b4b8bf}
+#view-quote .q-intro .eyebrow,#mobile-quote .q-intro .eyebrow{display:block;color:var(--red)}
+#view-quote .checks div,#mobile-quote .checks div{background:#151517;border:1px solid #26262a;color:#e8eaee;border-radius:10px}
+#view-quote .q-body,#mobile-quote .q-body{background:#0d0d0e;color:#fff;padding-block:30px 40px}
+#view-quote .q-body h3,#mobile-quote .q-body h3{color:#fff;font-size:clamp(22px,2.6vw,30px)}
+#view-quote .q-body>.wrap>p,#mobile-quote .q-body>.wrap>p{color:#8d929b!important}
+#view-quote .pick,#mobile-quote .pick{gap:12px;margin:22px 0 34px}
+#view-quote .pick label,#mobile-quote .pick label{background:#151517;border:1px solid #26262a;border-radius:14px;padding:16px 8px 14px;gap:8px;color:#e8eaee;font:700 13px/1.2 var(--body);transition:transform .25s var(--ease),border-color .2s,box-shadow .25s,background .2s}
+#view-quote .pick .pk-img,#mobile-quote .pick .pk-img{width:68px;height:68px;object-fit:contain;display:block;filter:drop-shadow(0 6px 14px rgba(227,22,27,.25))}
+#view-quote .pick label:hover,#mobile-quote .pick label:hover{transform:translateY(-3px);border-color:#4a1214}
+#view-quote .pick label:has(input:checked),#mobile-quote .pick label:has(input:checked){border-color:var(--red);background:linear-gradient(180deg,#1d1012,#151517);box-shadow:0 0 0 1px var(--red),0 10px 28px rgba(227,22,27,.28)}
+#view-quote .pick label:has(input:checked)::after,#mobile-quote .pick label:has(input:checked)::after{content:"✓";position:absolute;top:8px;right:10px;width:20px;height:20px;border-radius:50%;background:var(--red);color:#fff;font:800 12px/20px var(--body)}
+#view-quote .form-grid label.f,#mobile-quote .form-grid label.f{color:#9aa0a8}
+#view-quote .form-grid input,#view-quote .form-grid select,#mobile-quote .form-grid input,#mobile-quote .form-grid select,#view-quote .q-what textarea,#mobile-quote .q-what textarea{background:#151517;color:#fff;border:1px solid #2c2c30;border-radius:10px;padding:14px 14px;min-height:50px;transition:border-color .2s,box-shadow .2s}
+#view-quote .form-grid input::placeholder,#mobile-quote .form-grid input::placeholder,#view-quote .q-what textarea::placeholder,#mobile-quote .q-what textarea::placeholder{color:#6f747c}
+#view-quote .form-grid input:focus,#view-quote .form-grid select:focus,#mobile-quote .form-grid input:focus,#mobile-quote .form-grid select:focus,#view-quote .q-what textarea:focus,#mobile-quote .q-what textarea:focus{outline:0;border-color:var(--red);box-shadow:0 0 0 3px rgba(227,22,27,.25)}
+#view-quote .form-grid select option,#mobile-quote .form-grid select option{background:#151517;color:#fff}
+#view-quote .err,#mobile-quote .err{color:#ff8a8d}
+#view-quote .chk,#mobile-quote .chk{background:#151517;border:1px solid #26262a;border-radius:10px;padding:14px 16px;width:fit-content;color:#e8eaee}
+#view-quote .q-what,#mobile-quote .q-what{background:#101012;border-top:1px solid #1e1e21;padding-block:34px}
+#view-quote .sym label,#mobile-quote .sym label{background:#151517;border:1px solid #26262a;border-radius:10px;padding:14px 16px;transition:border-color .2s,background .2s}
+#view-quote .sym label:has(input:checked),#mobile-quote .sym label:has(input:checked){border-color:var(--red);background:#1a1012}
+#view-quote .q-what textarea,#mobile-quote .q-what textarea{margin-top:8px;min-height:110px}
+#view-quote .q-submit,#mobile-quote .q-submit{background:#0d0d0e;border-top:1px solid #1e1e21;padding-block:30px 40px}
+#view-quote .q-submit .btn,#mobile-quote .q-submit .btn{padding-block:18px;font-size:16px;box-shadow:0 10px 30px rgba(227,22,27,.35);border-radius:10px}
+#view-quote .done,#mobile-quote .done{background:#151517;color:#fff;border:1px solid #26262a;border-left:6px solid var(--red);border-radius:10px}
+@media(max-width:700px){#view-quote .pick .pk-img,#mobile-quote .pick .pk-img{width:56px;height:56px}#view-quote .pick label,#mobile-quote .pick label{padding:12px 4px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -2223,14 +2254,7 @@ body{background:#0d0d0e}
       <p style="color:var(--steel);font-size:14px;margin:10px 0 0" id="slot-note">Pick your preferred day and time. We confirm by text.</p>
     </div>
   </section>
-  <section class="areas" aria-labelledby="ar-h">
-    <div class="wrap">
-      <div class="eyebrow">Service area</div>
-      <h2 id="ar-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Cities we cover</h2>
-      <p style="color:var(--steel);max-width:44em">Mobile service across Miami-Dade, Broward and Palm Beach counties, from Homestead to West Palm Beach and beyond. Tap your city for details.</p>
-      <div class="cities" id="cities"></div>
-    </div>
-  </section>
+  
   <section class="mq" id="mobile-quote" aria-labelledby="mq-h">
     <div class="q-intro">
       <div class="wrap">
@@ -2278,6 +2302,14 @@ body{background:#0d0d0e}
         </div>
       </div>
     </form>
+  </section>
+  <section class="areas" aria-labelledby="ar-h">
+    <div class="wrap">
+      <div class="eyebrow">Service area</div>
+      <h2 id="ar-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Cities we cover</h2>
+      <p style="color:var(--steel);max-width:44em">Mobile service across Miami-Dade, Broward and Palm Beach counties, from Homestead to West Palm Beach and beyond. Tap your city for details.</p>
+      <div class="cities" id="cities"></div>
+    </div>
   </section>
 </section>
 
@@ -3695,9 +3727,11 @@ body{background:#0d0d0e}
     return '<a class="svc ic" href="#service/'+s[3]+'" data-view-link="service" data-param="'+s[3]+'">'+img+'</a>';
   }).join('');
 
+  var PK={brake:'brake',wheel:'wheels',lift:'lift',oil:'oil',susp:'suspension',align:'alignment',balance:'balancing',install:'installation',repair:'repair',rotate:'rotation',tpms:'tpms',pay:'paylater'};
+  var pimg=function(id){return '<img class="pk-img" src="media/services/dark/'+PK[id]+'.webp" alt="" width="72" height="72" loading="lazy" decoding="async">'};
   var pick=document.getElementById('pick');
   pick.innerHTML=SERVICES.map(function(s,i){
-    return '<label for="pk'+i+'"><input type="checkbox" id="pk'+i+'" name="svc" value="'+s[1]+'">'+icon(s[0])+s[1]+'</label>';
+    return '<label for="pk'+i+'"><input type="checkbox" id="pk'+i+'" name="svc" value="'+s[1]+'">'+pimg(s[0])+'<span>'+s[1]+'</span></label>';
   }).join('');
 
   var burger=document.getElementById('burger'), mnav=document.getElementById('mnav');
@@ -4238,7 +4272,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
   var mpick=document.getElementById('mq-pick'), mform=document.getElementById('mq-form');
   if(mpick&&mform){
     mpick.innerHTML=SERVICES.map(function(s,i){
-      return '<label for="mpk'+i+'"><input type="checkbox" id="mpk'+i+'" name="svc" value="'+s[1]+'">'+icon(s[0])+s[1]+'</label>';
+      return '<label for="mpk'+i+'"><input type="checkbox" id="mpk'+i+'" name="svc" value="'+s[1]+'">'+pimg(s[0])+'<span>'+s[1]+'</span></label>';
     }).join('');
     var MMSG={'mq-first':'Please enter your name.','mq-last':'Please enter your name.','mq-phone':'This field is required','mq-email':'This field is required','mq-when':'Please select when you need service.'};
     mform.addEventListener('submit',function(e){
