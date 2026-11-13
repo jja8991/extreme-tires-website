@@ -1716,6 +1716,9 @@ header.nav.scrolled .logo img{height:42px}
 .flow #wiz .w-veh-grid{grid-template-columns:1fr 1fr;gap:12px}
 .flow #wiz .hf-f{background:#f6f6f4;color:var(--ink)}
 @media (max-width:560px){.flow #wiz .w-veh-grid{grid-template-columns:1fr 1fr}}
+.opts .opt:has(.where-img){grid-template-columns:96px 1fr}
+.flow #wiz .opt:has(.where-img){grid-template-columns:96px 1fr 20px}
+.opt .where-img{width:96px;height:64px;object-fit:contain;display:block}
 </style>
 </head>
 <body>
@@ -2401,8 +2404,8 @@ header.nav.scrolled .logo img{height:42px}
         <fieldset class="sc-block">
           <legend><span class="sc-n">3</span> Where should we do it?</legend>
           <div class="opts sc-where" id="sc-where" role="group" aria-label="Location">
-            <button type="button" class="opt" data-where="shop" aria-pressed="true"><svg aria-hidden="true"><use href="#i-align"/></svg><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button>
-            <button type="button" class="opt" data-where="mobile" aria-pressed="false"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Mobile jobs only</small></span></button>
+            <button type="button" class="opt" data-where="shop" aria-pressed="true"><img class="where-img" src="media/where-shop.webp" alt="" loading="lazy"><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button>
+            <button type="button" class="opt" data-where="mobile" aria-pressed="false"><img class="where-img" src="media/where-mobile.webp" alt="" loading="lazy"><span>At my location<small>Mobile jobs only</small></span></button>
           </div>
           <div class="sc-note" id="sc-mobnote" hidden>Mobile covers tire installation, balancing, tire repair and oil changes. The other services are done at the shop.</div>
 
@@ -3856,8 +3859,8 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     } else if(s===2){
       var shopOnlyNeed=(W.need==='wheels'); if(shopOnlyNeed)W.where='shop';
       h='<h3>Where should we do it?</h3><div class="opts">'+
-        (shopOnlyNeed?'':'<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><svg aria-hidden="true"><use href="#i-van"/></svg><span>At my location<small>Home, work or roadside</small></span></button>')+
-        '<button type="button" class="opt" data-where="shop" aria-pressed="'+(W.where==='shop')+'"><svg aria-hidden="true"><use href="#i-align"/></svg><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button></div>';
+        (shopOnlyNeed?'':'<button type="button" class="opt" data-where="mobile" aria-pressed="'+(W.where==='mobile')+'"><img class="where-img" src="media/where-mobile.webp" alt="" loading="lazy"><span>At my location<small>Home, work or roadside</small></span></button>')+
+        '<button type="button" class="opt" data-where="shop" aria-pressed="'+(W.where==='shop')+'"><img class="where-img" src="media/where-shop.webp" alt="" loading="lazy"><span>At the Sunrise shop<small>7712 W Oakland Park Blvd</small></span></button></div>';
       if(shopOnlyNeed)h+='<div class="alert">Lifts, leveling and wheel packages are done at our Sunrise shop. Mobile service is for tires and everyday service only.</div>';
       if(W.where==='mobile'){
         var c=W.zip?county(W.zip):null;
