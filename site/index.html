@@ -1070,7 +1070,7 @@ body{background:#0d0d0e}
 .cm-lead{color:var(--steel);max-width:44em;margin:10px 0 0}
 
 /* who */
-.cm-who{padding-block:60px}
+.cm-who{padding-block:60px;background:#fff}
 .cm-tiles{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .cm-tiles li{background:var(--mist);padding:20px;display:grid;gap:10px;align-content:start;border-bottom:3px solid transparent;transition:border-color .2s,transform .25s var(--ease)}
 .cm-tiles li:hover{border-bottom-color:var(--red);transform:translateY(-3px)}
@@ -1824,6 +1824,8 @@ body{background:#0d0d0e}
 .opts .opt:has(.where-img){grid-template-columns:96px 1fr}
 .flow .wizcard .opt:has(.where-img){grid-template-columns:96px 1fr 20px}
 .opt .where-img{width:96px;height:64px;object-fit:contain;display:block}
+.cm-do-img{background:#000;padding-block:0}.cm-do-img .wrap{max-width:1400px;padding-inline:0}.cm-do-pic{position:relative}.cm-do-pic img{display:block;width:100%;height:auto}.cm-do-hit{position:absolute;display:block;border-radius:6px}.cm-do-hit:focus-visible{outline:3px solid var(--yellow)}
+.cm-do-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}@media(max-width:760px){.cm-do-pic{min-width:760px}}
 /* ===== Commercial widget: light theme (matches the white Mobile / Schedule forms) ===== */
 .flow.cm-flow .wizcard.card{background:#fff;color:var(--ink);border:1px solid #dcdde0;border-top:6px solid var(--red);border-radius:6px;box-shadow:0 20px 40px rgba(13,13,14,.08)}
 .flow.cm-flow .wizcard .prog i{background:#e3e5e8}.flow.cm-flow .wizcard .prog i.on{background:var(--red)}
@@ -3072,34 +3074,14 @@ body{overflow-x:clip}
     </div>
   </section>
 
-  <section class="cm-do" aria-labelledby="cm-do-h">
+  <section class="cm-do cm-do-img" aria-labelledby="cm-do-h">
     <div class="wrap">
-      <div class="eyebrow">What we do</div>
-      <h2 id="cm-do-h">Service where it makes sense for your fleet</h2>
-      <div class="cm-do-grid">
-        <div class="cm-col">
-          <h3>On site, with the mobile van</h3>
-          <p>No trip to the shop and no vehicles sitting idle waiting in line.</p>
-          <ul class="cm-list">
-            <li><svg aria-hidden="true"><use href="#i-install"/></svg><span><b>Tire installation</b> mounted at your lot or yard</span></li>
-            <li><svg aria-hidden="true"><use href="#i-balance"/></svg><span><b>High-speed balancing</b> built into the van</span></li>
-            <li><svg aria-hidden="true"><use href="#i-repair"/></svg><span><b>Repairs and roadside</b> flat repair where the vehicle stopped</span></li>
-            <li><svg aria-hidden="true"><use href="#i-oil"/></svg><span><b>Oil changes</b> done on site</span></li>
-          </ul>
-          <a class="btn btn-ghost" href="#mobile" data-view-link="mobile">How mobile service works</a>
-        </div>
-        <div class="cm-col">
-          <h3>At the Sunrise shop</h3>
-          <p>For work that needs a lift, an alignment rack or a full bay.</p>
-          <ul class="cm-list">
-            <li><svg aria-hidden="true"><use href="#i-align"/></svg><span><b>Wheel alignment</b> on Hunter Engineering equipment</span></li>
-            <li><svg aria-hidden="true"><use href="#i-brake"/></svg><span><b>Brake service</b> inspection and repair</span></li>
-            <li><svg aria-hidden="true"><use href="#i-susp"/></svg><span><b>Suspension repair</b> for worn or damaged components</span></li>
-            <li><svg aria-hidden="true"><use href="#i-tpms"/></svg><span><b>TPMS service</b> sensors and resets</span></li>
-          </ul>
-          <a class="btn btn-ghost" href="#services" data-view-link="services">All services</a>
-        </div>
-      </div>
+      <h2 id="cm-do-h" class="sr-only">Service where it makes sense for your fleet</h2>
+      <div class="cm-do-scroll"><div class="cm-do-pic">
+        <img src="media/commercial-what-we-do.webp" width="1755" height="896" loading="lazy" decoding="async" alt="Service where it makes sense for your fleet. On site with the mobile van: tire installation mounted at your lot or yard, high-speed balancing built into the van, repairs and roadside flat repair where the vehicle stopped, and oil changes done on site. At the Sunrise shop, for work that needs a lift, an alignment rack or a full bay: wheel alignment on Hunter Engineering equipment, brake service inspection and repair, suspension repair for worn or damaged components, and TPMS service sensors and resets.">
+        <a class="cm-do-hit" style="left:9.40%;top:88.17%;width:32.88%;height:6.36%" href="#mobile" data-view-link="mobile" aria-label="How mobile service works"></a>
+        <a class="cm-do-hit" style="left:61.99%;top:88.17%;width:26.67%;height:6.36%" href="#services" data-view-link="services" aria-label="All services"></a>
+      </div></div>
     </div>
   </section>
 
