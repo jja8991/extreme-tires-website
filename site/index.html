@@ -5324,7 +5324,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     var inp=$('sw-loc'),box=$('sw-ac'),timer=null,seq=0,items=[],cur=-1,cache={};
     var BBOX='-81.35,25.10,-79.90,27.25';
     /* Paste a Google Maps Platform key (Places API (New), restricted to this site's domains) to switch to Google address search. Empty = free OpenStreetMap fallback. */
-    var GKEY='',GEOKEY='',gtok=null; /* GEOKEY = free Geoapify key (no card needed), used when GKEY is empty */
+    var GKEY='',GEOKEY='3570c909d86347369fb7bc9292cc96fb',gtok=null; /* GEOKEY = free Geoapify key (no card needed), used when GKEY is empty */
     function newTok(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2)}
     function close(){box.hidden=true;box.innerHTML='';items=[];cur=-1;inp.setAttribute('aria-expanded','false')}
     function line1(p){var st=p.street||p.name||'';return ((p.housenumber?p.housenumber+' ':'')+st).trim()}
@@ -5370,7 +5370,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     }
     function geolookup(q){
       var my=++seq;
-      fetch('https://api.geoapify.com/v1/geocode/autocomplete?format=json&limit=8&lang=en&type=amenity,street&filter=rect:-81.35,25.10,-79.90,27.25&text='+encodeURIComponent(q)+'&apiKey='+encodeURIComponent(GEOKEY),{credentials:'omit',referrerPolicy:'no-referrer'})
+      fetch('https://api.geoapify.com/v1/geocode/autocomplete?format=json&limit=8&lang=en&filter=rect:-81.35,25.10,-79.90,27.25&text='+encodeURIComponent(q)+'&apiKey='+encodeURIComponent(GEOKEY),{credentials:'omit',referrerPolicy:'no-referrer'})
         .then(function(r){return r.ok?r.json():null}).then(function(j){
           if(my!==seq)return;if(!j){lookupOSM(q);return}
           var seen={};
