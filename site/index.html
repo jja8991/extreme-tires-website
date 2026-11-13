@@ -5515,8 +5515,8 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     }
     inp.addEventListener('input',function(){
       setErr('sw-e-loc','');clearTimeout(timer);var q=inp.value.trim();
-      if(q.length<4){close();return}
-      timer=setTimeout(function(){lookup(q)},260);
+      if(q.length<3){close();return}
+      timer=setTimeout(function(){lookup(q)},120);
     });
     inp.addEventListener('keydown',function(e){
       if(box.hidden||!items.length)return;
@@ -5562,7 +5562,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
           items=(j.results||[]).filter(function(p){return (p.country_code||'').toLowerCase()==='us'&&/florida/i.test(p.state||'')&&(p.street||p.address_line1)}).map(function(p){return {l1:((p.housenumber?p.housenumber+' ':'')+(p.street||'')).trim()||p.address_line1,l2:[p.city||p.town||p.suburb,'FL',p.postcode].filter(Boolean).join(', '),zip:p.postcode||''}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
           cur=-1;paint();
         }).catch(function(){close()});}
-    inp.addEventListener('input',function(){clearTimeout(timer);var q=inp.value.trim();if(q.length<4||/^[0-9]{0,5}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},260)});
+    inp.addEventListener('input',function(){clearTimeout(timer);var q=inp.value.trim();if(q.length<3||/^[0-9]{0,2}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},120)});
     inp.addEventListener('keydown',function(e){if(box.hidden||!items.length)return;
       if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%items.length;paint()}
       else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+items.length)%items.length;paint()}
