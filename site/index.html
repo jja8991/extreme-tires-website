@@ -4591,11 +4591,26 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
     }).catch(function(){});
   }
   var IGCATS=[['all','All']];
-  ET.GALLERY=GALLERY; ET.IGCATS=IGCATS;
+  ET.GALLERY=GALLERY; ET.IGCATS=IGCATS; ET.SHOP=[];
+  /* SHOP PHOTOS: techs add these from the ops app; they go straight into the gallery. Public list, newest first. */
+  var SHOP_CATS={tires:'Tires',wheels:'Wheels',mobile:'Mobile van',shop:'Shop',fleet:'Fleet',lifts:'Lifts',other:'Shop work'};
+  fetch('https://qaxxwpojwpqkwqlpzrck.supabase.co/functions/v1/gallery-feed',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'}).then(function(r){return r.ok?r.json():null}).then(function(j){
+    var rows=(j&&j.items)||[];
+    ET.SHOP.length=0;
+    rows.forEach(function(r){
+      if(!r||typeof r.url!=='string'||r.url.indexOf('https://qaxxwpojwpqkwqlpzrck.supabase.co/storage/v1/object/public/website-gallery/')!==0)return;
+      ET.SHOP.push({id:'s'+String(r.id).slice(0,8),file:r.url,category:SHOP_CATS[r.category]?r.category:'other',tags:[],isVideo:false,shop:true,caption:String(r.caption||SHOP_CATS[r.category]||'From the shop').slice(0,110),pos:'50% 50%'});
+    });
+    IGCATS.length=1;
+    var seen={};ET.SHOP.forEach(function(i){seen[i.category]=1});
+    if(ET.SHOP.length){IGCATS.push(['reel','Reels']);Object.keys(SHOP_CATS).forEach(function(k){if(seen[k])IGCATS.push([k,SHOP_CATS[k]])})}
+    window.dispatchEvent(new Event('et-feed'));
+  }).catch(function(){});
   var igFilter='all', igGrid=document.getElementById('ig-grid');
   function igRender(){
-    var rows=GALLERY.items.filter(function(i){return igFilter==='all'||i.category===igFilter||i.tags.indexOf(igFilter)>-1});
+    var rows=ET.SHOP.slice(0,8).concat(GALLERY.items).filter(function(i){return igFilter==='all'||i.category===igFilter||i.tags.indexOf(igFilter)>-1});
     igGrid.innerHTML=rows.map(function(i){
+      if(i.shop)return '<a class="ig-tile" href="#gallery" data-view-link="gallery" aria-label="'+esc(i.caption)+' (opens the gallery)"><img src="'+esc(i.file)+'" alt="'+esc(i.caption)+'" loading="lazy" width="280" height="280"><span class="cap">'+esc(i.caption)+'</span></a>';
       return '<a class="ig-tile" href="'+i.permalink+'" target="_blank" rel="noopener" aria-label="'+esc(i.caption)+' (opens Instagram)"><img src="'+i.file+'" alt="" loading="lazy" width="280" height="280">'+
         '<span class="vid"><svg width="10" height="10" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2l10 6-10 6z" fill="#fff"/></svg></span>'+
         '<span class="cap">'+esc(i.caption)+'</span></a>'}).join('')||'<p style="color:#999">No posts in this category yet.</p>';
@@ -6379,7 +6394,7 @@ ET.pages.push({id:'city',param:'davie',label:'City: Davie'});
 var glFilter='all', glShown=8, glFocus=null, glList=[], glIdx=0;
 var glExtra=[['50% 20%','x'],['10% 30%','x'],['95% 40%','x'],['60% 10%','x'],['25% 90%','x'],['85% 90%','x'],['40% 30%','x'],['70% 50%','x']];
 function glItems(){
-  var base=ET.GALLERY.items.slice(), out=base.slice();
+  var base=ET.GALLERY.items.slice(), out=(ET.SHOP||[]).slice().concat(base);
   for(var r=0;r<2;r++){base.forEach(function(it,k){
     var pp=glExtra[(k+r*3)%glExtra.length][0];
     out.push({id:it.id+'-'+(r+2),file:it.file,category:it.category,tags:it.tags,isVideo:r?false:it.isVideo,caption:it.caption,pos:pp,sample:true});
@@ -6399,7 +6414,8 @@ function glRender(){
   }).join('')||'<p class="gl-empty">No posts in this category yet.</p>';
   $('gl-more').parentNode.hidden=glShown>=rows.length;
 }
-window.addEventListener('et-feed',function(){glShown=8;glRender()});$('gl-chips').hidden=ET.IGCATS.length<2;$('gl-chips').innerHTML=ET.IGCATS.map(function(c){return '<button type="button" data-f="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+esc(c[1])+'</button>'}).join('');
+function glChips(){glFilter='all';$('gl-chips').hidden=ET.IGCATS.length<2;$('gl-chips').innerHTML=ET.IGCATS.map(function(c){return '<button type="button" data-f="'+c[0]+'" aria-pressed="'+(c[0]==='all')+'">'+esc(c[1])+'</button>'}).join('')}
+window.addEventListener('et-feed',function(){GL=glItems();glShown=8;glChips();glRender()});glChips();
 $('gl-chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;glFilter=b.dataset.f;glShown=8;
   this.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});glRender()});
 $('gl-more').addEventListener('click',function(){var before=glShown;glShown+=8;glRender();
