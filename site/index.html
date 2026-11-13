@@ -139,7 +139,8 @@ select:focus,input:focus,textarea:focus{outline:none;border-bottom-color:var(--r
 .sec-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:32px}
 .sec-head h2{font-size:clamp(27px,3.3vw,41px);font-weight:800}
 .sec-head p{margin:8px 0 0;color:var(--steel);max-width:36em}
-.svc-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.svc-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+.svc.ic{background:transparent;padding:0;border-bottom:0;display:block}.svc.ic img{display:block;width:100%;height:auto}.svc.ic:hover{box-shadow:none}.svc.ic:hover img{filter:drop-shadow(0 12px 16px rgba(13,13,14,.35))}.svc.ic:focus-visible{outline:3px solid var(--red);outline-offset:3px}
 .svc{background:#fff;display:grid;justify-items:center;align-content:center;gap:12px;padding:22px 10px;text-decoration:none;text-align:center;font:700 15px/1.2 var(--body);border-bottom:3px solid transparent;transition:border-color .15s,transform .15s}
 .svc:hover{border-bottom-color:var(--red);transform:translateY(-2px)}
 .svc svg{width:46px;height:46px;color:var(--red)}
@@ -1026,6 +1027,8 @@ header.nav.scrolled .logo img{height:42px}
 .bs-tile::before{content:attr(data-letter);position:absolute;right:-6px;top:-18px;font:900 96px/1 var(--display);color:var(--char);pointer-events:none}
 .bs-tile:hover,.bs-tile:focus-visible{transform:translateY(-4px);box-shadow:0 16px 32px rgba(13,13,14,.25)}
 .bs-tile:hover .bs-go{color:var(--yellow)}
+.bs-grid>li{display:flex}.bs-grid>li>.bs-tile{flex:1;min-height:170px}
+.bs-logo{position:relative;display:flex;align-items:center;justify-content:center;background:#fff;height:64px;padding:10px 14px;margin:-4px -4px 0}.bs-logo img{max-width:100%;max-height:100%;object-fit:contain;display:block}.bs-tile.has-logo{gap:12px}.bs-tile.has-logo .bs-name{font-size:13px;letter-spacing:.08em}.bs-tile.has-logo::before{display:none}
 .bs-name{position:relative;font:900 clamp(19px,2vw,24px)/1.05 var(--display);text-transform:uppercase;letter-spacing:.01em;overflow-wrap:anywhere}
 .bs-go{position:relative;font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.12em;color:#bdbdbd;transition:color .15s}
 .bs-fine{margin:22px 0 0;color:var(--steel);font-size:13px}
@@ -3484,11 +3487,19 @@ header.nav.scrolled .logo img{height:42px}
   var icon=function(id){return '<svg aria-hidden="true"><use href="#i-'+id+'"/></svg>'};
 
   var grid=document.getElementById('svc-grid');
-  grid.innerHTML=SERVICES.map(function(s){
-    var pay=s[0]==='pay';
-    var SL={brake:'brake-repair',wheel:'custom-wheels',lift:'lift-kits',oil:'oil-changes',susp:'suspension-repair',align:'wheel-alignment',balance:'tire-balancing',install:'tire-installation',repair:'tire-repair',rotate:'tire-rotation',tpms:'tpms-service'};
-    return pay?'<a class="svc pay" href="#financing" data-view-link="financing">'+icon(s[0])+s[1]+'</a>'
-      :'<a class="svc" href="#service/'+SL[s[0]]+'" data-view-link="service" data-param="'+SL[s[0]]+'">'+icon(s[0])+s[1]+'</a>';
+  // Branded app-style icons (media/services/*.webp), each a link. The artwork carries its own label, so alt = the label.
+  var SVC_TILES=[
+    ["brake","Brake Repair","service","brake-repair"],["wheels","Custom Wheels Service","service","custom-wheels"],["lift","Lift Kits","service","lift-kits"],["oil","Oil Changes","service","oil-changes"],
+    ["suspension","Suspension Repair","service","suspension-repair"],["alignment","Wheel Alignments","service","wheel-alignment"],["eta","ETA, track your technician","ext","https://extreme-tires-eta.vercel.app/"],
+    ["balancing","Tire Balancing","service","tire-balancing"],["installation","Tire Installation","service","tire-installation"],["repair","Tire Repair","service","tire-repair"],
+    ["rotation","Tire Rotation","service","tire-rotation"],["tpms","TPMS Service","service","tpms-service"],["paylater","Shop Now, Pay Later","financing",""],
+    ["booking","Booking, book a visit","ext","https://extreme-tires-eta.vercel.app/book"]
+  ];
+  grid.innerHTML=SVC_TILES.map(function(s){
+    var img='<img src="media/services/'+s[0]+'.webp" alt="'+s[1]+'" width="300" height="300" loading="lazy" decoding="async">';
+    if(s[2]==='ext') return '<a class="svc ic" href="'+s[3]+'" target="_blank" rel="noopener">'+img+'</a>';
+    if(s[2]==='financing') return '<a class="svc ic" href="#financing" data-view-link="financing">'+img+'</a>';
+    return '<a class="svc ic" href="#service/'+s[3]+'" data-view-link="service" data-param="'+s[3]+'">'+img+'</a>';
   }).join('');
 
   var pick=document.getElementById('pick');
@@ -4518,6 +4529,7 @@ $('cm-form').addEventListener('submit',function(e){
 ET.pages.push({id:'commercial',label:'Commercial & Fleet'});
 
 /* ===================== BRANDS ===================== */
+var BRAND_LOGOS=['bridgestone','continental','falken','firestone','hankook','kumho','pirelli','toyo'];
 var BRANDS=[
   ['michelin','Michelin',['p']],['bfgoodrich','BFGoodrich',['t']],['uniroyal','Uniroyal',['v']],['cooper','Cooper',['t']],
   ['firestone','Firestone',['v']],['bridgestone','Bridgestone',['p']],['hankook','Hankook',['p']],['hercules','Hercules',['v','t']],
@@ -4532,7 +4544,8 @@ function bsRender(){
   var q=$('bs-q').value.trim().toLowerCase();
   var rows=BRANDS.filter(function(b){return (bsCat==='all'||b[2].indexOf(bsCat)>-1)&&(!q||b[1].toLowerCase().indexOf(q)>-1)});
   $('bs-grid').innerHTML=rows.map(function(b){
-    return '<li><a class="bs-tile" data-letter="'+esc(b[1].charAt(0))+'" href="#brand/'+b[0]+'" data-view-link="brand" data-param="'+b[0]+'" aria-label="'+esc(b[1])+' tires"><span class="bs-name">'+esc(b[1])+'</span><span class="bs-go">View brand</span></a></li>';
+    var hasLogo=BRAND_LOGOS.indexOf(b[0])>-1;
+    return '<li><a class="bs-tile'+(hasLogo?' has-logo':'')+'" data-letter="'+esc(b[1].charAt(0))+'" href="#brand/'+b[0]+'" data-view-link="brand" data-param="'+b[0]+'" aria-label="'+esc(b[1])+' tires">'+(hasLogo?'<span class="bs-logo"><img src="media/brands/'+b[0]+'.svg" alt="'+esc(b[1])+' logo" loading="lazy"></span>':'')+'<span class="bs-name">'+esc(b[1])+'</span><span class="bs-go">View brand</span></a></li>';
   }).join('');
   $('bs-empty').hidden=rows.length>0;
   $('bs-count').textContent='Showing '+rows.length+' of '+BRANDS.length+' brands'+(bsCat==='all'?'':' · sample grouping, confirm');

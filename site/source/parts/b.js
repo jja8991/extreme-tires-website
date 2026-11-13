@@ -87,6 +87,7 @@ $('cm-form').addEventListener('submit',function(e){
 ET.pages.push({id:'commercial',label:'Commercial & Fleet'});
 
 /* ===================== BRANDS ===================== */
+var BRAND_LOGOS=['bridgestone','continental','falken','firestone','hankook','kumho','pirelli','toyo'];
 var BRANDS=[
   ['michelin','Michelin',['p']],['bfgoodrich','BFGoodrich',['t']],['uniroyal','Uniroyal',['v']],['cooper','Cooper',['t']],
   ['firestone','Firestone',['v']],['bridgestone','Bridgestone',['p']],['hankook','Hankook',['p']],['hercules','Hercules',['v','t']],
@@ -101,7 +102,8 @@ function bsRender(){
   var q=$('bs-q').value.trim().toLowerCase();
   var rows=BRANDS.filter(function(b){return (bsCat==='all'||b[2].indexOf(bsCat)>-1)&&(!q||b[1].toLowerCase().indexOf(q)>-1)});
   $('bs-grid').innerHTML=rows.map(function(b){
-    return '<li><a class="bs-tile" data-letter="'+esc(b[1].charAt(0))+'" href="#brand/'+b[0]+'" data-view-link="brand" data-param="'+b[0]+'" aria-label="'+esc(b[1])+' tires"><span class="bs-name">'+esc(b[1])+'</span><span class="bs-go">View brand</span></a></li>';
+    var hasLogo=BRAND_LOGOS.indexOf(b[0])>-1;
+    return '<li><a class="bs-tile'+(hasLogo?' has-logo':'')+'" data-letter="'+esc(b[1].charAt(0))+'" href="#brand/'+b[0]+'" data-view-link="brand" data-param="'+b[0]+'" aria-label="'+esc(b[1])+' tires">'+(hasLogo?'<span class="bs-logo"><img src="media/brands/'+b[0]+'.svg" alt="'+esc(b[1])+' logo" loading="lazy"></span>':'')+'<span class="bs-name">'+esc(b[1])+'</span><span class="bs-go">View brand</span></a></li>';
   }).join('');
   $('bs-empty').hidden=rows.length>0;
   $('bs-count').textContent='Showing '+rows.length+' of '+BRANDS.length+' brands'+(bsCat==='all'?'':' · sample grouping, confirm');
