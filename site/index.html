@@ -1995,6 +1995,23 @@ body{overflow-x:clip}
   .hero-copy>h1{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
   .play{bottom:52px}
 }
+
+/* Booking widget lives inside quote step 3 */
+.mq-slots .days{display:block;overflow:visible;margin-top:8px}
+.mq-slots .cal{margin:8px 0 10px;background:#fff;border:1.5px solid #d9dce1;border-radius:14px;padding:12px;color:#111}
+.mq-slots .cal-key{color:#6b7078}
+.mq-slots .times{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin:12px 0 6px}
+.mq-slots .times button{background:#fff;border:2px solid #111;color:#111;border-radius:10px;padding:13px 8px;font:700 15px var(--body);min-height:48px}
+.mq-slots .times button[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.mq-sum{margin:10px 0 0;font-size:15px;color:#111}.mq-sum b{color:var(--red)}
+/* Quote widget is now the first thing on the Mobile page: tighten the intro */
+#view-mobile>.mq .q-intro .wrap{padding-block:22px 6px}
+#view-mobile>.mq .q-intro .checks{display:none}
+#view-mobile>.mq .q-intro p{font-size:15px}
+#view-mobile>.mq .q-body{padding-block:18px 28px}
+
+.mq-live:empty{display:none}.mq-live.on{display:block;background:var(--mist,#f4f4f4);padding:18px var(--gut-r) 28px var(--gut-l)}
+.mq-live.on~form{display:none}
 </style>
 </head>
 <body>
@@ -2343,48 +2360,6 @@ body{overflow-x:clip}
 
 <!-- ================= MOBILE SERVICE ================= -->
 <section id="view-mobile" data-view="mobile" hidden>
-  <div class="phead">
-    <div class="wrap mhero">
-      <div style="display:grid;gap:14px">
-        <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Mobile Tire Service</span></nav>
-        <h1>Mobile tire service in Broward, Miami-Dade &amp; Palm Beach</h1>
-        <p>Our van brings the tires, the high-speed balancer and an Extreme tech to your driveway, office or job site. You keep your day.</p>
-      </div>
-      <div class="zipbox">
-        <b style="font:800 19px var(--display);text-transform:uppercase">Do we come to you?</b>
-        <form id="zip-form" novalidate>
-          <label for="zip" class="f">Your ZIP code<input id="zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
-          <button class="btn btn-red" type="submit" style="align-self:end">Check</button>
-        </form>
-        <div class="zipres" id="zipres" aria-live="polite"></div>
-      </div>
-    </div>
-  </div>
-  <section class="onsite" aria-labelledby="on-h">
-    <div class="wrap">
-      <div class="eyebrow">What we do on site</div>
-      <h2 id="on-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">The shop, on wheels</h2>
-      <div class="onsite-pic"><img src="media/mobile-onsite.webp" width="2172" height="724" loading="lazy" decoding="async" alt="What we do on site: tire installation (30 to 60 minutes), high-speed balancing (10 to 15 minutes), repairs and roadside (15 to 30 minutes), and oil changes (20 to 40 minutes)."></div>
-    </div>
-  </section>
-  <section class="how how-img" aria-labelledby="how-h">
-    <h2 id="how-h" class="sr-only">How mobile service works: you never wonder where we are</h2>
-    <div class="wrap">
-      <img src="media/mobile-how-it-works.webp" width="1536" height="1024" loading="lazy" alt="How mobile service works. 1 Book: pick a 2-hour window online, by text or by phone. 2 Reminder: a text the evening before, with what your parking spot needs. 3 On the way: a text with your tech's name when the van heads your way. 4 Done: receipt and a quick review link by text when the job is done.">
-    </div>
-  </section>
-
-  <section class="slots" aria-labelledby="sl-h">
-    <div class="wrap">
-      <div class="eyebrow">Book it</div>
-      <h2 id="sl-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">Pick a day and time</h2>
-      <div class="days" id="days" role="group" aria-label="Day"></div>
-      <div class="times" id="times" role="group" aria-label="Time"></div>
-      <button class="btn btn-red" type="button" id="book-slot">Book this slot</button>
-      <p style="color:var(--steel);font-size:14px;margin:10px 0 0" id="slot-note">Pick your preferred day and time. We confirm by text.</p>
-    </div>
-  </section>
-  
   <section class="mq" id="mobile-quote" aria-labelledby="mq-h">
     <div class="q-intro">
       <div class="wrap">
@@ -2394,6 +2369,7 @@ body{overflow-x:clip}
         <div class="checks"><div>Tires, wheels and auto service</div><div>Mobile service at your location</div><div>Pricing confirmed by our team</div><div>Shop now, pay later available</div></div>
       </div>
     </div>
+    <div class="mq-live" id="et-booking-live" aria-live="polite"></div>
     <form id="mq-form" novalidate autocomplete="on">
       <div class="mq-wiz q-body">
         <div class="wrap">
@@ -2427,13 +2403,20 @@ body{overflow-x:clip}
           </div>
           <div class="form-grid" style="margin-bottom:26px"><label class="f" for="mq-size">Tire size (optional)<input id="mq-size" name="tiresize" autocomplete="off" placeholder="Like 225/65R17, printed on the tire sidewall" maxlength="14"></label></div>
           </section>
-          <section class="mq-step" data-step="3" aria-label="Step 3 of 4: When and where" hidden>
-            <h3>When and where?</h3>
-            <div class="form-grid">
-              <label class="f" for="mq-when">When do you need service?<select id="mq-when" name="when" required><option value="">Choose timing</option><option>Today / ASAP</option><option>This week</option><option>Next week</option><option>Just pricing for now</option></select><span class="err" data-for="mq-when"></span></label>
-              <label class="f" for="mq-loc" style="color:var(--steel)">Location or service area<input id="mq-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err"></span></label>
+          <section class="mq-step" data-step="3" aria-label="Step 3 of 4: Where and when" hidden>
+            <h3>Where and when?</h3>
+            <div class="form-grid mq-where">
+              <label class="f" for="mq-loc">Where should the van come? (ZIP or address)<input id="mq-loc" name="loc" autocomplete="street-address" placeholder="City, ZIP, or address"><span class="err" data-for="mq-loc"></span></label>
             </div>
             <label class="chk" for="mq-mobile"><input type="checkbox" id="mq-mobile" name="mobile" checked> I'd prefer mobile service at my location</label>
+            <h3 class="mq-vh" style="margin-top:22px">Pick a day and time</h3>
+            <div class="mq-slots">
+              <div class="days" id="days" role="group" aria-label="Day"></div>
+              <div class="times" id="times" role="group" aria-label="Time"></div>
+              <input type="hidden" id="mq-when" name="when" value="">
+              <p class="mq-sum" id="mq-slot-sum" aria-live="polite"></p>
+              <p class="mq-fine" id="slot-note">Pick your preferred day and time. We confirm by text.</p>
+            </div>
           </section>
           <section class="mq-step" data-step="4" aria-label="Step 4 of 4: Your details" hidden>
             <h3>Who should we contact?</h3>
@@ -2458,6 +2441,40 @@ body{overflow-x:clip}
       </div>
     </form>
   </section>
+  <div class="phead">
+    <div class="wrap mhero">
+      <div style="display:grid;gap:14px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Mobile Tire Service</span></nav>
+        <h1>Mobile tire service in Broward, Miami-Dade &amp; Palm Beach</h1>
+        <p>Our van brings the tires, the high-speed balancer and an Extreme tech to your driveway, office or job site. You keep your day.</p>
+      </div>
+      <div class="zipbox">
+        <b style="font:800 19px var(--display);text-transform:uppercase">Do we come to you?</b>
+        <form id="zip-form" novalidate>
+          <label for="zip" class="f">Your ZIP code<input id="zip" inputmode="numeric" maxlength="5" placeholder="33351" autocomplete="postal-code"></label>
+          <button class="btn btn-red" type="submit" style="align-self:end">Check</button>
+        </form>
+        <div class="zipres" id="zipres" aria-live="polite"></div>
+      </div>
+    </div>
+  </div>
+  <section class="onsite" aria-labelledby="on-h">
+    <div class="wrap">
+      <div class="eyebrow">What we do on site</div>
+      <h2 id="on-h" style="font-size:clamp(25px,3.0vw,38px);font-weight:900">The shop, on wheels</h2>
+      <div class="onsite-pic"><img src="media/mobile-onsite.webp" width="2172" height="724" loading="lazy" decoding="async" alt="What we do on site: tire installation (30 to 60 minutes), high-speed balancing (10 to 15 minutes), repairs and roadside (15 to 30 minutes), and oil changes (20 to 40 minutes)."></div>
+    </div>
+  </section>
+  <section class="how how-img" aria-labelledby="how-h">
+    <h2 id="how-h" class="sr-only">How mobile service works: you never wonder where we are</h2>
+    <div class="wrap">
+      <img src="media/mobile-how-it-works.webp" width="1536" height="1024" loading="lazy" alt="How mobile service works. 1 Book: pick a 2-hour window online, by text or by phone. 2 Reminder: a text the evening before, with what your parking spot needs. 3 On the way: a text with your tech's name when the van heads your way. 4 Done: receipt and a quick review link by text when the job is done.">
+    </div>
+  </section>
+
+  
+  
+  
   <section class="areas" aria-labelledby="ar-h">
     <div class="wrap">
       <div class="eyebrow">Service area</div>
@@ -4121,7 +4138,7 @@ body{overflow-x:clip}
     var z=document.getElementById('zip').value.trim(), c=county(z), out=document.getElementById('zipres');
     out.className='zipres';
     if(c===null){out.textContent='Enter a 5-digit ZIP code.';out.classList.add('no');return}
-    if(c){out.textContent='Yes, we cover '+z+' in '+c+' County. Pick a time below.';out.classList.add('ok');document.getElementById('slots-anchor');document.querySelector('.slots').scrollIntoView({behavior:reduce?'auto':'smooth'})}
+    if(c){out.textContent='Yes, we cover '+z+' in '+c+' County. Pick a day and time in the booking form above.';out.classList.add('ok');var ml=document.getElementById('mq-loc');if(ml&&!ml.value)ml.value=z;var mqs=document.getElementById('mobile-quote');if(mqs)mqs.scrollIntoView({behavior:reduce?'auto':'smooth'})}
     else{out.textContent='That ZIP is outside our regular route. Call (954) 773-1896 and we will see what we can do.';out.classList.add('no')}
   });
   // ===== Real booking calendar (shared by Mobile page, Quote & Book, Schedule) =====
@@ -4169,7 +4186,7 @@ body{overflow-x:clip}
     daysEl.querySelectorAll('.cal-d').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickDay=b.dataset.day;renderTimes(b.dataset.sat==='true')});
   timesEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
     timesEl.querySelectorAll('button').forEach(function(o){o.setAttribute('aria-pressed',String(o===b))});pickTime=b.dataset.time});
-  document.getElementById('book-slot').addEventListener('click',function(){
+  var _bs=document.getElementById('book-slot');if(_bs)_bs.addEventListener('click',function(){
     document.getElementById('q-mobile').checked=true;
     var w=document.getElementById('q-when'); w.value='This week';
     var z=document.getElementById('zip').value.trim(); if(z)document.getElementById('q-loc').value=z;
@@ -4515,7 +4532,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       rememberContact('mq-');saveMobVeh();
       var mp=[].slice.call(mpick.querySelectorAll('input:checked')).map(function(i){return i.value});
       var veh=vehNow(), sz=$m('mq-size').value.trim();
-      md.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(mp.length?' for: '+mp.join(', '):'')+(veh?' | Vehicle: '+veh:'')+(sz?' | Tire size: '+sz:'')+'.';
+      md.textContent='Prototype only, nothing was sent. On the live site this goes to the Omnisend form and the shop gets a lead'+(mp.length?' for: '+mp.join(', '):'')+(veh?' | Vehicle: '+veh:'')+(sz?' | Tire size: '+sz:'')+' | When: '+$m('mq-when').value+(($m('mq-loc').value||'').trim()?' | Where: '+$m('mq-loc').value.trim():'')+'.';
       md.hidden=false;
     });
   }
@@ -5937,9 +5954,10 @@ $('cy-root').addEventListener('submit',function(e){
   var back=document.getElementById('mq-back'), next=document.getElementById('mq-next'), sub=document.getElementById('mq-submit');
   var prog=[].slice.call(document.querySelectorAll('#mq-prog li')), fill=document.getElementById('mq-barfill');
   var NEXT={1:'Next: Vehicle',2:'Next: When',3:'Next: Your details'};
-  var REQ={3:{'mq-when':'Please select when you need service.'},4:{'mq-first':'Please enter your name.','mq-last':'Please enter your name.','mq-phone':'This field is required','mq-email':'This field is required'}};
+  var REQ={3:{'mq-when':'Please pick a day and time.'},4:{'mq-first':'Please enter your name.','mq-last':'Please enter your name.','mq-phone':'This field is required','mq-email':'This field is required'}};
   function check(n){
-    var bad=null,m=REQ[n]||{};
+    var bad=null,m=Object.assign({},REQ[n]||{});
+    if(n===3&&document.getElementById('mq-mobile').checked)m={'mq-loc':'Enter a ZIP or address so the van knows where to go.','mq-when':m['mq-when']};
     Object.keys(m).forEach(function(id){
       var el=document.getElementById(id), err=f.querySelector('.err[data-for="'+id+'"]');
       var ok=el.value.trim()!==''&&(id!=='mq-email'||/.+@.+\..+/.test(el.value));
@@ -5969,7 +5987,37 @@ $('cy-root').addEventListener('submit',function(e){
       if(e){var st=e.closest('.mq-step');if(st&&+st.dataset.step!==cur)go(+st.dataset.step,true);var inp=e.parentNode.querySelector('input,select');if(inp)inp.focus()}
     },0);
   },true);
+
+  /* keep the hidden "when" value in step with the calendar + time buttons */
+  function pretty(k){var d=new Date(k+'T12:00:00');return isNaN(d)?k:d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}
+  function syncWhen(){
+    var d=document.querySelector('#days .cal-d[aria-pressed="true"]'),t=document.querySelector('#times button[aria-pressed="true"]');
+    var w=document.getElementById('mq-when'),sum=document.getElementById('mq-slot-sum');
+    if(d&&t){w.value=pretty(d.dataset.day)+' at '+t.dataset.time;sum.innerHTML='Your slot: <b>'+w.value+'</b>'}else{w.value='';sum.textContent=''}
+  }
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#days,#times'))setTimeout(syncWhen,0)});
+  syncWhen();
   go(1,true);
+})();
+</script>
+<script>
+/* Live booking widget (ops backend). Draws only when the shop has switched booking ON in the ops app; otherwise the built-in steps stay. */
+(function(){
+  var BOOK={endpoint:'https://qaxxwpojwpqkwqlpzrck.supabase.co/functions/v1/booking-intake',src:'https://extreme-tires-eta.vercel.app/widget.js'};
+  var host=document.getElementById('et-booking-live'),form=document.getElementById('mq-form');
+  if(!host||!form)return;
+  function live(){var c=host.firstElementChild;return !!c&&c.getBoundingClientRect().height>60}
+  function swap(){if(live()){form.hidden=true;host.classList.add('on')}}
+  function load(){
+    if(window.__etBookingLoaded)return;window.__etBookingLoaded=true;
+    var sc=document.createElement('script');sc.src=BOOK.src;sc.defer=true;
+    sc.setAttribute('data-endpoint',BOOK.endpoint);sc.setAttribute('data-target','#et-booking-live');
+    sc.setAttribute('data-skin','website');sc.setAttribute('data-theme','light');sc.setAttribute('data-phone','(954) 773-1896');sc.setAttribute('data-lang','auto');
+    sc.onerror=function(){};document.body.appendChild(sc);
+    var n=0,t=setInterval(function(){n++;swap();if(live()||n>40)clearInterval(t)},250);
+  }
+  var idle=window.requestIdleCallback||function(f){setTimeout(f,800)};
+  idle(load);
 })();
 </script>
 </body>
