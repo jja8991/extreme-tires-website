@@ -2090,6 +2090,7 @@ body{overflow-x:clip}
 .sw{background:var(--mist);color:#0d0d0e;padding-block:34px 60px}.sw-wrap{max-width:880px}
 .sw .mq-prog{grid-template-columns:repeat(5,1fr)}.sw .mq-prog li{cursor:default}.sw .mq-prog li.ok{cursor:pointer}
 .sw h3{font-size:clamp(22px,2.6vw,30px);font-weight:800;margin:0 0 6px;color:#0d0d0e}
+.grecaptcha-badge{visibility:hidden}.rc-note{margin:10px 0 0;color:#5b6068;font-size:12px;line-height:1.4}.rc-note a{color:inherit;text-decoration:underline}
 .sw-lead{margin:0 0 18px;color:#5b6068}.sw-hint{margin:10px 0 0;color:#5b6068;font-size:14px}.sw-hint a{color:var(--red-deep,#b80f13)}
 .sw .f{display:grid;gap:6px;font:700 13px var(--body);color:#444;text-transform:none;letter-spacing:0}
 .sw .f input,.sw .f textarea{background:#fff;color:#111;border:1.5px solid #cfd1d5;border-radius:10px;padding:12px 14px;font:16px var(--body);width:100%;min-height:48px}
@@ -2558,6 +2559,7 @@ body{overflow-x:clip}
               <p class="mq-fine mq-legal"><a href="#privacy" data-view-link="privacy">Privacy Policy</a> &middot; <a href="#terms" data-view-link="terms">Terms</a></p>
               <label class="chk mq-sms" for="mq-mkt"><input type="checkbox" id="mq-mkt" name="sms_marketing_consent"><span>I also agree to receive recurring promotional text messages (offers, discounts and seasonal tire promotions) from Extreme Tires-N-Accessories LLC at the mobile number I provided. Message frequency varies (up to about 4 per month). Message and data rates may apply. Reply STOP to cancel or HELP for help. Consent is not a condition of purchase.</span></label>
               <span class="err" id="mq-mkt-err" aria-live="polite"></span>
+              <p class="rc-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>
             </div>
             <span class="err" id="mq-live-err" role="alert" aria-live="assertive"></span>
             <input type="text" id="mq-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
@@ -2947,6 +2949,7 @@ body{overflow-x:clip}
             <p class="sw-hint"><a href="#privacy" data-view-link="privacy">Privacy Policy</a> &middot; <a href="#terms" data-view-link="terms">Terms</a></p>
             <label class="chk" for="sw-mkt"><input type="checkbox" id="sw-mkt" name="sms_marketing_consent"><span>I also agree to receive recurring promotional text messages (offers, discounts and seasonal tire promotions) from Extreme Tires-N-Accessories LLC at the mobile number I provided. Message frequency varies (up to about 4 per month). Message and data rates may apply. Reply STOP to cancel or HELP for help. Consent is not a condition of purchase.</span></label>
             <span class="err" id="sw-e-mkt" aria-live="polite"></span>
+            <p class="rc-note">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>
           </div>
           <span class="err" id="sw-live-err" role="alert" aria-live="assertive"></span>
           <input type="text" id="sw-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
@@ -4000,6 +4003,47 @@ body{overflow-x:clip}
 </nav>
 
 <script>
+/* reCAPTCHA v3 (invisible). Public site key only; the secret lives server-side in booking-intake. Loads lazily on first form focus or at submit. Never blocks a submit: resolves '' on any failure/timeout. */
+(function(){
+  var KEY='6Lc0UB8uAAAAAMo91UuudTy0dtsCeW8CsBEBqMyj',loading=null;
+  function load(){
+    if(loading)return loading;
+    loading=new Promise(function(res){
+      if(window.grecaptcha&&window.grecaptcha.ready){res(true);return}
+      try{
+        var s=document.createElement('script');s.src='https://www.google.com/recaptcha/api.js?render='+KEY;s.async=true;
+        s.onload=function(){res(true)};s.onerror=function(){res(false)};document.head.appendChild(s);
+      }catch(e){res(false)}
+    });
+    return loading;
+  }
+  function token(action){
+    return new Promise(function(done){
+      var fin=false;function end(v){if(!fin){fin=true;clearTimeout(t);done(typeof v==='string'?v:'')}}
+      var t=setTimeout(function(){end('')},3000);
+      try{
+        load().then(function(ok){
+          if(!ok||!window.grecaptcha||!window.grecaptcha.ready){end('');return}
+          window.grecaptcha.ready(function(){
+            try{window.grecaptcha.execute(KEY,{action:'booking'}).then(end,function(){end('')})}catch(e){end('')}
+          });
+        },function(){end('')});
+      }catch(e){end('')}
+    });
+  }
+  /* A 400 from booking-intake about verification (not a field validation error) */
+  function isVerifyFail(status,j){
+    if(status!==400||!j||j.field)return false;
+    return /recaptcha|captcha|verif/i.test([j.code,j.error,j.message].filter(function(x){return typeof x==='string'}).join(' '));
+  }
+  window.ETRecaptcha={token:token,load:load,isVerifyFail:isVerifyFail,
+    MSG:'We couldn\u2019t verify this request. Please call or text (954) 773-1896.'};
+  document.addEventListener('focusin',function(e){
+    var t=e.target;if(t&&t.closest&&/^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)&&t.closest('form,#wiz,#qwiz,#cwiz'))load();
+  },true);
+})();
+</script>
+<script>
 /* ===== Google Maps Platform (browser key) =====
    One key, referrer-locked to this site's *.vercel.app domains and limited to Maps JavaScript API + Places API (New).
    Safe to ship in front-end code. A custom domain must be added to the key's HTTP referrer list or Google calls will 403
@@ -4531,7 +4575,8 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
           '<label class="f" for="'+P+'email">Email'+(F?'':' (optional)')+'<input id="'+P+'email" type="email" autocomplete="email" value="'+esc(W.email)+'" placeholder="name@example.com"></label>'+
           (F?'<div class="chipgrp">Preferred contact</div><div class="chips">'+FPREF.map(function(x){return '<button type="button" class="chip" data-pref="'+esc(x)+'" aria-pressed="'+(W.pref===x)+'">'+esc(x)+'</button>'}).join('')+'</div>':'')+'<label class="f" for="'+P+'notes">Anything else we should know? (optional)<textarea id="'+P+'notes" maxlength="300" placeholder="'+(F?'Tire sizes, current brands, schedules, anything that helps':'Symptoms, tire size, gate code, etc.')+'">'+esc(W.notes)+'</textarea></label>'+
           '<label class="toggle" for="'+P+'consent"><input type="checkbox" id="'+P+'consent"'+(W.consent?' checked':'')+'> It is OK to call or text me about this request.</label>'+
-          '<label class="toggle" for="'+P+'sms" style="align-items:flex-start"><input type="checkbox" id="'+P+'sms"'+(W.sms?' checked':'')+' style="margin-top:3px"><span style="font-size:12px;color:#aaa;font-weight:400">'+esc(smsText())+'</span></label>';
+          '<label class="toggle" for="'+P+'sms" style="align-items:flex-start"><input type="checkbox" id="'+P+'sms"'+(W.sms?' checked':'')+' style="margin-top:3px"><span style="font-size:12px;color:#aaa;font-weight:400">'+esc(smsText())+'</span></label>'+
+          '<p style="margin:6px 0 0;font-size:11px;line-height:1.4;color:#999">This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>';
       }else{
         var a=chosen(),i2=dayInfo(),wl=wins().filter(function(x){return x.k===W.win})[0];
         h='<div class="done-step step"><h3>'+(Q?'Request received':'Request received')+', '+esc((W.name.split(' ')[0])||'friend')+'.</h3>'+
@@ -4600,7 +4645,6 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       var b=BK();
       if(!b||(!Q&&!b.live()))return err('Online booking is not open right now, so nothing was sent. Please call '+PHONE+' and we will book you in.');
       var d=dayInfo(),sz=W.size,v=W.vp||{};
-      /* TODO(reCAPTCHA): NOT implemented. Needs a separate reCAPTCHA site key (v3 or Enterprise) created in Google Cloud for the site domains, plus server-side token verification (secret key) in the booking-intake function. Add the token to the request body here before sending. */
       var svcs=labels(a).join('|'),pin=W.where==='mobile'&&W.lat!=null&&W.lng!=null;
       var tr=v.trim&&!/^Not sure|^Other/.test(v.trim)?v.trim:'';
       var bodyJ={name:W.name,phone:W.phone,email:W.email,address:W.where==='mobile'?W.loc:b.SHOP.addr,zip:W.where==='mobile'?W.zip:b.SHOP.zip,
@@ -4612,9 +4656,11 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       Object.keys(bodyJ).forEach(function(k){if(bodyJ[k]===''&&k!=='website')delete bodyJ[k]});
       W.busy=true;nextB.disabled=true;var lbl=nextB.textContent;nextB.textContent='Sending...';
       function idle(){W.busy=false;nextB.disabled=false;nextB.textContent=lbl}
-      fetch(b.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(bodyJ)})
-        .then(function(r){return r.json().catch(function(){return null})}).then(function(j){
-          idle();j=j||{};
+      window.ETRecaptcha.token(Q?(F?'fleet':'quote'):'schedule').then(function(rt){bodyJ.recaptcha_token=rt;
+      return fetch(b.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(bodyJ)})})
+        .then(function(r){return r.json().catch(function(){return null}).then(function(j){return {status:r.status,j:j}})}).then(function(res){
+          var j=res.j;idle();j=j||{};
+          if(window.ETRecaptcha.isVerifyFail(res.status,j)){err(window.ETRecaptcha.MSG);return}
           if(j.ok===true){W.done=true;W.step=5;W.dir=1;if(!Q)o.doneMsg=(typeof j.message==='string'&&j.message?j.message+'. ':'')+'This was a request, not a confirmed appointment. We will contact you to confirm the day and time.';render();return}
           var c=j.code,msg=typeof j.message==='string'&&j.message?j.message:'';
           var back=function(n,m){W.step=n;W.dir=-1;render();err(m)};
@@ -5518,7 +5564,6 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   /* ---- send ---- */
   function stepOfField(fld){return {address:1,zip:1,vehicle_year:2,vehicle_make:2,vehicle_model:2,tire_size:2,service_type:3,pref_date:4,pref_window:4}[fld]||5}
   function fail(msg,k){if(k<step)show(k,true);var id={1:'sw-e1',2:'sw-e2',3:'sw-e3',4:'sw-e4'}[k]||'sw-live-err';setErr(id,msg);try{$(id).scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}}
-  /* TODO(reCAPTCHA): NOT implemented. Needs a separate reCAPTCHA site key (v3 or Enterprise) created in Google Cloud for the site domains, plus server-side token verification (secret key) in the booking-intake function. Add the token to the request body here before sending. */
   f.addEventListener('submit',function(e){
     e.preventDefault();if(busy||done)return;
     $('sw-live-err').textContent='';
@@ -5536,10 +5581,12 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     body.website=$('sw-hp').value;
     busy=true;subB.disabled=true;var lbl=subB.textContent;subB.textContent='Sending...';
     function idle(){busy=false;subB.disabled=false;subB.textContent=lbl}
-    fetch(BOOK.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
+    window.ETRecaptcha.token('schedule').then(function(rt){body.recaptcha_token=rt;
+    return fetch(BOOK.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(body)})})
       .then(function(r){return r.json().catch(function(){return null}).then(function(j){return {status:r.status,j:j||{}}})})
       .then(function(res){
         idle();var j=res.j;
+        if(window.ETRecaptcha.isVerifyFail(res.status,j)){fail(window.ETRecaptcha.MSG,5);return}
         if(j.ok===true){
           done=true;var dn=$('sw-done'),first=body.name.split(' ')[0];
           dn.innerHTML='<h3>Request received, '+h(first)+'.</h3><p style="margin:0 0 10px"><b>'+h(typeof j.message==='string'&&j.message?j.message:'Request received — we will confirm by phone')+'.</b> This was a request, not a confirmed appointment. We will contact you by '+h(how)+' to confirm the day and time.</p>'+
@@ -6978,10 +7025,12 @@ $('cy-root').addEventListener('submit',function(e){
     body.website=$('mq-hp').value;
     busy=true;sub.disabled=true;var lbl=sub.textContent;sub.textContent='Sending...';
     function idle(){busy=false;sub.disabled=false;sub.textContent=lbl}
-    fetch(BOOK.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(body)})
+    window.ETRecaptcha.token('mobile').then(function(rt){body.recaptcha_token=rt;
+    return fetch(BOOK.endpoint,{method:'POST',mode:'cors',credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',headers:{'content-type':'application/json'},body:JSON.stringify(body)})})
       .then(function(r){return r.json().catch(function(){return null}).then(function(j){return {status:r.status,j:j||{}}})})
       .then(function(res){
         idle();var j=res.j;
+        if(window.ETRecaptcha.isVerifyFail(res.status,j)){fail(window.ETRecaptcha.MSG,5);return}
         if(j.ok===true){
           done=true;var md=$('mq-done');
           md.textContent=(typeof j.message==='string'&&j.message?j.message:'Request received — we will confirm by phone')+'. This was a request, not a confirmed appointment. We will contact you to confirm the day and time.';
