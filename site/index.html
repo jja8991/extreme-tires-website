@@ -1388,7 +1388,7 @@ body{background:#0d0d0e}
 .rv-big{display:grid;gap:6px;justify-items:start}
 .rv-big>span{font:900 clamp(52px,8vw,92px)/.9 var(--display)}
 .rv-stars{--r:4.5;display:inline-block;font-size:26px;letter-spacing:3px;line-height:1;background:linear-gradient(90deg,#f5a400 calc(var(--r)/5*100%),var(--line) 0);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
-.rv-src{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rv-src{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}@media (min-width:1061px){.rv-src:has(#g-rv-card:not([hidden])){grid-template-columns:repeat(5,minmax(0,1fr))}}
 .rv-card{background:#fff;padding:22px;display:grid;gap:8px;align-content:start;border-top:4px solid var(--ink)}
 .rv-card h3{font-size:16px;font-weight:800}
 .rv-score{font:900 48px/1 var(--display)}
@@ -2358,7 +2358,7 @@ body{overflow-x:clip}
         <div>
           <div class="stars-l" aria-hidden="true">★★★★★</div>
           <h2 id="rev-h" style="font-size:clamp(22px,2.7vw,34px);font-weight:900">1,300+ South Florida drivers</h2>
-          <div class="platforms"><span>Birdeye <b>4.7 · 1,319</b></span><span>Google feed</span><span>Yelp <b>4.2 · 106</b></span><span>MapQuest <b>4.4 · 109</b></span></div>
+          <div class="platforms"><span>Birdeye <b>4.7 · 1,319</b></span><span id="g-platform">Google feed</span><span>Yelp <b>4.2 · 106</b></span><span>MapQuest <b>4.4 · 109</b></span></div>
         </div>
         <a class="btn btn-dark" href="https://www.google.com/maps/search/?api=1&amp;query=Extreme+Tires+7712+W+Oakland+Park+Blvd+Sunrise+FL" target="_blank" rel="noopener">Review us on Google</a>
       </div>
@@ -3384,8 +3384,9 @@ body{overflow-x:clip}
         <article class="rv-card"><h3>Chamber of Commerce</h3><div class="rv-score">4.6<small>/ 5</small></div><div class="rv-stars" style="--r:4.6" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>542 reviews</p></article>
         <article class="rv-card"><h3>MapQuest</h3><div class="rv-score">4.4<small>/ 5</small></div><div class="rv-stars" style="--r:4.4" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>109 reviews</p></article>
         <article class="rv-card"><h3>Yelp</h3><div class="rv-score">4.2<small>/ 5</small></div><div class="rv-stars" style="--r:4.2" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p>106 reviews</p></article>
+        <article class="rv-card" id="g-rv-card" hidden><h3>Google</h3><div class="rv-score">&nbsp;<small>/ 5</small></div><div class="rv-stars" style="--r:4.5" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div><p class="g-count"></p></article>
       </div>
-      <p class="rv-src-note"><span class="sample-note">Figures from public listings, Oct 2026. Google count to be verified.</span></p>
+      <p class="rv-src-note"><span class="sample-note" id="rv-src-note-t">Figures from public listings, Oct 2026. Google count to be verified.</span></p>
     </div>
   </section>
 
@@ -3999,6 +4000,104 @@ body{overflow-x:clip}
 </nav>
 
 <script>
+/* ===== Google Maps Platform (browser key) =====
+   One key, referrer-locked to this site's *.vercel.app domains and limited to Maps JavaScript API + Places API (New).
+   Safe to ship in front-end code. A custom domain must be added to the key's HTTP referrer list or Google calls will 403
+   (every feature below then falls back silently: address search uses Geoapify, ratings keep their static text). */
+var GMAPS_BROWSER_KEY='AIzaSyAyXNBlL0iZoJ3US0n2eeHg0nPp7nUlSFg';
+/* Optional: paste the shop's Google Place ID (starts with ChIJ) to skip the one-time lookup. Same value as GOOGLE_PLACE_ID in the Vercel env. */
+var GOOGLE_PLACE_ID='';
+(function(){try{
+  var KEY=(typeof GMAPS_BROWSER_KEY==='string'&&GMAPS_BROWSER_KEY)||'',API='https://places.googleapis.com/v1/';
+  var ss=null,ls=null;try{ss=window.sessionStorage}catch(e){}try{ls=window.localStorage}catch(e){}
+  var dead=false,tok=null,warned={},MAXREQ=40,TTL=6*3600*1000;
+  function warn(k,msg,e){if(warned[k])return;warned[k]=1;try{console.warn('[ET Google] '+msg,e||'')}catch(x){}}
+  function sget(k){try{return ss&&ss.getItem(k)}catch(e){return null}}
+  function sset(k,v){try{ss&&ss.setItem(k,v)}catch(e){}}
+  function newTok(){return (window.crypto&&crypto.randomUUID)?crypto.randomUUID():String(Date.now())+Math.random().toString(16).slice(2)}
+  function on(){return !!KEY&&!dead&&typeof window.fetch==='function'}
+
+  /* ---- Address autocomplete: Places API (New) Autocomplete over fetch, prediction text only (no Place Details call) ---- */
+  function suggest(q){
+    q=String(q||'').trim();
+    if(!on()||q.length<4)return Promise.resolve(null);
+    var n=+(sget('et_gac_n')||0);
+    if(n>=MAXREQ){warn('cap','autocomplete request cap reached for this session, using fallback');return Promise.resolve(null)}
+    sset('et_gac_n',String(n+1));
+    if(!tok)tok=newTok();
+    return fetch(API+'places:autocomplete',{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json','X-Goog-Api-Key':KEY},
+      body:JSON.stringify({input:q,sessionToken:tok,includedRegionCodes:['us'],languageCode:'en',
+        locationBias:{circle:{center:{latitude:26.15,longitude:-80.28},radius:50000}}})})
+    .then(function(r){
+      if(!r.ok){dead=true;warn('http','autocomplete failed with HTTP '+r.status+', falling back to the free address search');return null}
+      return r.json();
+    }).then(function(j){
+      if(!j)return null;
+      var out=[];
+      (j.suggestions||[]).forEach(function(s){
+        var p=s&&s.placePrediction;if(!p)return;
+        var sf=p.structuredFormat||{},main=(sf.mainText&&sf.mainText.text)||'',sec=(sf.secondaryText&&sf.secondaryText.text)||'',
+            full=(p.text&&p.text.text)||(main+(sec?', '+sec:''));
+        full=full.replace(/,\s*USA$/,'');sec=sec.replace(/,\s*USA$/,'');
+        if(!main&&!full)return;
+        var street=/^\d/.test(main)?main:full,z=full.match(/\bFL\s+(\d{5})\b/);
+        out.push({l1:street,l2:street===main?sec:'',zip:z?z[1]:''});
+      });
+      return out.slice(0,5);
+    }).catch(function(e){dead=true;warn('net','autocomplete request error, falling back',e);return null});
+  }
+  function endSession(){tok=null}
+
+  /* ---- Live Google rating + review count: Place Details, field mask rating,userRatingCount, cached 6h per browser session ---- */
+  function fmtN(n){try{return n.toLocaleString('en-US')}catch(e){return String(n)}}
+  function apply(d){
+    try{
+      var r=+d.r,c=+d.n;if(!(r>=1&&r<=5)||!(c>=1))return;
+      var card=document.getElementById('g-rv-card');
+      if(card){
+        var sc=card.querySelector('.rv-score'),st=card.querySelector('.rv-stars'),ct=card.querySelector('.g-count');
+        if(sc)sc.innerHTML=r.toFixed(1)+'<small>/ 5</small>';
+        if(st)st.style.setProperty('--r',String(r));
+        if(ct)ct.textContent=fmtN(c)+' reviews';
+        card.hidden=false;
+        var note=document.getElementById('rv-src-note-t');if(note)note.textContent='Google figures are live from Google. Other sites from public listings, Oct 2026.';
+      }
+      var pf=document.getElementById('g-platform');
+      if(pf)pf.innerHTML='Google <b>'+r.toFixed(1)+' &middot; '+fmtN(c)+'</b>';
+    }catch(e){warn('apply','could not paint the live rating',e)}
+  }
+  function placeId(){
+    if(GOOGLE_PLACE_ID)return Promise.resolve(GOOGLE_PLACE_ID);
+    var id=null;try{id=ls&&ls.getItem('et_g_pid')}catch(e){}
+    if(id)return Promise.resolve(id);
+    /* one-time lookup, IDs-only field mask (no billable data), remembered in localStorage */
+    return fetch(API+'places:searchText',{method:'POST',credentials:'omit',headers:{'Content-Type':'application/json','X-Goog-Api-Key':KEY,'X-Goog-FieldMask':'places.id'},
+      body:JSON.stringify({textQuery:'Extreme Mobile Tires 7712 W Oakland Park Blvd Sunrise FL 33351',maxResultCount:1,
+        locationBias:{circle:{center:{latitude:26.1659,longitude:-80.2521},radius:2000}}})})
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+    .then(function(j){var v=j&&j.places&&j.places[0]&&j.places[0].id;if(!v)throw new Error('place not found');try{ls&&ls.setItem('et_g_pid',v)}catch(e){}return v});
+  }
+  function rating(){
+    if(!on())return;
+    var raw=sget('et_g_rating'),c=null;try{c=raw?JSON.parse(raw):null}catch(e){}
+    if(c&&Date.now()-c.t<(c.fail?30*60*1000:TTL)){if(!c.fail)apply(c);return}
+    placeId().then(function(id){
+      return fetch(API+'places/'+encodeURIComponent(id),{credentials:'omit',headers:{'X-Goog-Api-Key':KEY,'X-Goog-FieldMask':'rating,userRatingCount'}});
+    }).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})
+    .then(function(j){
+      var d={t:Date.now(),r:j&&j.rating,n:j&&j.userRatingCount};
+      if(!(d.r>=1&&d.r<=5)||!(d.n>=1))throw new Error('no rating in response');
+      sset('et_g_rating',JSON.stringify(d));apply(d);
+    }).catch(function(e){sset('et_g_rating',JSON.stringify({t:Date.now(),fail:1}));warn('rating','live rating unavailable, keeping the static text',e)});
+  }
+  window.ETGoogle={on:on,suggest:suggest,endSession:endSession,rating:rating};
+  /* single rating fetch, after the page has gone idle */
+  function kick(){var f=function(){try{rating()}catch(e){warn('rating2','rating error',e)}};
+    if('requestIdleCallback' in window)requestIdleCallback(f,{timeout:4000});else setTimeout(f,2500)}
+  if(document.readyState==='complete')kick();else window.addEventListener('load',kick,{once:true});
+}catch(e){try{console.warn('[ET Google] disabled',e)}catch(x){}}})();
+</script>
+<script>
 (function(){
   // Services from Melissa's quote mockup, same order and wording
   var SERVICES=[
@@ -4258,13 +4357,21 @@ body{overflow-x:clip}
     if(n>=33401&&n<=33499)return 'Palm Beach';
     return '';
   }
+  /* Outside-area result: same message as before plus tap-to-call and tap-to-text links for the shop */
+  window.ETZipOutside=function(el,msg){
+    el.textContent=msg+' ';
+    var a=document.createElement('a');a.href='tel:+19547731896';a.textContent='Call';
+    var b=document.createElement('a');b.href='sms:+19547731896';b.textContent='Text';
+    el.appendChild(a);el.appendChild(document.createTextNode(' or '));el.appendChild(b);el.appendChild(document.createTextNode(' (954) 773-1896.'));
+    [a,b].forEach(function(x){x.style.cssText='color:inherit;font-weight:800;text-decoration:underline'});
+  };
   document.getElementById('zip-form').addEventListener('submit',function(e){
     e.preventDefault();
     var z=document.getElementById('zip').value.trim(), c=county(z), out=document.getElementById('zipres');
     out.className='zipres';
     if(c===null){out.textContent='Enter a 5-digit ZIP code.';out.classList.add('no');return}
     if(c){out.textContent='Yes, we cover '+z+' in '+c+' County. Pick a day and time in the booking form above.';out.classList.add('ok');var mz=document.getElementById('mq-zip');if(mz&&!mz.value){mz.value=z;mz.dispatchEvent(new Event('input',{bubbles:true}))}var mqs=document.getElementById('mobile-quote');if(mqs)mqs.scrollIntoView({behavior:reduce?'auto':'smooth'})}
-    else{out.textContent='That ZIP is outside our regular route. Call (954) 773-1896 and we will see what we can do.';out.classList.add('no')}
+    else{ETZipOutside(out,'That ZIP is outside our regular route, but ask us, we may still be able to help.');out.classList.add('no')}
   });
   // ===== Real booking calendar (shared by Mobile page, Quote & Book, Schedule) =====
   // Edit CLOSED_DATES with 'YYYY-MM-DD' strings for holidays/shop closures. Sundays are always closed.
@@ -4493,6 +4600,7 @@ window.ICO_FILE={align:'alignment',balance:'balancing',brake:'brake',install:'in
       var b=BK();
       if(!b||(!Q&&!b.live()))return err('Online booking is not open right now, so nothing was sent. Please call '+PHONE+' and we will book you in.');
       var d=dayInfo(),sz=W.size,v=W.vp||{};
+      /* TODO(reCAPTCHA): NOT implemented. Needs a separate reCAPTCHA site key (v3 or Enterprise) created in Google Cloud for the site domains, plus server-side token verification (secret key) in the booking-intake function. Add the token to the request body here before sending. */
       var svcs=labels(a).join('|'),pin=W.where==='mobile'&&W.lat!=null&&W.lng!=null;
       var tr=v.trim&&!/^Not sure|^Other/.test(v.trim)?v.trim:'';
       var bodyJ={name:W.name,phone:W.phone,email:W.email,address:W.where==='mobile'?W.loc:b.SHOP.addr,zip:W.where==='mobile'?W.zip:b.SHOP.zip,
@@ -5410,6 +5518,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
   /* ---- send ---- */
   function stepOfField(fld){return {address:1,zip:1,vehicle_year:2,vehicle_make:2,vehicle_model:2,tire_size:2,service_type:3,pref_date:4,pref_window:4}[fld]||5}
   function fail(msg,k){if(k<step)show(k,true);var id={1:'sw-e1',2:'sw-e2',3:'sw-e3',4:'sw-e4'}[k]||'sw-live-err';setErr(id,msg);try{$(id).scrollIntoView({block:'center',behavior:'smooth'})}catch(e){}}
+  /* TODO(reCAPTCHA): NOT implemented. Needs a separate reCAPTCHA site key (v3 or Enterprise) created in Google Cloud for the site domains, plus server-side token verification (secret key) in the booking-intake function. Add the token to the request body here before sending. */
   f.addEventListener('submit',function(e){
     e.preventDefault();if(busy||done)return;
     $('sw-live-err').textContent='';
@@ -5516,6 +5625,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     }
     function pick(i){
       var it=items[i];if(!it)return;
+      if(window.ETGoogle)ETGoogle.endSession();
       if(it.pid){
         var tk=gtok;gtok=null;
         fetch('https://places.googleapis.com/v1/places/'+encodeURIComponent(it.pid)+'?sessionToken='+encodeURIComponent(tk||''),{headers:{'X-Goog-Api-Key':GKEY,'X-Goog-FieldMask':'addressComponents'}})
@@ -5553,7 +5663,13 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
           cur=-1;paint();
         }).catch(function(){lookupOSM(q)});
     }
-    function lookup(q){if(GKEY)glookup(q);else if(GEOKEY)geolookup(q);else lookupOSM(q)}
+    function legacyLookup(q){if(GKEY)glookup(q);else if(GEOKEY)geolookup(q);else lookupOSM(q)}
+    /* Google Places (New) first when the browser key works; any failure or empty key falls back to the existing free search */
+    function lookup(q){
+      var G=window.ETGoogle;if(!G||!G.on()||q.length<4){legacyLookup(q);return}
+      var my=++seq;
+      G.suggest(q).then(function(g){if(my!==seq)return;if(g){items=g;cur=-1;paint()}else legacyLookup(q)}).catch(function(){if(my===seq)legacyLookup(q)});
+    }
     function lookupOSM(q){
       var my=++seq;
       if(cache[q]){items=cache[q];cur=-1;paint();return}
@@ -5567,7 +5683,7 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     inp.addEventListener('input',function(){
       setErr('sw-e-loc','');clearTimeout(timer);var q=inp.value.trim();
       if(q.length<3){close();return}
-      timer=setTimeout(function(){lookup(q)},120);
+      timer=setTimeout(function(){lookup(q)},(window.ETGoogle&&ETGoogle.on())?250:120);
     });
     inp.addEventListener('keydown',function(e){
       if(box.hidden||!items.length)return;
@@ -5602,19 +5718,24 @@ function radio(name){var r=document.querySelector('input[name="'+name+'"]:checke
     function close(){box.hidden=true;box.innerHTML='';items=[];cur=-1;inp.setAttribute('aria-expanded','false')}
     function paint(){box.innerHTML=items.map(function(it,i){return '<li role="option" data-i="'+i+'" aria-selected="'+(i===cur)+'">'+esc(it.l1)+'<small>'+esc(it.l2)+'</small></li>'}).join('');box.hidden=!items.length;inp.setAttribute('aria-expanded',String(!!items.length))}
     function pick(i){var it=items[i];if(!it)return;
+      if(window.ETGoogle)ETGoogle.endSession();
       inp.value=full?(it.l1+', '+it.l2):it.l1;
       inp.dispatchEvent(new Event('input',{bubbles:true}));
       if(typeof it.lat==='number'&&typeof it.lon==='number'){inp.dataset.lat=String(it.lat);inp.dataset.lng=String(it.lon);inp.dataset.pin=inp.value}
       if(zipEl&&/^[0-9]{5}$/.test(it.zip)){zipEl.value=it.zip;zipEl.dispatchEvent(new Event('input',{bubbles:true}))}
       close();}
     function look(q){var my=++seq;
+      var G=window.ETGoogle;
+      if(G&&G.on()&&q.length>=4){G.suggest(q).then(function(g){if(my!==seq)return;if(g){items=g;cur=-1;paint()}else geo(q,my)}).catch(function(){if(my===seq)geo(q,my)});return}
+      geo(q,my)}
+    function geo(q,my){
       fetch('https://api.geoapify.com/v1/geocode/autocomplete?format=json&limit=8&lang=en&filter=rect:-81.35,25.10,-79.90,27.25&text='+encodeURIComponent(q)+'&apiKey='+encodeURIComponent(GEOKEY),{credentials:'omit',referrerPolicy:'no-referrer'})
         .then(function(r){return r.ok?r.json():null}).then(function(j){
           if(my!==seq||!j)return;var seen={};
           items=(j.results||[]).filter(function(p){return (p.country_code||'').toLowerCase()==='us'&&/florida/i.test(p.state||'')&&(p.street||p.address_line1)}).map(function(p){return {l1:((p.housenumber?p.housenumber+' ':'')+(p.street||'')).trim()||p.address_line1,l2:[p.city||p.town||p.suburb,'FL',p.postcode].filter(Boolean).join(', '),zip:p.postcode||'',lat:p.lat,lon:p.lon}}).filter(function(x){if(!x.l1||seen[x.l1+x.l2])return false;seen[x.l1+x.l2]=1;return true}).slice(0,6);
           cur=-1;paint();
         }).catch(function(){close()});}
-    inp.addEventListener('input',function(){if(inp.dataset.pin&&inp.dataset.pin!==inp.value){delete inp.dataset.lat;delete inp.dataset.lng;delete inp.dataset.pin}clearTimeout(timer);var q=inp.value.trim();if(q.length<3||/^[0-9]{0,2}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},120)});
+    inp.addEventListener('input',function(){if(inp.dataset.pin&&inp.dataset.pin!==inp.value){delete inp.dataset.lat;delete inp.dataset.lng;delete inp.dataset.pin}clearTimeout(timer);var q=inp.value.trim();if(q.length<3||/^[0-9]{0,2}$/.test(q)){close();return}timer=setTimeout(function(){look(q)},(window.ETGoogle&&ETGoogle.on())?250:120)});
     inp.addEventListener('keydown',function(e){if(box.hidden||!items.length)return;
       if(e.key==='ArrowDown'){e.preventDefault();cur=(cur+1)%items.length;paint()}
       else if(e.key==='ArrowUp'){e.preventDefault();cur=(cur-1+items.length)%items.length;paint()}
@@ -6263,7 +6384,7 @@ $('lc-zip-form').addEventListener('submit',function(e){
   out.className='zipres';
   if(c===null){out.textContent='Enter a 5-digit ZIP code.';out.classList.add('no');return}
   if(c){out.textContent='Yes, we cover '+z+' in '+c+' County. Request a quote to book the van.';out.classList.add('ok')}
-  else{out.textContent='That ZIP is outside our regular route. Call (954) 773-1896 and we will see what we can do.';out.classList.add('no')}
+  else{ETZipOutside(out,'That ZIP is outside our regular route, but ask us, we may still be able to help.');out.classList.add('no')}
 });
 
 /* ---------- CONTACT FORM ---------- */
@@ -6495,7 +6616,7 @@ $('ci-form').addEventListener('submit',function(e){
   if(c===null){r.textContent='Enter a 5-digit ZIP code.';r.classList.add('no');return}
   if(c){r.textContent='Yes, we cover '+z+' in '+c+' County. Pick your city below, or request a quote.';r.classList.add('ok');
     var g=document.querySelector('.ci-county[data-county="'+c+'"]');if(g)g.classList.add('hit')}
-  else{r.textContent='That ZIP is outside our regular route. Call '+PHONE+' and we will see what we can do.';r.classList.add('no')}
+  else{ETZipOutside(r,'That ZIP is outside our regular route, but ask us, we may still be able to help.');r.classList.add('no')}
 });
 
 /* ---------- City pages ---------- */
@@ -6594,7 +6715,7 @@ $('cy-root').addEventListener('submit',function(e){
   var z=$('cy-zipi').value.trim(),c=ET.county(z),r=$('cy-zipres');r.className='cy-zipres';
   if(c===null){r.textContent='Enter a 5-digit ZIP code.';r.classList.add('no')}
   else if(c){r.textContent='Yes, we cover '+z+' in '+c+' County. Book mobile service above.';r.classList.add('ok')}
-  else{r.textContent='Outside our regular route. Call '+PHONE+' and we will see what we can do.';r.classList.add('no')}
+  else{ETZipOutside(r,'Outside our regular route, but ask us, we may still be able to help.');r.classList.add('no')}
 });
 
 })();}catch(e){console.error('part d failed',e)}</script>
