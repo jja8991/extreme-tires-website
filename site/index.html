@@ -1323,6 +1323,9 @@ body{background:#0d0d0e}
 .cp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .cp-card{background:#fff;border:2px dashed var(--ink);padding:26px 24px 22px;display:grid;gap:10px;align-content:start;position:relative;min-width:0}
 .cp-card .sample{position:absolute;top:-11px;left:18px;background:var(--yellow);font:700 11px/1 var(--body);text-transform:uppercase;letter-spacing:.1em;padding:5px 8px}
+.cp-ban{display:block;margin:-26px -24px 6px;background:var(--ink)}
+.cp-ban img{display:block;width:100%;height:auto}
+.cp-real .cp-claim{text-align:center;text-decoration:none}
 .cp-kind{font:700 12px/1 var(--body);text-transform:uppercase;letter-spacing:.12em;color:var(--red)}
 .cp-card h3{font-size:22px;font-weight:800}
 .cp-amt{font:900 40px/.95 var(--display);color:var(--red)}
@@ -3227,7 +3230,7 @@ body{overflow-x:clip}
       <nav class="crumbs" aria-label="Breadcrumb"><a href="#home" data-view-link="home">Home</a><span>/</span><span>Coupons &amp; Offers</span></nav>
       <h1>Coupons &amp; offers</h1>
       <p>Current tire specials, service specials and manufacturer rebates, written out as text so you can read, search and claim them from any phone.</p>
-      <span class="sample-note">Sample layout. Every value and date is a placeholder until Simon confirms the real offers.</span>
+      <span class="sample-note">Manufacturer rebates below are current. Cards marked Sample are placeholders until Simon confirms the house offers.</span>
     </div>
   </div>
 
@@ -6314,12 +6317,16 @@ var esc=ET.esc;
 var OFFERS=[
   {id:'align',kind:'tire',label:'House offer',title:'Alignment with tire purchase',amt:'Ask us',svc:'Wheel Alignments',how:'house'},
   {id:'oil',kind:'service',label:'House offer',title:'Oil change special',amt:'Ask us',svc:'Oil Changes',how:'house'},
-  {id:'mich',kind:'rebate',label:'Manufacturer rebate',title:'Michelin rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
-  {id:'bfg',kind:'rebate',label:'Manufacturer rebate',title:'BFGoodrich rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
-  {id:'coop',kind:'rebate',label:'Manufacturer rebate',title:'Cooper rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
-  {id:'good',kind:'rebate',label:'Manufacturer rebate',title:'Goodyear rebate',amt:'Ask us',svc:'Tire Installation',how:'rebate'},
-  {id:'gen',kind:'rebate',label:'Manufacturer rebate',title:'Brand rebate',amt:'Rebate',svc:'Tire Installation',how:'rebate'}
+  {id:'rb-hankook-80',kind:'rebate',label:'Hankook rebate',title:'Hankook Season of Savings',amt:'$80',exp:'Nov 1 to Dec 12, 2026',img:'hankook-80',w:1200,h:800,fine:'Buy a set of 4 eligible Hankook Dynapro AT2 Xtreme, Dynapro HT2, Dynapro HPX or Weatherflex GT tires. Hankook sets the full terms.',alt:'Hankook Season of Savings: get $80 on a set of 4 eligible Dynapro or Weatherflex tires, November 1 to December 12, 2026',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-pirelli-100',kind:'rebate',label:'Pirelli rebate',title:'Pirelli WeatherActive rebate',amt:'$100',exp:'Nov 1 to Nov 30, 2026',img:'pirelli-100',w:681,h:351,fine:'On qualifying Pirelli Scorpion WeatherActive and Cinturato WeatherActive tires. Pirelli sets the full terms.',alt:'Pirelli $100 rebate on Scorpion WeatherActive and Cinturato WeatherActive tires, November 1 to 30, 2026',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-goodyear-100',kind:'rebate',label:'Goodyear rebate',title:'Goodyear rebate',amt:'Up to $100',exp:'Buy by Nov 30, 2026',img:'goodyear-100',w:1200,h:400,fine:'Buy a set of 4 qualifying Goodyear tires 9/1/26 to 11/30/26. Submit the form by 12/31/2026. Rebate amount varies by tire. One rebate per set of 4 bought in a single transaction, limit 4 per household. Cannot be combined with other Goodyear tire rebate offers. Paid as a Goodyear Mastercard Prepaid Card.',alt:'Goodyear: get up to $100 back by online or mail-in rebate on a set of 4 qualifying tires, September 1 to November 30, 2026',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-goodyear-200-card',kind:'rebate',label:'Goodyear rebate',title:'Goodyear rebate with the Goodyear Credit Card',amt:'Up to $200',exp:'Buy by Nov 30, 2026',img:'goodyear-200-card',w:1200,h:630,fine:'On a set of 4 select Goodyear tires when you use the Goodyear Credit Card on purchases made 9/1/2026 to 11/30/2026. Online or mail-in rebate, paid by prepaid card. Submit the form by 12/31/2026.',alt:'Goodyear: get up to $200 back on a set of 4 select tires with the Goodyear Credit Card, September 1 to November 30, 2026',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-cooper-70',kind:'rebate',label:'Cooper rebate',title:'Cooper rebate',amt:'Up to $70',exp:'Buy by Nov 30, 2026',img:'cooper-70',w:1200,h:400,fine:'Buy a set of 4 qualifying Cooper tires 9/1/26 to 11/30/26. Submit the rebate by 12/31/26. Rebate amount varies by tire. One rebate per set of 4 bought in a single transaction, limit 4 per household. Cannot be combined with other Cooper tire rebate offers. Paid as a Cooper Mastercard Prepaid Card.',alt:'Cooper Tires: get $70 back by online or mail-in rebate on a set of 4 qualifying tires, September 1 to November 30, 2026',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-cooper-140-card',kind:'rebate',label:'Cooper rebate',title:'Cooper rebate with the Goodyear Credit Card',amt:'Up to $140',exp:'Buy by Nov 30, 2026',img:'cooper-140-card',w:1200,h:630,fine:'On a set of 4 select Cooper tires when you use the Goodyear Credit Card on purchases made 9/1/2026 to 11/30/2026. Online or mail-in rebate, paid by prepaid card. Base rebates do not require the card. Submit the form by 12/31/2026.',alt:'Cooper Tires: get up to $140 back on a set of 4 select tires with the Goodyear Credit Card, September 1 to November 30, 2026',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-continental-110',kind:'rebate',label:'Continental rebate',title:'Continental rebate',amt:'$110',exp:'November offer, ask us for the end date',img:'continental-110',w:1200,h:800,fine:'When you purchase a set of 4 qualifying Continental tires. Continental sets the full terms, ask us for the details.',alt:'Continental $110 rebate when you purchase a set of 4 qualifying tires',svc:'Tire Installation',how:'rebate'},
+  {id:'rb-continental-200-card',kind:'rebate',label:'Continental rebate',title:'Continental rebate with the Continental credit card',amt:'Up to $200',exp:'November offer, ask us for the end date',img:'continental-200-card',w:1200,h:800,fine:'When you purchase a set of 4 qualifying Continental tires with the Continental Synchrony Car Care credit card. Continental sets the full terms, ask us for the details.',alt:'Continental: get up to a $200 rebate on a set of 4 qualifying tires with the Continental Synchrony Car Care credit card',svc:'Tire Installation',how:'rebate'}
 ];
+OFFERS.sort(function(x,y){return (x.img?0:1)-(y.img?0:1)});
 var CP_TABS=[['all','All offers'],['tire','Tire specials'],['service','Service specials'],['rebate','Manufacturer rebates']];
 var cpFilter='all';
 function cpRender(){
@@ -6328,6 +6335,16 @@ function cpRender(){
     var redeem=o.how==='house'
       ?'Mention this offer when you book, or show it on your phone at the counter.'
       :'Rebate rules come from the manufacturer. Tell us when you book and we will point you to the current form.';
+    if(o.img){
+      var src='media/rebates/'+o.img+'.webp';
+      return '<article class="cp-card cp-real" data-id="'+o.id+'">'+
+        '<a class="cp-ban" href="'+src+'" target="_blank" rel="noopener" aria-label="Open the full '+esc(o.title)+' banner"><img src="'+src+'" width="'+o.w+'" height="'+o.h+'" alt="'+esc(o.alt)+'" loading="lazy" decoding="async"></a>'+
+        '<div class="cp-kind">'+esc(o.label)+'</div><h3>'+esc(o.title)+'</h3><div class="cp-amt">'+esc(o.amt)+'</div>'+
+        '<div class="cp-exp">'+esc(o.exp)+'</div>'+
+        '<p class="cp-fine">'+esc(o.fine)+'</p>'+
+        '<p class="cp-redeem"><b>How to redeem</b>'+esc(redeem)+'</p>'+
+        '<a class="btn btn-red cp-claim" href="#quote" data-view-link="quote" data-svc="'+esc(o.svc)+'">Book with this rebate</a></article>';
+    }
     return '<article class="cp-card" data-id="'+o.id+'"><span class="sample">Sample</span>'+
       '<div class="cp-kind">'+esc(o.label)+'</div><h3>'+esc(o.title)+'</h3><div class="cp-amt">'+esc(o.amt)+'</div>'+
       '<div class="cp-exp">Expires MM/DD</div>'+
@@ -6337,7 +6354,7 @@ function cpRender(){
       '<div class="cp-code" id="cp-code-'+o.id+'" hidden><small>Sample code, not valid</small><code>SAMPLE-0000</code>'+
       '<a href="#quote" data-view-link="quote" data-svc="'+esc(o.svc)+'">Use at booking</a></div></article>';
   }).join('');
-  $('cp-count').textContent='Showing '+rows.length+' of '+OFFERS.length+' sample offers.';
+  $('cp-count').textContent='Showing '+rows.length+' of '+OFFERS.length+' offers.';
 }
 $('cp-tabs').innerHTML=CP_TABS.map(function(t){return '<button type="button" data-f="'+t[0]+'" aria-pressed="'+(t[0]==='all')+'">'+t[1]+'</button>'}).join('');
 $('cp-tabs').addEventListener('click',function(e){
@@ -6347,7 +6364,7 @@ $('cp-tabs').addEventListener('click',function(e){
   cpRender();
 });
 $('cp-grid').addEventListener('click',function(e){
-  var b=e.target.closest('.cp-claim'); if(!b)return;
+  var b=e.target.closest('button.cp-claim'); if(!b)return;
   var code=$(b.getAttribute('aria-controls')), open=code.hidden;
   code.hidden=!open; b.setAttribute('aria-expanded',String(open)); b.textContent=open?'Hide code':'Claim';
 });
